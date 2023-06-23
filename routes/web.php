@@ -29,6 +29,15 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/test', function () {
+    return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
+})->middleware(['auth', 'verified'])->name('test');
+
+// Route::get('/bannerslider', function () {
+//     return Inertia::render('BannerSlider');
+// })->middleware(['auth', 'verified'])->name('bannerslider');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
