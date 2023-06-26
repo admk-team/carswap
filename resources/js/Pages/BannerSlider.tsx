@@ -25,7 +25,8 @@ const BannerSlider = () => {
 
   return (
     <div className="relative w-full">
-      <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+
+      <div className="relative h-56 overflow-hidden md:h-96">
         {/* Item 1 */}
         <div className={currentSlide === 0 ? '' : 'hidden'}>
           <img
@@ -33,6 +34,7 @@ const BannerSlider = () => {
             className="absolute block w-full h-full object-cover"
             alt="Slide 1"
           />
+
         </div>
         {/* Item 2 */}
         <div className={currentSlide === 1 ? '' : 'hidden'}>
@@ -43,7 +45,12 @@ const BannerSlider = () => {
           />
         </div>
       </div>
-
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+        <h1 className="text-7xl font-bold text-white mb-4">SWAP A CAR</h1>
+        <p className="text-white">
+           Showcase multiple images or promotional content in a visually appealing manner using this dynamic.
+        </p>
+      </div>
       {/* Slider controls */}
       <button
         type="button"

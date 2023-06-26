@@ -15,6 +15,11 @@ import Box from '@/Components/Box/Box'
 import Banner from '@/Components/Banner/Banner'
 import PricingCard from '@/Components/Cards/PricingCard'
 import Footer from '@/Pages/Footer/Footer'
+import BannerTwo from '@/Components/Banner/BannerTwo'
+import IconsBoxes from '@/Components/Box/IconsBoxes'
+import BrandBoxes from '@/Components/Box/BrandBoxes'
+import UpcomingCard from '@/Components/Cards/UpcomingCard'
+import Reviews from '@/Components/Reviews/Reviews'
 
 
 const products = [
@@ -209,6 +214,11 @@ export default function Test() {
     <Box/>
     <Banner/>
     <PricingCard/>
+    <BannerTwo/>
+    <IconsBoxes/>
+    <UpcomingCard/>
+    <BrandBoxes/>
+    <Reviews/>
     <Footer/>
     </div>
   )

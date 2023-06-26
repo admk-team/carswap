@@ -3,7 +3,7 @@ import backgroundImage from '@/Assets/Baner1.jpg'; // Replace with the actual fi
 
 const PricingCard = () => {
     return (
-        <div className="md:container md:mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-16">
+        <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-28">
             {Array.from({ length: 12 }).map((_, index) => (
                 <div key={index} className="w-full max-w-sm bg-white border border-gray-200 shadow-2xl rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
