@@ -17,7 +17,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('test', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -29,9 +29,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/test', function () {
-    return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
-})->middleware(['auth', 'verified'])->name('test');
+//Route::get('/test', function () {
+    //return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
+//})->middleware(['auth', 'verified'])->name('test');
 
 // Route::get('/bannerslider', function () {
 //     return Inertia::render('BannerSlider');
