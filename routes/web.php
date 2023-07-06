@@ -33,9 +33,9 @@ Route::get('/test', function () {
     return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
 })->middleware(['auth', 'verified'])->name('test');
 
-// Route::get('/bannerslider', function () {
-//     return Inertia::render('BannerSlider');
-// })->middleware(['auth', 'verified'])->name('bannerslider');
+Route::get('/postcar', function () {
+    return Inertia::render('PostCar');
+})->middleware(['auth', 'verified'])->name('postcar');
 
 
 Route::middleware('auth')->group(function () {
