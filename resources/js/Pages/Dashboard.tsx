@@ -8,7 +8,6 @@ import Layout from '../Layouts/Layout';
 
  function Dashboard({ auth }: PageProps) {
 
-
     return (
 
         <div className="container-fluid">
@@ -214,7 +213,7 @@ import Layout from '../Layouts/Layout';
                         <h4 className="small font-weight-bold">Payout Details <span
                                 className="float-right">80%</span></h4>
                         <div className="progress mb-4">
-                            <div className="progress-bar bg-info" a5 role="progressbar" ></div>
+                            <div className="progress-bar bg-info"  role="progressbar" ></div>
                         </div>
                         <h4 className="small font-weight-bold">Account Setup <span
                                 className="float-right">Complete!</span></h4>

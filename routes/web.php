@@ -18,10 +18,11 @@ use Inertia\Inertia;
 */
 
 
-//render admin dashboard
+//render admin dashboard 
 Route::get('/admin_dashboard' , [DashboardController::class, 'index']);
+// homepage is Test
 Route::get('/', function () {
-    return Inertia::render('test', [
+    return Inertia::render('Test', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -29,9 +30,15 @@ Route::get('/', function () {
     ]);
 });
 
+
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $username = auth()->user()->name;
+
+    return Inertia::render('Dashboard', [
+        'username' => $username,
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 //Route::get('/test', function () {
     //return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
@@ -48,6 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/demo' , [ProfileController::class, 'demo'])->name('demo');
+    Route::get('/user-profile' , [ProfileController::class , 'user_profile'])->name('user-profile');
+    Route::get('/Logout' , [ProfileController::class , 'Logout'])->name('Logout');
 });
 
 require __DIR__.'/auth.php';

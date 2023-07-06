@@ -179,7 +179,7 @@ function TopNavbar({onCollapseChange}) {
                         {/* <!-- Dropdown - User Information --> */}
                         <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-                            <a className="dropdown-item" href="#">
+                            <a className="dropdown-item" href={route('user-profile')}>
                                 <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>
@@ -192,7 +192,7 @@ function TopNavbar({onCollapseChange}) {
                                 Activity Log
                             </a>
                             <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <a className="dropdown-item" href={route('Logout')}>
                                 <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout
                             </a>
