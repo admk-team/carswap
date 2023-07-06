@@ -1,8 +1,9 @@
 
 
 import React, { useState, useEffect } from 'react';
-import Image1 from '@/Assets/Baner1.jpg';
-import Image2 from '@/Assets/baner2.jpg';
+import Image1 from '@/Assets/hero-section.png';
+import Image2 from '@/Assets/hero-section.png';
+import SliderCard from '@/Components/Cards/SliderCard';
 
 const BannerSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -25,7 +26,8 @@ const BannerSlider = () => {
 
   return (
     <div className="relative w-full">
-      <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+
+      <div className="relative overflow-hidden h-[62vh]">
         {/* Item 1 */}
         <div className={currentSlide === 0 ? '' : 'hidden'}>
           <img
@@ -33,6 +35,7 @@ const BannerSlider = () => {
             className="absolute block w-full h-full object-cover"
             alt="Slide 1"
           />
+
         </div>
         {/* Item 2 */}
         <div className={currentSlide === 1 ? '' : 'hidden'}>
@@ -43,7 +46,18 @@ const BannerSlider = () => {
           />
         </div>
       </div>
+      <div className="absolute top-36 left-24 ">
+        <h3 className="text-white font-bold text-xl">
+          Need a better car? Swap it for the best. <br />
+          Thinking of selling your car for cash? Swap it for <br /> cash and get another car.
+        </h3>
+      </div>
 
+      {/* side panel */}
+      <div className='absolute top-0 right-24'>
+          <SliderCard/>
+      </div>
+      {/* // side panel */}
       {/* Slider controls */}
       <button
         type="button"
