@@ -33,6 +33,11 @@ Route::get('/test', function () {
     return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
 })->middleware(['auth', 'verified'])->name('test');
 
+
+Route::get('/detail', function () {
+    return Inertia::render('CarDetail');
+})->name('car.detail');
+
 // Route::get('/bannerslider', function () {
 //     return Inertia::render('BannerSlider');
 // })->middleware(['auth', 'verified'])->name('bannerslider');
