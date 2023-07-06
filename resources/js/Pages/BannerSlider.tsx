@@ -1,8 +1,9 @@
 
 
 import React, { useState, useEffect } from 'react';
-import Image1 from '@/Assets/Baner1.jpg';
-import Image2 from '@/Assets/baner2.jpg';
+import Image1 from '@/Assets/hero-section.png';
+import Image2 from '@/Assets/hero-section.png';
+import SliderCard from '@/Components/Cards/SliderCard';
 
 const BannerSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -26,7 +27,7 @@ const BannerSlider = () => {
   return (
     <div className="relative w-full">
 
-      <div className="relative h-56 overflow-hidden md:h-96">
+      <div className="relative overflow-hidden h-[62vh]">
         {/* Item 1 */}
         <div className={currentSlide === 0 ? '' : 'hidden'}>
           <img
@@ -45,12 +46,18 @@ const BannerSlider = () => {
           />
         </div>
       </div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-        <h1 className="text-7xl font-bold text-white mb-4">SWAP A CAR</h1>
-        <p className="text-white">
-           Showcase multiple images or promotional content in a visually appealing manner using this dynamic.
-        </p>
+      <div className="absolute top-36 left-24 ">
+        <h3 className="text-white font-bold text-xl">
+          Need a better car? Swap it for the best. <br />
+          Thinking of selling your car for cash? Swap it for <br /> cash and get another car.
+        </h3>
       </div>
+
+      {/* side panel */}
+      <div className='absolute top-0 right-24'>
+          <SliderCard/>
+      </div>
+      {/* // side panel */}
       {/* Slider controls */}
       <button
         type="button"

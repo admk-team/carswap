@@ -10,7 +10,7 @@ const ReviewsCard = () => {
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Very easy this was to integrate</h3>
                     <p className="my-4">If you care for your time, I hands down would go with this.Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order."</p>
                 </blockquote>
-                <figcaption className="flex items-center justify-center space-x-3">
+                <figcaption className="flex items-center space-x-3">
                     <img className="rounded-full w-9 h-9" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/karen-nelson.png" alt="profile picture" />
                     <div className="space-y-0.5 font-medium dark:text-white text-left">
                         <div>Bonnie Green</div>
@@ -24,7 +24,7 @@ const ReviewsCard = () => {
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Solid foundation for any project</h3>
                     <p className="my-4">Designing with Figma components that can be easily translated to the utility classNamees of Tailwind CSS is a huge timesaver!"</p>
                 </blockquote>
-                <figcaption className="flex items-center justify-center space-x-3">
+                <figcaption className="flex items-center  space-x-3">
                     <img className="rounded-full w-9 h-9" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png" alt="profile picture" />
                     <div className="space-y-0.5 font-medium dark:text-white text-left">
                         <div>Roberta Casas</div>
@@ -38,7 +38,7 @@ const ReviewsCard = () => {
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Mindblowing workflow</h3>
                     <p className="my-4">Aesthetically, the well designed components are beautiful and will undoubtedly level up your next application."</p>
                 </blockquote>
-                <figcaption className="flex items-center justify-center space-x-3">
+                <figcaption className="flex items-center  space-x-3">
                     <img className="rounded-full w-9 h-9" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="profile picture" />
                     <div className="space-y-0.5 font-medium dark:text-white text-left">
                         <div>Jese Leos</div>
