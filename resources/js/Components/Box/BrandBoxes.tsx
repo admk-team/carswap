@@ -18,7 +18,7 @@ import ImageKIA from '@/Assets/kia_PNG46.png';
 const BrandBoxes = () => {
   return (
     <>
-       <div className="container mx-auto mt-32">
+       <div className="container mx-auto mt-16">
             <div className="flex flex-wrap justify-center">
                 <div className="text-4xl font-bold text-center mb-6 w-full">
                 <h1>Browse By Brands</h1>
