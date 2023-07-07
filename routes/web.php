@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -17,9 +19,6 @@ use Inertia\Inertia;
 |
 */
 
-
-//render admin dashboard
-Route::get('/admin_dashboard' , [DashboardController::class, 'index']);
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -28,10 +27,13 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Admin Routes
+Route::prefix('admin')->name('admin.')->group(function(){
+    //Dashboard
+    Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
+    //Brands
+    Route::resource('/brands',BrandController::class);
+})->middleware(['auth', 'verified']);
 
 Route::get('/test', function () {
     return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);

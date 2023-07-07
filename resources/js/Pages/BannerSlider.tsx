@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import Image1 from '@/Assets/hero-section.png';
 import Image2 from '@/Assets/hero-section.png';
