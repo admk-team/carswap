@@ -14,7 +14,7 @@ const UploadImgForm = () => {
                                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
 
                                     <img src={ImageGallery} className="mb-2 w-12 h-12 mr-5"></img>
-                                    <button type='button' className='bg-green-500 text-white py-2.5 px-5'>+ Add Photos</button>
+                                    <button type='button' className='bg-green-500 text-white py-2.5 px-5'> + Add Photos</button>
 
                                     <img src={ImagCheck} className='w-5 h-5 mt-5' alt="" />
                                     <p className="text-xs text-gray-500 dark:text-gray-400"><b>Add at least 15 pictures</b> improve chances for a quick sale.</p>
