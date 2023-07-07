@@ -425,6 +425,6 @@ function Dashboard({ auth }: PageProps) {
     );
 }
 
-Dashboard.layout = (page) => <Layout children={page} />;
+Dashboard.layout = (page:any) => <Layout children={page} />;
 
 export default Dashboard;

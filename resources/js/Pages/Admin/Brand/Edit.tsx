@@ -20,8 +20,8 @@ const Edit = ({ auth,brand }: any) => {
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('description', data.description);
-    formData.append('image', image);
-    put(route('admin.brands.update', brand.id), formData);
+    // formData.append('image', image);
+    // put(route('admin.brands.update', brand.id), formData);
   }
   return (
     <>
