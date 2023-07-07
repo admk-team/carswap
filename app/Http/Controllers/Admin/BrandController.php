@@ -14,7 +14,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Admin/Brand/Index');
+        $brands=Brand::latest()->get();
+        return Inertia::render('Admin/Brand/Index',['brands'=>$brands]);
     }
 
     /**
@@ -78,5 +79,15 @@ class BrandController extends Controller
     public function destroy(Brand $brand)
     {
         //
+    }
+    public function status($id,$status)
+    {
+        $brand=Brand::find($id);
+        $brand->status=$status;
+        if ($brand->save()) {
+            return Inertia::location(route('admin.brands.index'));
+        } else {
+            return response()->json(['success' => false]);
+        }
     }
 }

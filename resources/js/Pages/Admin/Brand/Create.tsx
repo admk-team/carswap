@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Layout from "../Layouts/Layout";
-import { usePage } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import { Inertia  } from '@inertiajs/inertia';
 
 const Create = ({ auth }: any) => {
@@ -19,6 +19,7 @@ const Create = ({ auth }: any) => {
   }
   return (
     <>
+     <Head title="Create Brand" />
       <div className="container-fluid">
         <h1 className="h3 mb-2 text-gray-800">Brand</h1>
         <div className="card shadow mb-4">
@@ -51,5 +52,5 @@ const Create = ({ auth }: any) => {
     </>
   );
 };
-Create.layout = (page) => <Layout children={page} />;
+Create.layout = (page:any) => <Layout children={page} />;
 export default Create;
