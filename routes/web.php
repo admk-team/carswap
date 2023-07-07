@@ -41,6 +41,9 @@ Route::get('/test', function () {
 Route::get('/detail', function () {
     return Inertia::render('CarDetail');
 })->name('car.detail');
+Route::get('/all', function () {
+    return Inertia::render('AllDetail');
+})->name('all.detail');
 
 // Route::get('/bannerslider', function () {
 //     return Inertia::render('BannerSlider');
