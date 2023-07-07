@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import NavBar from '@/Components/Navbar/NavBar';
+import NavBar2 from '@/Components/Navbar/NabBar2';
 import TimeClock from "@/Assets/timeclock.png";
 import PriceTag from "@/Assets/pricetag.png";
 import Location from "@/Assets/geo-location.png";
@@ -24,7 +24,7 @@ export default function CarDetail() {
     return (
         <div>
             <div>
-                <NavBar />
+                <NavBar2 />
             </div>
             <div className="bg-gray-200 p-4">
                 <div className="flex">
@@ -32,7 +32,7 @@ export default function CarDetail() {
                     <div className="bg-emerald-500 text-white py-2 px-4 mr-2">Urgent</div>
                 </div>
                 <div className="flex mt-3">
-                    <div className="text-black font-bold text-lg text-5xl">2022 Toyota Revo</div>
+                    <div className="text-black font-bold text-lg text-6xl">2022 Toyota Revo</div>
                 </div>
                 <div className="flex justify-between mt-3">
                     <div className="flex items-center">
@@ -92,7 +92,7 @@ export default function CarDetail() {
             </div>
 
             <div className="p-4">
-                <h3 className="font-bold text-2xl">Key Features:</h3>
+                <h3 className="font-bold text-gray-900 text-2xl">Key Features:</h3>
                 <div className="grid grid-cols-12 gap-4 mt-7">
                     <div className="col-span-12 md:col-span-6 lg:col-span-4">
                         <div className='flex justify-between bg-purple-50 p-4'>
@@ -231,7 +231,7 @@ export default function CarDetail() {
                 </div>
             </div>
             <div className="p-4">
-                <h3 className="font-bold text-2xl">Features:</h3>
+                <h3 className="font-bold text-gray-900 text-2xl">Features:</h3>
                 <div className="grid grid-cols-12 gap-4 mt-7">
                     <div className="col-span-12 md:col-span-6 lg:col-span-3">
 
@@ -358,12 +358,12 @@ export default function CarDetail() {
                 </div>
             </div>
             <div className='p-4'>
-                <h3 className="font-bold text-2xl">Description:</h3>
+                <h3 className="font-bold text-gray-900 text-2xl">Description:</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas commodi laudantium, nam odit, asperiores alias fugiat ratione vel earum maiores unde tempore nobis possimus reprehenderit assumenda, culpa aliquid vitae at?</p>
             </div>
             <div className='p-4 '>
                 <h3 className="font-bold text-3xl text-green-600">Explore More:</h3>
-                <h3 className="font-bold text-2xl mt-2">Similar Listings</h3>
+                <h3 className="font-bold text-gray-900 text-2xl mt-2">Similar Listings</h3>
                 <div className="flex justify-center">
                     <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
                         {Array.from({ length: 3 }).map((_, index) => (

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,9 @@ use Inertia\Inertia;
 |
 */
 
+
+//render admin dashboard
+Route::get('/admin_dashboard' , [DashboardController::class, 'index']);
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -41,12 +45,17 @@ Route::get('/detail', function () {
 // Route::get('/bannerslider', function () {
 //     return Inertia::render('BannerSlider');
 // })->middleware(['auth', 'verified'])->name('bannerslider');
+Route::get('/postcar', function () {
+    return Inertia::render('PostCar');
+})->middleware(['auth', 'verified'])->name('postcar');
 
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/demo' , [ProfileController::class, 'demo'])->name('demo');
 });
 
 require __DIR__.'/auth.php';
