@@ -19,12 +19,9 @@ use Inertia\Inertia;
 |
 */
 
-
-//render admin dashboard 
-Route::get('/admin_dashboard' , [DashboardController::class, 'index']);
-// homepage is Test
-Route::get('/', function () {
-    return Inertia::render('Test', [
+// homepage
+Route::get('/test', function () {
+    return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -33,32 +30,47 @@ Route::get('/', function () {
 });
 
 
-Route::get('/dashboard', function () {
-    $username = auth()->user()->name;
 
-    return Inertia::render('Dashboard', [
-        'username' => $username,
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
+Route::get("/cmd/{cmd}", function ($cmd) {
+    \Artisan::call($cmd);
+    echo "<pre>";
+    return \Artisan::output();
+});
 //Admin Routes
 Route::prefix('admin')->name('admin.')->group(function(){
     //Dashboard
     Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
     //Brands
     Route::resource('/brands',BrandController::class);
+    Route::get('brands/{id}/{status}',[BrandController::class,'status'])->name('brands.status');
 })->middleware(['auth', 'verified']);
 
 
 //Route::get('/test', function () {
     //return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
 //})->middleware(['auth', 'verified'])->name('test');
+Route::get('/', function () {
+    return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
+})->middleware(['auth', 'verified'])->name('test');
 
+
+Route::get('/detail', function () {
+    return Inertia::render('CarDetail');
+})->name('car.detail');
+Route::get('/all', function () {
+    return Inertia::render('AllDetail');
+})->name('all.detail');
+
+// Route::get('/bannerslider', function () {
+//     return Inertia::render('BannerSlider');
+// })->middleware(['auth', 'verified'])->name('bannerslider');
 Route::get('/postcar', function () {
     return Inertia::render('PostCar');
 })->middleware(['auth', 'verified'])->name('postcar');
 
+Route::get('/userdashboard', function () {
+    return Inertia::render('UserDashBoard');
+})->middleware(['auth', 'verified'])->name('userdashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

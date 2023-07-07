@@ -7,6 +7,6 @@ function Demo() {
 
    );
 }
-Demo.layout = page => <Layout children={page} />
+Demo.layout = (page:any) => <Layout children={page} />
 
 export default Demo

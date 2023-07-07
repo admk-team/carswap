@@ -6,7 +6,7 @@ const CheckBoxForm = () => {
             <div className="mx-auto max-w-screen-xl w-full h-full mt-6 ">
                 <div className="bg-white border border-gray-300 p-8 rounded-lg shadow-md">
                     <h1 className="text-xl font-bold">Undertaking:</h1>
-                    <div className="px-12 py-2">
+                    <div className=" py-2">
 
                         <div className="flex items-center">
                             <input id="link-checkbox" type="checkbox" value="" className="w-4 h-4 text-dark-600 bg-gray-200 border-gray-300 rounded-lg " />

@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import imagelogo1 from '@/Assets/logo 111.png'
+import imagelogo1 from '@/Assets/headerlogo.png'
 import watsapImage from '@/Assets/whatsapp.png'
 import bellIcon from "@/Assets/bell.png"
+
 
 const NavBar2 = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -16,23 +17,23 @@ const NavBar2 = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <img className="" src={imagelogo1} alt="Logo" />
+            <img className="w-52 h-9" src={imagelogo1} alt="Logo" />
           </div>
           <div className="hidden md:block">
             <div className="flex items-center space-x-4">
-              <a className=" font-black font-extrabold">
+              <a className=" font-gray-900 font-extrabold cursor-pointer">
                 Post a Car
               </a>
              <img className='w-7 h-7' src={bellIcon} alt="" />
-              <div className="flex items-center text-white bg-gray-900 px-3 py-2">
-                <span className="w-7 h-7 mr-1"><img src={watsapImage} alt="" /></span>
+              <div className="flex items-center text-white bg-gray-900 p-2">
+                <span className="w-6 h-6 mr-1"><img src={watsapImage} alt="" /></span>
                 <span className="text-white text-sm">07031555235</span>
               </div>
-              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-amber-600">
+              <div className="flex items-center p-2 space-y-1 sm:px-3 bg-emerald-600 ">
                 {/* Mobile menu items */}
                 <a
                   href="#"
-                  className="px-3 py-2 rounded-md text-base font-medium text-white"
+                  className=" rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
                 >
                   LogIn/SignUp
                 </a>
@@ -98,13 +99,13 @@ const NavBar2 = () => {
               </div>
             <a
               href="#"
-              className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+              className="block px-3 py-2  text-base font-medium text-white bg-emerald-500"
             >
               Login
             </a>
             <a
               href="#"
-              className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+              className="block px-3 py-2  text-base font-medium text-white bg-emerald-900"
             >
               Signup
             </a>
