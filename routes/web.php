@@ -19,7 +19,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/test', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -36,7 +36,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('brands/{id}/{status}',[BrandController::class,'status'])->name('brands.status');
 })->middleware(['auth', 'verified']);
 
-Route::get('/test', function () {
+Route::get('/', function () {
     return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
 })->middleware(['auth', 'verified'])->name('test');
 
