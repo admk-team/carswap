@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class BrandController extends Controller
@@ -43,7 +45,7 @@ class BrandController extends Controller
         $model->image = $img_path ?? '';
         $model->description=$request->description;
         if($model->save()){
-            return redirect()->route('admin.brands.index');
+            return Inertia::location(route('admin.brands.index'));
         }else{
             return Inertia::redirect('Admin/Brand/Index');
         }
@@ -60,9 +62,10 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Brand $brand)
+    public function edit($id)
     {
-        //
+        $brand=Brand::find($id);
+        return Inertia::render('Admin/Brand/Edit',['brand'=>$brand]);
     }
 
     /**
@@ -70,7 +73,25 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'image' => 'image',
+        ]);
+        $model=Brand::find($brand->id);
+        if($request->hasFile('image')){
+            if ($model->image) {
+                Storage::disk('public')->delete($model->image);
+            }
+            $img_path = $request->file('image')->store('/images/brand', 'public');        
+            $model->image = $img_path;
+        }
+        $model->title=$request->title;
+        $model->description=$request->description;
+        if($model->save()){
+            return Inertia::location(route('admin.brands.index'));
+        }else{
+            return Inertia::redirect('Admin/Brand/Index');
+        }
     }
 
     /**
@@ -85,7 +106,7 @@ class BrandController extends Controller
         $brand=Brand::find($id);
         $brand->status=$status;
         if ($brand->save()) {
-            return Inertia::location(route('admin.brands.index'));
+            return redirect()->back();
         } else {
             return response()->json(['success' => false]);
         }

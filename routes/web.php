@@ -33,7 +33,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
     //Brands
     Route::resource('/brands',BrandController::class);
-    Route::post('brands/{id}/{status}',[BrandController::class,'status'])->name('brands.status');
+    Route::get('brands/{id}/{status}',[BrandController::class,'status'])->name('brands.status');
 })->middleware(['auth', 'verified']);
 
 Route::get('/test', function () {

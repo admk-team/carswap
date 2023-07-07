@@ -18,7 +18,7 @@ const Index = ({ auth, brands }: any) => {
       setCurrentPage(pageNumber);
     };
     const changeBrandStatus = (id: number, status: number) => {
-      Inertia.post(route("admin.brands.status", { id, status }));
+      Inertia.get(route("admin.brands.status", { id, status }));
     };
     return (
         <>
@@ -93,7 +93,7 @@ const Index = ({ auth, brands }: any) => {
                                                   Action
                                                 </button>
                                                 <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                                                    <a className="dropdown-item" href="#">Edit</a>
+                                                    <Link className="dropdown-item" href={route('admin.brands.edit',brand.id)}>Edit</Link>
                                                     <a className="dropdown-item" href="#">Delete</a>
                                                 </div>
                                               </div>
