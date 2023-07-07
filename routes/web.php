@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -38,6 +40,15 @@ Route::get('/dashboard', function () {
         'username' => $username,
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+//Admin Routes
+Route::prefix('admin')->name('admin.')->group(function(){
+    //Dashboard
+    Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
+    //Brands
+    Route::resource('/brands',BrandController::class);
+})->middleware(['auth', 'verified']);
 
 
 //Route::get('/test', function () {
