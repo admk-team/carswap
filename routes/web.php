@@ -41,6 +41,9 @@ Route::get('/postcar', function () {
     return Inertia::render('PostCar');
 })->middleware(['auth', 'verified'])->name('postcar');
 
+Route::get('/userdashboard', function () {
+    return Inertia::render('UserDashBoard');
+})->middleware(['auth', 'verified'])->name('userdashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
