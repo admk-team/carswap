@@ -22,7 +22,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Brand/Create');
     }
 
     /**
@@ -30,7 +30,22 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'image' => 'required|image',
+        ]);
+        if($request->hasFile('image')){
+            $img_path = $request->file('image')->store('/images/brand', 'public');
+        }
+        $model=new Brand();
+        $model->title=$request->title;
+        $model->image = $img_path ?? '';
+        $model->description=$request->description;
+        if($model->save()){
+            return redirect()->route('admin.brands.index');
+        }else{
+            return Inertia::redirect('Admin/Brand/Index');
+        }
     }
 
     /**
