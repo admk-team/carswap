@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -40,9 +41,14 @@ Route::get("/cmd/{cmd}", function ($cmd) {
 Route::prefix('admin')->name('admin.')->group(function(){
     //Dashboard
     Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
+    
     //Brands
     Route::resource('/brands',BrandController::class);
     Route::get('brands/{id}/{status}',[BrandController::class,'status'])->name('brands.status');
+
+    //Cars
+    Route::resource('/cars',CarController::class);
+    Route::get('cars/{id}/{status}',[CarController::class,'status'])->name('cars.status');
 })->middleware(['auth', 'verified']);
 
 

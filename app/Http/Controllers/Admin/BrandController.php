@@ -18,7 +18,7 @@ class BrandController extends Controller
     public function index()
     {
         $brands=Brand::latest()->get();
-        return Inertia::render('Admin/Brand/Index',['brands'=>$brands]);
+        return Inertia::render('Admin/Brand/Index',['brands'=>$brands, 'success'=>request()->get('success')]);
     }
 
     /**
@@ -46,9 +46,9 @@ class BrandController extends Controller
         $model->image = $img_path ?? '';
         $model->description=$request->description;
         if($model->save()){
-            return Inertia::location(route('admin.brands.index'));
+            return Inertia::location(route('admin.brands.index', ['success' => 'Brand added successfully.']));
         }else{
-            return Inertia::redirect('Admin/Brand/Index');
+            return Inertia::location(route('admin.brands.index', ['error' => 'Failed to add brand!']));
         }
     }
 
@@ -89,9 +89,9 @@ class BrandController extends Controller
         $model->title=$request->title;
         $model->description=$request->description;
         if($model->save()){
-            return Inertia::location(route('admin.brands.index'));
+            return Inertia::location(route('admin.brands.index', ['success' => 'Brand updated successfully.']));
         }else{
-            return Inertia::redirect('Admin/Brand/Index');
+            return Inertia::location(route('admin.brands.index', ['error' => 'Failed to update the brand!']));
         }
     }
 
@@ -106,11 +106,9 @@ class BrandController extends Controller
                 Storage::disk('public')->delete($brand->image);
             }
             $brand->delete();
-            Session::flash('success', 'Brand deleted successfully.');
-            return Inertia::location(route('admin.brands.index'));
+            return Inertia::location(route('admin.brands.index', ['success' => 'Brand deleted successfully.']));
         }else{
-            Session::flash('error', 'Failed to delete brand!');
-            return redirect()->back();
+            return redirect()->back()->with('error', 'Brand not found.');
         }
     }
     public function status($id,$status)
