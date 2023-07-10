@@ -44,17 +44,10 @@ const BannerSlider = () => {
           />
         </div>
       </div>
-      <div className="absolute top-36 left-24 md:top-20 md:left-10 ">
-        <h3 className="text-white font-bold text-xl">
-          Need a better car? Swap it for the best. <br />
-          Thinking of selling your car for cash? Swap it for <br /> cash and get another car.
-        </h3>
-      </div>
+     
 
       {/* side panel */}
-      <div className='absolute top-0 right-24'>
-          <SliderCard/>
-      </div>
+     
       {/* // side panel */}
       {/* Slider controls */}
       <button

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import imagelogo1 from '@/Assets/logo 1.png'
+import imagelogo1 from '@/Assets/logo1.png'
 import watsapImage from '@/Assets/whatsapp.png'
 import bellIcon from "@/Assets/bell.png"
 
@@ -28,7 +28,7 @@ const NavBar = () => {
                 <span className="w-6 h-6 mr-1"><img src={watsapImage} alt="" /></span>
                 <span className="text-white text-sm">07031555235</span>
               </div>
-              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-amber-600">
+              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-emerald-500 hover:bg-emerald-600">
                 {/* Mobile menu items */}
                 <a
                   href="#"

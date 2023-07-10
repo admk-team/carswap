@@ -49,6 +49,7 @@ Route::get('/', function () {
 Route::get('/detail', function () {
     return Inertia::render('CarDetail');
 })->name('car.detail');
+
 Route::get('/all', function () {
     return Inertia::render('AllDetail');
 })->name('all.detail');
