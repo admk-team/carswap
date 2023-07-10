@@ -61,6 +61,9 @@ Route::get('/detail', function () {
 Route::get('/all', function () {
     return Inertia::render('AllDetail');
 })->name('all.detail');
+Route::get('/user/profile', function () {
+    return Inertia::render('EditProfile');
+})->name('edit.profile');
 
 // Route::get('/bannerslider', function () {
 //     return Inertia::render('BannerSlider');
