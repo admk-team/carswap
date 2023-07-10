@@ -44,9 +44,9 @@ const SliderCard = () => {
           <button className="focus:bg-emerald-500 border pt-1 pl-1.5">
             <img src={ImageTesla} alt="Image 1" className="w-10 h-10 object-contain" />
           </button>
-          <div className="focus:bg-emerald-500 border pt-0 pl-0">
+          <button className="focus:bg-emerald-500 border pt-0 pl-0">
             <img src={ImageToryota} alt="Image 1" className="w-12 h-12 object-contain" />
-          </div>
+          </button>
           <button className="focus:bg-emerald-500 border pt-1 pl-1">
             <img src={ImageFerrari} alt="Image 1" className="w-10 h-10 object-contain" />
           </button>

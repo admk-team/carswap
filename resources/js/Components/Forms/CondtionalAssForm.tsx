@@ -6,8 +6,8 @@ const CondtionalAssForm = () => {
         <>
             <div className="mx-auto max-w-screen-xl w-full h-full mt-6 ">
                 <div className="bg-white border border-gray-300 p-8 rounded-lg shadow-md">
-                    <h1 className="text-xl font-bold">Condition Assessment:</h1>
-                    <h2 className="text-base sm:text-xl  text-gray-600">(ratings are required. Rating is from 10-100%)</h2>
+                    <h1 className="text-xl text-gray-950 font-bold">Condition Assessment:</h1>
+                    <h2 className="text-base sm:text-xl  text-gray-700">(ratings are required. Rating is from 10-100%)</h2>
                     <div className=" py-2">
                     
                         <div className="flex items-center mt-2">

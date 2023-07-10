@@ -5,8 +5,6 @@ import backgroundImage from "@/Assets/hero-section.jpg"
 import SliderCard from '../Cards/SliderCard'
 import { url } from 'inspector'
 
-
-
 const TopBanner = () => {
     return (
         <>
@@ -19,7 +17,10 @@ const TopBanner = () => {
                                 Need a better car? Swap it for the best.
                                 Thinking of selling your car for cash? Swap it for cash and get another car.
                             </h3>
-                            
+                            {/* <div className="text-white hidden lg:flex">
+                                <img src={backgroundImage} alt="ok"/>
+                            </div>
+                             */}
                         </div>
                         <div className="my-8 flex">
                         <SliderCard />
