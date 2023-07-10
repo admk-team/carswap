@@ -64,4 +64,17 @@ class ProfileController extends Controller
     public function demo(){
         return Inertia::render('Demo');
     }
+    public function Logout(){
+        Auth::logout();
+
+        return redirect('/'); // Redirect to the home page
+       // return Inertia::render('Demo');
+    }
+
+    public function user_profile(Request $request){
+        return Inertia::render('Profile/Edit', [
+            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+            'status' => session('status'),
+        ]);
+    }
 }

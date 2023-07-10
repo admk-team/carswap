@@ -31,7 +31,7 @@ const NavBar = () => {
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-emerald-500 hover:bg-emerald-600">
                 {/* Mobile menu items */}
                 <a
-                  href="#"
+                 href={route('login')}
                   className="px-3 py-2 rounded-md text-base font-medium text-white"
                 >
                   Login/SignUp
