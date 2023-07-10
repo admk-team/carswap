@@ -19,6 +19,7 @@ use Inertia\Inertia;
 |
 */
 
+// homepage
 Route::get('/test', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -27,6 +28,9 @@ Route::get('/test', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+
+
 Route::get("/cmd/{cmd}", function ($cmd) {
     \Artisan::call($cmd);
     echo "<pre>";
@@ -41,14 +45,32 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('brands/{id}/{status}',[BrandController::class,'status'])->name('brands.status');
 })->middleware(['auth', 'verified']);
 
+
+//Route::get('/test', function () {
+    //return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
+//})->middleware(['auth', 'verified'])->name('test');
 Route::get('/', function () {
     return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
 })->name('test');
 
+
+Route::get('/detail', function () {
+    return Inertia::render('CarDetail');
+})->name('car.detail');
+Route::get('/all', function () {
+    return Inertia::render('AllDetail');
+})->name('all.detail');
+
 // Route::get('/bannerslider', function () {
 //     return Inertia::render('BannerSlider');
 // })->middleware(['auth', 'verified'])->name('bannerslider');
+Route::get('/postcar', function () {
+    return Inertia::render('PostCar');
+})->middleware(['auth', 'verified'])->name('postcar');
 
+Route::get('/userdashboard', function () {
+    return Inertia::render('UserDashBoard');
+})->middleware(['auth', 'verified'])->name('userdashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -56,6 +78,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/demo' , [ProfileController::class, 'demo'])->name('demo');
+    Route::get('/user-profile' , [ProfileController::class , 'user_profile'])->name('user-profile');
+    Route::get('/Logout' , [ProfileController::class , 'Logout'])->name('Logout');
 });
 
 require __DIR__.'/auth.php';

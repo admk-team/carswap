@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import imagelogo1 from '@/Assets/logo 1.png'
+import imagelogo1 from '@/Assets/headerlogo.png'
 import watsapImage from '@/Assets/whatsapp.png'
 import bellIcon from "@/Assets/bell.png"
 
-const NavBar = () => {
+
+const NavBar2 = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
@@ -11,30 +12,30 @@ const NavBar = () => {
   };
 
   return (
-    <div>
-    <nav className="bg-gray-800">
+    <>
+    <nav className=" border-b border-black ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <img className="" src={imagelogo1} alt="Logo" />
+            <img className="w-52 h-9" src={imagelogo1} alt="Logo" />
           </div>
           <div className="hidden md:block">
             <div className="flex items-center space-x-4">
-              <a className=" text-white font-bold ">
+              <a className=" font-gray-900 font-extrabold cursor-pointer">
                 Post a Car
               </a>
              <img className='w-7 h-7' src={bellIcon} alt="" />
-              <div className="flex items-center">
+              <div className="flex items-center text-white bg-gray-900 p-2">
                 <span className="w-6 h-6 mr-1"><img src={watsapImage} alt="" /></span>
                 <span className="text-white text-sm">07031555235</span>
               </div>
-              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-amber-600">
+              <div className="flex items-center p-2 space-y-1 sm:px-3 bg-emerald-600 ">
                 {/* Mobile menu items */}
                 <a
-                 href={route('login')}
-                  className="px-3 py-2 rounded-md text-base font-medium text-white"
+                  href="#"
+                  className=" rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
                 >
-                  Login/SignUp
+                  LogIn/SignUp
                 </a>
 
               </div>
@@ -85,23 +86,26 @@ const NavBar = () => {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {/* Mobile menu items */}
-            <a className=" block px-3 py-2  text-base font-medium text-white bg-gray-900text-white font-bold ">
+            <a className=" block px-3 py-2 text-base font-medium bg-gray-900 text-white font-bold ">
                 Post a Car
               </a>
-             <img className='block   w-7 h-7' src={bellIcon} alt="" />
-              <div className="flex items-center">
+             <div className="px-3 py-2 flex items-center font-medium text-white bg-gray-900">
+                <span className="block w-7 h-7 mr-1"><img src={bellIcon} alt="" /></span>
+                <span className="text-white mt-2 text-sm"></span>
+              </div>
+              <div className="px-3 py-2 flex items-center font-medium text-white bg-gray-900">
                 <span className="block mt-2 w-6 h-6 mr-1"><img src={watsapImage} alt="" /></span>
                 <span className="text-white mt-2 text-sm">07031555235</span>
               </div>
             <a
               href="#"
-              className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+              className="block px-3 py-2  text-base font-medium text-white bg-emerald-500"
             >
               Login
             </a>
             <a
               href="#"
-              className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+              className="block px-3 py-2  text-base font-medium text-white bg-emerald-900"
             >
               Signup
             </a>
@@ -109,8 +113,8 @@ const NavBar = () => {
         </div>
       )}
     </nav>
-    </div>
+    </>
   );
 };
 
-export default NavBar;
+export default NavBar2;
