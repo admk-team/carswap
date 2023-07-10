@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -17,7 +18,7 @@ class BrandController extends Controller
     public function index()
     {
         $brands=Brand::latest()->get();
-        return Inertia::render('Admin/Brand/Index',['brands'=>$brands]);
+        return Inertia::render('Admin/Brand/Index',['brands'=>$brands, 'success'=>request()->get('success')]);
     }
 
     /**
@@ -45,9 +46,9 @@ class BrandController extends Controller
         $model->image = $img_path ?? '';
         $model->description=$request->description;
         if($model->save()){
-            return Inertia::location(route('admin.brands.index'));
+            return Inertia::location(route('admin.brands.index', ['success' => 'Brand added successfully.']));
         }else{
-            return Inertia::redirect('Admin/Brand/Index');
+            return Inertia::location(route('admin.brands.index', ['error' => 'Failed to add brand!']));
         }
     }
 
@@ -88,18 +89,27 @@ class BrandController extends Controller
         $model->title=$request->title;
         $model->description=$request->description;
         if($model->save()){
-            return Inertia::location(route('admin.brands.index'));
+            return Inertia::location(route('admin.brands.index', ['success' => 'Brand updated successfully.']));
         }else{
-            return Inertia::redirect('Admin/Brand/Index');
+            return Inertia::location(route('admin.brands.index', ['error' => 'Failed to update the brand!']));
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Brand $brand)
+    public function destroy($id)
     {
-        //
+        $brand=Brand::find($id);
+        if($brand){
+            if ($brand->image) {
+                Storage::disk('public')->delete($brand->image);
+            }
+            $brand->delete();
+            return Inertia::location(route('admin.brands.index', ['success' => 'Brand deleted successfully.']));
+        }else{
+            return redirect()->back()->with('error', 'Brand not found.');
+        }
     }
     public function status($id,$status)
     {

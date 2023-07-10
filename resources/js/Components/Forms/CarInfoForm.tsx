@@ -44,9 +44,9 @@ import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
     return (
         <>
             <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
-                <div className="bg-white border border-gray-300 p-8 rounded-lg shadow-md">
-                    <h1 className="text-xl font-bold">Car Information:</h1>
-                    <h2 className="text-lg text-gray-600 mb-4">(All fields are * required)</h2>
+                <div className="border border-gray-300 p-8 rounded-lg shadow-md">
+                    <h1 className="text-xl text-gray-950 font-bold">Car Information:</h1>
+                    <h2 className="text-lg text-gray-700 mb-4">(All fields are * required)</h2>
                     <div className=" py-2">
                     <form className="row g-3" method='post' onSubmit={handleSubmit} encType='multipart/form-data'>
                             <div className="grid md:grid-cols-2 md:gap-x-6">

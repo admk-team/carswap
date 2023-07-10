@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Users\PostacarController;
@@ -41,9 +42,14 @@ Route::get("/cmd/{cmd}", function ($cmd) {
 Route::prefix('admin')->name('admin.')->group(function(){
     //Dashboard
     Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
+    
     //Brands
-    Route::resource('/brands',BrandController::class);
-    Route::get('brands/{id}/{status}',[BrandController::class,'status'])->name('brands.status');   
+    Route::resource('/brands',BrandController::class); 
+    Route::get('brands/{id}/{status}',[BrandController::class,'status'])->name('brands.status');
+
+    //Cars
+    Route::resource('/cars',CarController::class);
+    Route::get('cars/{id}/{status}',[CarController::class,'status'])->name('cars.status');
 })->middleware(['auth', 'verified']);
 
 
@@ -52,15 +58,19 @@ Route::prefix('admin')->name('admin.')->group(function(){
 //})->middleware(['auth', 'verified'])->name('test');
 Route::get('/', function () {
     return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
-})->middleware(['auth', 'verified'])->name('test');
+})->name('test');
 
 
 Route::get('/detail', function () {
     return Inertia::render('CarDetail');
 })->name('car.detail');
+
 Route::get('/all', function () {
     return Inertia::render('AllDetail');
 })->name('all.detail');
+Route::get('/user/profile', function () {
+    return Inertia::render('EditProfile');
+})->name('edit.profile');
 
 // Route::get('/bannerslider', function () {
 //     return Inertia::render('BannerSlider');

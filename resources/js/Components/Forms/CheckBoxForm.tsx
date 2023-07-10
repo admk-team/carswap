@@ -5,7 +5,7 @@ const CheckBoxForm = () => {
         <>
             <div className="mx-auto max-w-screen-xl w-full h-full mt-6 ">
                 <div className="bg-white border border-gray-300 p-8 rounded-lg shadow-md">
-                    <h1 className="text-xl font-bold">Undertaking:</h1>
+                    <h1 className="text-xl text-gray-950 font-bold">Undertaking:</h1>
                     <div className=" py-2">
 
                         <div className="flex items-center">
