@@ -43,7 +43,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 Route::get('/', function () {
     return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
-})->middleware(['auth', 'verified'])->name('test');
+})->name('test');
 
 // Route::get('/bannerslider', function () {
 //     return Inertia::render('BannerSlider');

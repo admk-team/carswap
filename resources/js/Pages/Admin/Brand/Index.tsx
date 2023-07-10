@@ -6,6 +6,10 @@ import { Head, Link } from "@inertiajs/react";
 const Index = ({ auth, brands }: any) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [brandsData, setBrandsData] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [deleteId, setDeleteId] = useState<number | null>(null);
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const itemsPerPage = 10;
     useEffect(() => {
         setBrandsData(brands);
@@ -20,10 +24,43 @@ const Index = ({ auth, brands }: any) => {
     const changeBrandStatus = (id: number, status: number) => {
       Inertia.get(route("admin.brands.status", { id, status }));
     };
+    const deleteHandler=((id: number)=>{
+        setDeleteId(id);
+        setShowModal(true);
+    });
+    const confirmDeleteHandler = () => {
+        if (deleteId !== null) {
+          Inertia.delete(route("admin.brands.destroy", deleteId));
+        }
+        setShowModal(false);
+    };
+    useEffect(() => {
+        const success = '{{ session("success") }}';
+        const error = '{{ session("error") }}';
+
+        if (success) {
+        setSuccessMessage(success);
+        }
+        if (error) {
+        setErrorMessage(error);
+        }
+    }, []);
     return (
         <>
         <Head title="Brand | List"/>
             <div className="container-fluid">
+                {successMessage && (
+                    <div className="alert alert-success alert-dismissible fade show" role="alert">
+                        {successMessage}
+                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                )}
+                {errorMessage && (
+                    <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                        {errorMessage}
+                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                )}
                 <h1 className="h3 mb-2 text-gray-800">Brands</h1>
                 <div className="card shadow mb-4">
                     <div className="card-header py-3 d-flex justify-content-between">
@@ -52,7 +89,7 @@ const Index = ({ auth, brands }: any) => {
                                 </thead>
                                 <tbody>
                                     {currentItems.map((brand: any) => (
-                                        <tr>
+                                        <tr key={brand.id}>
                                             <td>
                                                 <img
                                                     src={
@@ -94,7 +131,7 @@ const Index = ({ auth, brands }: any) => {
                                                 </button>
                                                 <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
                                                     <Link className="dropdown-item" href={route('admin.brands.edit',brand.id)}>Edit</Link>
-                                                    <a className="dropdown-item" href="#">Delete</a>
+                                                    <button onClick={()=>deleteHandler(brand.id)} className="dropdown-item">Delete</button>
                                                 </div>
                                               </div>
                                             </td>
@@ -127,6 +164,26 @@ const Index = ({ auth, brands }: any) => {
                     </div>
                 </div>
             </div>
+            {/* Delete modal */}
+            {showModal && (
+                <div className="modal fade show" id="staticBackdropLive" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLiveLabel" style={{ display:"block" }} aria-modal="true" role="dialog">
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="staticBackdropLabel">Confirm Delete</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                Are you sure you want to delete?
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => setShowModal(false)}>No</button>
+                                <button type="button" className="btn btn-danger" onClick={confirmDeleteHandler}>Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 };

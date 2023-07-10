@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -97,9 +98,20 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Brand $brand)
+    public function destroy($id)
     {
-        //
+        $brand=Brand::find($id);
+        if($brand){
+            if ($brand->image) {
+                Storage::disk('public')->delete($brand->image);
+            }
+            $brand->delete();
+            Session::flash('success', 'Brand deleted successfully.');
+            return Inertia::location(route('admin.brands.index'));
+        }else{
+            Session::flash('error', 'Failed to delete brand!');
+            return redirect()->back();
+        }
     }
     public function status($id,$status)
     {
