@@ -10,8 +10,7 @@ import ImageCharlo from '@/Assets/BrandLogos/сhevrolet_PNG157.png'
 import ImageAudi from '@/Assets/BrandLogos/audi-logo-2.png';
 import ImageMG from '@/Assets//BrandLogos/MgLogo.png';
 
-const SliderCard = () => {
-
+const SliderCard = (brands:any) => {
   return (
     <>
       <div className="w-full max-w-sm p-4 bg-white bg-opacity-50 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 ">
@@ -29,37 +28,13 @@ const SliderCard = () => {
         </div>
         <h3 className='font-extrabold text-xl'>By Brand:</h3>
         <div className="grid grid-cols-6 gap-0 mt-2">
-          <button className="border pt-1 pl-1 focus:bg-emerald-500">
-            <img src={ImageBWM} alt="Image 1" className="w-10 h-10 object-contain" />
-          </button>
-          <button className=" border pt-0 pl-1 focus:bg-emerald-500">
-            <img src={ImageHonda} alt="Image 1" className="w-12 h-12 object-contain" />
-          </button>
-          <button className="focus:bg-emerald-500 border pt-1 pl-1">
-            <img src={ImagemMercedes} alt="Image 1" className="w-10 h-10 object-contain" />
-          </button>
-          <button className="focus:bg-emerald-500 border pt-0 pl-0.5">
-            <img src={ImageFord} alt="Image 1" className="w-12 h-12 object-contain" />
-          </button>
-          <button className="focus:bg-emerald-500 border pt-1 pl-1.5">
-            <img src={ImageTesla} alt="Image 1" className="w-10 h-10 object-contain" />
-          </button>
-          <button className="focus:bg-emerald-500 border pt-0 pl-0">
-            <img src={ImageToryota} alt="Image 1" className="w-12 h-12 object-contain" />
-          </button>
-          <button className="focus:bg-emerald-500 border pt-1 pl-1">
-            <img src={ImageFerrari} alt="Image 1" className="w-10 h-10 object-contain" />
-          </button>
-          <button className="focus:bg-emerald-500 border pt-1 pl-1">
-            <img src={ImageCharlo} alt="Image 1" className="w-10 h-10 object-contain" />
-          </button>
-          <button className="focus:bg-emerald-500 border pt-1 pl-1">
-            <img src={ImageAudi} alt="Image 1" className="w-10 h-10 object-contain" />
-          </button>
-          <button className="focus:bg-emerald-500 border pl-1 pt-1 pb-1">
-            <img src={ImageMG} alt="Image 1" className="w-10 h-10 object-contain" />
-          </button>
-
+          {
+            brands.brands.brands?.map((brand:any)=>(
+                <button className="border pt-1 pl-1 focus:bg-emerald-500">
+                    <img src={"/storage/" + brand?.image} alt="Image 1" className="w-10 h-10 object-contain" />
+                </button>
+            ))
+          }
         </div>
         <div className="flex justify-center mt-4">
           <button className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold w-full py-2 px-4 rounded">Search</button>

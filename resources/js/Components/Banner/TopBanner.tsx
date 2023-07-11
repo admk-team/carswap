@@ -6,7 +6,7 @@ import SliderCard from '../Cards/SliderCard'
 import { url } from 'inspector'
 import Slider from '../Slider/Slider'
 
-const TopBanner = () => {
+const TopBanner = (brands:any) => {
     return (
         <>
             <div style={{ backgroundImage: `url(${backgroundImage})` ,backgroundSize: 'cover'  }}>
@@ -21,13 +21,13 @@ const TopBanner = () => {
                             <div className=" hidden lg:flex">
                                <Slider/>
                             </div>
-                            
+
                         </div>
                         <div className="my-8 flex">
-                        <SliderCard />
+                        <SliderCard brands={brands} />
                     </div>
                     </div>
-                   
+
                 </div>
             </div>
         </>
