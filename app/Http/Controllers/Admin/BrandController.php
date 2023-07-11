@@ -75,15 +75,14 @@ class BrandController extends Controller
     public function update(Request $request, Brand $brand)
     {
         $request->validate([
-            'title' => 'required',
-            'image' => 'image',
+            'title' => 'required'
         ]);
         $model=Brand::find($brand->id);
         if($request->hasFile('image')){
-            if ($model->image) {
+            $img_path = $request->file('image')->store('/images/brand', 'public');
+            if ($model->image && $img_path) {
                 Storage::disk('public')->delete($model->image);
             }
-            $img_path = $request->file('image')->store('/images/brand', 'public');        
             $model->image = $img_path;
         }
         $model->title=$request->title;
