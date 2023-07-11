@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -88,14 +89,55 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|unique:users,email,'.$id,
+            'city' => 'required',
+            'state' => 'required',
+            'address' => 'required',
+            'phone_no' => 'required'
+        ]);
+    
+        $user = User::findOrFail($id);
+    
+        $user->fill($request->only($user->getFillable()));
+    
+        if ($request->hasFile('image')) {
+            $img_path = $request->file('image')->store('/images/user', 'public');
+            $user->image = $img_path;
+        }
+        if($user->save()){
+            return Inertia::location(route('admin.users.index', ['success' => 'User updated successfully.']));
+        }else{
+            return Inertia::location(route('admin.users.index', ['error' => 'Failed to update the user!']));
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $user=User::find($id);
+        if($user){
+            if ($user->image) {
+                Storage::disk('public')->delete($user->image);
+            }
+            $user->delete();
+            return Inertia::location(route('admin.users.index', ['success' => 'User deleted successfully.']));
+        }else{
+            return redirect()->back()->with('error', 'User not found.');
+        }
+    }
+    public function status($id,$status)
+    {
+        $user=User::find($id);
+        $user->status=$status;
+        if ($user->save()) {
+            return Inertia::location(route('admin.users.index', ['success' => 'Status Change successfully.']));
+        } else {
+            return Inertia::location(route('admin.users.index', ['success' => 'Failed to change status.']));
+        }
     }
 }
