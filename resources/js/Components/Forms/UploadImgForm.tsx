@@ -17,9 +17,9 @@ const UploadImgForm = () => {
                             >
                                 <div className="flex items-center justify-center pb-3">
                                     <img src={ImageGallery} className="mb-2 w-12 h-12 mr-4" alt="" />
-                                    <button type="button" className="bg-green-500 text-white py-2.5 px-3">
+                                    <div className="bg-green-500 text-white py-2.5 px-3">
                                         + Add Photos
-                                    </button>
+                                    </div>
                                 </div>
                                 <div className="flex flex-wrap justify-around">
                                     <span className='flex pt-4'>
