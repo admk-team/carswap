@@ -1,46 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Layout from "../Layouts/Layout";
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { Inertia  } from '@inertiajs/inertia';
 
 const Edit = ({ auth,brands,car }: any) => {
   const { errors } = usePage().props
+  const [images, setImages] = useState([]);
   const { data, setData, put, processing } = useForm({
-    title: car.title || '',
-    brand_id: car.brand_id || '',
-    condition: car.condition || '',
-    engineCapacity: car.engine_capacity || '',
-    mileage: car.mileage || '',
-    location: car.location || '',
-    price: car.price || '',
-    fuelType: car.fuel_type || '',
-    model: car.model || '',
-    transmission: car.transmission || '',
-    drive: car.drive || '',
-    interiorColor: car.interior_color || '',
-    exteriorColor: car.exterior_color || '',
-    description: car.description || '',
+    title: car.title,
+    brand_id: car.brand_id,
+    condition: car.condition,
+    engine_capacity: car.engine_capacity,
+    mileage: car.mileage,
+    location: car.location,
+    price: car.price,
+    fuel_type: car.fuel_type,
+    model: car.model,
+    transmission: car.transmission,
+    drive: car.drive,
+    interior_color: car.interior_color,
+    exterior_color: car.exterior_color,
+    description: car.description,
+    images:[]
   });
 
-
+  const handleImageChange = (e:any) => {
+    if (e.target.files) {
+      setData('images',e.target.files);
+    }
+  };
+  useEffect(()=>{
+    setData(car)
+  },[])
   function handleSubmit(e:any){
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('title', data.title);
-    formData.append('brand_id', data.brand_id);
-    formData.append('condition', data.condition);
-    formData.append('engineCapacity', data.engineCapacity);
-    formData.append('mileage', data.mileage);
-    formData.append('location', data.location);
-    formData.append('price', data.price);
-    formData.append('fuelType', data.fuelType);
-    formData.append('model', data.model);
-    formData.append('transmission', data.transmission);
-    formData.append('drive', data.drive);
-    formData.append('interiorColor', data.interiorColor);
-    formData.append('exteriorColor', data.exteriorColor);
-    formData.append('description', data.description);
-    put(route('admin.cars.update',car.id),formData)
+    put(route('admin.cars.update',car.id))
   }
   return (
     <>
@@ -81,8 +75,8 @@ const Edit = ({ auth,brands,car }: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Engine Capacity <span className='text-danger'>*</span></label>
-                <input type="text" name="engine_capacity" className="form-control" placeholder="Engine Capacity"  value={data.engineCapacity} onChange={(e)=>setData('engineCapacity',e.target.value)} />
-                {errors.engineCapacity && <div className='text-danger'>{errors.engineCapacity}</div>}
+                <input type="text" name="engine_capacity" className="form-control" placeholder="Engine Capacity"  value={data.engine_capacity} onChange={(e)=>setData('engine_capacity',e.target.value)} />
+                {errors.engine_capacity && <div className='text-danger'>{errors.engine_capacity}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Mileage <span className='text-danger'>*</span></label>
@@ -96,12 +90,12 @@ const Edit = ({ auth,brands,car }: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Fuel Type <span className='text-danger'>*</span></label>
-                <select name="fuel_type" id="" className="form-control" onChange={(e)=>setData('fuelType',e.target.value)}>
+                <select name="fuel_type" id="" className="form-control" onChange={(e)=>setData('fuel_type',e.target.value)}>
                   <option value="">Select Fuel Type</option>
                   <option value="Desiel" selected={car.fuel_type && car.fuel_type === 'Desiel'}>Desiel</option>
                   <option value="Petrol" selected={car.fuel_type && car.fuel_type === 'Petrol'}>Petrol</option>
                 </select>
-                {errors.fuelType && <div className='text-danger'>{errors.fuelType}</div>}
+                {errors.fuel_type && <div className='text-danger'>{errors.fuel_type}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Model <span className='text-danger'>*</span></label>
@@ -120,18 +114,23 @@ const Edit = ({ auth,brands,car }: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Interior Color <span className='text-danger'>*</span></label>
-                <input type="text" name="interior_color" className="form-control" placeholder="Interior Color"  value={data.interiorColor} onChange={(e)=>setData('interiorColor',e.target.value)} />
-                {errors.interiorColor && <div className='text-danger'>{errors.interiorColor}</div>}
+                <input type="text" name="interior_color" className="form-control" placeholder="Interior Color"  value={data.interior_color} onChange={(e)=>setData('interior_color',e.target.value)} />
+                {errors.interior_color && <div className='text-danger'>{errors.interior_color}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Exterior Color <span className='text-danger'>*</span></label>
-                <input type="text" name="exterior_color" className="form-control" placeholder="Exterior Color"  value={data.exteriorColor} onChange={(e)=>setData('exteriorColor',e.target.value)} />
-                {errors.ExteriorColor && <div className='text-danger'>{errors.ExteriorColor}</div>}
+                <input type="text" name="exterior_color" className="form-control" placeholder="Exterior Color"  value={data.exterior_color} onChange={(e)=>setData('exterior_color',e.target.value)} />
+                {errors.Exterior_color && <div className='text-danger'>{errors.Exterior_color}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Location <span className='text-danger'>*</span></label>
                 <input type="text" className="form-control" name="location" value={data.location} placeholder='Location' onChange={(e)=>setData('location',e.target.value)}/>
                 {errors.location && <div className='text-danger'>{errors.location}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label">Images <span className='text-danger'>*</span></label>
+                <input type="file" className="form-control" name="images" onChange={handleImageChange} multiple/>
+                {errors.images && <div className='text-danger'>{errors.images}</div>}
               </div>
               <div className="col-md-12">
                 <label className="form-label">Description <span className='text-danger'>*</span></label>

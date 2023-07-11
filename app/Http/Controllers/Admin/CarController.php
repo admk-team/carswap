@@ -111,51 +111,52 @@ class CarController extends Controller
             'title' => 'required',
             'brand_id' => 'required',
             'condition' => 'required',
-            'engineCapacity' => 'required',
+            'engine_capacity' => 'required',
             'mileage' => 'required',
             'location' => 'required',
             'price' => 'required',
-            'fuelType' => 'required',
+            'fuel_type' => 'required',
             'model' => 'required',
             'transmission' => 'required',
-            'interiorColor' => 'required',
-            'exteriorColor' => 'required',
+            'interior_color' => 'required',
+            'exterior_color' => 'required',
             'description' => 'required',
+            'images.*' => 'image',
         ]);
         
         $model=Car::find($id);
-        // if($request->hasFile('images')){
-        //     if ($request->hasFile('images')) {
-        //         $existingImages = explode(',', $model->images);
-        //         foreach ($existingImages as $existingImage) {
-        //             Storage::disk('public')->delete($existingImage);
-        //         }
-        //     }
-        //     $images = '';
-        //     $arr=[];
-        //     foreach ($request->images ?? [] as $item){
-        //         $var = date_create();
-        //         $time = date_format($var, 'YmdHis');
-        //         $imageName = $time . '-' . $item->getClientOriginalName();
-        //         $item->move(public_path('storage/images/cars'), $imageName);
-        //         array_push($arr,'/images/cars/'.$imageName);
-        //     }
-        //     $images = implode(",", $arr);
-        //     $model->images=$images;
-        // }
+        if($request->hasFile('images')){
+            if ($request->hasFile('images')) {
+                $existingImages = explode(',', $model->images);
+                foreach ($existingImages as $existingImage) {
+                    Storage::disk('public')->delete($existingImage);
+                }
+            }
+            $images = '';
+            $arr=[];
+            foreach ($request->images ?? [] as $item){
+                $var = date_create();
+                $time = date_format($var, 'YmdHis');
+                $imageName = $time . '-' . $item->getClientOriginalName();
+                $item->move(public_path('storage/images/cars'), $imageName);
+                array_push($arr,'/images/cars/'.$imageName);
+            }
+            $images = implode(",", $arr);
+            $model->images=$images;
+        }
         $model->title=$request->title;
         $model->brand_id=$request->brand_id;
         $model->condition=$request->condition;
-        $model->engine_Capacity=$request->engineCapacity;
+        $model->engine_capacity=$request->engine_capacity;
         $model->mileage=$request->mileage;
         $model->location=$request->location;
         $model->price=$request->price;
         $model->drive=$request->drive;
-        $model->fuel_Type=$request->fuelType;
+        $model->fuel_type=$request->fuel_type;
         $model->model=$request->model;
         $model->transmission=$request->transmission;
-        $model->interior_color=$request->interiorColor;
-        $model->exterior_color=$request->exteriorColor;
+        $model->interior_color=$request->interior_color;
+        $model->exterior_color=$request->exterior_color;
         $model->description=$request->description;
         if($model->save()){
             return Inertia::location(route('admin.cars.index', ['success' => 'Car updated successfully.']));

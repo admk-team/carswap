@@ -20,35 +20,19 @@ const Create = ({ auth,brands }: any) => {
     interiorColor: '',
     exteriorColor: '',
     description: '',
+    images:[]
   });
 
   const handleImageChange = (e:any) => {
     if (e.target.files) {
-      setImages(e.target.files);
+      setData('images',e.target.files);
+      // setImages(e.target.files);
     }
   };
 
   function handleSubmit(e:any){
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('title', data.title);
-    formData.append('brand_id', data.brand_id);
-    formData.append('condition', data.condition);
-    formData.append('engineCapacity', data.engineCapacity);
-    formData.append('mileage', data.mileage);
-    formData.append('location', data.location);
-    formData.append('price', data.price);
-    formData.append('fuelType', data.fuelType);
-    formData.append('model', data.model);
-    formData.append('transmission', data.transmission);
-    formData.append('drive', data.drive);
-    formData.append('interiorColor', data.interiorColor);
-    formData.append('exteriorColor', data.exteriorColor);
-    for (let i = 0; i < images.length; i++) {
-      formData.append('images[]', images[i]);
-    }
-    formData.append('description', data.description);
-    post(route('admin.cars.store'),formData)
+    post(route('admin.cars.store'))
   }
   return (
     <>
