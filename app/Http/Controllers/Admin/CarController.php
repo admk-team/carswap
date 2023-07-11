@@ -16,7 +16,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars=Car::latest()->get();
+        $cars=Car::with('brand')->latest()->get();
         return Inertia::render('Admin/Cars/Index',['cars'=>$cars, 'success'=>request()->get('success')]);
     }
 
