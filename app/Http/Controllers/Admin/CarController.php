@@ -48,22 +48,20 @@ class CarController extends Controller
             'interiorColor' => 'required',
             'exteriorColor' => 'required',
             'description' => 'required',
-            'images' => 'required',
+            'images' => 'required|array',
             'images.*' => 'image',
         ],[
             'brand_id.required' =>'The brand field is required',
         ]);
         $images = '';
         $arr=[];
-        foreach ($request->all() as $key => $value) {
-            if (strpos($key, 'images') !== false) {
-                foreach ($value as $file) {
-                    $var = date_create();
-                    $time = date_format($var, 'YmdHis');
-                    $imageName = $time . '-' . $file->getClientOriginalName();
-                    $file->move(public_path('storage/images/cars'), $imageName);
-                    array_push($arr, '/images/cars/' . $imageName);
-                }
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $item) {
+                $var = date_create();
+                $time = date_format($var, 'YmdHis');
+                $imageName = $time . '-' . $item->getClientOriginalName();
+                $item->move(public_path('storage/images/cars'), $imageName);
+                array_push($arr, '/images/cars/' . $imageName);
             }
         }
         $images = implode(",", $arr);
