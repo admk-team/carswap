@@ -88,7 +88,29 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|unique:users,email,'.$id,
+            'city' => 'required',
+            'state' => 'required',
+            'address' => 'required',
+            'phone_no' => 'required'
+        ]);
+    
+        $user = User::findOrFail($id);
+    
+        $user->fill($request->only($user->getFillable()));
+    
+        if ($request->hasFile('image')) {
+            $img_path = $request->file('image')->store('/images/user', 'public');
+            $user->image = $img_path;
+        }
+        if($user->save()){
+            return Inertia::location(route('admin.users.index', ['success' => 'User updated successfully.']));
+        }else{
+            return Inertia::location(route('admin.users.index', ['error' => 'Failed to update the user!']));
+        }
     }
 
     /**
