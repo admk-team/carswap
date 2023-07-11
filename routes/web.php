@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Users\PostacarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -44,7 +45,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
     
     //Brands
-    Route::resource('/brands',BrandController::class);
+    Route::resource('/brands',BrandController::class); 
     Route::get('brands/{id}/{status}',[BrandController::class,'status'])->name('brands.status');
 
     //Cars
@@ -78,10 +79,14 @@ Route::get('/user/profile', function () {
 Route::get('/postcar', function () {
     return Inertia::render('PostCar');
 })->middleware(['auth', 'verified'])->name('postcar');
-
+// Route::post('/postcars', [PostacarController::class, 'store'])->name('postcars.store');
 Route::get('/userdashboard', function () {
     return Inertia::render('UserDashBoard');
 })->middleware(['auth', 'verified'])->name('userdashboard');
+
+    //Post car
+    Route::resource('user/cars',PostacarController::class, ['as'=> 'user']);
+    // Route::get('cars/{id}/{status}',[PostacarController::class,'status'])->name('cars.status');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
