@@ -48,17 +48,22 @@ class CarController extends Controller
             'interiorColor' => 'required',
             'exteriorColor' => 'required',
             'description' => 'required',
-            'images' => 'image',
+            'images' => 'required',
+            'images.*' => 'image',
+        ],[
+            'brand_id.required' =>'The brand field is required',
         ]);
         $images = '';
         $arr=[];
-        if($request->hasFile('images')){
-            foreach ($request->images ?? [] as $item){
-                $var = date_create();
-                $time = date_format($var, 'YmdHis');
-                $imageName = $time . '-' . $item->getClientOriginalName();
-                $item->move(public_path('storage/images/cars'), $imageName);
-                array_push($arr,'/images/cars/'.$imageName);
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'images') !== false) {
+                foreach ($value as $file) {
+                    $var = date_create();
+                    $time = date_format($var, 'YmdHis');
+                    $imageName = $time . '-' . $file->getClientOriginalName();
+                    $file->move(public_path('storage/images/cars'), $imageName);
+                    array_push($arr, '/images/cars/' . $imageName);
+                }
             }
         }
         $images = implode(",", $arr);
@@ -66,7 +71,7 @@ class CarController extends Controller
         $model->title=$request->title;
         $model->brand_id=$request->brand_id;
         $model->condition=$request->condition;
-        $model->engine_Capacity=$request->engineCapacity;
+        $model->engine_capacity=$request->engineCapacity;
         $model->mileage=$request->mileage;
         $model->location=$request->location;
         $model->price=$request->price;
