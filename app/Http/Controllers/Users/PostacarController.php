@@ -13,7 +13,18 @@ class PostacarController extends Controller
      */
     public function index()
     {
-        //
+        $cars=Postacar::latest()->get();
+        return $data = $cars->map(function($item){
+            $images = explode(",", $item->Car_img);
+            $item->Car_img = array_map(function($im){ 
+                return url('storage' . $im); 
+            },
+            $images);
+
+            return $item;
+        });
+       
+        return Inertia::render('UserDashBoard', ['cars' => $cars]);
     }
 
     /**
@@ -29,29 +40,41 @@ class PostacarController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'first_name' => 'required',
-        //     'last_name' => 'required',
-        //     'email'=>'required',
-        //     'Phone'=>'required',
-        //     // 'Car_address'=>'required',
-        //     // 'State'=>'required',
-        //     // 'Address'=>'required',
-        //     // 'City'=>'required',
-        //     // 'Inspection_date'=>'required',
-        //     // 'Inspection_Time'=>'required',
-        //     // 'Modal'=>'required',
-        //     // 'Year'=>'required',
-        //     // 'Trim'=>'required',
-        //     // 'Price'=>'required',
-        //     // 'Usedcar'=>'required',
-        //     // 'Milage'=>'required',
-        //     // 'Tarnsmisiion_Type'=>'required',
-        //     // 'Engin_size'=>'required',
-        //     'Comments'=>'required',
-        //     // 'Car_img'=>'required',
-        // ]);
-      
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email'=>'required',
+            'Phone'=>'required',
+            'Car_address'=>'required',
+            'State'=>'required',
+            'address'=>'required',
+            'City'=>'required',
+            'Inspection_date'=>'required',
+            'Inspection_Time'=>'required',
+            'Modal'=>'required',
+            'Year'=>'required',
+            'Trim'=>'required',
+            'Price'=>'required',
+            'Usedcar'=>'required',
+            'Milage'=>'required',
+            'Transmission_Type'=>'required',
+            'Engin_size'=>'required',
+            'Comments'=>'required',
+            'Car_img' => 'required|array',
+            'Car_img.*' => 'image',
+        ]);
+        $Car_img= '';
+        $arr=[];
+        if ($request->hasFile('Car_img')) {
+            foreach ($request->file('Car_img') as $item) {
+                $var = date_create();
+                $time = date_format($var, 'YmdHis');
+                $imageName = $time . '-' . $item->getClientOriginalName();
+                $item->move(public_path('storage/Postcar/Usercar'), $imageName);
+                array_push($arr, '/Postcar/Usercar/' . $imageName);
+            }
+        }
+        $Car_img= implode(",", $arr);
         $model=new Postacar();
         $model->first_name=$request->first_name;
         $model->last_name=$request->last_name;
@@ -59,7 +82,7 @@ class PostacarController extends Controller
         $model->Phone=$request->Phone;
         $model->Car_address=$request->Car_address;
         $model->State=$request->State;
-        $model->Address=$request->Address;
+        $model->Address=$request->address;
         $model->City=$request->City;
         $model->Inspection_date=$request->Inspection_date;
         $model->Inspection_Time=$request->Inspection_Time;
@@ -69,13 +92,16 @@ class PostacarController extends Controller
         $model->Price=$request->Price;
         $model->Usedcar=$request->Usedcar;
         $model->Milage=$request->Milage;
-        $model->Tarnsmisiion_Type=$request->Tarnsmisiion_Type;
+        $model->Transmission_Type=$request->Transmission_Type;
         $model->Engin_size=$request->Engin_size;
         $model->Comments=$request->Comments;
-        $model->Car_img=$request->Car_imtg;
-
+        $model->Car_img=$Car_img;
        
-            return $request;
+        if($model->save()){
+            return Inertia::location(route('userdashboard', ['success' => 'Car added successfully.']));
+        }else{
+            return Inertia::location(route('postcar', ['error' => 'Failed to add car!']));
+        }
         
     }
 

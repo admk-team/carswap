@@ -21,7 +21,7 @@ const NavBar2 = () => {
           </div>
           <div className="hidden md:block">
             <div className="flex items-center space-x-4">
-              <a className=" font-gray-900 font-extrabold cursor-pointer">
+              <a  href={route('postcar')} className=" font-gray-900 font-extrabold cursor-pointer">
                 Post a Car
               </a>
              <img className='w-7 h-7' src={bellIcon} alt="" />
