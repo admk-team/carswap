@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Users\PostacarController;
 use Illuminate\Foundation\Application;
@@ -50,12 +51,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
     //Cars
     Route::resource('/cars',CarController::class);
     Route::get('cars/{id}/{status}',[CarController::class,'status'])->name('cars.status');
+
+    //User
+    Route::resource('/users',UserController::class);
+    Route::get('users/{id}/{status}',[UserController::class,'status'])->name('users.status');
 })->middleware(['auth', 'verified']);
 
-
-//Route::get('/test', function () {
-    //return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
-//})->middleware(['auth', 'verified'])->name('test');
 Route::get('/', function () {
     return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
 })->name('test');

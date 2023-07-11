@@ -4,26 +4,26 @@ import { Inertia } from "@inertiajs/inertia";
 import { Head, Link } from "@inertiajs/react";
 import Modal from "@/Components/Modal";
 
-const Index = ({ auth, cars, success, error }: any) => {
+const Index = ({ auth, users, success, error }: any) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [carsData, setCarsData] = useState([]);
+    const [usersData, setUsersData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [deleteId, setDeleteId] = useState<number | null>(null);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const itemsPerPage = 10;
     useEffect(() => {
-        setCarsData(cars);
-    }, [cars]);
+        setUsersData(users);
+    }, [users]);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = carsData.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = usersData.slice(indexOfFirstItem, indexOfLastItem);
 
     const handlePageChange = (pageNumber: number) => {
       setCurrentPage(pageNumber);
     };
-    const changeCarStatus = (id: number, status: number) => {
-      Inertia.get(route("admin.cars.status", { id, status }));
+    const changeUserStatus = (id: number, status: number) => {
+      Inertia.get(route("admin.users.status", { id, status }));
     };
     const deleteHandler=((id: number)=>{
         setDeleteId(id);
@@ -31,7 +31,7 @@ const Index = ({ auth, cars, success, error }: any) => {
     });
     const confirmDeleteHandler = () => {
         if (deleteId !== null) {
-          Inertia.delete(route("admin.cars.destroy", deleteId));
+          Inertia.delete(route("admin.users.destroy", deleteId));
         }
         setShowModal(false);
     };
@@ -45,7 +45,7 @@ const Index = ({ auth, cars, success, error }: any) => {
     }, []);
     return (
         <>
-        <Head title="Car | List"/>
+        <Head title="User | List"/>
             <div className="container-fluid">
                 {successMessage && (
                     <div className="alert alert-success alert-dismissible fade show" role="alert">
@@ -59,18 +59,18 @@ const Index = ({ auth, cars, success, error }: any) => {
                         <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 )}
-                <h1 className="h3 mb-2 text-gray-800">Cars</h1>
+                <h1 className="h3 mb-2 text-gray-800">Users</h1>
                 <div className="card shadow mb-4">
                     <div className="card-header py-3 d-flex justify-content-between">
                         <h6 className="m-0 font-weight-bold text-primary">
                             {" "}
-                            Car List{" "}
+                            User List{" "}
                         </h6>
                         <Link
-                            href={route("admin.cars.create")}
+                            href={route("admin.users.create")}
                             className="btn btn-primary"
                         >
-                            Add Car
+                            Add User
                         </Link>
                     </div>
                     <div className="card-body">
@@ -78,46 +78,40 @@ const Index = ({ auth, cars, success, error }: any) => {
                             <table className="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Brand</th>
-                                        <th>Model</th>
-                                        <th>Price</th>
-                                        <th>Condition</th>
-                                        <th>Fuel Type</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {currentItems.map((car: any) => (
-                                        <tr key={car.id}>
-                                            <td>{car?.title}</td>
-                                            <td>{car?.brand.title}</td>
-                                            <td>{car?.model}</td>
-                                            <td>{car?.price}</td>
-                                            <td>{car?.condition}</td>
-                                            <td>{car?.fuel_type}</td>
+                                    {currentItems.map((user: any) => (
+                                        <tr key={user.id}>
+                                            <td>{user?.first_name}</td>
+                                            <td>{user?.last_name}</td>
+                                            <td>{user?.email}</td>
+                                            <td>{user?.phone_no}</td>
                                             <td>
-                                            <div className="dropdown mb-4">
-                                              <button
-                                                  className={`btn btn-${
-                                                      car && car.status && car.status === 1 ? "success" : "danger"
-                                                  } dropdown-toggle`}
-                                                  type="button"
-                                                  id="dropdownMenuButton"
-                                                  data-toggle="dropdown"
-                                                  aria-haspopup="true"
-                                                  aria-expanded="false"
-                                              >
-                                                  {car && car.status && car.status === 1 ? "Active" : "Deactive"}
-                                              </button>
-                                              <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                                                  <button className="dropdown-item" onClick={() => changeCarStatus(car.id, 1)} >Active</button>
-                                                  <button className="dropdown-item" onClick={() => changeCarStatus(car.id, 0)}>
-                                                      Deactive
-                                                  </button>
-                                              </div>
-                                          </div>
+                                                <div className="dropdown mb-4">
+                                                    <button
+                                                        className={`btn btn-${
+                                                            user && user.status && user.status == "1" ? "success" : "danger"
+                                                        } dropdown-toggle`}
+                                                        type="button"
+                                                        id="dropdownMenuButton"
+                                                        data-toggle="dropdown"
+                                                        aria-haspopup="true"
+                                                        aria-expanded="false"
+                                                    >
+                                                        {user && user.status && user.status == "1" ? "Active" : "Deactive"}
+                                                    </button>
+                                                    <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+                                                        <button className="dropdown-item" onClick={() => changeUserStatus(user.id, 1)} >Active</button>
+                                                        <button className="dropdown-item" onClick={() => changeUserStatus(user.id, 0)}>Deactive</button>
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td>
                                               <div className="dropdown mb-4">
@@ -125,8 +119,8 @@ const Index = ({ auth, cars, success, error }: any) => {
                                                   Action
                                                 </button>
                                                 <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                                                    <Link className="dropdown-item" href={route('admin.cars.edit',car.id)}>Edit</Link>
-                                                    <button onClick={()=>deleteHandler(car.id)} className="dropdown-item">Delete</button>
+                                                    <Link className="dropdown-item" href={route('admin.users.edit',user.id)}>Edit</Link>
+                                                    <button onClick={()=>deleteHandler(user.id)} className="dropdown-item">Delete</button>
                                                 </div>
                                               </div>
                                             </td>
@@ -137,7 +131,7 @@ const Index = ({ auth, cars, success, error }: any) => {
                         </div>
                         <div className="d-flex justify-content-center">
                           <ul className="pagination">
-                            {Array(Math.ceil(carsData.length / itemsPerPage))
+                            {Array(Math.ceil(usersData.length / itemsPerPage))
                                 .fill(0)
                                 .map((_, index) => (
                                     <li

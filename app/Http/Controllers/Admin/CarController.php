@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Car;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -16,7 +17,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars=Car::latest()->get();
+        $cars=Car::with('brand')->latest()->get();
         return Inertia::render('Admin/Cars/Index',['cars'=>$cars, 'success'=>request()->get('success')]);
     }
 
@@ -26,7 +27,8 @@ class CarController extends Controller
     public function create()
     {
         $brands=Brand::get();
-        return Inertia::render('Admin/Cars/Create',['brands'=>$brands]);
+        $users=User::get();
+        return Inertia::render('Admin/Cars/Create',['brands'=>$brands,'users'=>$users]);
     }
 
     /**
@@ -37,6 +39,7 @@ class CarController extends Controller
         $request->validate([
             'title' => 'required',
             'brand_id' => 'required',
+            'user_id' => 'required',
             'condition' => 'required',
             'engineCapacity' => 'required',
             'mileage' => 'required',
@@ -52,6 +55,7 @@ class CarController extends Controller
             'images.*' => 'image',
         ],[
             'brand_id.required' =>'The brand field is required',
+            'user_id.required' =>'The User field is required',
         ]);
         $images = '';
         $arr=[];
@@ -68,6 +72,7 @@ class CarController extends Controller
         $model=new Car();
         $model->title=$request->title;
         $model->brand_id=$request->brand_id;
+        $model->user_id=$request->user_id;
         $model->condition=$request->condition;
         $model->engine_capacity=$request->engineCapacity;
         $model->mileage=$request->mileage;
@@ -102,14 +107,16 @@ class CarController extends Controller
     public function edit($id)
     {
         $brands=Brand::get();
+        $users=User::get();
         $car=Car::find($id);
-        return Inertia::render('Admin/Cars/Edit',['brands'=>$brands,'car'=>$car]);
+        return Inertia::render('Admin/Cars/Edit',['brands'=>$brands,'car'=>$car,'users'=>$users]);
     }
     public function update($id,Request $request)
     {
         $request->validate([
             'title' => 'required',
             'brand_id' => 'required',
+            'user_id' => 'required',
             'condition' => 'required',
             'engine_capacity' => 'required',
             'mileage' => 'required',
@@ -146,6 +153,7 @@ class CarController extends Controller
         }
         $model->title=$request->title;
         $model->brand_id=$request->brand_id;
+        $model->user_id=$request->user_id;
         $model->condition=$request->condition;
         $model->engine_capacity=$request->engine_capacity;
         $model->mileage=$request->mileage;
