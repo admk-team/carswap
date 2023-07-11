@@ -69,6 +69,7 @@ Route::get('/detail', function () {
 Route::get('/all', function () {
     return Inertia::render('AllDetail');
 })->name('all.detail');
+
 Route::get('/user/profile', function () {
     return Inertia::render('EditProfile');
 })->name('edit.profile');
@@ -76,10 +77,17 @@ Route::get('/user/profile', function () {
 // Route::get('/bannerslider', function () {
 //     return Inertia::render('BannerSlider');
 // })->middleware(['auth', 'verified'])->name('bannerslider');
+
 Route::get('/postcar', function () {
     return Inertia::render('PostCar');
 })->middleware(['auth', 'verified'])->name('postcar');
+
+Route::get('/signuppage', function () {
+    return Inertia::render('SignUpPage');
+})->middleware(['auth', 'verified'])->name('signuppage');
+
 // Route::post('/postcars', [PostacarController::class, 'store'])->name('postcars.store');
+
 Route::get('/userdashboard', function () {
     return Inertia::render('UserDashBoard');
 })->middleware(['auth', 'verified'])->name('userdashboard');
