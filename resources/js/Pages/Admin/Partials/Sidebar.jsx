@@ -40,10 +40,10 @@ function Sidebar({ onCollapseChange, style }) {
                 </Link>
             </li>
             <hr className="sidebar-divider my-0" />
-            <li className={`nav-item ${ route().current("demo") ? "active" : "collapsed" }`} >
-                <Link href={route("demo")} className="nav-link collapsed">
-                    <i className="fas fa-fw fa-cog"></i>
-                    <span>Component</span>
+            <li className={`nav-item ${ route().current("admin.users.index") ? "active" : "collapsed" }`} >
+                <Link href={route("admin.users.index")} className="nav-link collapsed">
+                    <i className="fa fa-user"></i>
+                    <span>Users</span>
                 </Link>
             </li>
             <hr className="sidebar-divider d-none d-md-block" />
