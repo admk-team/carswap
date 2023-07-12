@@ -5,7 +5,7 @@ import FacImage from "@/Assets/facebook.png"
 import { Head, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 
-const LoginPage = ({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) => {
+const LoginPage = ({ status, canResetPassword }: { status?: string, canResetPassword?: boolean }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',

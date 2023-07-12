@@ -16,7 +16,7 @@ import { Button } from 'flowbite-react';
 
 export default function AllCars({ brands, cars }: { brands: any[]; cars: any }) {
     const [showModal, setShowModal] = useState(false);
-    const [compare, setCompare] = useState([])
+    const [compare, setCompare]:any = useState([])
 
     const handleSetCar = (id=0)=>{
         console.log(cars)
