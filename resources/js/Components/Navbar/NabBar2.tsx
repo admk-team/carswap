@@ -24,9 +24,9 @@ const NavBar2 = (auth:any) => {
           </div>
           <div className="hidden md:block">
             <div className="flex items-center space-x-4">
-              <a className=" font-gray-900 font-extrabold cursor-pointer">
+              <Link  href={route('user.postcar')} className=" font-gray-900 font-extrabold cursor-pointer">
                 Post a Car
-              </a>
+              </Link>
              <img className='w-7 h-7' src={bellIcon} alt="" />
               <div className="flex items-center text-white bg-gray-900 p-2">
                 <span className="w-6 h-6 mr-1"><img src={watsapImage} alt="" /></span>
