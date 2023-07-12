@@ -66,6 +66,7 @@ class FrontController extends Controller
         $brands=Brand::where('status','1')->get();
         $car=Car::where('slug',$slug)->first();
         $car->images=explode(',',$car->images);
-        return Inertia::render('Front/CarDetail',['brands'=>$brands,'car'=>$car]);
+        $similarCars=Car::where('status','1')->limit(3)->latest()->get();
+        return Inertia::render('Front/CarDetail',['brands'=>$brands,'car'=>$car,'similarCars'=>$similarCars]);
     }
 }

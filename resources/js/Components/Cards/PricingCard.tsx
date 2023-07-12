@@ -58,17 +58,12 @@ const PricingCard = (cars:any) => {
                                     <a href="#" className="text-white bg-black hover:bg-gray-600 font-medium  text-sm px-6 py-2.5 text-center  w-36">Cash Purchase</a>
                                     <a href="#" className="text-white bg-green-500 hover:bg-green-600 font-medium  text-sm px-6 py-2.5 text-center  w-32">Swap</a>
                                 </div>
-
-
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
         </div>
-
-
-
     );
 };
 

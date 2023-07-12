@@ -10,7 +10,8 @@ import logo6 from '@/Assets/toyota-logo.png'
 import logo7 from '@/Assets/bmw.png'
 import Footer from '../Footer/Footer';
 
-export default function AllCars() {
+export default function AllCars({ brands }: { brands: any[] }) {
+    console.log("brand arha g?", brands)
     return (
         <div>
             <NavBar2 />
@@ -30,6 +31,7 @@ export default function AllCars() {
                         </div>
 
                         <div className="flex flex-wrap mt-2 gap-2">
+
                             <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
                                 <option value="">Price</option>
                                 <option value="option1">Under 3M</option>
@@ -41,9 +43,12 @@ export default function AllCars() {
 
                             <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
                                 <option value="">Brand</option>
-                                <option value="option1">BMW</option>
-                                <option value="option2">Honda</option>
-                                <option value="option2">Corolla</option>
+                                {brands.map((option: any) => (
+                                    <option key={option.id} value={option.title}>
+                                        {option.title}
+                                    </option>
+                                ))}
+
                             </select>
                             <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
                                 <option value="">Mileage</option>
@@ -316,9 +321,9 @@ export default function AllCars() {
 
                     </div>
                 </div>
-                </div>
-                <Footer />
             </div>
+            <Footer />
+        </div>
 
-            )
+    )
 }
