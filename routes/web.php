@@ -10,6 +10,7 @@ use App\Http\Controllers\Users\PostacarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\User\AuthController;
 use Inertia\Inertia;
 
 /*
@@ -58,9 +59,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('users/{id}/{status}',[UserController::class,'status'])->name('users.status');
 })->middleware(['auth', 'verified']);
 
-Route::get('/', [FrontController::class,'index'])->name('test');
+Route::get('/', [FrontController::class,'index'])->name('front.index');
 Route::get('/car-detail/{slug}', [FrontController::class,'CarDetail'])->name('CarDetail');
 Route::get('/cars/all', [FrontController::class,'ViewAllCars'])->name('ViewAllCars');
+
+Route::get('/user-login',[AuthController::class,'create'])->name('user.login');
 
 
 Route::get('/detail', function () {

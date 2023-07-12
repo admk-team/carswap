@@ -2,6 +2,7 @@ import { useState } from 'react';
 import imagelogo1 from '@/Assets/headerlogo.png'
 import watsapImage from '@/Assets/whatsapp.png'
 import bellIcon from "@/Assets/bell.png"
+import { Link } from '@inertiajs/react';
 
 const NavBar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -16,7 +17,9 @@ const NavBar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <img className="w-52 h-10 object-contain" src={imagelogo1} alt="Logo" />
+            <Link  href={route('front.index')}>
+              <img className="w-52 h-10 object-contain" src={imagelogo1} alt="Logo" />
+            </Link>
           </div>
           <div className="hidden md:block">
             <div className="flex items-center space-x-4">
@@ -31,7 +34,7 @@ const NavBar = () => {
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-emerald-500 hover:bg-emerald-600">
                 {/* Mobile menu items */}
                 <a
-                 href={route('login')}
+                 href={route('user.login')}
                   className="px-3 py-2 rounded-md text-base font-medium text-white"
                 >
                   Login/SignUp
