@@ -50,7 +50,7 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                             <div className="relative">
                                 <img src={PriceTag} alt="PriceTag" />
                                 <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white self-center mx-3 pb-3 font-bold">
-                                    $ 43496.10
+                                    $ {car.car.price}
                                 </p>
                             </div>
                         </div>
@@ -58,7 +58,7 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                     <div className="flex justify-between mt-3">
                         <div className="flex items-center">
                             <img src={Location} className="w-6 h-6" />
-                            <p className="mx-2">California, USA</p>
+                            <p className="mx-2">{car.car.location}</p>
                         </div>
                         <div className="flex items-center mr-10" >
                             <img src={Share} className="w-6 h-6" />
@@ -102,7 +102,7 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                     <h3 className="font-bold text-gray-900 text-2xl">Key Features:</h3>
                     <div className="grid grid-cols-12 gap-4 mt-7">
                         <div className="col-span-12 md:col-span-6 lg:col-span-4">
-                            <div className='flex justify-between bg-purple-50 p-4'>
+                            {/* <div className='flex justify-between bg-purple-50 p-4'>
                                 <div className="flex gap-2">
                                     <img src={Body} className="w-6 h-6" />
                                     <p>Body Type</p>
@@ -110,7 +110,7 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                                 <div>
                                     <p>Truck</p>
                                 </div>
-                            </div>
+                            </div> */}
                             <hr />
                             <div className='flex justify-between bg-purple-50 p-4'>
                                 <div className="flex gap-2">
@@ -118,7 +118,7 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                                     <p>Engine Size</p>
                                 </div>
                                 <div>
-                                    <p>2982 cc</p>
+                                    <p>{car.car.engine_capacity} CC</p>
                                 </div>
                             </div>
                             <hr />
@@ -128,7 +128,7 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                                     <p>Drive</p>
                                 </div>
                                 <div>
-                                    <p>4WD</p>
+                                    <p>{car.car.drive} KM</p>
                                 </div>
                             </div>
                             <hr />
@@ -138,7 +138,7 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                                     <p>Interior Color</p>
                                 </div>
                                 <div>
-                                    <p>Jet Black</p>
+                                    <p>{car.car.interior_color}</p>
                                 </div>
                             </div>
                         </div>
@@ -149,7 +149,7 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                                     <p>Mileage</p>
                                 </div>
                                 <div>
-                                    <p>35,000 (Mi)</p>
+                                    <p>{car.car.mileage} (Mi)</p>
                                 </div>
                             </div>
                             <hr />
@@ -175,11 +175,11 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                                     <p>Condition</p>
                                 </div>
                                 <div>
-                                    <p>Used</p>
+                                    <p>{car.car.condition}</p>
                                 </div>
                             </div>
                             <hr />
-                            <div className='flex justify-between bg-purple-50 p-4'>
+                            {/* <div className='flex justify-between bg-purple-50 p-4'>
                                 <div className="flex gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -189,7 +189,7 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                                 <div>
                                     <p>Dealer</p>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="col-span-12 md:col-span-6 lg:col-span-4">
                             <div className='flex justify-between bg-purple-50 p-4'>
@@ -198,7 +198,7 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                                     <p>Transmission</p>
                                 </div>
                                 <div>
-                                    <p>Semi Automatic</p>
+                                    <p>{car.car.transmission}</p>
                                 </div>
                             </div>
                             <hr />
@@ -208,7 +208,7 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                                     <p>Fuel Type</p>
                                 </div>
                                 <div>
-                                    <p>Diesel</p>
+                                    <p>{car.car.fuel_type}</p>
                                 </div>
                             </div>
                             <hr />
@@ -218,11 +218,11 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                                     <p>Exterior Color</p>
                                 </div>
                                 <div>
-                                    <p>Black</p>
+                                    <p>{car.car.exterior_color}</p>
                                 </div>
                             </div>
                             <hr />
-                            <div className='flex justify-between bg-purple-50 p-4'>
+                            {/* <div className='flex justify-between bg-purple-50 p-4'>
                                 <div className="flex gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
@@ -233,7 +233,7 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                                 <div>
                                     <p>First Owner</p>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -366,7 +366,7 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                 </div>
                 <div className='p-4'>
                     <h3 className="font-bold text-gray-900 text-2xl">Description:</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas commodi laudantium, nam odit, asperiores alias fugiat ratione vel earum maiores unde tempore nobis possimus reprehenderit assumenda, culpa aliquid vitae at?</p>
+                    <p>{car.car.description}</p>
                 </div>
                 <div className='p-4 '>
                     <h3 className="font-bold text-3xl text-green-600">Explore More:</h3>
