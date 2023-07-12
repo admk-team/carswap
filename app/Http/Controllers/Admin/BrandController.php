@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class BrandController extends Controller
 {
@@ -46,6 +47,8 @@ class BrandController extends Controller
         $model->image = $img_path ?? '';
         $model->description=$request->description;
         if($model->save()){
+            $model->slug=Str::slug($request->title).'-'.$model->id;
+            $model->update();
             return Inertia::location(route('admin.brands.index', ['success' => 'Brand added successfully.']));
         }else{
             return Inertia::location(route('admin.brands.index', ['error' => 'Failed to add brand!']));
@@ -88,6 +91,8 @@ class BrandController extends Controller
         $model->title=$request->title;
         $model->description=$request->description;
         if($model->save()){
+            $model->slug=Str::slug($request->title).'-'.$model->id;
+            $model->update();
             return Inertia::location(route('admin.brands.index', ['success' => 'Brand updated successfully.']));
         }else{
             return Inertia::location(route('admin.brands.index', ['error' => 'Failed to update the brand!']));
