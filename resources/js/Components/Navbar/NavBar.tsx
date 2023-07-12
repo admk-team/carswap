@@ -31,12 +31,17 @@ const NavBar = () => {
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-emerald-500 hover:bg-emerald-600">
                 {/* Mobile menu items */}
                 <a
-                 href={route('login')}
-                  className="px-3 py-2 rounded-md text-base font-medium text-white"
+                 href={route('loginpage')}
+                  className="py-2 ml-2 rounded-md text-base font-medium text-white"
                 >
-                  Login/SignUp
+                  Login
                 </a>
-
+                <a
+                 href={route('signuppage')}
+                  className=" py-2 mr-2 rounded-md text-base font-medium text-white"
+                >
+                  /SignUp
+                </a>
               </div>
             </div>
 
@@ -94,13 +99,13 @@ const NavBar = () => {
                 <span className="text-white mt-2 text-sm">07031555235</span>
               </div>
             <a
-              href="#"
+              href={route('loginpage')}
               className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
             >
               Login
             </a>
             <a
-              href="#"
+              href={route('signuppage')}
               className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
             >
               Signup
