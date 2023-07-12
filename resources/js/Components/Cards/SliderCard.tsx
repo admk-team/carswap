@@ -113,7 +113,7 @@ const SliderCard = (brands: any) => {
         
                 {showResults && (<ul className="absolute top-8 left-0 z-10 w-full mt-2  bg-white rounded-lg shadow-lg ">
                   {suggestion?.map((sitem:any)=>(
-                    <li className='px-4 py-2 cursor-pointer hover:bg-gray-200' onClick={()=>{setData('location', sitem);setlocation(sitem);}}>{sitem}</li>
+                    <li key={sitem} className='px-4 py-2 cursor-pointer hover:bg-gray-200' onClick={()=>{setData('location', sitem);setlocation(sitem);}}>{sitem}</li>
                   ))}
                 </ul>)}
         </div>
