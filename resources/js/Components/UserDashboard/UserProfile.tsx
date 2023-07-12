@@ -5,6 +5,7 @@ import PendingAprroval from './PendingAprroval';
 import ApprovedCar from './ApprovedCar';
 import MySwapedCar from './MySwapedCar';
 import MyListedCar from './MyListedCar';
+import { Link } from '@inertiajs/react';
 
 const UserProfile = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -30,7 +31,7 @@ const UserProfile = () => {
               </p>
             </div>
             <div className="flex flex-col">
-              <button className="underline hover: text-dark font-medium mb-2">Edit Profile</button>
+              <Link href={route('user.editProfile')} className="underline hover: text-dark font-medium mb-2">Edit Profile</Link>
               <button className="underline hover: text-dark font-medium mb-2">Liked Ads</button>
               <button className="underline hover: text-dark font-medium mb-2">Inbox</button>
             </div>
