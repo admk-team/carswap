@@ -5,7 +5,7 @@ import { Link } from "@inertiajs/react";
 function Sidebar({ onCollapseChange, style }) {
     return (
         <ul className={style} id="accordionSidebar">
-            <a className="sidebar-brand d-flex align-items-center justify-content-center">
+            <Link href="" className="sidebar-brand d-flex align-items-center justify-content-center">
                 <div className="sidebar-brand-icon rotate-n-15">
                     <i className="fas fa-laugh-wink"></i>
                 </div>
@@ -17,7 +17,7 @@ function Sidebar({ onCollapseChange, style }) {
                         onClick={onCollapseChange}
                     ></button>
                 </div>
-            </a>
+            </Link>
             <hr className="sidebar-divider my-0" />
             <li className={`nav-item ${route().current("dashboard") ? "active" : "collapsed" }`} >
                 <Link className="nav-link" href={route("admin.dashboard")}>

@@ -6,10 +6,10 @@ import SliderCard from '../Cards/SliderCard'
 import { url } from 'inspector'
 import Slider from '../Slider/Slider'
 
-const TopBanner = () => {
+const TopBanner = (brands:any) => {
     return (
         <>
-            <div style={{ backgroundImage: `url(${backgroundImage})` ,backgroundSize: 'cover'  }}>
+            <div style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
 
                 <div className="top-0 w-full h-full">
                     <div className="container flex flex-col lg:flex-row items-center xl:gap-y-12 xl:gap-x-80 lg:gap-x-32">
@@ -19,15 +19,15 @@ const TopBanner = () => {
                                 Thinking of selling your car for cash? Swap it for cash and get another car.
                             </h3>
                             <div className=" hidden lg:flex">
-                               <Slider/>
+                                <Slider />
                             </div>
-                            
+
                         </div>
                         <div className="my-8 flex">
-                        <SliderCard />
+                        <SliderCard brands={brands} />
                     </div>
                     </div>
-                   
+
                 </div>
             </div>
         </>

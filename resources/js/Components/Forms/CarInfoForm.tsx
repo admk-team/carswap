@@ -10,7 +10,7 @@ import CondtionalAssForm from '@/Components/Forms/CondtionalAssForm'
 import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
 
     const  CarInfohtmlForm= ({ auth,brands,users}: any) => {
-        console.log("auth",auth);
+        // console.log("auth",auth);
         const { errors } = usePage().props
         const [images, setImages] = useState([]);
         const { data, setData, post, processing } = useForm({
@@ -102,8 +102,8 @@ import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
                                     <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Price</label>
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
-                                <select name="Usedca" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"value={data.fuelType} onChange={(e) => setData('fuelType', e.target.options[e.target.selectedIndex].text)}>
-                                        <option value="option0">Select fuel Type</option>
+                                <select name="Usedca" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"value={data.fuelType} onChange={(e) => setData('fuelType', e.target.value)}>
+                                        <option value="option0">Select Fuel Type</option>
                                         <option value="option1">Fuel</option>
                                         <option value="option2">Desiel</option>
                                       

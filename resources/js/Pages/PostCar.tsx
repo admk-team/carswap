@@ -10,12 +10,12 @@ import CondtionalAssForm from '@/Components/Forms/CondtionalAssForm'
 import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
 import FormButton from '@/Components/Forms/FormButton'
 
-const PostCar = () => {
+const PostCar = ({auth,brands}:any) => {
   return (
     <>
       <NavBar2/>
       <Frame/>
-      <CarInfohtmlForm/>
+      <CarInfohtmlForm auth={auth} brands={brands}/>
       <Footer/>
     </>
   )

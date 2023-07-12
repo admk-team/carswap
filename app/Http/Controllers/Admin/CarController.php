@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class CarController extends Controller
 {
@@ -87,6 +88,8 @@ class CarController extends Controller
         $model->exterior_color=$request->exteriorColor;
         $model->description=$request->description;
         if($model->save()){
+            $model->slug=Str::slug($request->title).'-'.$model->id;
+            $model->update();
             return Inertia::location(route('admin.cars.index', ['success' => 'Car added successfully.']));
         }else{
             return Inertia::location(route('admin.cars.index', ['error' => 'Failed to add car!']));
@@ -167,6 +170,8 @@ class CarController extends Controller
         $model->exterior_color=$request->exterior_color;
         $model->description=$request->description;
         if($model->save()){
+            $model->slug=Str::slug($request->title).'-'.$model->id;
+            $model->update();
             return Inertia::location(route('admin.cars.index', ['success' => 'Car updated successfully.']));
         }else{
             return Inertia::location(route('admin.cars.index', ['error' => 'Failed to update car!']));

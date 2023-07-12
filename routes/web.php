@@ -9,6 +9,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Users\PostacarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\User\AuthController;
 use Inertia\Inertia;
 
 /*
@@ -43,9 +45,9 @@ Route::get("/cmd/{cmd}", function ($cmd) {
 Route::prefix('admin')->name('admin.')->group(function(){
     //Dashboard
     Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
-    
+
     //Brands
-    Route::resource('/brands',BrandController::class); 
+    Route::resource('/brands',BrandController::class);
     Route::get('brands/{id}/{status}',[BrandController::class,'status'])->name('brands.status');
 
     //Cars
@@ -57,9 +59,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('users/{id}/{status}',[UserController::class,'status'])->name('users.status');
 })->middleware(['auth', 'verified']);
 
-Route::get('/', function () {
-    return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
-})->name('test');
+Route::get('/', [FrontController::class,'index'])->name('front.index');
+Route::get('/car-detail/{slug}', [FrontController::class,'CarDetail'])->name('CarDetail');
+Route::get('/cars/all', [FrontController::class,'ViewAllCars'])->name('ViewAllCars');
+
+Route::get('/user-login',[AuthController::class,'create'])->name('user.login');
 
 
 Route::get('/detail', function () {
@@ -69,6 +73,7 @@ Route::get('/detail', function () {
 Route::get('/all', function () {
     return Inertia::render('AllDetail');
 })->name('all.detail');
+
 Route::get('/user/profile', function () {
     return Inertia::render('EditProfile');
 })->name('edit.profile');
@@ -76,9 +81,20 @@ Route::get('/user/profile', function () {
 // Route::get('/bannerslider', function () {
 //     return Inertia::render('BannerSlider');
 // })->middleware(['auth', 'verified'])->name('bannerslider');
-Route::get('/postcar',[PostacarController::class,'create'])->middleware(['auth', 'verified'])->name('postcar');
+Route::get('/postcar',[PostacarController::class,'create'])->name('postcar');
 // Route::post('/postcars', [PostacarController::class, 'store'])->name('postcars.store');
-Route::get('user/cars', function () {
+
+Route::get('/signuppage', function () {
+    return Inertia::render('SignUpPage');
+})->middleware(['auth', 'verified'])->name('signuppage');
+
+Route::get('/loginpage', function () {
+    return Inertia::render('LoginPage');
+})->middleware(['auth', 'verified'])->name('loginpage');
+
+// Route::post('/postcars', [PostacarController::class, 'store'])->name('postcars.store');
+
+Route::get('/userdashboard', function () {
     return Inertia::render('UserDashBoard');
 })->middleware(['auth', 'verified'])->name('userdashboard');
 

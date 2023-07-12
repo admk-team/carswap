@@ -2,6 +2,7 @@ import { useState } from 'react';
 import imagelogo1 from '@/Assets/headerlogo.png'
 import watsapImage from '@/Assets/whatsapp.png'
 import bellIcon from "@/Assets/bell.png"
+import { Link } from '@inertiajs/react';
 
 
 const NavBar2 = () => {
@@ -17,7 +18,9 @@ const NavBar2 = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <img className="w-52 h-9" src={imagelogo1} alt="Logo" />
+            <Link  href={route('front.index')}>
+              <img className="w-52 h-9" src={imagelogo1} alt="Logo" />
+            </Link>
           </div>
           <div className="hidden md:block">
             <div className="flex items-center space-x-4">

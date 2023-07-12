@@ -12,6 +12,9 @@ import Reviews from '@/Components/Reviews/Reviews'
 //import BeforeFooterbanner from '@/Components/Banner/BeforeFooterbanner'
 import NavBar from '@/Components/Navbar/NavBar'
 import TopBanner from '@/Components/Banner/TopBanner';
+import SignUpPage from './SignUpPage';
+import LoginPage from './LoginPage';
+
 
 
 
@@ -40,6 +43,8 @@ export default function Test() {
       {/* <BrandBoxes /> */}
       <Reviews />
       {/* <BeforeFooterbanner /> */}
+      <SignUpPage/>
+      <LoginPage/>
       <Footer />
     </>
   )
