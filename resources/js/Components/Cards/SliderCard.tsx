@@ -30,7 +30,7 @@ const SliderCard = (brands:any) => {
         <div className="grid grid-cols-6 gap-0 mt-2">
           {
             brands.brands.brands?.map((brand:any)=>(
-                <button className="border pt-1 pl-1 focus:bg-emerald-500">
+                <button key={brand.id} className="border pt-1 pl-1 focus:bg-emerald-500">
                     <img src={"/storage/" + brand?.image} alt="Image 1" className="w-10 h-10 object-contain" />
                 </button>
             ))

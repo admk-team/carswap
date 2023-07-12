@@ -68,11 +68,13 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                     <div className="grid grid-cols-12 gap-4 mt-7">
                         <div className="col-span-12 md:col-span-6">
                             <div className="flex flex-col">
-                                <img src={CoverImg} className="w-full h-5/6 object-cover" alt="Cover Image" />
+                                <img src={'/storage/'+car.car.images[0]} className="w-full h-5/6 object-cover" alt="Cover Image" />
                                 <div className="flex flex-wrap gap-2 mt-3">
-                                    <img src={Img2} className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/6" />
-                                    <img src={Img3} className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/6" />
-                                    <img src={Img4} className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/6" />
+                                    {
+                                        car.car.images.map((image:any,index:any)=>(
+                                            <img key={index} src={'/storage/'+image} className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/6" />
+                                        ))
+                                    }
                                 </div>
 
                             </div>
