@@ -11,6 +11,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\User\UserController as FrontUserController;
 use Inertia\Inertia;
 
 /*
@@ -64,6 +65,7 @@ Route::get('/car-detail/{slug}', [FrontController::class,'CarDetail'])->name('Ca
 Route::get('/cars/all', [FrontController::class,'ViewAllCars'])->name('ViewAllCars');
 
 Route::get('/user-login',[AuthController::class,'create'])->name('user.login');
+Route::post('/login-post',[AuthController::class,'store'])->name('user.logedIn');
 
 
 Route::get('/detail', function () {
@@ -95,10 +97,9 @@ Route::get('/loginpage', function () {
 })->middleware(['auth', 'verified'])->name('loginpage');
 
 // Route::post('/postcars', [PostacarController::class, 'store'])->name('postcars.store');
-
-Route::get('/userdashboard', function () {
-    return Inertia::render('UserDashBoard');
-})->middleware(['auth', 'verified'])->name('userdashboard');
+Route::prefix('/user')->name('user.')->group(function(){
+    Route::get('/dashboard',[FrontUserController::class,'index'])->name('dashboard');
+})->middleware(['auth', 'verified']);
 
     //Post car
     Route::resource('user/cars',PostacarController::class, ['as'=> 'user']);
