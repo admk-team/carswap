@@ -4,16 +4,15 @@ import GoogImage from "@/Assets/Google.png"
 import FacImage from "@/Assets/facebook.png"
 
 const LoginPage = () => {
-  return (
-    <>
-       <div className="mx-auto max-w-screen-xl w-full h-full mt-12 p-12">
+    return (
+        <>
+            <div className="mx-auto max-w-screen-xl w-full h-full mt-12 p-12">
                 <div className="border border-gray-500 rounded-xl shadow-md">
                     <div className="grid grid-cols-1 md:grid-cols-2 ">
-                        <div className='m-20  '>
-                            <h2 className="text-2xl text-center text-dark uppercase font-bold">Login</h2>
+                        <div className='m-6'>
+                            <h2 className="text-2xl text-center text-dark uppercase font-bold mt-12">Login</h2>
                             <p className="text xl text-center text-dark mb-4">Welcome to Carswap</p>
                             <form >
-                                
 
                                 <div className="mb-3">
                                     <input
@@ -24,8 +23,6 @@ const LoginPage = () => {
                                     />
                                 </div>
 
-                                
-
                                 <div className="mb-3">
                                     <input
                                         type="password"
@@ -34,9 +31,6 @@ const LoginPage = () => {
                                         className="w-full px-3 py-2 border border-gray-300 rounded-xl bg-pink-50"
                                     />
                                 </div>
-
-                               
-
                                 <div className="text-center">
                                     <button
                                         type="submit"
@@ -45,14 +39,14 @@ const LoginPage = () => {
                                         Login Now
                                     </button>
                                     <p className="text xl text-center text-gray-900 mt-3"><b className='font-bold'>Login</b> with Others</p>
-                                    <span className='mt-3  '>
-                                        <img src={GoogImage} alt="" className='w-6 h-6'/>
-                                    <a href='#' className="text xl text-gray-900 ">Login with <b className='font-bold'>Google</b></a>
-                                    </span>
-                                    <span className='mt-3  '>
-                                        <img src={FacImage} alt="" className='w-6 h-6'/>
-                                    <a href='#' className="text xl text-gray-900 ">Login with <b className='font-bold'>Facebook</b></a>
-                                    </span>
+                                    <div className="flex items-center justify-center mt-3">
+                                        <img src={GoogImage} alt="" className="w-6 h-6" />
+                                        <a href="#" className="text xl text-gray-900 ml-1">Login with <b className='font-bold'>Google</b></a>
+                                    </div>
+                                    <div className="flex items-center justify-center mt-3">
+                                        <img src={FacImage} alt="" className="w-6 h-6" />
+                                        <a href="#" className="text xl text-gray-900 ml-1">Login with <b className='font-bold'>Facebook</b></a>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -62,8 +56,8 @@ const LoginPage = () => {
                     </div>
                 </div>
             </div>
-    </>
-  )
+        </>
+    )
 }
 
 export default LoginPage

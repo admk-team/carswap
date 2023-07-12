@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import imagelogo1 from '@/Assets/logo1.png'
+import imagelogo1 from '@/Assets/headerlogo.png'
 import watsapImage from '@/Assets/whatsapp.png'
 import bellIcon from "@/Assets/bell.png"
 
@@ -16,7 +16,7 @@ const NavBar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <img className="" src={imagelogo1} alt="Logo" />
+            <img className="w-52 h-10 object-contain" src={imagelogo1} alt="Logo" />
           </div>
           <div className="hidden md:block">
             <div className="flex items-center space-x-4">
@@ -31,12 +31,17 @@ const NavBar = () => {
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-emerald-500 hover:bg-emerald-600">
                 {/* Mobile menu items */}
                 <a
-                 href={route('login')}
-                  className="px-3 py-2 rounded-md text-base font-medium text-white"
+                 href={route('loginpage')}
+                  className="py-2 ml-2 rounded-md text-base font-medium text-white"
                 >
-                  Login/SignUp
+                  Login
                 </a>
-
+                <a
+                 href={route('signuppage')}
+                  className=" py-2 mr-2 rounded-md text-base font-medium text-white"
+                >
+                  /SignUp
+                </a>
               </div>
             </div>
 
@@ -94,13 +99,13 @@ const NavBar = () => {
                 <span className="text-white mt-2 text-sm">07031555235</span>
               </div>
             <a
-              href="#"
+              href={route('loginpage')}
               className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
             >
               Login
             </a>
             <a
-              href="#"
+              href={route('signuppage')}
               className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
             >
               Signup

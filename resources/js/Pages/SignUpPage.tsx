@@ -8,8 +8,8 @@ const SignUpPage = () => {
             <div className="mx-auto max-w-screen-xl w-full h-full mt-12 p-12">
                 <div className="border border-gray-500 rounded-xl shadow-md">
                     <div className="grid grid-cols-1 md:grid-cols-2 ">
-                        <div className='m-20  '>
-                            <h2 className="text-2xl text-center text-dark uppercase font-bold">Sign Up</h2>
+                        <div className='m-6 '>
+                            <h2 className="text-2xl text-center text-dark uppercase font-bold mt-12">Sign Up</h2>
                             <p className="text xl text-center text-dark mb-4">Welcome to Carswap</p>
                             <form >
                                 <div className="mb-3">
