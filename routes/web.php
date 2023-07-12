@@ -6,11 +6,12 @@ use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Users\PostacarController;
+use App\Http\Controllers\User\PostacarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\User\UserController as FrontUserController;
 use Inertia\Inertia;
 
 /*
@@ -64,6 +65,7 @@ Route::get('/car-detail/{slug}', [FrontController::class,'CarDetail'])->name('Ca
 Route::get('/cars/all', [FrontController::class,'ViewAllCars'])->name('ViewAllCars');
 
 Route::get('/user-login',[AuthController::class,'create'])->name('user.login');
+Route::post('/login-post',[AuthController::class,'store'])->name('user.logedIn');
 
 
 Route::get('/detail', function () {
@@ -78,11 +80,6 @@ Route::get('/user/profile', function () {
     return Inertia::render('EditProfile');
 })->name('edit.profile');
 
-// Route::get('/bannerslider', function () {
-//     return Inertia::render('BannerSlider');
-// })->middleware(['auth', 'verified'])->name('bannerslider');
-Route::get('/postcar',[PostacarController::class,'create'])->name('postcar');
-// Route::post('/postcars', [PostacarController::class, 'store'])->name('postcars.store');
 
 Route::get('/signuppage', function () {
     return Inertia::render('SignUpPage');
@@ -92,11 +89,10 @@ Route::get('/loginpage', function () {
     return Inertia::render('LoginPage');
 })->middleware(['auth', 'verified'])->name('loginpage');
 
-// Route::post('/postcars', [PostacarController::class, 'store'])->name('postcars.store');
-
-Route::get('/userdashboard', function () {
-    return Inertia::render('UserDashBoard');
-})->middleware(['auth', 'verified'])->name('userdashboard');
+Route::prefix('/user')->name('user.')->group(function(){
+    Route::get('/dashboard',[FrontUserController::class,'index'])->name('dashboard');
+    Route::get('/postcar',[PostacarController::class,'create'])->name('postcar');
+})->middleware(['auth', 'verified']);
 
     //Post car
     Route::resource('user/cars',PostacarController::class, ['as'=> 'user']);

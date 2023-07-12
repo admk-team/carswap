@@ -23,8 +23,8 @@ const MyListedCar = ({ cars }: any) => {
         <h1 className="font-extrabold text-black">My Listed Cars</h1>
       </div>
 
-      {car.map((carItem: any) => (
-        <div className="px-4 pt-2" key={carItem.id}>
+      {car.map((carItem: any,index) => (
+        <div className="px-4 pt-2" key={index}>
           <div className="flex flex-col bg-white border-1 md:flex-row md:max-w-xl hover:bg-gray-100">
             <img className="object-cover md:h-auto md:w-48" src={carItem?.images} alt="" />
             <div className="flex flex-col justify-between p-2 leading-normal">

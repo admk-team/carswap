@@ -1,15 +1,14 @@
 import NavBar2 from '@/Components/Navbar/NabBar2'
-import Footer from './Footer/Footer'
 import UserProfile from '@/Components/UserDashboard/UserProfile'
 import React, { useState, useEffect } from "react";
+import { Head } from '@inertiajs/react'
+import Footer from '../Footer/Footer';
 
-  const UserDashBoard = ({cars}: any) => {
- 
-  // const currentItems = carsData.slice();
-
+const UserDashBoard = ({auth,cars}:any) => {
   return (
     <>
-      <NavBar2 />
+    <Head title='User | Dashboard'/>
+      <NavBar2 auth={auth}/>
       <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
         <h1 className='font-bold text-xl text-dark sm:text-lg md:text-xl lg:text-2xl'>My Dashboard</h1>
         {/* {cars && cars?.map((car: any) => (
@@ -18,7 +17,7 @@ import React, { useState, useEffect } from "react";
                 <td>{car?.last_name}</td>
             </tr>
         ))} */}
-
+ 
         <UserProfile cars={cars}/>
       </div>
       <Footer />

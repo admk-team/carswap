@@ -6,15 +6,18 @@ import Reviews from '@/Components/Reviews/Reviews'
 import NavBar from '@/Components/Navbar/NavBar'
 import TopBanner from '@/Components/Banner/TopBanner';
 import { Link } from '@inertiajs/inertia-react';
+import { Head } from '@inertiajs/react';
 interface IndexProps {
     brands: any;
     cars: any;
+    auth: any;
 }
 
-const Index: React.FC<IndexProps> = ({ brands,cars }) =>{
+const Index: React.FC<IndexProps> = ({ brands,cars,auth }) =>{
   return (
     <>
-      <NavBar />
+    <Head title='Index'/>
+      <NavBar auth={auth} />
       <TopBanner brands={brands}/>
       <div className="text-3xl font-bold text-center w-full mt-12">
         <h1>Finds the Best Deals For You</h1>

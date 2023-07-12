@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Postacar;
@@ -15,15 +15,7 @@ class PostacarController extends Controller
      */
     public function index()
     {
-        $cars=Car::latest()->get();
-        $data = $cars->map(function($item){
-            $imageUrl = url('storage' . $item->images);
-            $item->images = $imageUrl;
-            
-            $item;
-        });
-       
-        return Inertia::render('UserDashBoard', ['cars' => $cars]);
+        //
     }
 
     /**
@@ -32,7 +24,7 @@ class PostacarController extends Controller
     public function create()
     {
         $brands=Brand::where('status',1)->get();
-        return Inertia::render('PostCar',['brands'=>$brands]);
+        return Inertia::render('User/PostCar',['brands'=>$brands]);
     }
 
     /**
