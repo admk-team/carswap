@@ -1,5 +1,6 @@
 import React from 'react';
 import backgroundImage from '@/Assets/card1.jpg';
+import { Link } from '@inertiajs/react';
 
 const PricingCard = (cars:any) => {
     console.log(cars)
@@ -8,11 +9,12 @@ const PricingCard = (cars:any) => {
             <div className="flex justify-center">
                 <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-6">
                     { cars.cars?.map((car:any,index:any) => (
-                        <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+
+                            <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <div className="relative">
-                                <a href="#">
-                                    <img className=" w-full rounded-t-lg object-cover" src={"storage/" + car?.images} alt="product image" />
-                                </a>
+                                <Link href={route('CarDetail',car.id)}>
+                                    <img className=" w-full h-72 rounded-t-lg object-cover" src={"storage/" + car?.images} alt="product image" />
+                                </Link>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-red-500 absolute top-2 right-2" fill="red" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                                 </svg>
@@ -28,8 +30,9 @@ const PricingCard = (cars:any) => {
                                 </div>
                             </div>
                             <div className="px-2 pb-4">
-                                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">{car?.title}</h5>
-
+                                <Link href={route('CarDetail',car.id)}>
+                                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">{car?.title}</h5>
+                                </Link>
                                 <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">$ {car?.price}</h5>
                                 <div className="flex items-center">
                                 </div>
