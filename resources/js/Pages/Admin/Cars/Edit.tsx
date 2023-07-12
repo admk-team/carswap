@@ -3,12 +3,13 @@ import Layout from "../Layouts/Layout";
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { Inertia  } from '@inertiajs/inertia';
 
-const Edit = ({ auth,brands,car }: any) => {
+const Edit = ({ auth,brands,car,users}: any) => {
   const { errors } = usePage().props
   const [images, setImages] = useState([]);
   const { data, setData, put, processing } = useForm({
     title: car.title,
     brand_id: car.brand_id,
+    user_id: car.user_id,
     condition: car.condition,
     engine_capacity: car.engine_capacity,
     mileage: car.mileage,
@@ -53,7 +54,19 @@ const Edit = ({ auth,brands,car }: any) => {
                 {errors.title && <div className='text-danger'>{errors.title}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Brands <span className='text-danger'>*</span></label>
+                <label className="form-label">User <span className='text-danger'>*</span></label>
+                <select name="user_id" id="" className="form-control" onChange={(e)=>setData('user_id',e.target.value)}>
+                  <option value="">Select User</option>
+                  {
+                    users.map((user:any)=>(
+                      <option selected={car.user_id && car.user_id === user.id}  value={user?.id} key={user.id}>{user?.first_name}</option>
+                    ))
+                  }
+                </select>
+                {errors.brand_id && <div className='text-danger'>{errors.brand_id}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label">Brand <span className='text-danger'>*</span></label>
                 <select name="brand_id" id="" className="form-control" onChange={(e)=>setData('brand_id',e.target.value)}>
                   <option value="">Select Brand</option>
                   {
