@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import imagelogo1 from '@/Assets/logo1.png'
+import imagelogo1 from '@/Assets/headerlogo.png'
 import watsapImage from '@/Assets/whatsapp.png'
 import bellIcon from "@/Assets/bell.png"
 
@@ -16,7 +16,7 @@ const NavBar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <img className="" src={imagelogo1} alt="Logo" />
+            <img className="w-52 h-10 object-contain" src={imagelogo1} alt="Logo" />
           </div>
           <div className="hidden md:block">
             <div className="flex items-center space-x-4">

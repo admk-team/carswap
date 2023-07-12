@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Users\PostacarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontController;
 use Inertia\Inertia;
 
 /*
@@ -43,9 +44,9 @@ Route::get("/cmd/{cmd}", function ($cmd) {
 Route::prefix('admin')->name('admin.')->group(function(){
     //Dashboard
     Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
-    
+
     //Brands
-    Route::resource('/brands',BrandController::class); 
+    Route::resource('/brands',BrandController::class);
     Route::get('brands/{id}/{status}',[BrandController::class,'status'])->name('brands.status');
 
     //Cars
@@ -57,9 +58,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('users/{id}/{status}',[UserController::class,'status'])->name('users.status');
 })->middleware(['auth', 'verified']);
 
-Route::get('/', function () {
-    return Inertia::render('Test', ['test_var' => "hello world!!!!!!!!"]);
-})->name('test');
+Route::get('/', [FrontController::class,'index'])->name('test');
 
 
 Route::get('/detail', function () {
