@@ -37,9 +37,14 @@ const NavBar = () => {
                  href={route('user.login')}
                   className="px-3 py-2 rounded-md text-base font-medium text-white"
                 >
-                  Login/SignUp
+                  Login
                 </a>
-
+                <a
+                 href={route('signuppage')}
+                  className=" py-2 mr-2 rounded-md text-base font-medium text-white"
+                >
+                  /SignUp
+                </a>
               </div>
             </div>
 
@@ -97,13 +102,13 @@ const NavBar = () => {
                 <span className="text-white mt-2 text-sm">07031555235</span>
               </div>
             <a
-              href="#"
+              href={route('loginpage')}
               className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
             >
               Login
             </a>
             <a
-              href="#"
+              href={route('signuppage')}
               className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
             >
               Signup
