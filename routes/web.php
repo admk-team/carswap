@@ -59,7 +59,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 })->middleware(['auth', 'verified']);
 
 Route::get('/', [FrontController::class,'index'])->name('test');
-Route::get('/car-detail/{id}', [FrontController::class,'CarDetail'])->name('CarDetail');
+Route::get('/car-detail/{slug}', [FrontController::class,'CarDetail'])->name('CarDetail');
 Route::get('/cars/all', [FrontController::class,'ViewAllCars'])->name('ViewAllCars');
 
 

@@ -12,7 +12,7 @@ const PricingCard = (cars:any) => {
 
                             <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <div className="relative">
-                                <Link href={route('CarDetail',car.id)}>
+                                <Link href={route('CarDetail',car.slug)}>
                                     <img className=" w-full h-72 rounded-t-lg object-cover" src={"storage/" + car?.images} alt="product image" />
                                 </Link>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-red-500 absolute top-2 right-2" fill="red" viewBox="0 0 24 24" stroke="currentColor">
@@ -30,7 +30,7 @@ const PricingCard = (cars:any) => {
                                 </div>
                             </div>
                             <div className="px-2 pb-4">
-                                <Link href={route('CarDetail',car.id)}>
+                                <Link href={route('CarDetail',car.slug)}>
                                     <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">{car?.title}</h5>
                                 </Link>
                                 <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">$ {car?.price}</h5>
