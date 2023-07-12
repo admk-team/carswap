@@ -3,7 +3,7 @@ import backgroundImage from '@/Assets/card1.jpg';
 import { Link } from '@inertiajs/react';
 
 const PricingCard = (cars:any) => {
-    console.log(cars)
+
     return (
         <div className="mx-auto max-w-screen-xl w-full h-full mt-8 ">
             <div className="flex justify-center">

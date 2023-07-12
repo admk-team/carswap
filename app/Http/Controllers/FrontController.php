@@ -21,6 +21,7 @@ class FrontController extends Controller
     public function CarDetail($slug){
         $brands=Brand::where('status','1')->get();
         $car=Car::where('slug',$slug)->first();
-        return Inertia::render('Front/CarDetail',['brands'=>$brands,'car'=>$car]);
+        $similarCars=Car::where('status','1')->limit(3)->latest()->get();
+        return Inertia::render('Front/CarDetail',['brands'=>$brands,'car'=>$car,'similarCars'=>$similarCars]);
     }
 }

@@ -18,13 +18,14 @@ import Fuel from "@/Assets/gas-station.png";
 import Color1 from "@/Assets/car-color.png";
 import backgroundImage from '@/Assets/card1.jpg';
 import Footer from '../Footer/Footer';
-export default function CarDetail(car:any) {
-console.log("Car Detail :",car)
-const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
+import { Link } from '@inertiajs/react';
+export default function CarDetail(car: any) {
+
+    const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+    });
 
 
     return (
@@ -373,22 +374,19 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                     <h3 className="font-bold text-gray-900 text-2xl mt-2">Similar Listings</h3>
                     <div className="flex justify-center">
                         <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
-                            {Array.from({ length: 3 }).map((_, index) => (
+                            {car.similarCars?.map((car: any, index: any) => (
+
                                 <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                     <div className="relative">
-                                        <a href="#">
-                                            <img className=" w-full rounded-t-lg object-cover" src={backgroundImage} alt="product image" />
-                                        </a>
+                                        <Link href={route('CarDetail', car.slug)}>
+                                            <img className=" w-full h-72 rounded-t-lg object-cover" src={"storage/" + car?.images} alt="product image" />
+                                        </Link>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-red-500 absolute top-2 right-2" fill="red" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                                         </svg>
                                         <div className="absolute bottom-5 left-1">
                                             <svg aria-hidden="true" className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                {/* SVG path */}
-
                                             </svg>
-                                            {/* Repeat for other stars */}
-
                                             <span className=" flex justify-center bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#FFA534" viewBox="0 0 24 24" strokeWidth={0} stroke="currentColor" className="w-5 h-5">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
@@ -398,9 +396,10 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                                         </div>
                                     </div>
                                     <div className="px-2 pb-4">
-                                        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">2022 Toyota Revo</h5>
-
-                                        <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">$ 43496.10</h5>
+                                        <Link href={route('CarDetail', car.slug)}>
+                                            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">{car?.title}</h5>
+                                        </Link>
+                                        <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">$ {car?.price}</h5>
                                         <div className="flex items-center">
                                         </div>
                                         <hr className='border-t-2 border-black mt-2' />
@@ -413,21 +412,18 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                                                         <th className="px-2 py-1 text-gray-800">Mileage</th>
                                                     </tr>
                                                     <tr>
-                                                        <th className="px-2 py-1 text-gray-600">Brand New</th>
-                                                        <th className="px-2 py-1 text-gray-800">3000 CC</th>
-                                                        <th className="px-2 py-1 text-gray-800">35000 (MI)</th>
+                                                        <th className="px-2 py-1 text-gray-600">{car?.condition}</th>
+                                                        <th className="px-2 py-1 text-gray-800">{car?.engine_capacity}</th>
+                                                        <th className="px-2 py-1 text-gray-800">{car?.mileage}</th>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
 
-                                        <div className="flex flex-col items-center mt-4 md:flex-row md:justify-between md:items-center">
-                                            <a href="#" className="text-white bg-gray-950 hover:bg-emerald-800 focus:outline-none font-medium text-sm px-6 py-2.5 text-center dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-green-800 inline-block rounded-md shadow-md md:w-auto">
-                                                Cash Purchase
-                                            </a>
-                                            <a href="#" className="text-white bg-emerald-600 hover:bg-emerald-800 focus:outline-none font-medium text-sm px-6 py-2.5 text-center dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-green-800 inline-block rounded-md shadow-md md:w-auto">
-                                                Swap
-                                            </a>
+                                        <div className="flex items-center justify-between mt-4">
+
+                                            <a href="#" className="text-white bg-black hover:bg-gray-600 font-medium  text-sm px-6 py-2.5 text-center  w-36">Cash Purchase</a>
+                                            <a href="#" className="text-white bg-green-500 hover:bg-green-600 font-medium  text-sm px-6 py-2.5 text-center  w-32">Swap</a>
                                         </div>
 
 
@@ -437,12 +433,12 @@ const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
                         </div>
                     </div>
                 </div>
-                </div>
-                <div>
-                    <Footer />
-                </div>
-
+            </div>
+            <div>
+                <Footer />
             </div>
 
-            )
+        </div>
+
+    )
 }
