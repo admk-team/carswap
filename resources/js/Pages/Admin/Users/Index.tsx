@@ -94,26 +94,24 @@ const Index = ({ auth, users, success, error }: any) => {
                                             <td>{user?.email}</td>
                                             <td>{user?.phone_no}</td>
                                             <td>
-                                            <div className="dropdown mb-4">
-                                              <button
-                                                  className={`btn btn-${
-                                                      user && user.status && user.status === 1 ? "success" : "danger"
-                                                  } dropdown-toggle`}
-                                                  type="button"
-                                                  id="dropdownMenuButton"
-                                                  data-toggle="dropdown"
-                                                  aria-haspopup="true"
-                                                  aria-expanded="false"
-                                              >
-                                                  {user && user.status && user.status === 1 ? "Active" : "Deactive"}
-                                              </button>
-                                              <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                                                  <button className="dropdown-item" onClick={() => changeUserStatus(user.id, 1)} >Active</button>
-                                                  <button className="dropdown-item" onClick={() => changeUserStatus(user.id, 0)}>
-                                                      Deactive
-                                                  </button>
-                                              </div>
-                                          </div>
+                                                <div className="dropdown mb-4">
+                                                    <button
+                                                        className={`btn btn-${
+                                                            user && user.status && user.status == "1" ? "success" : "danger"
+                                                        } dropdown-toggle`}
+                                                        type="button"
+                                                        id="dropdownMenuButton"
+                                                        data-toggle="dropdown"
+                                                        aria-haspopup="true"
+                                                        aria-expanded="false"
+                                                    >
+                                                        {user && user.status && user.status == "1" ? "Active" : "Deactive"}
+                                                    </button>
+                                                    <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+                                                        <button className="dropdown-item" onClick={() => changeUserStatus(user.id, 1)} >Active</button>
+                                                        <button className="dropdown-item" onClick={() => changeUserStatus(user.id, 0)}>Deactive</button>
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td>
                                               <div className="dropdown mb-4">

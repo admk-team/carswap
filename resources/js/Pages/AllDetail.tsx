@@ -223,7 +223,7 @@ export default function AllDetail() {
                                 ))}
                             </div>
                         </div>
-                        <div className="flex justify-center mt-4">
+                        {/* <div className="flex justify-center mt-4">
                             <div className="bg-white rounded-lg shadow-md p-4">
                                 <h2 className="text-lg text-gray-950 font-bold mb-4 text-center">Filter By</h2>
                                 <div className="flex flex-wrap justify-center items-center gap-2">
@@ -250,7 +250,7 @@ export default function AllDetail() {
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="flex justify-center">
                             <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
                                 {Array.from({ length: 6 }).map((_, index) => (
