@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\Postacar;
+use App\Models\Brand;
+use App\Models\Car;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 class PostacarController extends Controller
@@ -13,15 +15,12 @@ class PostacarController extends Controller
      */
     public function index()
     {
-        $cars=Postacar::latest()->get();
-        return $data = $cars->map(function($item){
-            $images = explode(",", $item->Car_img);
-            $item->Car_img = array_map(function($im){ 
-                return url('storage' . $im); 
-            },
-            $images);
-
-            return $item;
+        $cars=Car::latest()->get();
+        $data = $cars->map(function($item){
+            $imageUrl = url('storage' . $item->images);
+            $item->images = $imageUrl;
+            
+            $item;
         });
        
         return Inertia::render('UserDashBoard', ['cars' => $cars]);
@@ -32,7 +31,8 @@ class PostacarController extends Controller
      */
     public function create()
     {
-        //
+        $brands=Brand::where('status',1)->get();
+        return Inertia::render('PostCar',['brands'=>$brands]);
     }
 
     /**
@@ -40,65 +40,60 @@ class PostacarController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email'=>'required',
-            'Phone'=>'required',
-            'Car_address'=>'required',
-            'State'=>'required',
-            'address'=>'required',
-            'City'=>'required',
-            'Inspection_date'=>'required',
-            'Inspection_Time'=>'required',
-            'Modal'=>'required',
-            'Year'=>'required',
-            'Trim'=>'required',
-            'Price'=>'required',
-            'Usedcar'=>'required',
-            'Milage'=>'required',
-            'Transmission_Type'=>'required',
-            'Engin_size'=>'required',
-            'Comments'=>'required',
-            'Car_img' => 'required|array',
-            'Car_img.*' => 'image',
+            'title' => 'required',
+            'brand_id' => 'required',
+         
+            'condition' => 'required',
+            'engineCapacity' => 'required',
+            'mileage' => 'required',
+            'location' => 'required',
+            'price' => 'required',
+            'fuelType' => 'required',
+            'model' => 'required',
+            'transmission' => 'required',
+            'drive' => 'required',
+            'interiorColor' => 'required',
+            'exteriorColor' => 'required',
+            'description' => 'required',
+            'images' => 'required|array',
+            'images.*' => 'image',
+        ],[
+            'brand_id.required' =>'The brand field is required',
+      
         ]);
-        $Car_img= '';
+        $images = '';
         $arr=[];
-        if ($request->hasFile('Car_img')) {
-            foreach ($request->file('Car_img') as $item) {
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $item) {
                 $var = date_create();
                 $time = date_format($var, 'YmdHis');
                 $imageName = $time . '-' . $item->getClientOriginalName();
-                $item->move(public_path('storage/Postcar/Usercar'), $imageName);
-                array_push($arr, '/Postcar/Usercar/' . $imageName);
+                $item->move(public_path('storage/images/cars'), $imageName);
+                array_push($arr, '/images/cars/' . $imageName);
             }
         }
-        $Car_img= implode(",", $arr);
-        $model=new Postacar();
-        $model->first_name=$request->first_name;
-        $model->last_name=$request->last_name;
-        $model->email=$request->email;
-        $model->Phone=$request->Phone;
-        $model->Car_address=$request->Car_address;
-        $model->State=$request->State;
-        $model->Address=$request->address;
-        $model->City=$request->City;
-        $model->Inspection_date=$request->Inspection_date;
-        $model->Inspection_Time=$request->Inspection_Time;
-        $model->Modal=$request->Modal;
-        $model->Year=$request->Year;
-        $model->Trim=$request->Trim;
-        $model->Price=$request->Price;
-        $model->Usedcar=$request->Usedcar;
-        $model->Milage=$request->Milage;
-        $model->Transmission_Type=$request->Transmission_Type;
-        $model->Engin_size=$request->Engin_size;
-        $model->Comments=$request->Comments;
-        $model->Car_img=$Car_img;
-       
+        $images = implode(",", $arr);
+        $model=new Car();
+        $model->title=$request->title;
+        $model->brand_id= $request->brand_id;
+        // $model->user_id= auth()->id(1);// auth()->id();
+        $model->condition=$request->condition;
+        $model->engine_capacity=$request->engineCapacity;
+        $model->mileage=$request->mileage;
+        $model->location=$request->location;
+        $model->price=$request->price;
+        $model->drive=$request->drive;
+        $model->images=$images;
+        $model->fuel_Type=$request->fuelType;
+        $model->model=$request->model;
+        $model->transmission=$request->transmission;
+        $model->interior_color=$request->interiorColor;
+        $model->exterior_color=$request->exteriorColor;
+        $model->description=$request->description;
         if($model->save()){
-            return Inertia::location(route('userdashboard', ['success' => 'Car added successfully.']));
+            return Inertia::location(route('postcar', ['success' => 'Car added successfully.']));
         }else{
             return Inertia::location(route('postcar', ['error' => 'Failed to add car!']));
         }

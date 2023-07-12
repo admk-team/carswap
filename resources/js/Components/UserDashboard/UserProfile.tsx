@@ -6,7 +6,7 @@ import ApprovedCar from './ApprovedCar';
 import MySwapedCar from './MySwapedCar';
 import MyListedCar from './MyListedCar';
 
-const UserProfile = () => {
+const UserProfile = ({ cars }: any) =>  {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (tabId: number) => {
@@ -40,7 +40,7 @@ const UserProfile = () => {
           {/* User Table */}
           <div className="bg-white border border-gray-300 rounded-lg shadow-md">
             <UserTabs activeTab={activeTab} onTabClick={handleTabClick} />
-            {activeTab === 0 && <MyListedCar />}
+            {activeTab === 0 && <MyListedCar cars={cars}/>}
             {activeTab === 1 && <MySwapedCar />}
             {activeTab === 2 && <PendingAprroval />}
             {activeTab === 3 && <ApprovedCar />}

@@ -76,11 +76,9 @@ Route::get('/user/profile', function () {
 // Route::get('/bannerslider', function () {
 //     return Inertia::render('BannerSlider');
 // })->middleware(['auth', 'verified'])->name('bannerslider');
-Route::get('/postcar', function () {
-    return Inertia::render('PostCar');
-})->middleware(['auth', 'verified'])->name('postcar');
+Route::get('/postcar',[PostacarController::class,'create'])->middleware(['auth', 'verified'])->name('postcar');
 // Route::post('/postcars', [PostacarController::class, 'store'])->name('postcars.store');
-Route::get('/userdashboard', function () {
+Route::get('user/cars', function () {
     return Inertia::render('UserDashBoard');
 })->middleware(['auth', 'verified'])->name('userdashboard');
 
