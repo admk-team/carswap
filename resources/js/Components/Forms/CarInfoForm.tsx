@@ -9,37 +9,39 @@ import ImagCheck from '@/Assets/check.png';
 import CondtionalAssForm from '@/Components/Forms/CondtionalAssForm'
 import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
 
-    const  CarInfohtmlForm= ({ auth }: any) => {
+    const  CarInfohtmlForm= ({ auth,brands,users}: any) => {
+        // console.log("auth",auth);
         const { errors } = usePage().props
-        const [first_name,setfirst_name]=useState("")
-        const [last_name,setlast_name]=useState("")
-        const [Phone,setPhone]=useState("")
-        const [email,setemail]=useState("")
-        const [Car_address,setCar_address]=useState("") 
-        const [State,setState]=useState("")
-        const [Address,setAddress]=useState("")
-        const [City,setCity]=useState("")
-        const [Inspection_date,setInspection_date]=useState("")
-        const [Inspection_Time,setInspection_Time]=useState("")
-        const [Modal1,setModal1]=useState("")
-        const [Year,setYear]=useState("")
-        const [Trim,setTrim]=useState("")
-        const [Price,setPrice]=useState("")
-        const [Usedcar,setUsedcar]=useState("")
-        const [Milage,setMilage]=useState("")
-        const [Transmission_Type,setTransmission_Type]=useState("")
-        const [Engin_size,setEngin_size]=useState("")
-        const [comments,setComments]=useState("")
-        
-        const [image, setImage] = useState(null);
-
-        function handleImageChange(e:any) {
-          setImage(e.target.files[0]);
-        }
+        const [images, setImages] = useState([]);
+        const { data, setData, post, processing } = useForm({
+          title: '',
+          brand_id: '',
+          user_id: '',
+          condition: '',
+          engineCapacity: '',
+          mileage: '',
+          location: '',
+          price: '',
+          fuelType: '',
+          model: '',
+          transmission: '',
+          drive: '',
+          interiorColor: '',
+          exteriorColor: '',
+          description: '',
+          images:[]
+        });
       
-        function handleSubmit(e:any){
-          e.preventDefault();
-          Inertia.post(route('user.cars.store'), {first_name,last_name,email,Phone,Car_address,State,Address,City,Inspection_date,Inspection_Time,Modal1,Year,Price,Usedcar,Milage,Transmission_Type,Engin_size,comments,image})
+        const handleImageChange = (e:any) => {
+          if (e.target.files) {
+            setData('images',e.target.files);
+            // setImages(e.target.files);
+          }
+        };
+      
+  function handleSubmit(){
+    
+    post(route('user.cars.store'))
         }
     return (
         <>
@@ -48,94 +50,104 @@ import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
                     <h1 className="text-xl text-gray-950 font-bold">Car Information:</h1>
                     <h2 className="text-lg text-gray-700 mb-4">(All fields are * required)</h2>
                     <div className=" py-2">
-                    <form className="row g-3" method='post' onSubmit={handleSubmit} encType='multipart/form-data'>
+                    <form className="row g-3" method='post' encType='multipart/form-data'>
                             <div className="grid md:grid-cols-2 md:gap-x-6">
                                 <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text" name="first_name"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={first_name} onChange={(e)=>setfirst_name(e.target.value)} required />
-                                    <label htmlFor="first_name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First name *</label>
+                                    <input type="text" name="title"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.title} onChange={(e)=>setData('title',e.target.value)} />
+                                   
+                                    <label htmlFor="first_name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Title *</label>
+                                    {errors.title && <div className='text-danger'>{errors.title}</div>}
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text" name="last_name" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={last_name} onChange={(e)=>setlast_name(e.target.value)} required />
-                                    <label htmlFor="" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last name *</label>
+                                <select name="brand_id" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"value={data.brand_id} onChange={(e) => setData('brand_id', e.target.value)}>
+                                        <option value="">Select Brands</option>
+                                        {
+                                            brands.map((brand:any)=>(
+                                                <option value={brand.id}>{brand.title}</option>
+                                            ))
+                                        }
+                                     
+                                    </select>
+                                    {errors.condition && <div className='text-danger'>{errors.condition}</div>}
+                                    <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                                
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
-                                    <input type="email" name="email" id="email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={email} onChange={(e)=>setemail(e.target.value)} required />
-                                    <label htmlFor="" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email *</label>
+                                <select name="condition" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"value={data.condition} onChange={(e) => setData('condition', e.target.value)}>
+                                        <option value="">Selecet Condition</option>
+                                        <option value="Nigerian used">Nigerian used</option>
+                                        <option value="Foreign used">Foreign used</option>
+                                        <option value="Brand New">Brand New</option>
+                                    </select>
+                                    {errors.condition && <div className='text-danger'>{errors.condition}</div>}
+                                    <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                                
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
-                                    <input type="Number"  name="Phone" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "  value={Phone} onChange={(e)=>setPhone(e.target.value)} required />
-                                    <label htmlFor="" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone number *</label>
+                                    <input type="text" name="engineCapacity"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "  value={data.engineCapacity} onChange={(e)=>setData('engineCapacity',e.target.value)} />
+                                   {errors.engineCapacity && <div className='text-danger'>{errors.engineCapacity}</div>}
+                                    <label htmlFor="" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Engine Capacity *</label>
+                                </div>
+                                <div className="relative z-0 w-full mb-6 group">
+                                    <input type="text"  name="mileage" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "   value={data.mileage} onChange={(e)=>setData('mileage',e.target.value)} />
+                                   {errors.mileage && <div className='text-danger'>{errors.mileage}</div>}
+                                    <label htmlFor="" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Mileage*</label>
                                 </div>
                             </div>
                            
                             <div className="grid md:grid-cols-2 md:gap-x-6">
                                 <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text" name="Car-address" id="floating_company" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={Car_address} onChange={(e)=>setCar_address(e.target.value)} required />
-                                    <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Company (Ex. Google)</label>
+                                    <input type="text" name="price" id="floating_company" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0  focus:border-blue-600 peer" placeholder=" "  value={data.price} onChange={(e)=>setData('price',e.target.value)} />
+                                    {errors.price && <div className='text-danger'>{errors.price}</div>}
+                                    <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Price</label>
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text" name="State" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={State} onChange={(e)=>setState(e.target.value)} required />
-                                    <label htmlFor="State" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">State *</label>
-                                </div>
-                                <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text" name="address" id="address" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={Address}  onChange={(e)=>setAddress(e.target.value)} required />
-                                    <label htmlFor="address" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Address *</label>
-                                </div>
-                                <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text" name="City"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600  peer" placeholder=" " value={City}  onChange={(e)=>setCity(e.target.value)} required />
-                                    <label htmlFor="City" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">City *</label>
-                                </div>
-                                <div className="relative z-0 w-full mb-6 group">
-                                    <b> or Use <a href=""><u>Google Map</u></a></b>
-                                </div>
-                                <div className="relative z-0 w-full mb-6 group">
-                                    <input type="date" name="Inspection_date" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600  peer" placeholder=" "value={Inspection_date} onChange={(e)=>setInspection_date(e.target.value)} required />
-                                    <label htmlFor="date" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Inspection Date *</label>
-                                </div>
-                                <div className="relative z-0 w-full mb-6 group">
-                                    <input type="time" name="Inspection_Time"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "value={Inspection_Time}  onChange={(e)=>setInspection_Time(e.target.value)} required />
-                                    <label htmlFor="Time" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Inspection Time *</label>
-                                </div>
-                                <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text"  name="Modal"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={Modal1} onChange={(e)=>setModal1(e.target.value)} required />
-                                    <label htmlFor="Modal" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Modal *</label>
-                                </div>
-                                <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text" name="Year"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "value={Year} onChange={(e)=>setYear(e.target.value)} required />
-                                    <label htmlFor="Year" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Year *</label>
-                                </div>
-                                <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text"  name="Trim"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={Trim} onChange={(e)=>setTrim(e.target.value)} required />
-                                    <label htmlFor="Trim" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Trim *</label>
-                                </div>
-                                <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text" name="Price"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "value={Price} onChange={(e)=>setPrice(e.target.value)} required />
-                                    <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Price *</label>
-                                </div>
-                                <div className="relative z-0 w-full mb-6 group">
-                                    <select name="Usedcar"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={Usedcar} onChange={(e)=>setUsedcar(e.target.value)} required >
-                                        <option value="option1">Nigerian used</option>
-                                        <option value="option2">Foreign used</option>
-                                        <option value="option3">Brand New</option>
+                                <select name="Usedca" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"value={data.fuelType} onChange={(e) => setData('fuelType', e.target.value)}>
+                                        <option value="option0">Select Fuel Type</option>
+                                        <option value="option1">Fuel</option>
+                                        <option value="option2">Desiel</option>
+                                      
                                     </select>
+                                    {errors.condition && <div className='text-danger'>{errors.condition}</div>}
                                     <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                                
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text" name="Milage"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={Milage} onChange={(e)=>setMilage(e.target.value)} required />
-                                    <label htmlFor="Mileage" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Mileage *</label>
+                                    <input type="text" name="modal" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.model} onChange={(e)=>setData('model',e.target.value)} />
+                                    {errors.model && <div className='text-danger'>{errors.model}</div>}
+                                    <label htmlFor="address" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Modal *</label>
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text" name="Transmission_Type" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={Transmission_Type} onChange={(e)=>setTransmission_Type(e.target.value)} required />
-                                    <label htmlFor="Transmission" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Transmission Type *</label>
+                                    <input type="text" name="transmission"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600  peer" placeholder=" " value={data.transmission} onChange={(e)=>setData('transmission',e.target.value)} />
+                                     {errors.transmission && <div className='text-danger'>{errors.transmission}</div>}
+                                    <label htmlFor="City" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Transmission  *</label>
+                                </div>
+                            
+                                <div className="relative z-0 w-full mb-6 group">
+                                    <input type="text" name="drive" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600  peer" placeholder=" " value={data.drive} onChange={(e)=>setData('drive',e.target.value)} />
+                                     {errors.drive && <div className='text-danger'>{errors.drive}</div>}
+                                    <label htmlFor="date" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Drive *</label>
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text"  name="Engin_size" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "  value={Engin_size} onChange={(e)=>setEngin_size(e.target.value)} required />
-                                    <label htmlFor="Engine" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Engine Size *</label>
+                                    <input type="text" name="interiorColor"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.interiorColor} onChange={(e)=>setData('interiorColor',e.target.value)} />
+                                    {errors.interiorColor && <div className='text-danger'>{errors.interiorColor}</div>}
+                                    <label htmlFor="Time" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Interior Color *</label>
                                 </div>
-                            </div> 
-                            <div className="relative z-0 w-full mb-6 group">
-                                <textarea name="Comments"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={comments}  onChange={(e)=>setComments(e.target.value)} required ></textarea>
-                                <label htmlFor="Comments" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Comments *</label>
+                                <div className="relative z-0 w-full mb-6 group">
+                                    <input type="text"  name="exteriorColor"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.exteriorColor} onChange={(e)=>setData('exteriorColor',e.target.value)} />
+                                     {errors.exteriorColor && <div className='text-danger'>{errors.exteriorColor}</div>}
+                                    <label htmlFor="Modal" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Exterior Color *</label>
+                                </div>
+                                <div className="relative z-0 w-full mb-6 group">
+                                    <input type="text" name="location"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "value={data.location} onChange={(e)=>setData('location',e.target.value)}/>
+                                      {errors.location && <div className='text-danger'>{errors.location}</div>}
+                                    <label htmlFor="Year" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Location *</label>
+                                </div>
+                                <div className="relative z-0 w-full mb-6 group">
+                                    <input type="text" name=" description"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "value={data.description} onChange={(e)=>setData('description',e.target.value)}/>
+                                      {errors.location && <div className='text-danger'>{errors.location}</div>}
+                                    <label htmlFor="Year" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Description *</label>
+                                </div>
                             </div>
                              <div className="mx-auto max-w-screen-xl w-full h-full mt-6">
                 <div className="bg-white border border-gray-300 p-8 rounded-lg shadow-md">
@@ -148,9 +160,9 @@ import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
                             >
                                 <div className="flex items-center justify-center pb-3">
                                     <img src={ImageGallery} className="mb-2 w-12 h-12 mr-4" alt="" />
-                                    <button type="button" className="bg-green-500 text-white py-2.5 px-3">
+                                    <div className="bg-green-500 text-white py-2.5 px-3">
                                         + Add Photos
-                                    </button>
+                                    </div>
                                 </div>
                                 <div className="flex flex-wrap justify-around">
                                     <span className='flex pt-4'>
@@ -173,7 +185,7 @@ import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
                                         </p>
                                     </span>
                                 </div>
-                                <input id="dropzone-file" type="file" className="hidden" />
+                                <input id="dropzone-file" type="file" className="hidden" name="images" onChange={handleImageChange} multiple/>
                             </label>
                         </div>
                     </div>
@@ -183,7 +195,7 @@ import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
       <CheckBoxForm/>
       <div className="mx-auto max-w-screen-xl w-full h-full mt-6 ">
                 <div className="flex justify-end">
-                    <button type="submit" className="px-5 py-3 text-base font-medium text-center text-white bg-green-500  hover:bg-green-600" >Submit and Pay Fees</button>
+                    <button type="button" onClick={()=>handleSubmit()} className="px-5 py-3 text-base font-medium text-center text-white bg-green-500  hover:bg-green-600" >Submit and Pay Fees</button>
                 </div>
             </div>
            

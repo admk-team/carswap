@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import imagelogo1 from '@/Assets/headerlogo.png'
+import imagelogo1 from '@/Assets/nav2.png'
 import watsapImage from '@/Assets/whatsapp.png'
 import bellIcon from "@/Assets/bell.png"
+import { Link } from '@inertiajs/react';
 
 
-const NavBar2 = () => {
+const NavBar2 = (auth:any) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
@@ -17,13 +18,15 @@ const NavBar2 = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <img className="w-52 h-9" src={imagelogo1} alt="Logo" />
+            <Link  href={route('front.index')}>
+              <img className="w-52 h-9" src={imagelogo1} alt="Logo" />
+            </Link>
           </div>
           <div className="hidden md:block">
             <div className="flex items-center space-x-4">
-              <a className=" font-gray-900 font-extrabold cursor-pointer">
+              <Link  href={route('user.postcar')} className=" font-gray-900 font-extrabold cursor-pointer">
                 Post a Car
-              </a>
+              </Link>
              <img className='w-7 h-7' src={bellIcon} alt="" />
               <div className="flex items-center text-white bg-gray-900 p-2">
                 <span className="w-6 h-6 mr-1"><img src={watsapImage} alt="" /></span>
@@ -31,13 +34,24 @@ const NavBar2 = () => {
               </div>
               <div className="flex items-center p-2 space-y-1 sm:px-3 bg-emerald-600 ">
                 {/* Mobile menu items */}
-                <a
-                  href="#"
+
+                {
+                  auth && auth.auth.user?
+                  <Link
+                  href={route('user.dashboard')}
                   className=" rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
                 >
-                  LogIn/SignUp
-                </a>
+                  Dashboard
+                </Link>
+                  :
+                  <Link
+                    href={route('user.login')}
+                    className=" rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
+                  >
+                    LogIn/SignUp
+                  </Link>
 
+                }
               </div>
             </div>
 
@@ -97,18 +111,31 @@ const NavBar2 = () => {
                 <span className="block mt-2 w-6 h-6 mr-1"><img src={watsapImage} alt="" /></span>
                 <span className="text-white mt-2 text-sm">07031555235</span>
               </div>
-            <a
-              href="#"
-              className="block px-3 py-2  text-base font-medium text-white bg-emerald-500"
-            >
-              Login
-            </a>
-            <a
-              href="#"
-              className="block px-3 py-2  text-base font-medium text-white bg-emerald-900"
-            >
-              Signup
-            </a>
+
+            {
+              auth && auth.auth.user?
+              <Link
+                href={route('user.dashboard')}
+                className="block px-3 py-2  text-base font-medium text-white bg-emerald-500"
+              >
+                Dashboard
+              </Link>
+              :
+              <>
+                <Link
+                  href={route('user.login')}
+                  className="block px-3 py-2  text-base font-medium text-white bg-emerald-500"
+                >
+                  Login
+                </Link>
+                <Link
+                  href={route('signuppage')}
+                  className="block px-3 py-2  text-base font-medium text-white bg-emerald-900"
+                >
+                  Signup
+                </Link>
+              </>
+              }
           </div>
         </div>
       )}

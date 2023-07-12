@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import NavBar2 from '@/Components/Navbar/NabBar2';
 import ProfilePic from '@/Assets/userprofile.jpg';
-import Footer from './Footer/Footer';
+import Footer from '../Footer/Footer';
 
-export default function EditProfile() {
+export default function EditProfile({auth}:any) {
     const [passwordField, setPasswordField] = useState(false);
     const [nameField, setNameField] = useState(false);
     const [mailField, setMailField] = useState(false);
@@ -11,9 +11,10 @@ export default function EditProfile() {
     const [cnicField, setCnicField] = useState(false);
     const [addressField, setAddressField] = useState(false);
     const [birthField, setBirthField] = useState(false);
+    console.log(auth)
     return (
         <div>
-            <NavBar2 />
+            <NavBar2 auth={auth}/>
             <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
             <div className="grid grid-cols-12 gap-4 mt-7 p-4">
                 <div className="col-span-12 md:col-span-6">
@@ -40,7 +41,7 @@ export default function EditProfile() {
                                     </svg>
                                     <p className='text-gray-950'>Profile Name</p>
                                 </div>
-                                <p className='mx-4'>Toni Kroos</p>
+                                <p className='mx-4'>{auth&&auth.user?auth.user.first_name +' '+ auth.user.last_name:''}</p>
                             </div>
 
                             <p
@@ -54,10 +55,15 @@ export default function EditProfile() {
                         <div className="mt-3 border p-4">
                             <div className="flex flex-col">
                                 <label >Edit Profile Name </label>
+                                <label >First Name </label>
+                                <input
+                                     className="border border-gray-300 p-1 mt-1" value={auth&&auth.user?auth.user.first_name:''}
+                                />
+                                <label >Last Name </label>
                                 <input
                                     type="profile"
                                     id="profile"
-                                    className="border border-gray-300 p-1 mt-1"
+                                    className="border border-gray-300 p-1 mt-1" value={auth&&auth.user?auth.user.last_name:''}
                                 />
                             </div>
                             <div className="flex justify-between w-full mt-2">
@@ -84,7 +90,7 @@ export default function EditProfile() {
 
                                     <p className='text-gray-950'>Email Address</p>
                                 </div>
-                                <p className='mx-4'>kroos@example.com</p>
+                                <p className='mx-4'>{auth&&auth.user?auth.user.email:''}</p>
                             </div>
 
                             <p
@@ -99,9 +105,8 @@ export default function EditProfile() {
                             <div className="flex flex-col">
                                 <label >Edit Email Address</label>
                                 <input
-                                    type="email"
-                                    id="email"
-                                    className="border border-gray-300 p-1 mt-1"
+                                    className="border border-gray-300 p-2 mt-1"
+                                    value={auth&&auth.user?auth.user.email:''}
                                 />
                             </div>
                             <div className="flex justify-between w-full mt-2">
@@ -127,7 +132,7 @@ export default function EditProfile() {
                                     </svg>
                                     <p className='text-gray-950'>Phone Number</p>
                                 </div>
-                                <p className='mx-4'>+92*******23</p>
+                                <p className='mx-4'>{auth&&auth.user?auth.user.phone_no:''}</p>
                             </div>
 
                             <p
@@ -142,9 +147,8 @@ export default function EditProfile() {
                             <div className="flex flex-col">
                                 <label >Edit Phone Number</label>
                                 <input
-                                    type="number"
-                                    id="number"
-                                    className="border border-gray-300 p-1 mt-1"
+                                   value={auth&&auth.user?auth.user.phone_no:''}
+                                    className="border border-gray-300 p-2 mt-1"
                                 />
                             </div>
                             <div className="flex justify-between w-full mt-2">
@@ -215,7 +219,7 @@ export default function EditProfile() {
 
                                     <p className='text-gray-950'>Address </p>
                                 </div>
-                                <p className='mx-4'>Not provided yet</p>
+                                <p className='mx-4'>{auth&&auth.user?auth.user.address:''}</p>
                             </div>
 
                             <p
@@ -230,9 +234,8 @@ export default function EditProfile() {
                             <div className="flex flex-col">
                                 <label >Edit Address</label>
                                 <input
-                                    type="address"
-                                    id="address"
-                                    className="border border-gray-300 p-1 mt-1"
+                                className="border border-gray-300 p-2 mt-1"
+                                value={auth&&auth.user?auth.user.address:''}
                                 />
                             </div>
                             <div className="flex justify-between w-full mt-2">

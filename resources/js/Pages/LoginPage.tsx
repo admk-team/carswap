@@ -1,35 +1,62 @@
-import React from 'react'
+import React, { useEffect,FormEventHandler } from 'react'
 import backgroundedImage from '../Assets/Login.png';
 import GoogImage from "@/Assets/Google.png"
 import FacImage from "@/Assets/facebook.png"
+import { Head, useForm } from '@inertiajs/react';
+import InputError from '@/Components/InputError';
 
-const LoginPage = () => {
+const LoginPage = ({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) => {
+    const { data, setData, post, processing, errors, reset } = useForm({
+        email: '',
+        password: '',
+        remember: false,
+    });
+
+    useEffect(() => {
+        return () => {
+            reset('password');
+        };
+    }, []);
+
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
+
+        post(route('user.logedIn'));
+    };
     return (
         <>
+        <Head title="Log in" />
+        {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
             <div className="mx-auto max-w-screen-xl w-full h-full mt-12 p-12">
                 <div className="border border-gray-500 rounded-xl shadow-md">
                     <div className="grid grid-cols-1 md:grid-cols-2 ">
                         <div className='m-6'>
                             <h2 className="text-2xl text-center text-dark uppercase font-bold mt-12">Login</h2>
                             <p className="text xl text-center text-dark mb-4">Welcome to Carswap</p>
-                            <form >
+                            <form onSubmit={submit}>
 
                                 <div className="mb-3">
                                     <input
-                                        type="text"
-                                        id="username"
-                                        placeholder="Username"
+                                        type="enail"
+                                        id="email"
+                                        value={data.email}
+                                        placeholder="Enter Email"
                                         className="w-full px-3 py-2 border border-gray-300 rounded-xl bg-pink-50"
+                                        onChange={(e) => setData('email', e.target.value)}
                                     />
+                                    <InputError message={errors.email} className="mt-2" />
                                 </div>
 
                                 <div className="mb-3">
                                     <input
                                         type="password"
                                         id="password"
-                                        placeholder="Password"
+                                        placeholder="Enter Password"
+                                        name="password"
+                                        onChange={(e) => setData('password', e.target.value)}
                                         className="w-full px-3 py-2 border border-gray-300 rounded-xl bg-pink-50"
                                     />
+                                    <InputError message={errors.password} className="mt-2" />
                                 </div>
                                 <div className="text-center">
                                     <button

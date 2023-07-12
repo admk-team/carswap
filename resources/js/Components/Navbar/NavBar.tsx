@@ -2,10 +2,10 @@ import { useState } from 'react';
 import imagelogo1 from '@/Assets/headerlogo.png'
 import watsapImage from '@/Assets/whatsapp.png'
 import bellIcon from "@/Assets/bell.png"
+import { Link } from '@inertiajs/react';
 
-const NavBar = () => {
+const NavBar = (auth:any) => {
   const [showMenu, setShowMenu] = useState(false);
-
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -16,13 +16,15 @@ const NavBar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <img className="w-52 h-10 object-contain" src={imagelogo1} alt="Logo" />
+            <Link  href={route('front.index')}>
+              <img className="w-52 h-10 object-contain" src={imagelogo1} alt="Logo" />
+            </Link>
           </div>
           <div className="hidden md:block">
             <div className="flex items-center space-x-4">
-              <a className=" text-white font-bold ">
+              <Link  href={route('user.postcar')} className=" text-white font-bold">
                 Post a Car
-              </a>
+              </Link>
              <img className='w-7 h-7' src={bellIcon} alt="" />
               <div className="flex items-center">
                 <span className="w-6 h-6 mr-1"><img src={watsapImage} alt="" /></span>
@@ -30,18 +32,31 @@ const NavBar = () => {
               </div>
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-emerald-500 hover:bg-emerald-600">
                 {/* Mobile menu items */}
-                <a
-                 href={route('loginpage')}
-                  className="py-2 ml-2 rounded-md text-base font-medium text-white"
-                >
-                  Login
-                </a>
-                <a
-                 href={route('signuppage')}
-                  className=" py-2 mr-2 rounded-md text-base font-medium text-white"
-                >
-                  /SignUp
-                </a>
+                {
+                  auth && auth.auth.user?
+                  <Link
+                      href={route('user.dashboard')}
+                      className="px-3 py-2 rounded-md text-base font-medium text-white"
+                    >
+                      Dashboard
+                  </Link>
+                  :
+                  <>
+                   <Link
+                      href={route('user.login')}
+                      className="px-3 py-2 rounded-md text-base font-medium text-white"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      href={route('user.login')}
+                      className=" py-2 mr-2 rounded-md text-base font-medium text-white"
+                    >/SignUp
+                    </Link>
+                  </>
+                 
+                }
+                  
               </div>
             </div>
 
@@ -98,18 +113,30 @@ const NavBar = () => {
                 <span className="block mt-2 w-6 h-6 mr-1"><img src={watsapImage} alt="" /></span>
                 <span className="text-white mt-2 text-sm">07031555235</span>
               </div>
-            <a
-              href={route('loginpage')}
-              className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
-            >
-              Login
-            </a>
-            <a
-              href={route('signuppage')}
-              className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
-            >
-              Signup
-            </a>
+              {
+                auth && auth.auth.user?
+                  <Link
+                  href={route('user.dashboard')}
+                  className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+                >
+                  Dashboard
+                </Link>
+                :
+                <>
+                  <Link
+                    href={route('user.login')}
+                    className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href={route('signuppage')}
+                    className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+                  >
+                    Signup
+                  </Link>
+                </>
+              }
           </div>
         </div>
       )}
