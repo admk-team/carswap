@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import NavBar2 from '@/Components/Navbar/NabBar2'
-import backgroundImage from '@/Assets/card1.jpg';
-import logo1 from '@/Assets/alfa.png'
-import logo2 from '@/Assets/audi-logo-2.png'
-import logo3 from '@/Assets/mercedes.png'
-import logo4 from '@/Assets/honda-logo.png'
-import logo5 from '@/Assets/tesla_logo_PNG19.png'
-import logo6 from '@/Assets/toyota-logo.png'
-import logo7 from '@/Assets/bmw.png'
+// import backgroundImage from '@/Assets/card1.jpg';
+// import logo1 from '@/Assets/alfa.png'
+// import logo2 from '@/Assets/audi-logo-2.png'
+// import logo3 from '@/Assets/mercedes.png'
+// import logo4 from '@/Assets/honda-logo.png'
+// import logo5 from '@/Assets/tesla_logo_PNG19.png'
+// import logo6 from '@/Assets/toyota-logo.png'
+// import logo7 from '@/Assets/bmw.png'
 import Footer from '../Footer/Footer';
 import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"

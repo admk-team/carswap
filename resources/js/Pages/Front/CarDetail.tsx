@@ -373,7 +373,7 @@ export default function CarDetail({car,auth,similarCars}:any) {
                         <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
                             {similarCars?.map((car: any, index: any) => (
 
-                                <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                <div key={index} className="w-full bg-white border border-gray-200  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                     <div className="relative">
                                         <Link href={route('CarDetail', car.slug)}>
                                             <img className=" w-full h-72 rounded-t-lg object-cover" src={"/storage" + car?.images[0]} alt="product image" />
