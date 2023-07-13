@@ -2,16 +2,16 @@ import React from 'react';
 import backgroundImage from '@/Assets/card1.jpg';
 import { Link } from '@inertiajs/react';
 
-const PricingCard = (cars:any) => {
+const PricingCard = (cars: any) => {
     return (
         <div className="mx-auto max-w-screen-xl w-full h-full mt-8 ">
             <div className="flex justify-center">
                 <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-6">
-                    { cars.cars?.map((car:any,index:any) => (
+                    {cars.cars?.map((car: any, index: any) => (
 
-                            <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg dark:bg-gray-800 dark:border-gray-700">
                             <div className="relative">
-                                <Link href={route('CarDetail',car.slug)}>
+                                <Link href={route('CarDetail', car.slug)}>
                                     <img className=" w-full h-72 rounded-t-lg object-cover" src={"storage/" + car?.images[0]} alt="product image" />
                                 </Link>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-red-500 absolute top-2 right-2" fill="red" viewBox="0 0 24 24" stroke="currentColor">
@@ -29,7 +29,7 @@ const PricingCard = (cars:any) => {
                                 </div>
                             </div>
                             <div className="px-2 pb-4">
-                                <Link href={route('CarDetail',car.slug)}>
+                                <Link href={route('CarDetail', car.slug)}>
                                     <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">{car?.title}</h5>
                                 </Link>
                                 <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">$ {car?.price}</h5>
