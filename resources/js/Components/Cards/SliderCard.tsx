@@ -6,7 +6,7 @@ const SliderCard = (brands: any) => {
   const [showResults, setShowResults] = useState(false);
   const [location, setlocation] = useState('');
   const [suggestion, setSuggestion] = useState([
-    'Islmabad',
+    'Islamabad',
     'nigeria',
   ]);
 
