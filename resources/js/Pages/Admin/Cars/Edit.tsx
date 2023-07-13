@@ -4,9 +4,7 @@ import { Head, useForm, usePage } from '@inertiajs/react';
 import { Inertia  } from '@inertiajs/inertia';
 
 const Edit = ({ auth,brands,car,users}: any) => {
-  const { errors } = usePage().props
-  const [images, setImages] = useState([]);
-  const { data, setData, put, processing } = useForm({
+  const { data, errors, setData, post, progress } = useForm({
     title: car.title,
     brand_id: car.brand_id,
     user_id: car.user_id,
@@ -22,20 +20,19 @@ const Edit = ({ auth,brands,car,users}: any) => {
     interior_color: car.interior_color,
     exterior_color: car.exterior_color,
     description: car.description,
-    images:[]
+    images: null,
+    _method: 'put',
   });
 
+  const [images, setImages] = useState(null);
   const handleImageChange = (e:any) => {
     if (e.target.files) {
       setData('images',e.target.files);
     }
   };
-  useEffect(()=>{
-    setData(car)
-  },[])
   function handleSubmit(e:any){
     e.preventDefault();
-    put(route('admin.cars.update',car.id))
+    post(route('admin.cars.update',car.id))
   }
   return (
     <>
@@ -45,6 +42,11 @@ const Edit = ({ auth,brands,car,users}: any) => {
         <div className="card shadow mb-4">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-primary">Edit Car</h6>
+            {progress && (
+                <progress value={progress.percentage} max="100">
+                  {progress.percentage}%
+                </progress>
+            )}
           </div>
           <div className="card-body">
             <form className="row g-3" method='post' onSubmit={handleSubmit} encType='multipart/form-data'>

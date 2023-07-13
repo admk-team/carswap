@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import UserImage from '@/Assets/dummy-profile 1.png';
+import UserIcon from '@/Assets/user-icon.jpg';
 import UserTabs from './UserTabs';
 import PendingAprroval from './PendingAprroval';
 import ApprovedCar from './ApprovedCar';
@@ -7,7 +7,7 @@ import MySwapedCar from './MySwapedCar';
 import MyListedCar from './MyListedCar';
 import { Link } from '@inertiajs/react';
 
-const UserProfile = ({ cars }: any) =>  {
+const UserProfile = ({ auth,cars }: any) =>  {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (tabId: number) => {
@@ -21,17 +21,19 @@ const UserProfile = ({ cars }: any) =>  {
           {/* User Profile */}
           <div className="bg-white border border-gray-300 rounded-lg shadow-md p-4 mb-4">
             <div className="flex flex-col items-center mb-4">
-              <img src={UserImage} alt="Profile" className="w-44 h-44 " />
-              <h2 className="text-lg text-gray-900 font-medium mt-2">Johnathan Cole</h2>
+              <img src={auth&&auth.user&&auth.user.image?'/storage/'+auth.user.image:UserIcon} alt="Profile" className="w-44 h-44 " />
+              <h2 className="text-lg text-gray-900 font-medium mt-2">
+                {auth&&auth.user?auth.user.first_name+' '+auth.user.last_name:'N/A'}
+              </h2>
               <p className="text-gray-900 mt-1">
-                <b>Email:</b> johnny@xyz.com
+                <b>Email:</b> {auth&&auth.user?auth.user.email:'N/A'}
               </p>
               <p className="text-gray-900 mt-1">
-                <b>Contact:</b> 37612790123
+                <b>Contact:</b> {auth&&auth.user?auth.user.phone_no:'N/A'}
               </p>
             </div>
             <div className="flex flex-col">
-              <Link href={route('user.editProfile')} className="underline hover: text-dark font-medium mb-2">Edit Profile</Link>
+              <Link href={route('user.editProfile')} className="underline hover: text-dark font-medium mb-2 text-center">Edit Profile</Link>
               <button className="underline hover: text-dark font-medium mb-2">Liked Ads</button>
               <button className="underline hover: text-dark font-medium mb-2">Inbox</button>
             </div>

@@ -44,14 +44,15 @@ const NavBar = (auth:any) => {
                   <>
                    <Link
                       href={route('user.login')}
-                      className="px-3 py-2 rounded-md text-base font-medium text-white"
+                      className="px-1 py-2 rounded-md text-base font-medium text-white"
                     >
                       Login
                     </Link>
+                    <span className='px-1 py-1 text-white'>/</span>
                     <Link
-                      href={route('user.login')}
+                      href={route('user.register')}
                       className=" py-2 mr-2 rounded-md text-base font-medium text-white"
-                    >/SignUp
+                    >SignUp
                     </Link>
                   </>
                  
@@ -130,7 +131,7 @@ const NavBar = (auth:any) => {
                     Login
                   </Link>
                   <Link
-                    href={route('signuppage')}
+                    href={route('user.register')}
                     className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
                   >
                     Signup

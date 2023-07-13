@@ -6,6 +6,7 @@ import { Link } from '@inertiajs/react';
 
 
 const NavBar2 = (auth:any) => {
+  
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
@@ -45,10 +46,10 @@ const NavBar2 = (auth:any) => {
                 </Link>
                   :
                   <Link
-                    href={route('user.login')}
+                    href={route('user.register')}
                     className=" rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
                   >
-                    LogIn/SignUp
+                    LogIn / SignUp
                   </Link>
 
                 }
@@ -129,7 +130,7 @@ const NavBar2 = (auth:any) => {
                   Login
                 </Link>
                 <Link
-                  href={route('signuppage')}
+                  href={route('user.register')}
                   className="block px-3 py-2  text-base font-medium text-white bg-emerald-900"
                 >
                   Signup

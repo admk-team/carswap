@@ -35,7 +35,8 @@ const UserDashBoard = ({auth,success,cars,error}:any) => {
                         <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                            )}
-        <UserProfile cars={cars}/>
+ 
+        <UserProfile auth={auth} cars={cars}/>
       </div>
       <Footer />
     </>
