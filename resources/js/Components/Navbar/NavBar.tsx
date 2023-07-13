@@ -7,6 +7,11 @@ import { Link } from '@inertiajs/react';
 const NavBar = (auth: any) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [subMenu, setSebMenu] = useState(false);
+
+  const toggleSubMenu = () => {
+    setSebMenu(!subMenu)
+  }
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -40,42 +45,47 @@ const NavBar = (auth: any) => {
                   </a>
                 </div>
 
-                <div className=" bg-emerald-500 hover:bg-emerald-600">
-
-                  
+                <div className="flex items-center p-2 space-y-1 sm:px-3 bg-emerald-600">
 
                   {
                     auth && auth.auth.user ?
-                      <button className='px-3 py-2 rounded-md text-white' onClick={toggleDropdown}>
+                      <button className='px-3 py-2 rounded-md text-white flex' onClick={toggleDropdown}>
                         Dashboard
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mt-1 ml-2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+
                       </button>
                       :
                       <>
+                      <div className='m-2'>
                         <Link
                           href={route('user.login')}
-                          className="px-3 py-2 rounded-md text-base font-medium text-white"
+                          className="rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
                         >
-                          Login
+                          Login 
                         </Link>
+                        <span className='text-white ps-2 pe-2'> / </span>
                         <Link
                           href={route('user.register')}
-                          className=" py-2 mr-2 rounded-md text-base font-medium text-white"
-                        >/SignUp
+                          className="rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
+                        > SignUp
                         </Link>
+                        </div>
                       </>
                   }
 
                   {isOpen && (
                     <div className="absolute mt-1 font-sm bg-white border-1 border-gray-950 ">
                       <Link
-                       href={route('user.editProfile')}
-                        className="block px-2 border-b py-1 border-gray-900 text-center text-gray-900"
+                        href={route('user.editProfile')}
+                        className="block px-4 border-b py-1 border-gray-900 text-center text-gray-900"
                       >
                         My Profile
                       </Link>
                       <Link
                         href={route('user.dashboard')}
-                        className="block px-2 border-b py-1 border-gray-900 text-center text-gray-900"
+                        className="block px-3 border-b py-1 border-gray-900 text-center text-gray-900"
                       >
                         My Dashboard
                       </Link>
@@ -87,8 +97,6 @@ const NavBar = (auth: any) => {
                       </Link>
                     </div>
                   )}
-
-
                 </div>
               </div>
 
@@ -150,34 +158,54 @@ const NavBar = (auth: any) => {
 
               {
                 auth && auth.auth.user ?
-                  <Link
-                    href={route('user.dashboard')}
-                    className="block px-3 py-2  text-base font-medium text-white"
-                  >
+                  <div className=' px-3 mt-3 text-base font-medium text-white cursor-pointer flex' onClick={toggleSubMenu}>
                     Dashboard
-                  </Link>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mt-1 ml-2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                  </div>
                   :
                   <>
+                  <div className='m-3'>
                     <Link
                       href={route('user.login')}
-                      className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+                      className="   text-base font-medium text-white"
                     >
-                      Login
+                      LogIn
                     </Link>
-                    <span className='px-1 py-1 text-white'>/</span>
+                    <span className='px-2 text-white'>/</span>
                     <Link
-                      href={route('signuppage')}
-                      className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+                      href={route('user.register')}
+                      className="  text-base font-medium text-white"
                     >
-                      Signup
+                      SignUp
                     </Link>
+                    </div>
                   </>
               }
+              {subMenu && (
+                <>
+                  <ul className='text-white ml-10 '>
+                    <li className='mt-2'>
+                      <Link className="hover:text-white" href={route('user.editProfile')}> My Profile</Link>
+                    </li>
+                    <li className=' mt-2'>
+                      <Link className="hover:text-white" href={route('user.dashboard')}>My Dashbaord</Link>
+                    </li>
+                    <li className='mt-2'>
+                      <Link href={route('Logout')} className="hover:text-white" >Logout</Link>
+                    </li>
+                  </ul>
+                </>
+              )
+              }
+
             </div>
           </div>
-        )}
-      </nav>
-    </div>
+        )
+        }
+      </nav >
+    </div >
   );
 };
 
