@@ -58,17 +58,20 @@ const NavBar2 = (auth: any) => {
                       </button>
                       :
                       <>
-                        <Link
-                          href={route('user.login')}
-                          className="px-3 py-2 rounded-md text-base font-medium text-white"
-                        >
-                          Login
-                        </Link>
-                        <Link
-                          href={route('user.register')}
-                          className=" py-2 mr-2 rounded-md text-base font-medium text-white"
-                        >/SignUp
-                        </Link>
+                        <div className='m-2'>
+                          <Link
+                            href={route('user.login')}
+                            className=" rounded-md text-base font-medium text-white"
+                          >
+                            LogIn
+                          </Link>
+                          <span className='px-2 text-white'>/</span>
+                          <Link
+                            href={route('user.register')}
+                            className=" rounded-md text-base font-medium text-white"
+                          >SignUp
+                          </Link>
+                        </div>
                       </>
                   }
 
@@ -168,35 +171,37 @@ const NavBar2 = (auth: any) => {
                   </div>
                   :
                   <>
-                    <Link
-                      href={route('user.login')}
-                      className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
-                    >
-                      Login
-                    </Link>
-                    <span className='px-1 py-1 text-white'>/</span>
-                    <Link
-                      href={route('user.register')}
-                      className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
-                    >
-                      Signup
-                    </Link>
+                    <div className='py-2 px-3 bg-gray-900'>
+                      <Link
+                        href={route('user.login')}
+                        className=" text-base font-medium text-white"
+                      >
+                        LogIn
+                      </Link>
+                      <span className='px-2 text-white'>/</span>
+                      <Link
+                        href={route('user.register')}
+                        className=" text-base font-medium text-white"
+                      >
+                        SignUp
+                      </Link>
+                    </div>
                   </>
               }
               {subMenu && (
                 <>
-                <div className=' bg-gray-900'>
-                  <ul className='text-white ml-10 bg-gray-900'>
-                    <li className='mt-2'>
-                      <Link className="hover:text-white  bg-gray-900" href={route('user.editProfile')}> My Profile</Link>
-                    </li>
-                    <li className=' mt-2'>
-                      <Link className="hover:text-white  bg-gray-900" href={route('user.dashboard')}>My Dashbaord</Link>
-                    </li>
-                    <li className='mt-2'>
-                      <Link href={route('Logout')} className="hover:text-white  bg-gray-900" >Logout</Link>
-                    </li>
-                  </ul>
+                  <div className=' bg-gray-900'>
+                    <ul className='text-white ml-10 bg-gray-900'>
+                      <li className='mt-2'>
+                        <Link className="hover:text-white  bg-gray-900" href={route('user.editProfile')}> My Profile</Link>
+                      </li>
+                      <li className=' mt-2'>
+                        <Link className="hover:text-white  bg-gray-900" href={route('user.dashboard')}>My Dashbaord</Link>
+                      </li>
+                      <li className='mt-2'>
+                        <Link href={route('Logout')} className="hover:text-white  bg-gray-900" >Logout</Link>
+                      </li>
+                    </ul>
                   </div>
                 </>
               )
