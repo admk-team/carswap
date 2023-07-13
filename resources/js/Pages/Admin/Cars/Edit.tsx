@@ -135,7 +135,7 @@ const Edit = ({ auth,brands,car,users}: any) => {
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Exterior Color <span className='text-danger'>*</span></label>
                 <input type="text" name="exterior_color" className="form-control" placeholder="Exterior Color"  value={data.exterior_color} onChange={(e)=>setData('exterior_color',e.target.value)} />
-                {errors.Exterior_color && <div className='text-danger'>{errors.Exterior_color}</div>}
+                {errors.exterior_color && <div className='text-danger'>{errors.exterior_color}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Location <span className='text-danger'>*</span></label>
