@@ -176,7 +176,7 @@ const NavBar2 = (auth: any) => {
                     </Link>
                     <span className='px-1 py-1 text-white'>/</span>
                     <Link
-                      href={route('signuppage')}
+                      href={route('user.register')}
                       className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
                     >
                       Signup

@@ -57,17 +57,20 @@ const NavBar = (auth: any) => {
                       </button>
                       :
                       <>
+                      <div className='m-2'>
                         <Link
                           href={route('user.login')}
-                          className="px-3 py-2 rounded-md text-base font-medium text-white"
+                          className=" py-2 rounded-md text-base font-medium text-white"
                         >
-                          Login
+                          LogIn
                         </Link>
+                        <span className='px-2 text-white'>/</span>
                         <Link
                           href={route('user.register')}
-                          className=" py-2 mr-2 rounded-md text-base font-medium text-white"
-                        >/SignUp
+                          className=" py-2 rounded-md text-base font-medium text-white"
+                        >SignUp
                         </Link>
+                        </div>
                       </>
                   }
 
@@ -162,19 +165,21 @@ const NavBar = (auth: any) => {
                   </div>
                   :
                   <>
+                  <div className='m-3'>
                     <Link
                       href={route('user.login')}
-                      className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+                      className="   text-base font-medium text-white"
                     >
-                      Login
+                      LogIn
                     </Link>
-                    <span className='px-1 py-1 text-white'>/</span>
+                    <span className='px-2 text-white'>/</span>
                     <Link
-                      href={route('signuppage')}
-                      className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+                      href={route('user.register')}
+                      className="  text-base font-medium text-white"
                     >
-                      Signup
+                      SignUp
                     </Link>
+                    </div>
                   </>
               }
               {subMenu && (
