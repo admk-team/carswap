@@ -91,6 +91,10 @@ class FrontController extends Controller
             $query->where('brand_id', $request->brand);
         }
         $cars = $query->get();
+        $cars=$cars->map(function($car){
+            $car->images=explode(',',$car->images);
+            return $car;
+        });
         return Inertia::render('Front/AllCars',['brands'=>$brands,'cars'=>$cars]);
     }
 }
