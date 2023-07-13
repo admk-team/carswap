@@ -2,7 +2,7 @@ import React, { useEffect,FormEventHandler } from 'react'
 import backgroundedImage from '../Assets/Login.png';
 import GoogImage from "@/Assets/Google.png"
 import FacImage from "@/Assets/facebook.png"
-import { Head, useForm } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 
 const LoginPage = ({ status, canResetPassword }: { status?: string, canResetPassword?: boolean }) => {
@@ -65,6 +65,7 @@ const LoginPage = ({ status, canResetPassword }: { status?: string, canResetPass
                                     >
                                         Login Now
                                     </button>
+                                    <p className='mt-2'><Link href={route('user.register')} className='text-center underline'>Register new user?</Link></p>
                                     <p className="text xl text-center text-gray-900 mt-3"><b className='font-bold'>Login</b> with Others</p>
                                     <div className="flex items-center justify-center mt-3">
                                         <img src={GoogImage} alt="" className="w-6 h-6" />

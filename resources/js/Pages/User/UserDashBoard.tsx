@@ -18,7 +18,7 @@ const UserDashBoard = ({auth,cars}:any) => {
             </tr>
         ))} */}
  
-        <UserProfile cars={cars}/>
+        <UserProfile auth={auth} cars={cars}/>
       </div>
       <Footer />
     </>
