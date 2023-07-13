@@ -1,14 +1,8 @@
-import React, { useEffect } from 'react'
 import NavBar2 from '@/Components/Navbar/NabBar2';
 import TimeClock from "@/Assets/timeclock.png";
 import PriceTag from "@/Assets/pricetag.png";
 import Location from "@/Assets/geo-location.png";
 import Share from "@/Assets/send.png";
-import CoverImg from "@/Assets/revo-img.png";
-import Img2 from "@/Assets/revo_2 .png";
-import Img3 from "@/Assets/revo_3.png";
-import Img4 from "@/Assets/revo_3.png";
-import Body from "@/Assets/car-wash.png";
 import Engine from "@/Assets/car-engine.png";
 import Drive from "@/Assets/steering-wheel.png";
 import Color from "@/Assets/car-painting.png";
@@ -16,12 +10,10 @@ import Mileage from "@/Assets/speed-test.png";
 import Gear from "@/Assets/gear-stick.png";
 import Fuel from "@/Assets/gas-station.png";
 import Color1 from "@/Assets/car-color.png";
-import backgroundImage from '@/Assets/card1.jpg';
 import Footer from '../Footer/Footer';
-import { Link } from '@inertiajs/react';
-export default function CarDetail(car: any) {
-
-    const formattedDate = new Date(car.car.created_at).toLocaleDateString('en-US', {
+import { Head, Link } from '@inertiajs/react';
+export default function CarDetail({car,auth,similarCars}:any) {
+    const formattedDate = new Date(car.created_at).toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
         year: 'numeric',
@@ -30,17 +22,18 @@ export default function CarDetail(car: any) {
 
     return (
         <div>
+            <Head title={car.title}/>
             <div>
-                <NavBar2 />
+                <NavBar2 auth={auth} />
             </div>
             <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
                 <div className="bg-gray-200 p-4">
                     <div className="flex">
                         <div className="bg-green-600 text-white py-2 px-4 mr-2">Nigerian</div>
-                        <div className="bg-emerald-500 text-white py-2 px-4 mr-2">{car.car.condition}</div>
+                        <div className="bg-emerald-500 text-white py-2 px-4 mr-2">{car.condition}</div>
                     </div>
                     <div className="flex mt-3">
-                        <div className="text-black font-bold text-lg text-6xl">{car.car.title}</div>
+                        <div className="text-black font-bold text-lg text-6xl">{car.title}</div>
                     </div>
                     <div className="flex justify-between mt-3">
                         <div className="flex items-center">
@@ -51,7 +44,7 @@ export default function CarDetail(car: any) {
                             <div className="relative">
                                 <img src={PriceTag} alt="PriceTag" />
                                 <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white self-center mx-3 pb-3 font-bold">
-                                    $ {car.car.price}
+                                    $ {car.price}
                                 </p>
                             </div>
                         </div>
@@ -59,7 +52,7 @@ export default function CarDetail(car: any) {
                     <div className="flex justify-between mt-3">
                         <div className="flex items-center">
                             <img src={Location} className="w-6 h-6" />
-                            <p className="mx-2">{car.car.location}</p>
+                            <p className="mx-2">{car.location}</p>
                         </div>
                         <div className="flex items-center mr-10" >
                             <img src={Share} className="w-6 h-6" />
@@ -69,10 +62,10 @@ export default function CarDetail(car: any) {
                     <div className="grid grid-cols-12 gap-4 mt-7">
                         <div className="col-span-12 md:col-span-6">
                             <div className="flex flex-col">
-                                <img src={'/storage/'+car.car.images[0]} className="w-full h-5/6 object-cover" alt="Cover Image" />
+                                <img src={'/storage/'+car.images[0]} className="w-full h-5/6 object-cover" alt="Cover Image" />
                                 <div className="flex flex-wrap gap-2 mt-3">
                                     {
-                                        car.car.images.map((image:any,index:any)=>(
+                                        car.images.map((image:any,index:any)=>(
                                             <img key={index} src={'/storage/'+image} className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/6" />
                                         ))
                                     }
@@ -121,7 +114,7 @@ export default function CarDetail(car: any) {
                                     <p>Engine Size</p>
                                 </div>
                                 <div>
-                                    <p>{car.car.engine_capacity} CC</p>
+                                    <p>{car.engine_capacity} CC</p>
                                 </div>
                             </div>
                             <hr />
@@ -131,7 +124,7 @@ export default function CarDetail(car: any) {
                                     <p>Drive</p>
                                 </div>
                                 <div>
-                                    <p>{car.car.drive} KM</p>
+                                    <p>{car.drive} KM</p>
                                 </div>
                             </div>
                             <hr />
@@ -141,7 +134,7 @@ export default function CarDetail(car: any) {
                                     <p>Interior Color</p>
                                 </div>
                                 <div>
-                                    <p>{car.car.interior_color}</p>
+                                    <p>{car.interior_color}</p>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +145,7 @@ export default function CarDetail(car: any) {
                                     <p>Mileage</p>
                                 </div>
                                 <div>
-                                    <p>{car.car.mileage} (Mi)</p>
+                                    <p>{car.mileage} (Mi)</p>
                                 </div>
                             </div>
                             <hr />
@@ -178,7 +171,7 @@ export default function CarDetail(car: any) {
                                     <p>Condition</p>
                                 </div>
                                 <div>
-                                    <p>{car.car.condition}</p>
+                                    <p>{car.condition}</p>
                                 </div>
                             </div>
                             <hr />
@@ -201,7 +194,7 @@ export default function CarDetail(car: any) {
                                     <p>Transmission</p>
                                 </div>
                                 <div>
-                                    <p>{car.car.transmission}</p>
+                                    <p>{car.transmission}</p>
                                 </div>
                             </div>
                             <hr />
@@ -211,7 +204,7 @@ export default function CarDetail(car: any) {
                                     <p>Fuel Type</p>
                                 </div>
                                 <div>
-                                    <p>{car.car.fuel_type}</p>
+                                    <p>{car.fuel_type}</p>
                                 </div>
                             </div>
                             <hr />
@@ -221,7 +214,7 @@ export default function CarDetail(car: any) {
                                     <p>Exterior Color</p>
                                 </div>
                                 <div>
-                                    <p>{car.car.exterior_color}</p>
+                                    <p>{car.exterior_color}</p>
                                 </div>
                             </div>
                             <hr />
@@ -369,19 +362,21 @@ export default function CarDetail(car: any) {
                 </div>
                 <div className='p-4'>
                     <h3 className="font-bold text-gray-900 text-2xl">Description:</h3>
-                    <p>{car.car.description}</p>
+                    <p>{car.description}</p>
                 </div>
+                {
+                    similarCars?
                 <div className='p-4 '>
                     <h3 className="font-bold text-3xl text-green-600">Explore More:</h3>
                     <h3 className="font-bold text-gray-900 text-2xl mt-2">Similar Listings</h3>
                     <div className="flex justify-center">
                         <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
-                            {car.similarCars?.map((car: any, index: any) => (
+                            {similarCars?.map((car: any, index: any) => (
 
                                 <div key={index} className="w-full bg-white border border-gray-200  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                     <div className="relative">
                                         <Link href={route('CarDetail', car.slug)}>
-                                            <img className=" w-full h-72 rounded-t-lg object-cover" src={"storage/" + car?.images} alt="product image" />
+                                            <img className=" w-full h-72 rounded-t-lg object-cover" src={"/storage" + car?.images[0]} alt="product image" />
                                         </Link>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-red-500 absolute top-2 right-2" fill="red" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
@@ -435,6 +430,7 @@ export default function CarDetail(car: any) {
                         </div>
                     </div>
                 </div>
+                :''}
             </div>
             <div>
                 <Footer />

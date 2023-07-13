@@ -1,5 +1,6 @@
 import React from 'react'
 import LogoFooter from "@/Assets/headerlogo.png";
+import { Link } from '@inertiajs/inertia-react';
 
 const Footer = () => {
     return (
@@ -8,7 +9,9 @@ const Footer = () => {
                 <div className="mx-auto w-full max-w-screen-xl">
                     <div className="grid grid-cols-1 gap-8 px-4 lg:py-8 md:grid-cols-4">
                         <div>
-                            <img src={LogoFooter} className="h-8 mr-3 mt-10" alt="Flowbite Logo" />
+                            <Link href={route('front.index')}>
+                                <img src={LogoFooter} className="h-8 mr-3 mt-10" alt="Flowbite Logo" />
+                            </Link>
                             <p className='text-white mt-3'>Powered by Carswap Limited <br />RC-1443296 <br /> Head Office <br />3rd Floor, Africa Reinsurance Building, Plot 1679 Karimu kuton St, Victoria Island, 101241, Logas Nageria. <br />Hotline: 07031555235</p>
                             <div className="flex mt-5 space-x-6  md:mt-0">
                                 <a href="#" className="text-white hover:text-gray-300 dark:hover:text-white mt-4">

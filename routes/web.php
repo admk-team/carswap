@@ -64,28 +64,11 @@ Route::get('/', [FrontController::class,'index'])->name('front.index');
 Route::get('/car-detail/{slug}', [FrontController::class,'CarDetail'])->name('CarDetail');
 Route::get('/cars/all', [FrontController::class,'ViewAllCars'])->name('ViewAllCars');
 
-Route::get('/user-login',[AuthController::class,'create'])->name('user.login');
+//Use Auth Routes
+Route::get('/signin',[AuthController::class,'create'])->name('user.login');
 Route::post('/login-post',[AuthController::class,'store'])->name('user.logedIn');
-
-
-Route::get('/detail', function () {
-    return Inertia::render('CarDetail');
-})->name('car.detail');
-
-Route::get('/all', function () {
-    return Inertia::render('AllDetail');
-})->name('all.detail');
-
-
-
-
-Route::get('/signuppage', function () {
-    return Inertia::render('SignUpPage');
-})->name('signuppage');
-
-Route::get('/loginpage', function () {
-    return Inertia::render('LoginPage');
-})->middleware(['auth', 'verified'])->name('loginpage');
+Route::get('/signup',[AuthController::class,'register'])->name('user.register');
+Route::post('/signup-post',[AuthController::class,'signup'])->name('user.signup');
 
 Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(function(){
     Route::get('/dashboard',[FrontUserController::class,'index'])->name('dashboard');

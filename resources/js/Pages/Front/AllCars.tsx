@@ -11,10 +11,10 @@ import NavBar2 from '@/Components/Navbar/NabBar2'
 import Footer from '../Footer/Footer';
 import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { Button } from 'flowbite-react';
 
-export default function AllCars({ brands, cars }: { brands: any[]; cars: any }) {
+export default function AllCars({ brands, cars,auth }:any) {
     const [showModal, setShowModal] = useState(false);
     const [compare, setCompare]:any = useState([])
 
@@ -28,7 +28,8 @@ export default function AllCars({ brands, cars }: { brands: any[]; cars: any }) 
 
     return (
         <div>
-            <NavBar2 />
+            <Head title='All Cars'/>
+            <NavBar2 auth={auth} />
             <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
                 <div className="bg-gray-200 p-4">
                     <p className="font-black text-gray-950 text-3xl">Cars Up for Sale</p>
@@ -152,10 +153,10 @@ export default function AllCars({ brands, cars }: { brands: any[]; cars: any }) 
                                     <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                         <div className="relative">
                                             <Link href={route('CarDetail', car.slug)}>
-                                                <img className=" w-full h-72 rounded-t-lg object-cover" src={"/storage/" + car?.images[0]} alt="product image" />
+                                                <img className=" w-full h-72 rounded-t-lg object-cover" src={"/storage" + car?.images[0]} alt="product image" />
                                             </Link>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-red-500 absolute top-2 right-2" fill="red" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                                             </svg>
                                             <div className="absolute bottom-5 left-1">
                                                 <svg aria-hidden="true" className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -224,7 +225,7 @@ export default function AllCars({ brands, cars }: { brands: any[]; cars: any }) 
                                                 <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 mt-6">
                                                     <div className="col-span-1 md:col-span-2 lg:col-span-1">
                                                         <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
-                                                        <img src={"/storage/" + compare.images[0]}  className="w-full h-4/5 object-contain"></img>
+                                                        <img src={"/storage" + compare.images[0]}  className="w-full h-4/5 object-contain"></img>
                                                         <p className='font-semibold text-gray-950 mt-2 text-2xl '>Price</p>
                                                         <p className='text-emerald-500'>$ {compare.price}</p>
                                                     </div>
