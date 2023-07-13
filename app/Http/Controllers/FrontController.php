@@ -10,7 +10,7 @@ class FrontController extends Controller
 {
     public function index(){
         $brands=Brand::where('status','1')->get();
-        $cars=Car::where('status','1')->limit(3)->latest()->get();
+        $cars=Car::where('status','1')->where('slug','!=',null)->limit(3)->latest()->get();
         $cars=$cars->map(function($car){
             $images=explode(',',$car->images);
             return [
@@ -37,7 +37,7 @@ class FrontController extends Controller
     }
     public function ViewAllCars(){
         $brands=Brand::where('status','1')->get();
-        $cars=Car::where('status','1')->latest()->get();
+        $cars=Car::where('status','1')->where('slug','!=',null)->latest()->get();
         $cars=$cars->map(function($car){
             $images=explode(',',$car->images);
             return [

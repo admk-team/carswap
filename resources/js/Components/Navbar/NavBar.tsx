@@ -46,9 +46,6 @@ const NavBar = (auth: any) => {
                 </div>
 
                 <div className=" bg-emerald-500 hover:bg-emerald-600">
-
-
-
                   {
                     auth && auth.auth.user ?
                       <button className='px-3 py-2 rounded-md text-white flex' onClick={toggleDropdown}>
@@ -60,17 +57,20 @@ const NavBar = (auth: any) => {
                       </button>
                       :
                       <>
+                      <div className='m-2'>
                         <Link
                           href={route('user.login')}
-                          className="px-3 py-2 rounded-md text-base font-medium text-white"
+                          className=" py-2 rounded-md text-base font-medium text-white"
                         >
-                          Login
+                          LogIn
                         </Link>
+                        <span className='px-2 text-white'>/</span>
                         <Link
-                          href={route('user.login')}
-                          className=" py-2 mr-2 rounded-md text-base font-medium text-white"
-                        >/SignUp
+                          href={route('user.register')}
+                          className=" py-2 rounded-md text-base font-medium text-white"
+                        >SignUp
                         </Link>
+                        </div>
                       </>
                   }
 
@@ -88,16 +88,14 @@ const NavBar = (auth: any) => {
                       >
                         My Dashboard
                       </Link>
-                      <a
-                        href="/logout"
+                      <Link
+                        href={route('Logout')}
                         className="block px-2 border-b py-1 border-gray-900 text-center text-gray-900"
                       >
                         Logout
-                      </a>
+                      </Link>
                     </div>
                   )}
-
-
                 </div>
               </div>
 
@@ -167,19 +165,21 @@ const NavBar = (auth: any) => {
                   </div>
                   :
                   <>
+                  <div className='m-3'>
                     <Link
                       href={route('user.login')}
-                      className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+                      className="   text-base font-medium text-white"
                     >
-                      Login
+                      LogIn
                     </Link>
-                    <span className='px-1 py-1 text-white'>/</span>
+                    <span className='px-2 text-white'>/</span>
                     <Link
-                      href={route('signuppage')}
-                      className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+                      href={route('user.register')}
+                      className="  text-base font-medium text-white"
                     >
-                      Signup
+                      SignUp
                     </Link>
+                    </div>
                   </>
               }
               {subMenu && (
@@ -192,39 +192,13 @@ const NavBar = (auth: any) => {
                       <Link className="hover:text-white" href={route('user.dashboard')}>My Dashbaord</Link>
                     </li>
                     <li className='mt-2'>
-                      <Link className="hover:text-white" href=''>Logout</Link>
+                      <Link href={route('Logout')} className="hover:text-white" >Logout</Link>
                     </li>
                   </ul>
                 </>
               )
               }
 
-
-              {/* {
-                auth && auth.auth.user ?
-                  <Link
-                    href={route('user.dashboard')}
-                    className="block px-3 py-2  text-base font-medium text-white"
-                  >
-                    Dashboard
-                  </Link>
-                  :
-                  <>
-                    <Link
-                      href={route('user.login')}
-                      className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
-                    >
-                      Login
-                    </Link>
-                    <span className='px-1 py-1 text-white'>/</span>
-                    <Link
-                      href={route('signuppage')}
-                      className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
-                    >
-                      Signup
-                    </Link>
-                  </>
-              } */}
             </div>
           </div>
         )

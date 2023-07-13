@@ -104,8 +104,8 @@ import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
                                 <div className="relative z-0 w-full mb-6 group">
                                 <select name="Usedca" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"value={data.fuelType} onChange={(e) => setData('fuelType', e.target.value)}>
                                         <option value="option0">Select Fuel Type</option>
-                                        <option value="option1">Fuel</option>
-                                        <option value="option2">Desiel</option>
+                                        <option value="Fuel">Fuel</option>
+                                        <option value="Desiel">Desiel</option>
                                       
                                     </select>
                                     {errors.condition && <div className='text-danger'>{errors.condition}</div>}
@@ -113,7 +113,7 @@ import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
                                 
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text" name="modal" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.model} onChange={(e)=>setData('model',e.target.value)} />
+                                    <input type="text" name="model" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.model} onChange={(e)=>setData('model',e.target.value)} />
                                     {errors.model && <div className='text-danger'>{errors.model}</div>}
                                     <label htmlFor="address" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Modal *</label>
                                 </div>
