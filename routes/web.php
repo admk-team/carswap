@@ -70,8 +70,8 @@ Route::post('/login-post',[AuthController::class,'store'])->name('user.logedIn')
 Route::get('/signup',[AuthController::class,'register'])->name('user.register');
 Route::post('/signup-post',[AuthController::class,'signup'])->name('user.signup');
 
-Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(function(){
-    Route::get('/dashboard',[FrontUserController::class,'index'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(function () {
+    Route::get('/dashboard', [FrontUserController::class, 'index'])->name('dashboard');
 
     //User Edit Profile
     Route::get('/profile', [FrontUserController::class,'EditProfile'])->name('editProfile');

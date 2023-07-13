@@ -67,7 +67,7 @@ const NavBar = (auth: any) => {
                           Login
                         </Link>
                         <Link
-                          href={route('user.login')}
+                          href={route('user.register')}
                           className=" py-2 mr-2 rounded-md text-base font-medium text-white"
                         >/SignUp
                         </Link>
@@ -88,12 +88,12 @@ const NavBar = (auth: any) => {
                       >
                         My Dashboard
                       </Link>
-                      <a
-                        href="/logout"
+                      <Link
+                        href={route('Logout')}
                         className="block px-2 border-b py-1 border-gray-900 text-center text-gray-900"
                       >
                         Logout
-                      </a>
+                      </Link>
                     </div>
                   )}
 
