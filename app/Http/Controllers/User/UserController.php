@@ -12,12 +12,12 @@ class UserController extends Controller
     public function index(){
         $cars=Car::latest()->get();
         $data = $cars->map(function($item){
-            $imageUrl = url('storage' . $item->images);
-            $item->images = $imageUrl;
+            $image = explode(',',$item->images);
+            $item->images = $image;
             
             return $item;
         });
-        return Inertia::render('User/UserDashBoard', ['cars' => $data]);
+        return Inertia::render('User/UserDashBoard', ['cars' => $data,'success'=>request()->success,'error'=>request()->error]);
     }
     public function EditProfile(){
         return Inertia::render('User/EditProfile');
