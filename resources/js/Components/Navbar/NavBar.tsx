@@ -42,33 +42,7 @@ const NavBar = (auth: any) => {
 
                 <div className=" bg-emerald-500 hover:bg-emerald-600">
 
-                  {/* {
-                    auth && auth.auth.user ?
-                      <Link
-                        href={route('user.dashboard')}
-                        className="px-3 py-2 rounded-md text-base font-medium text-white"
-                      >
-                        Dashboard
-                      </Link>
-
-                     
-
-                      :
-                      <>
-                        <Link
-                          href={route('user.login')}
-                          className="px-3 py-2 rounded-md text-base font-medium text-white"
-                        >
-                          Login
-                        </Link>
-                        <Link
-                          href={route('user.login')}
-                          className=" py-2 mr-2 rounded-md text-base font-medium text-white"
-                        >/SignUp
-                        </Link>
-                      </>
-
-                  } */}
+                  
 
                   {
                     auth && auth.auth.user ?
