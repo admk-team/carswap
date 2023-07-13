@@ -73,4 +73,9 @@ class FrontController extends Controller
         });
         return Inertia::render('Front/CarDetail',['brands'=>$brands,'car'=>$car,'similarCars'=>$similarCars]);
     }
+
+    public function contactus(){
+       
+        return Inertia::render('Front/ContactUsPage');
+    }
 }

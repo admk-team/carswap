@@ -114,7 +114,7 @@ const SignUpPage = () => {
                                 <div className="text-start">
                                     <Link href={route('user.login')} className='underline'>Already have an account?</Link>
                                 </div>
-                                <div className="text-end">
+                                <div className="text-center">
                                     <button
                                         type="submit"
                                         className="bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-xl mt-2"
