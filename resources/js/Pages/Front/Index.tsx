@@ -5,8 +5,7 @@ import BannerTwo from '@/Components/Banner/BannerTwo'
 import Reviews from '@/Components/Reviews/Reviews'
 import NavBar from '@/Components/Navbar/NavBar'
 import TopBanner from '@/Components/Banner/TopBanner';
-import { Link } from '@inertiajs/inertia-react';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 interface IndexProps {
     brands: any;
     cars: any;

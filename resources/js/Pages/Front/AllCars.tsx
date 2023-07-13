@@ -19,8 +19,6 @@ export default function AllCars({ brands, cars,auth }:any) {
     const [compare, setCompare]:any = useState([])
 
     const handleSetCar = (id=0)=>{
-        console.log(cars)
-        // setCompare(cars[index]);
         let car = cars.find((item:any) => (item.id === id))
         setCompare(car);
         setShowModal(true);
