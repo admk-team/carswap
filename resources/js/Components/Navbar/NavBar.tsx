@@ -6,6 +6,12 @@ import { Link } from '@inertiajs/react';
 
 const NavBar = (auth: any) => {
   const [showMenu, setShowMenu] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -27,11 +33,6 @@ const NavBar = (auth: any) => {
                 </Link>
                 <img className='w-7 h-7' src={bellIcon} alt="" />
 
-                {/* <div className="flex items-center">
-                <span className="w-6 h-6 mr-1"><img src={watsapImage} alt="" /></span>
-                <span className="text-white text-sm">07031555235</span>
-              </div> */}
-
                 <div className="flex items-center">
                   <a href="https://api.whatsapp.com/send?phone=07031555235" className="flex items-center" target="_blank" rel="noopener noreferrer">
                     <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
@@ -39,9 +40,9 @@ const NavBar = (auth: any) => {
                   </a>
                 </div>
 
-                <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-emerald-500 hover:bg-emerald-600">
-                  {/* Mobile menu items */}
-                  {
+                <div className=" bg-emerald-500 hover:bg-emerald-600">
+
+                  {/* {
                     auth && auth.auth.user ?
                       <Link
                         href={route('user.dashboard')}
@@ -49,6 +50,9 @@ const NavBar = (auth: any) => {
                       >
                         Dashboard
                       </Link>
+
+                     
+
                       :
                       <>
                         <Link
@@ -64,7 +68,52 @@ const NavBar = (auth: any) => {
                         </Link>
                       </>
 
+                  } */}
+
+                  {
+                    auth && auth.auth.user ?
+                      <button className='px-3 py-2 rounded-md text-white' onClick={toggleDropdown}>
+                        Dashboard
+                      </button>
+                      :
+                      <>
+                        <Link
+                          href={route('user.login')}
+                          className="px-3 py-2 rounded-md text-base font-medium text-white"
+                        >
+                          Login
+                        </Link>
+                        <Link
+                          href={route('user.login')}
+                          className=" py-2 mr-2 rounded-md text-base font-medium text-white"
+                        >/SignUp
+                        </Link>
+                      </>
                   }
+
+                  {isOpen && (
+                    <div className="absolute mt-1 font-sm bg-white border-1 border-gray-950 ">
+                      <Link
+                       href={route('user.editProfile')}
+                        className="block px-2 border-b py-1 border-gray-900 text-center text-gray-900"
+                      >
+                        My Profile
+                      </Link>
+                      <Link
+                        href={route('user.dashboard')}
+                        className="block px-2 border-b py-1 border-gray-900 text-center text-gray-900"
+                      >
+                        My Dashboard
+                      </Link>
+                      <a
+                        href="/logout"
+                        className="block px-2 border-b py-1 border-gray-900 text-center text-gray-900"
+                      >
+                        Logout
+                      </a>
+                    </div>
+                  )}
+
 
                 </div>
               </div>
@@ -158,3 +207,5 @@ const NavBar = (auth: any) => {
 };
 
 export default NavBar;
+
+
