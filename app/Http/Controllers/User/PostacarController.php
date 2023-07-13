@@ -85,9 +85,9 @@ class PostacarController extends Controller
         $model->exterior_color=$request->exteriorColor;
         $model->description=$request->description;
         if($model->save()){
-            return Inertia::location(route('postcar', ['success' => 'Car added successfully.']));
+            return Inertia::location(route('user.dashboard', ['success' => 'Car added successfully.']));
         }else{
-            return Inertia::location(route('postcar', ['error' => 'Failed to add car!']));
+            return Inertia::location(route('user.dashboard', ['error' => 'Failed Car not added.']));
         }
         
     }

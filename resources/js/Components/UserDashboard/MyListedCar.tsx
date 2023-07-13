@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const MyListedCar = ({ cars }: any) => {
+  console.log(cars)
   const [currentPage, setCurrentPage] = useState(1);
   const [carsData, setCarsData] = useState([]);
   const itemsPerPage = 3;
@@ -28,7 +29,7 @@ const MyListedCar = ({ cars }: any) => {
           <div className="flex flex-col bg-white border-1 md:flex-row md:max-w-xl hover:bg-gray-100">
             <img className="object-cover md:h-auto md:w-48" src={'/storage'+carItem?.images[0]} alt="" />
             <div className="flex flex-col justify-between p-2 leading-normal">
-              <h5 className="mb-1 text-2xl font-bold text-gray-900">{carItem?.modal}</h5>
+              <h5 className="mb-1 text-2xl font-bold text-gray-900">{carItem?.model}</h5>
               <h5 className="text-2xl font-bold dark:text-white text-amber-500">${carItem?.price}</h5>
               <div className="mt-1">
                 <table className="w-full">
