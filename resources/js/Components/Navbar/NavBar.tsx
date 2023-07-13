@@ -45,7 +45,8 @@ const NavBar = (auth: any) => {
                   </a>
                 </div>
 
-                <div className=" bg-emerald-500 hover:bg-emerald-600">
+                <div className="flex items-center p-2 space-y-1 sm:px-3 bg-emerald-600">
+
                   {
                     auth && auth.auth.user ?
                       <button className='px-3 py-2 rounded-md text-white flex' onClick={toggleDropdown}>
@@ -60,15 +61,15 @@ const NavBar = (auth: any) => {
                       <div className='m-2'>
                         <Link
                           href={route('user.login')}
-                          className=" py-2 rounded-md text-base font-medium text-white"
+                          className="rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
                         >
-                          LogIn
+                          Login 
                         </Link>
-                        <span className='px-2 text-white'>/</span>
+                        <span className='text-white ps-2 pe-2'> / </span>
                         <Link
                           href={route('user.register')}
-                          className=" py-2 rounded-md text-base font-medium text-white"
-                        >SignUp
+                          className="rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
+                        > SignUp
                         </Link>
                         </div>
                       </>
