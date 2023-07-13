@@ -6,11 +6,9 @@ const SliderCard = (brands: any) => {
   const [showResults, setShowResults] = useState(false);
   const [location, setlocation] = useState('');
   const [suggestion, setSuggestion] = useState([
-    'isb',
-    'fsd',
-    'rwp',
+    'Islmabad',
+    'nigeria',
   ]);
-
 
   const handleInputChange = () => {
     setShowResults(true);
@@ -30,18 +28,10 @@ const SliderCard = (brands: any) => {
 
   }, []);
 
-
   const handleSuggestions = (value: any) => {
     setlocation(value)
-    console.log(value);
-
-
     const response = router.get('/', { q: value }, { preserveState: true });
-
   };
-
-
-
 
   const { data, setData, errors, get } = useForm({
     location: '',
@@ -83,7 +73,7 @@ const SliderCard = (brands: any) => {
 
   const handleSearch = () => {
     console.log(data)
-    // get(route('search'));
+    get(route('search'));
   }
 
   return (
@@ -115,7 +105,7 @@ const SliderCard = (brands: any) => {
         <div className="grid grid-cols-6 gap-0 mt-2">
           {
             brands.brands.brands?.map((brand: any) => (
-              <button key={brand.id} className="border pt-1 pl-1 focus:bg-emerald-500" onClick={() => setData('brand', brand?.title)}>
+              <button key={brand.id} className="border pt-1 pl-1 focus:bg-emerald-500" onClick={() => setData('brand', brand?.id)}>
                 <img src={"/storage/" + brand?.image} alt="Image 1" className="w-10 h-10 object-contain" />
               </button>
             ))

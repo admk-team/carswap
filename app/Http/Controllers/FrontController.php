@@ -73,4 +73,19 @@ class FrontController extends Controller
         });
         return Inertia::render('Front/CarDetail',['brands'=>$brands,'car'=>$car,'similarCars'=>$similarCars]);
     }
+    public function search(Request $request){
+        $brands=Brand::where('status','1')->get();
+        $query = Car::query();
+        if ($request->location) {
+            $query->where('location', $request->location);
+        }
+        if ($request->min && $request->max) {
+            $query->whereBetween('price', [$request->min, $request->max]);
+        }
+        if ($request->brand) {
+            $query->where('brand_id', $request->brand);
+        }
+        $cars = $query->get();
+        return Inertia::render('Front/AllCars',['brands'=>$brands,'cars'=>$cars]);
+    }
 }
