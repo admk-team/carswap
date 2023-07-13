@@ -36,7 +36,7 @@ const NavBar = (auth: any) => {
                   <a href="https://api.whatsapp.com/send?phone=07031555235" className="flex items-center" target="_blank" rel="noopener noreferrer">
                     <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
                     <span className="text-white text-sm">07031555235</span>
-                  </a>   
+                  </a>
                 </div>
 
                 <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-emerald-500 hover:bg-emerald-600">
@@ -114,19 +114,22 @@ const NavBar = (auth: any) => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {/* Mobile menu items */}
-              <a className=" block px-3 py-2  text-base font-medium text-white bg-gray-900text-white font-bold ">
+              <Link href={route('user.postcar')} className=" block px-3 py-2  text-base font-medium text-white">
                 Post a Car
-              </a>
-              <img className='block   w-7 h-7' src={bellIcon} alt="" />
-              <div className="flex items-center">
-                <span className="block mt-2 w-6 h-6 mr-1"><img src={watsapImage} alt="" /></span>
-                <span className="text-white mt-2 text-sm">07031555235</span>
+              </Link>
+              <img className='block w-7 h-7 ml-3' src={bellIcon} alt="" />
+              <div className="flex items-center ml-3 mt-3">
+                <a href="https://api.whatsapp.com/send?phone=07031555235" className="flex items-center" target="_blank" rel="noopener noreferrer">
+                  <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
+                  <span className="text-base font-medium text-white">07031555235</span>
+                </a>
               </div>
+
               {
                 auth && auth.auth.user ?
                   <Link
                     href={route('user.dashboard')}
-                    className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+                    className="block px-3 py-2  text-base font-medium text-white"
                   >
                     Dashboard
                   </Link>
