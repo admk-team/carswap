@@ -45,7 +45,7 @@ const NavBar = (auth: any) => {
                   </a>
                 </div>
 
-                <div className="flex items-center p-2 space-y-1 sm:px-3 bg-emerald-600">
+                <div className="bg-emerald-500 hover:bg-emerald-600">
 
                   {
                     auth && auth.auth.user ?
