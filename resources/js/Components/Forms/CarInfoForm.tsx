@@ -104,8 +104,8 @@ import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
                                 <div className="relative z-0 w-full mb-6 group">
                                 <select name="Usedca" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"value={data.fuelType} onChange={(e) => setData('fuelType', e.target.value)}>
                                         <option value="option0">Select Fuel Type</option>
-                                        <option value="option1">Fuel</option>
-                                        <option value="option2">Desiel</option>
+                                        <option value="Fuel">Fuel</option>
+                                        <option value="Desiel">Desiel</option>
                                       
                                     </select>
                                     {errors.condition && <div className='text-danger'>{errors.condition}</div>}
