@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar2 from '@/Components/Navbar/NabBar2'
 // import backgroundImage from '@/Assets/card1.jpg';
 // import logo1 from '@/Assets/alfa.png'
@@ -17,6 +17,7 @@ import { Button } from 'flowbite-react';
 export default function AllCars({ brands, cars,auth }:any) {
     const [showModal, setShowModal] = useState(false);
     const [compare, setCompare]:any = useState([])
+    const [total, setTotal]:any = useState(0)
 
     const handleSetCar = (id=0)=>{
         console.log(cars)
@@ -25,7 +26,9 @@ export default function AllCars({ brands, cars,auth }:any) {
         setCompare(car);
         setShowModal(true);
     }
-
+    useEffect(() => {
+        setTotal(cars.length);
+    }, [cars]);
     return (
         <div>
             <Head title='All Cars'/>
@@ -85,7 +88,7 @@ export default function AllCars({ brands, cars,auth }:any) {
                     </div>
 
                     <div>
-                        <p className="font-black text-gray-950 text-2xl mt-3">All Results(20)</p>
+                        <p className="font-black text-gray-950 text-2xl mt-3">All Results({total?total:0})</p>
                         <div className="flex justify-center">
                             <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
 

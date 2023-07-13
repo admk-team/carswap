@@ -63,6 +63,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 Route::get('/', [FrontController::class,'index'])->name('front.index');
 Route::get('/car-detail/{slug}', [FrontController::class,'CarDetail'])->name('CarDetail');
 Route::get('/cars/all', [FrontController::class,'ViewAllCars'])->name('ViewAllCars');
+Route::get('/search',[FrontController::class,'search'])->name('search');
+Route::get('/search',[FrontController::class,'search'])->name('search');
 
 //Use Auth Routes
 Route::get('/signin',[AuthController::class,'create'])->name('user.login');
