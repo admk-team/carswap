@@ -7,6 +7,11 @@ import { Link } from '@inertiajs/react';
 const NavBar = (auth: any) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [subMenu, setSebMenu] = useState(false);
+
+  const toggleSubMenu = () => {
+    setSebMenu(!subMenu)
+  }
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -42,12 +47,16 @@ const NavBar = (auth: any) => {
 
                 <div className=" bg-emerald-500 hover:bg-emerald-600">
 
-                  
+
 
                   {
                     auth && auth.auth.user ?
-                      <button className='px-3 py-2 rounded-md text-white' onClick={toggleDropdown}>
+                      <button className='px-3 py-2 rounded-md text-white flex' onClick={toggleDropdown}>
                         Dashboard
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mt-1 ml-2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+
                       </button>
                       :
                       <>
@@ -68,14 +77,14 @@ const NavBar = (auth: any) => {
                   {isOpen && (
                     <div className="absolute mt-1 font-sm bg-white border-1 border-gray-950 ">
                       <Link
-                       href={route('user.editProfile')}
-                        className="block px-2 border-b py-1 border-gray-900 text-center text-gray-900"
+                        href={route('user.editProfile')}
+                        className="block px-4 border-b py-1 border-gray-900 text-center text-gray-900"
                       >
                         My Profile
                       </Link>
                       <Link
                         href={route('user.dashboard')}
-                        className="block px-2 border-b py-1 border-gray-900 text-center text-gray-900"
+                        className="block px-3 border-b py-1 border-gray-900 text-center text-gray-900"
                       >
                         My Dashboard
                       </Link>
@@ -150,6 +159,49 @@ const NavBar = (auth: any) => {
 
               {
                 auth && auth.auth.user ?
+                  <div className=' px-3 mt-3 text-base font-medium text-white cursor-pointer flex' onClick={toggleSubMenu}>
+                    Dashboard
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mt-1 ml-2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                  </div>
+                  :
+                  <>
+                    <Link
+                      href={route('user.login')}
+                      className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+                    >
+                      Login
+                    </Link>
+                    <span className='px-1 py-1 text-white'>/</span>
+                    <Link
+                      href={route('signuppage')}
+                      className="block px-3 py-2  text-base font-medium text-white bg-gray-900"
+                    >
+                      Signup
+                    </Link>
+                  </>
+              }
+              {subMenu && (
+                <>
+                  <ul className='text-white ml-10 '>
+                    <li className='mt-2'>
+                      <Link className="hover:text-white" href={route('user.editProfile')}> My Profile</Link>
+                    </li>
+                    <li className=' mt-2'>
+                      <Link className="hover:text-white" href={route('user.dashboard')}>My Dashbaord</Link>
+                    </li>
+                    <li className='mt-2'>
+                      <Link className="hover:text-white" href=''>Logout</Link>
+                    </li>
+                  </ul>
+                </>
+              )
+              }
+
+
+              {/* {
+                auth && auth.auth.user ?
                   <Link
                     href={route('user.dashboard')}
                     className="block px-3 py-2  text-base font-medium text-white"
@@ -172,12 +224,13 @@ const NavBar = (auth: any) => {
                       Signup
                     </Link>
                   </>
-              }
+              } */}
             </div>
           </div>
-        )}
-      </nav>
-    </div>
+        )
+        }
+      </nav >
+    </div >
   );
 };
 
