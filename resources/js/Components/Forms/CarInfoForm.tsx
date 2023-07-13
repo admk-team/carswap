@@ -68,7 +68,7 @@ import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
                                         }
                                      
                                     </select>
-                                    {errors.condition && <div className='text-danger'>{errors.condition}</div>}
+                                    {errors.brand_id && <div className='text-danger'>{errors.brand_id}</div>}
                                     <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
                                 
                                 </div>
@@ -191,8 +191,8 @@ import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
                     </div>
                 </div>
             </div>
-            <CondtionalAssForm/>
-      <CheckBoxForm/>
+            {/* <CondtionalAssForm/> */}
+      {/* <CheckBoxForm/> */}
       <div className="mx-auto max-w-screen-xl w-full h-full mt-6 ">
                 <div className="flex justify-end">
                     <button type="button" onClick={()=>handleSubmit()} className="px-5 py-3 text-base font-medium text-center text-white bg-green-500  hover:bg-green-600" >Submit and Pay Fees</button>
