@@ -81,20 +81,20 @@ Route::get('/all', function () {
 
 Route::get('/signuppage', function () {
     return Inertia::render('SignUpPage');
-})->middleware(['auth', 'verified'])->name('signuppage');
+})->name('signuppage');
 
 Route::get('/loginpage', function () {
     return Inertia::render('LoginPage');
 })->middleware(['auth', 'verified'])->name('loginpage');
 
-Route::prefix('/user')->name('user.')->group(function(){
+Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(function(){
     Route::get('/dashboard',[FrontUserController::class,'index'])->name('dashboard');
 
     //User Edit Profile
     Route::get('/profile', [FrontUserController::class,'EditProfile'])->name('editProfile');
 
     Route::get('/postcar',[PostacarController::class,'create'])->name('postcar');
-})->middleware(['auth', 'verified']);
+});
 
     //Post car
     Route::resource('user/cars',PostacarController::class, ['as'=> 'user']);
