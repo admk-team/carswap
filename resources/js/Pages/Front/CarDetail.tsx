@@ -33,7 +33,7 @@ export default function CarDetail({car,auth,similarCars}:any) {
                         <div className="bg-emerald-500 text-white py-2 px-4 mr-2">{car.condition}</div>
                     </div>
                     <div className="flex mt-3">
-                        <div className="text-black font-bold text-lg text-6xl">{car.title}</div>
+                        <div className="text-black font-bold  text-6xl">{car.title}</div>
                     </div>
                     <div className="flex justify-between mt-3">
                         <div className="flex items-center">

@@ -78,6 +78,12 @@ class FrontController extends Controller
        
         return Inertia::render('Front/ContactUsPage');
     }
+
+    public function aboutus(){
+       
+        return Inertia::render('Front/AboutUsPage');
+    }
+
     public function search(Request $request){
         $brands=Brand::where('status','1')->get();
         $query = Car::query();

@@ -74,7 +74,7 @@ const Footer = () => {
                             <h2 className="mb-6 text-xl font-semibold text-white mt-10 dark:text-white">Quick Links</h2>
                             <ul className="text-gray-300 dark:text-gray-400 font-medium">
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">About</a>
+                                    <Link href={route('aboutus')} className="hover:underline">About</Link>
                                 </li>
                                 <li className="mb-4">
                                     <a href="#" className="hover:underline">Live Chat</a>

@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import NavBar2 from '@/Components/Navbar/NabBar2'
-// import backgroundImage from '@/Assets/card1.jpg';
-// import logo1 from '@/Assets/alfa.png'
-// import logo2 from '@/Assets/audi-logo-2.png'
-// import logo3 from '@/Assets/mercedes.png'
-// import logo4 from '@/Assets/honda-logo.png'
-// import logo5 from '@/Assets/tesla_logo_PNG19.png'
-// import logo6 from '@/Assets/toyota-logo.png'
-// import logo7 from '@/Assets/bmw.png'
 import Footer from '../Footer/Footer';
 import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"
@@ -96,64 +88,14 @@ export default function AllCars({ brands, cars,auth }:any) {
                         </div>
                     </div>
                     <div>
-                        {/* <div className="flex justify-center mt-4">
-                            <div className="bg-white rounded-lg shadow-md p-4">
-                                <h2 className="text-lg text-gray-950 font-bold mb-4 text-center">Filter By</h2>
-                                <div className="flex flex-wrap justify-center gap-2">
-                                    <button className="hover:bg-emerald-600  text-black py-2 px-4 rounded-md focus:outline-none shadow-md">
-                                        Under 3M
-                                    </button>
+                
 
-                                    <button className="hover:bg-emerald-600 text-black py-2 px-4 rounded-md focus:outline-none shadow-md">
-                                        3M-6M
-                                    </button>
-                                    <button className=" hover:bg-emerald-600 text-black py-2 px-4 rounded-md focus:outline-none shadow-md">
-                                        6M-10M
-                                    </button>
-                                    <button className=" hover:bg-emerald-600 text-black py-2 px-4 rounded-md focus:outline-none shadow-md">
-                                        10M-15M
-                                    </button>
-                                    <button className=" hover:bg-emerald-600 text-black py-2 px-4 rounded-md focus:outline-none shadow-md">
-                                        Above 15M
-                                    </button>
-                                </div>
-
-                            </div>
-                        </div> */}
-
-                        {/* <div className="flex justify-center mt-4">
-                            <div className="bg-white rounded-lg shadow-md p-4">
-                                <h2 className="text-lg text-gray-950 font-bold mb-4 text-center">Filter By</h2>
-                                <div className="flex flex-wrap justify-center items-center gap-2">
-                                    <a href="#" className="w-24  object-contain">
-                                        <img src={logo1} alt="Car Logo" className="hover:opacity-80 transition-opacity duration-300 w-full h-auto object-contain" />
-                                    </a>
-                                    <a href="#" className="w-24  object-contain">
-                                        <img src={logo2} alt="Car Logo" className="hover:opacity-80 transition-opacity duration-300 w-full h-auto object-contain" />
-                                    </a>
-                                    <a href="#" className="w-24  object-contain">
-                                        <img src={logo3} alt="Car Logo" className="hover:opacity-80 transition-opacity duration-300 w-full h-auto object-contain" />
-                                    </a>
-                                    <a href="#" className="w-24  object-contain">
-                                        <img src={logo4} alt="Car Logo" className="hover:opacity-80 transition-opacity duration-300 w-full h-auto object-contain" />
-                                    </a>
-                                    <a href="#" className="w-24  object-contain">
-                                        <img src={logo5} alt="Car Logo" className="hover:opacity-80 transition-opacity duration-300 w-full h-auto object-contain" />
-                                    </a>
-                                    <a href="#" className="w-24  object-contain">
-                                        <img src={logo6} alt="Car Logo" className="hover:opacity-80 transition-opacity duration-300 w-full h-auto object-contain" />
-                                    </a>
-                                    <a href="#" className="w-24  object-contain">
-                                        <img src={logo7} alt="Car Logo" className="hover:opacity-80 transition-opacity duration-300 w-full h-auto object-contain" />
-                                    </a>
-                                </div>
-                            </div>
-                        </div> */}
+                        
                         <div className="flex justify-center">
                             <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
                                 {cars?.map((car: any, index: any) => (
 
-                                    <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                    <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                         <div className="relative">
                                             <Link href={route('CarDetail', car.slug)}>
                                                 <img className=" w-full h-72 rounded-t-lg object-cover" src={"/storage" + car?.images[0]} alt="product image" />

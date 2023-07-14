@@ -1,13 +1,13 @@
 import React from 'react'
 import NavBar2 from '@/Components/Navbar/NabBar2'
 import backgroundImage from '@/Assets/card1.jpg';
-import logo1 from '@/Assets/alfa.png'
-import logo2 from '@/Assets/audi-logo-2.png'
-import logo3 from '@/Assets/mercedes.png'
-import logo4 from '@/Assets/honda-logo.png'
-import logo5 from '@/Assets/tesla_logo_PNG19.png'
-import logo6 from '@/Assets/toyota-logo.png'
-import logo7 from '@/Assets/bmw.png'
+// import logo1 from '@/Assets/alfa.png'
+// import logo2 from '@/Assets/audi-logo-2.png'
+// import logo3 from '@/Assets/mercedes.png'
+// import logo4 from '@/Assets/honda-logo.png'
+// import logo5 from '@/Assets/tesla_logo_PNG19.png'
+// import logo6 from '@/Assets/toyota-logo.png'
+// import logo7 from '@/Assets/bmw.png'
 import Footer from './Footer/Footer';
 
 
@@ -70,7 +70,7 @@ export default function AllDetail() {
                         <div className="flex justify-center">
                             <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
                                 {Array.from({ length: 6 }).map((_, index) => (
-                                    <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                    <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                         <div className="relative">
                                             <a href="#">
                                                 <img className=" w-full rounded-t-lg object-cover" src={backgroundImage} alt="product image" />
@@ -161,7 +161,7 @@ export default function AllDetail() {
                         <div className="flex justify-center">
                             <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
                                 {Array.from({ length: 6 }).map((_, index) => (
-                                    <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                    <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg dark:bg-gray-800 dark:border-gray-700">
                                         <div className="relative">
                                             <a href="#">
                                                 <img className=" w-full rounded-t-lg object-cover" src={backgroundImage} alt="product image" />
@@ -254,7 +254,7 @@ export default function AllDetail() {
                         <div className="flex justify-center">
                             <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
                                 {Array.from({ length: 6 }).map((_, index) => (
-                                    <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                    <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg  dark:bg-gray-800 dark:border-gray-700">
                                         <div className="relative">
                                             <a href="#">
                                                 <img className=" w-full rounded-t-lg object-cover" src={backgroundImage} alt="product image" />
@@ -317,9 +317,9 @@ export default function AllDetail() {
 
                     </div>
                 </div>
-                </div>
-                <Footer />
             </div>
+            <Footer />
+        </div>
 
-            )
+    )
 }

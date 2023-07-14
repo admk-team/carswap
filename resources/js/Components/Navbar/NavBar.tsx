@@ -61,11 +61,11 @@ const NavBar = (auth: any) => {
                       <div className='m-2'>
                         <Link
                           href={route('user.login')}
-                          className="rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
+                          className="rounded-md justify-content-center text-center text-base font-medium text-white"
                         >
                           Login 
                         </Link>
-                        <span className='text-white ps-2 pe-2'> / </span>
+                        <span className='text-white py-2'> / </span>
                         <Link
                           href={route('user.register')}
                           className="rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
@@ -76,7 +76,7 @@ const NavBar = (auth: any) => {
                   }
 
                   {isOpen && (
-                    <div className="absolute mt-1 font-sm bg-white border-1 border-gray-950 ">
+                    <div className="absolute mt-1 font-sm bg-white border-1 border-gray-950">
                       <Link
                         href={route('user.editProfile')}
                         className="block px-4 border-b py-1 border-gray-900 text-center text-gray-900"
