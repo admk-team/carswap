@@ -5,7 +5,7 @@ import { Head, useForm, usePage } from '@inertiajs/react';
 const Edit = ({ auth,user }: any) => {
   const { errors } = usePage().props
   const [image, setImage] = useState([]);
-  const { data, setData, put, processing } = useForm({
+  const { data, setData, post, processing } = useForm({
     first_name: user.first_name,
     last_name: user.last_name,
     phone_no: user.phone_no,
@@ -14,16 +14,19 @@ const Edit = ({ auth,user }: any) => {
     address: user.address,
     email: user.email,
     password: user.password,
-    image:[]
+    image:null,
+    _method:'put'
   });
 
   function handleImageChange(e:any) {
-    setData('image',e.target.files[0]);
+    if (e.target.files) {
+      setData('image',e.target.files[0]);
+    }
   }
 
   function handleSubmit(e:any){
     e.preventDefault();
-    put(route('admin.users.update',user.id))
+    post(route('admin.users.update',user.id))
   }
   return (
     <>

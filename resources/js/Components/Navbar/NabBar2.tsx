@@ -30,7 +30,7 @@ const NavBar2 = (auth: any) => {
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
               <Link href={route('front.index')}>
-                <img className="w-52 h-9" src={imagelogo1} alt="Logo" />
+                <img className="w-52 h-9 object-contain" src={imagelogo1} alt="Logo" />
               </Link>
             </div>
             <div className="hidden md:block">

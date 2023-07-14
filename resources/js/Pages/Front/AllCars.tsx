@@ -26,56 +26,58 @@ export default function AllCars({ brands, cars,auth }:any) {
             <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
                 <div className="bg-gray-200 p-4">
                     <p className="font-black text-gray-950 text-3xl">Cars Up for Sale</p>
-                    <div className="flex flex-col mt-2">
-                        <div className="relative w-full max-w-xl shadow-md">
-                            <input
-                                type="text"
-                                placeholder="Search For car by Model, brand"
-                                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            />
-                            <button className="absolute top-0 right-0 h-full bg-green-500 text-white px-4 rounded-md focus:outline-none">
-                                Search
-                            </button>
+                    <form action="">
+                        <div className="flex flex-col mt-2">
+                            <div className="relative w-full max-w-xl shadow-md">
+                                <input
+                                    type="text"
+                                    placeholder="Search For car by Model, brand"
+                                    className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <button className="absolute top-0 right-0 h-full bg-green-500 text-white px-4 rounded-md focus:outline-none">
+                                    Search
+                                </button>
+                            </div>
+
+                            <div className="flex flex-wrap mt-2 gap-2">
+
+                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
+                                    <option value="">Price</option>
+                                    <option value="option1">Under 3M</option>
+                                    <option value="option2">3M-6M</option>
+                                    <option value="option2">6M-10M</option>
+                                    <option value="option2">10M-15M</option>
+                                    <option value="option2">Above 15M</option>
+                                </select>
+
+                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
+                                    <option value="">Brand</option>
+                                    {brands.map((option: any) => (
+                                        <option key={option.id} value={option.title}>
+                                            {option.title}
+                                        </option>
+                                    ))}
+
+                                </select>
+                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
+                                    <option value="">Mileage</option>
+                                    <option value="option1">2019-2023</option>
+                                    <option value="option2">2014-2018</option>
+                                    <option value="option2">2009-2013</option>
+                                    <option value="option2">2004-2008</option>
+                                    <option value="option2">Below 2004</option>
+                                </select>
+                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
+                                    <option value="">Engine</option>
+                                    <option value="option1">0-30,000 KM</option>
+                                    <option value="option2">30,000-60,000 KM</option>
+                                    <option value="option2">60,000-120,000 KM</option>
+                                    <option value="option2">120,000-150,000 KM</option>
+                                    <option value="option2">Above 150,000 KM</option>
+                                </select>
+                            </div>
                         </div>
-
-                        <div className="flex flex-wrap mt-2 gap-2">
-
-                            <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
-                                <option value="">Price</option>
-                                <option value="option1">Under 3M</option>
-                                <option value="option2">3M-6M</option>
-                                <option value="option2">6M-10M</option>
-                                <option value="option2">10M-15M</option>
-                                <option value="option2">Above 15M</option>
-                            </select>
-
-                            <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
-                                <option value="">Brand</option>
-                                {brands.map((option: any) => (
-                                    <option key={option.id} value={option.title}>
-                                        {option.title}
-                                    </option>
-                                ))}
-
-                            </select>
-                            <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
-                                <option value="">Mileage</option>
-                                <option value="option1">2019-2023</option>
-                                <option value="option2">2014-2018</option>
-                                <option value="option2">2009-2013</option>
-                                <option value="option2">2004-2008</option>
-                                <option value="option2">Below 2004</option>
-                            </select>
-                            <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
-                                <option value="">Engine</option>
-                                <option value="option1">0-30,000 KM</option>
-                                <option value="option2">30,000-60,000 KM</option>
-                                <option value="option2">60,000-120,000 KM</option>
-                                <option value="option2">120,000-150,000 KM</option>
-                                <option value="option2">Above 150,000 KM</option>
-                            </select>
-                        </div>
-                    </div>
+                    </form>
 
                     <div>
                         <p className="font-black text-gray-950 text-2xl mt-3">All Results({total?total:0})</p>
