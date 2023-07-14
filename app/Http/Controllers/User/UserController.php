@@ -44,10 +44,12 @@ class UserController extends Controller
             $user->image = $img_path;
         }
         if($user->save()){
-            return Inertia::render('User/EditProfile', ['success' => 'Profile updated successfully']);
+            return redirect()->back()->withErrors(['success' => 'Profile updated successfully.']);
+           // return Inertia::render('User/EditProfile', ['success' => 'Profile updated successfully']);
             // return  Inertia::location(route('user.editProfile', ['success' => 'Image updated successfully']));
         }else{
-            return Inertia::render('User/EditProfile', ['error' => 'Failed to update the user!']);
+            return redirect()->back()->withErrors(['failed' => 'Profile not updated successfully.']);
+           // return Inertia::render('User/EditProfile', ['error' => 'Failed to update the user!']);
             // return Inertia::location(route('user.editProfile', ['error' => 'Failed to update the user!']));
         }
     }

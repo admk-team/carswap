@@ -6,7 +6,7 @@ import { useForm } from '@inertiajs/react';
 import UserIcon from '@/Assets/user-icon.jpg';
 import React, { useState, useEffect } from "react";
 
-export default function EditProfile ({ auth,success,error}: any) {
+export default function EditProfile ({ auth,success,errors}: any) {
     const [passwordField, setPasswordField] = useState(false);
     const [nameField, setNameField] = useState(false);
     const [mailField, setMailField] = useState(false);
@@ -19,15 +19,7 @@ export default function EditProfile ({ auth,success,error}: any) {
     const [image, setImage] = useState('');
     const [uploadNow, setUploadNow] = useState(false);
 
-    useEffect(() => {
-
-        if (success) {
-          setSuccessMessage(success);
-        }
-        if (error) {
-          setErrorMessage(error);
-        }
-      }, [success, error]);
+   
 
     const { data, setData ,post} = useForm({
         first_name:auth.user.first_name || '',
@@ -66,18 +58,18 @@ export default function EditProfile ({ auth,success,error}: any) {
                 <div className="col-span-12 md:col-span-6">
                     <div className="flex flex-col">
                         <p className="font-black text-gray-950 text-2xl">Edit Profile</p>
-                        {successMessage && (
-        <div className="alert alert-success alert-dismissible fade show" role="alert">
-          {successMessage}
-          <button className="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      )}
-      {errorMessage && (
-        <div className="alert alert-danger alert-dismissible fade show" role="alert">
-          {errorMessage}
-          <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      )}
+                        {
+                                errors && errors.success ?
+                                <p className="alert alert-success alert-dismissible fade show">{errors.success}</p>
+                                :
+                                ''
+                            }
+                              {
+                                errors && errors.failed ?
+                                <p className="alert alert-success alert-dismissible fade show">{errors.success}</p>
+                                :
+                                ''
+                            }
                         <p className="text-gray-600 text-xl">Hello User, where do you want to apply the changes?</p>
                         <form className="row g-3" method='post' encType='multipart/form-data'>
                         <div className="flex flex-col items-start mt-4 relative transform hover:scale-110 transition-all duration-200">
