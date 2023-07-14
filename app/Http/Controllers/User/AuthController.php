@@ -32,14 +32,20 @@ class AuthController extends Controller
 
         if ($user && $user->status == 0) {
             return redirect()->back()->withErrors(['deactivated' => 'Your account is currently deactivated.']);
+        }else{
+            $request->authenticate();
+
+            $request->session()->regenerate();
+
+            return redirect()->route('front.index');
         }
 
-        if ($request->authenticate()) {
-            $request->session()->regenerate();
-            return redirect()->route('front.index');
-        } else {
-            return redirect()->back()->withErrors(['credentials' => 'Invalid email or password.']);
-        }
+        // if ($request->authenticate()) {
+        //     $request->session()->regenerate();
+        //     return redirect()->route('front.index');
+        // } else {
+        //     return redirect()->back()->withErrors(['credentials' => 'Invalid email or password.']);
+        // }
     }
     public function register()
     {
