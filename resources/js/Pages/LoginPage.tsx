@@ -18,12 +18,6 @@ const LoginPage = ({ status, canResetPassword }: { status?: string, canResetPass
         };
     }, []);
 
-    // const [deactive,setDeactive]=useState(null);
-    // useEffect(() => {
-    //    if(errors){
-    //     setDeactive(errors);
-    //    }
-    // }, []);
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
