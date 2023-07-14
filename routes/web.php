@@ -79,8 +79,12 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
     //User Edit Profile
     Route::get('/profile', [FrontUserController::class,'EditProfile'])->name('editProfile');
     Route::post('/updateProfile',[FrontUserController::class,'updateProfile'])->name('updateProfile');
- 
+
     Route::get('/postcar',[PostacarController::class,'create'])->name('postcar');
+    Route::get('/edit-car/{slug}',[PostacarController::class,'edit'])->name('editcar');
+    Route::any('/update-car/{slug}',[PostacarController::class,'update'])->name('updateCar');
+    Route::get('/delete-car/{slug}',[PostacarController::class,'delete'])->name('deleteCar');
+
 });
 
     //Post car

@@ -72,7 +72,6 @@ const SliderCard = (brands: any) => {
   ]
 
   const handleSearch = () => {
-    console.log(data)
     get(route('search'));
   }
 

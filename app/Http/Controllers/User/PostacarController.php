@@ -7,6 +7,7 @@ use App\Models\Postacar;
 use App\Models\Brand;
 use App\Models\Car;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 class PostacarController extends Controller
 {
@@ -32,11 +33,9 @@ class PostacarController extends Controller
      */
     public function store(Request $request)
     {
-        
         $request->validate([
             'title' => 'required',
             'brand_id' => 'required',
-         
             'condition' => 'required',
             'engineCapacity' => 'required',
             'mileage' => 'required',
@@ -53,7 +52,7 @@ class PostacarController extends Controller
             'images.*' => 'image',
         ],[
             'brand_id.required' =>'The brand field is required',
-      
+
         ]);
         $images = '';
         $arr=[];
@@ -89,7 +88,7 @@ class PostacarController extends Controller
         }else{
             return Inertia::location(route('user.dashboard', ['error' => 'Failed Car not added.']));
         }
-        
+
     }
 
     /**
@@ -103,24 +102,93 @@ class PostacarController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Postacar $postacar)
+    public function edit($slug)
     {
-        //
+        $brands=Brand::where('status',1)->get();
+        $car=Car::where('slug',$slug)->first();
+        $car->images=explode(",",$car->images);
+        return Inertia::render('User/EditCar',['brands'=>$brands,'car'=>$car]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Postacar $postacar)
+    public function update(Request $request,$id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'brand_id' => 'required',
+            'condition' => 'required',
+            'engineCapacity' => 'required',
+            'mileage' => 'required',
+            'location' => 'required',
+            'price' => 'required',
+            'fuelType' => 'required',
+            'model' => 'required',
+            'transmission' => 'required',
+            'drive' => 'required',
+            'interiorColor' => 'required',
+            'exteriorColor' => 'required',
+            'description' => 'required',
+            'images.*' => 'image',
+        ],[
+            'brand_id.required' =>'The brand field is required',
+
+        ]);
+        $images = '';
+        $arr=[];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $item) {
+                $var = date_create();
+                $time = date_format($var, 'YmdHis');
+                $imageName = $time . '-' . $item->getClientOriginalName();
+                $item->move(public_path('storage/images/cars'), $imageName);
+                array_push($arr, '/images/cars/' . $imageName);
+            }
+        }
+        $images = implode(",", $arr);
+        $model=Car::find($id);
+        $model->title=$request->title;
+        $model->brand_id= $request->brand_id;
+        $model->condition=$request->condition;
+        $model->engine_capacity=$request->engineCapacity;
+        $model->mileage=$request->mileage;
+        $model->location=$request->location;
+        $model->price=$request->price;
+        $model->drive=$request->drive;
+        $model->images=$images;
+        $model->fuel_Type=$request->fuelType;
+        $model->model=$request->model;
+        $model->transmission=$request->transmission;
+        $model->interior_color=$request->interiorColor;
+        $model->exterior_color=$request->exteriorColor;
+        $model->description=$request->description;
+        if($model->save()){
+            return Inertia::location(route('user.dashboard', ['success' => 'Car update successfully.']));
+        }else{
+            return Inertia::location(route('user.dashboard', ['error' => 'Failed to update car.']));
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Postacar $postacar)
+    public function delete($slug)
     {
-        //
+        $model=Car::where('slug',$slug)->first();
+        if($model){
+            if($model->images){
+                $images = explode(",", $model->images);
+                foreach($images as $img){
+                    if($img){
+                        Storage::disk('public')->delete($img);
+                    }
+                }
+            }
+            $model->delete();
+            return redirect()->back()->withSuccess(['success' => 'Car deleted successfully.']);
+        }else{
+            return redirect()->back()->withError('error', 'Failed to delete car.');
+        }
     }
 }
