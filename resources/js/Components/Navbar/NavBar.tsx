@@ -45,7 +45,7 @@ const NavBar = (auth: any) => {
                   </a>
                 </div>
 
-                <div className="  hover:bg-emerald-600 bg-emerald-500">
+                <div className="bg-emerald-500 hover:bg-emerald-600">
 
                   {
                     auth && auth.auth.user ?
