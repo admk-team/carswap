@@ -20,7 +20,7 @@ const ContactUsPage = (auth: any) => {
                     <div className="border border-gray-500 rounded-xl shadow-md">
                         <div className="grid grid-cols-1 md:grid-cols-2 ">
                             <div className='mt-9 mx-4 my-4 align-center'>
-                                <h2 className="text-2xl text-center text-dark uppercase font-bold mt-12">Login</h2>
+                                <h2 className="text-2xl text-center text-dark uppercase font-bold mt-12">Contact Now</h2>
                                 <p className="text xl text-center text-dark mb-4">Got any issue ? No problem contact us now</p>
                                 <form>
                                     <div className="flex flex-wrap gap-2 mb-3">

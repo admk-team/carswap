@@ -7,6 +7,7 @@ use App\Models\Postacar;
 use App\Models\Brand;
 use App\Models\Car;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 class PostacarController extends Controller
 {
@@ -172,8 +173,22 @@ class PostacarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Postacar $postacar)
+    public function delete($slug)
     {
-        //
+        $model=Car::where('slug',$slug)->first();
+        if($model){
+            if($model->images){
+                $images = explode(",", $model->images);
+                foreach($images as $img){
+                    if($img){
+                        Storage::disk('public')->delete($img);
+                    }
+                }
+            }
+            $model->delete();
+            return redirect()->back()->withSuccess(['success' => 'Car deleted successfully.']);
+        }else{
+            return redirect()->back()->withError('error', 'Failed to delete car.');
+        }
     }
 }
