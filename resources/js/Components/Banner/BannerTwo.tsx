@@ -1,5 +1,6 @@
 import React from 'react'
 import ImageBanerTwo from '@/Assets/Imagge5.jpg';
+import { Link } from '@inertiajs/react';
 
 const BannerTwo = () => {
     const BannerTwo = {
@@ -18,8 +19,8 @@ const BannerTwo = () => {
                         <p className="mt-2 md:mt-3 text-base md:text-lg font-bold text-white">We favor creating fair and straightforward pricing Structures.</p>
                         <p className="text-base md:text-lg font-bold text-white">Select your next effective strategy and begin right away.</p>
 
-                        <button type="button" className="px-4 py-2.5 text-base font-medium text-center text-white bg-emerald-500 hover:bg-emerald-600 mr-3 mt-4">View Car</button>
-                        <button type="button" className="px-4 py-2.5 text-base font-medium text-center text-white bg-emerald-500 hover:bg-emerald-600 ml-3 mt-4">Sell Your Car</button>
+                        <Link href={route('ViewAllCars')} type="button" className="px-4 py-2.5 text-base font-medium text-center text-white bg-emerald-500 hover:bg-emerald-600 mr-3 mt-4">View Car</Link>
+                        <Link href={route('user.postcar')} type="button" className="px-4 py-2.5 text-base font-medium text-center text-white bg-emerald-500 hover:bg-emerald-600 ml-3 mt-4">Sell Your Car</Link>
                     </div>
                 </div>
             </div>

@@ -1,11 +1,26 @@
-import React from 'react';
-import backgroundImage from '@/Assets/card1.jpg';
+import React, { useState, useEffect } from 'react';
+import Cover from "@/Assets/revo-img.png";
+import Transfer from "@/Assets/transfer.png"
 import { Link } from '@inertiajs/react';
 
-const PricingCard = (cars: any) => {
+
+const PricingCard = ({ brands, cars, auth }: any) => {
+    const [showModal, setShowModal] = useState(false);
+    const [compare, setCompare]: any = useState([])
+    const [total, setTotal]: any = useState(0)
+
+    const handleSetCar = (id = 0) => {
+        let car = cars.find((item: any) => (item.id === id))
+        setCompare(car);
+        setShowModal(true);
+    }
+    useEffect(() => {
+        setTotal(cars.length);
+    }, [cars]);
+
     return (
         <div className="mx-auto max-w-screen-xl w-full h-full mt-8 ">
-            <div className="flex justify-center">
+            <div className="flex justify-center mx-4">
                 <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-6">
                     {cars.cars?.map((car: any, index: any) => (
 
@@ -54,15 +69,148 @@ const PricingCard = (cars: any) => {
                                 </div>
 
                                 <div className="flex items-center justify-between mt-4">
-
                                     <a href="#" className="text-white bg-black hover:bg-gray-600 font-medium  text-sm px-6 py-2.5 text-center  w-36">Cash Purchase</a>
-                                    <a href="#" className="text-white bg-green-500 hover:bg-green-600 font-medium  text-sm px-6 py-2.5 text-center  w-32">Swap</a>
+                                    <a href='#' className="text-white bg-green-500 hover:bg-green-600 font-medium  px-6 py-2.5 text-sm  text-center" onClick={() => handleSetCar(car.id)}>Swap</a>
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
+            <div className="flex justify-center mx-4">
+                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
+                    {cars?.map((car: any, index: any) => (
+
+                        <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                            <div className="relative">
+                                <Link href={route('CarDetail', car.slug)}>
+                                    <img className=" w-full h-72 rounded-t-lg object-cover" src={"/storage" + car?.images[0]} alt="product image" />
+                                </Link>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-red-500 absolute top-2 right-2" fill="red" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+                                <div className="absolute bottom-5 left-1">
+                                    <svg aria-hidden="true" className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    </svg>
+                                    <span className=" flex justify-center bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#FFA534" viewBox="0 0 24 24" strokeWidth={0} stroke="currentColor" className="w-5 h-5">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                                        </svg>
+                                        <p className='text-sm'>4.2</p>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="px-2 pb-4">
+                                <Link href={route('CarDetail', car.slug)}>
+                                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">{car?.title}</h5>
+                                </Link>
+                                <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">$ {car?.price}</h5>
+                                <div className="flex items-center">
+                                </div>
+                                <hr className='border-t-2 border-black mt-2' />
+                                <div className="mt-4">
+                                    <table className="w-full">
+                                        <tbody>
+                                            <tr>
+                                                <th className="px-2 py-1 font-bold-300 text-gray-600">Condition</th>
+                                                <th className="px-2 py-1 text-gray-800">Engine</th>
+                                                <th className="px-2 py-1 text-gray-800">Mileage</th>
+                                            </tr>
+                                            <tr>
+                                                <th className="px-2 py-1 text-gray-600">{car?.condition}</th>
+                                                <th className="px-2 py-1 text-gray-800">{car?.engine_capacity}</th>
+                                                <th className="px-2 py-1 text-gray-800">{car?.mileage}</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div className="flex items-center justify-between mt-4">
+
+                                    <p className="text-white bg-black hover:bg-gray-600 font-medium  text-sm px-6 py-2.5 text-center  w-34 cursor-pointer" >Purchase</p>
+                                    <button className="text-white bg-green-500 hover:bg-green-600 font-medium  px-8 py-2.5 text-sm w-34 text-center" onClick={() => handleSetCar(car.id)}>Swap</button>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            {showModal ? (
+                <>
+                    <div
+                        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                    >
+                        <div className="relative w-50 my-6 mx-auto max-w-3xl ">
+                            {/*content*/}
+                            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                {/*header*/}
+                                <div className="flex justify-center pt-4 ">
+                                    <h3 className=" align-center text-2xl font-semibold">
+                                        Swap Car
+                                    </h3>
+                                </div>
+
+                                {/*body*/}
+                                <hr className="mt-2 border-t-2 border-solid border-emerald-500  mx-3 my-3" />
+                                <div className="relative p-4 flex">
+                                    <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 mt-6">
+                                        <div className="col-span-1 md:col-span-2 lg:col-span-1">
+                                            <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
+                                            <img src={"/storage" + compare.images[0]} className="w-full h-4/5 object-contain"></img>
+                                            <p className='font-semibold text-gray-950 mt-2 text-2xl '>Price</p>
+                                            <p className='text-emerald-500'>$ {compare.price}</p>
+                                        </div>
+                                        <div className="col-span-1 md:col-span-1 lg:col-span-1 flex justify-center items-center">
+                                            <img src={Transfer} className="w-full h-20 object-contain"></img>
+                                        </div>
+                                        <div className="col-span-1 md:col-span-2 lg:col-span-1">
+                                            <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>My Car</p>
+                                            <img src={Cover} className="w-full h-4/5 object-contain"></img>
+                                            <p className='font-semibold text-gray-950 mt-2 text-2xl '>Price</p>
+                                            <p className='text-emerald-500 mb-2 mt-2'>$ 43496.10</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div className='p-4 mt-3'>
+                                    <p className='text-gray-950 text-2xl font-bold mb-2'>Difference</p>
+                                    <p className='text-emerald-500'>$ 32,360.81</p>
+                                    <p className='font-semibold'>You have to Pay <span className="text-emerald-500">$ 32,360.81</span> to make this Deal happen.</p>
+                                </div>
+                                <hr className="mt-2 border-t-2 border-solid border-emerald-500 mx-3 my-3" />
+                                {/*footer*/}
+                                <div className="flex flex-col items-center justify-center p-6">
+                                    <div className="flex flex-col space-y-2">
+                                        <button
+                                            className="bg-gray-950 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+                                            type="button"
+                                            onClick={() => setShowModal(false)}
+                                        >
+                                            Pay Now
+                                        </button>
+                                        <button
+                                            className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+                                            type="button"
+                                            onClick={() => setShowModal(false)}
+                                        >
+                                            Book Inspection
+                                        </button>
+                                        <button
+                                            className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none ease-linear transition-all duration-150"
+                                            type="button"
+                                            onClick={() => setShowModal(false)}
+                                        >
+                                            Close
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                </>
+            ) : null}
         </div>
     );
 };
