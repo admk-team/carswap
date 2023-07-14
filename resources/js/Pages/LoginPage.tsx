@@ -1,4 +1,4 @@
-import React, { useEffect,FormEventHandler } from 'react'
+import React, { useEffect,FormEventHandler, useState } from 'react'
 import backgroundedImage from '../Assets/Login.png';
 import GoogImage from "@/Assets/Google.png"
 import FacImage from "@/Assets/facebook.png"
@@ -10,14 +10,20 @@ const LoginPage = ({ status, canResetPassword }: { status?: string, canResetPass
         email: '',
         password: '',
         remember: false,
+        deactivated:false
     });
-
     useEffect(() => {
         return () => {
             reset('password');
         };
     }, []);
 
+    // const [deactive,setDeactive]=useState(null);
+    // useEffect(() => {
+    //    if(errors){
+    //     setDeactive(errors);
+    //    }
+    // }, []);
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
@@ -33,6 +39,12 @@ const LoginPage = ({ status, canResetPassword }: { status?: string, canResetPass
                         <div className='m-6'>
                             <h2 className="text-2xl text-center text-dark uppercase font-bold mt-12">Login</h2>
                             <p className="text xl text-center text-dark mb-4">Welcome to Carswap</p>
+                            {
+                                errors && errors.deactivated ?
+                                <p className="text xl text-center text-danger mb-4">{errors.deactivated}</p>
+                                :
+                                ''
+                            }
                             <form onSubmit={submit}>
 
                                 <div className="mb-3">

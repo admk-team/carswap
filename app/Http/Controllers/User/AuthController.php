@@ -27,11 +27,19 @@ class AuthController extends Controller
     }
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $credentials = $request->only('email', 'password');
+        $user = User::where('email', $credentials['email'])->first();
 
-        $request->session()->regenerate();
+        if ($user && $user->status == 0) {
+            return redirect()->back()->withErrors(['deactivated' => 'Your account is currently deactivated.']);
+        }
 
-        return redirect()->route('front.index');
+        if ($request->authenticate()) {
+            $request->session()->regenerate();
+            return redirect()->route('front.index');
+        } else {
+            return redirect()->back()->withErrors(['credentials' => 'Invalid email or password.']);
+        }
     }
     public function register()
     {
