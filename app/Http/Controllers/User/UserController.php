@@ -29,18 +29,18 @@ class UserController extends Controller
     }
     public function updateProfile(Request $request)
     {
-        // $request->validate([
-        //     'first_name' => 'required',
-        //     'last_name' => 'required',
-        //     'email' => 'required|unique:users,email,'.$id,
-        //     'city' => 'required',
-        //     'state' => 'required',
-        //     'address' => 'required',
-        //     'phone_no' => 'required'
-        // ]);
+        $data=$request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|unique:users,email,'.auth()->user()->id,
+            'city' => 'required',
+            'state' => 'required',
+            'address' => 'required',
+            'phone_no' => 'required'
+        ]);
         $user = User::findOrFail(auth()->user()->id);
-    
-        $user->fill($request->only($user->getFillable()));
+        // $data = $request->all();
+        $user->fill($data);
     
         if ($request->hasFile('image')) {
             $img_path = $request->file('image')->store('/images/user', 'public');
