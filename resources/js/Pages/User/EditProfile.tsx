@@ -1,12 +1,19 @@
-
+import InputLabel from '@/Components/InputLabel';
 import NavBar2 from '@/Components/Navbar/NabBar2';
 import ProfilePic from '@/Assets/userprofile.jpg';
 import Footer from '../Footer/Footer';
 import { useForm } from '@inertiajs/react';
 import UserIcon from '@/Assets/user-icon.jpg';
 import React, { useState, useEffect } from "react";
+import TextInput from '@/Components/TextInput';
+import { useRef, FormEventHandler } from 'react';
+import InputError from '@/Components/InputError';
+import PrimaryButton from '@/Components/PrimaryButton';
+import { Transition } from '@headlessui/react';
 
 export default function EditProfile ({ auth,success,errors}: any) {
+    const currentPasswordInput = useRef<HTMLInputElement>();
+    const passwordInput = useRef<HTMLInputElement>();
     const [passwordField, setPasswordField] = useState(false);
     const [nameField, setNameField] = useState(false);
     const [mailField, setMailField] = useState(false);
@@ -21,7 +28,7 @@ export default function EditProfile ({ auth,success,errors}: any) {
 
    
 
-    const { data, setData ,post} = useForm({
+    const { data, setData ,post,put,reset,processing,recentlySuccessful} = useForm({
         first_name:auth.user.first_name || '',
         last_name: auth.user.last_name || '',
         phone_no:  auth.user.phone_no || '',
@@ -32,6 +39,10 @@ export default function EditProfile ({ auth,success,errors}: any) {
          email:auth.user.email || '',
         // password: user.password,
          image:auth.user.image || '',
+
+         current_password: '',
+         password: '',
+         password_confirmation: '',
       });
 
       useEffect(()=>{
@@ -48,6 +59,28 @@ export default function EditProfile ({ auth,success,errors}: any) {
         post(route('user.updateProfile'));
         setUploadNow(false);
       }
+
+      function updatePassword (e:any){
+        e.preventDefault();
+      
+        post(route('user.update'), {
+            preserveScroll: true,
+            onSuccess: () => reset(),
+            onError: (errors) => {
+                if (errors.password) {
+                    reset('password', 'password_confirmation');
+                    passwordInput.current?.focus();
+                }
+
+                if (errors.current_password) {
+                    reset('current_password');
+                    currentPasswordInput.current?.focus();
+                }
+            },
+        });
+    };
+
+
     return (
         <div>
             <NavBar2 auth={auth}/>
@@ -66,7 +99,7 @@ export default function EditProfile ({ auth,success,errors}: any) {
                             }
                               {
                                 errors && errors.failed ?
-                                <p className="alert alert-success alert-dismissible fade show">{errors.success}</p>
+                                <p className="alert alert-success alert-dismissible fade show">{errors.failed}</p>
                                 :
                                 ''
                             }
@@ -161,7 +194,7 @@ export default function EditProfile ({ auth,success,errors}: any) {
                         </div>
                     ) : (
                         <div className="mt-3 border p-4">
-                              <form className="row g-3" method='post' onSubmit={handleSubmit}>
+                              <form className="row g-3" method='post'>
                             <div className="flex flex-col">
                                 <label >Edit Email Address</label>
                                 <input
@@ -205,7 +238,7 @@ export default function EditProfile ({ auth,success,errors}: any) {
                         </div>
                     ) : (
                         <div className="mt-3 border p-4">
-                              <form className="row g-3" method='post' onSubmit={handleSubmit}>
+                              <form className="row g-3" method='post'>
                             <div className="flex flex-col">
                                 <label >Edit Phone Number</label>
                                 <input
@@ -214,7 +247,7 @@ export default function EditProfile ({ auth,success,errors}: any) {
                                 />
                             </div>
                             <div className="flex justify-between w-full mt-2">
-                                <button type ="submit"className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded">
+                                <button type="button" onClick={()=>handleSubmit()} className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded">
                                     Save
                                 </button>
                                 <p
@@ -309,56 +342,70 @@ export default function EditProfile ({ auth,success,errors}: any) {
                                 </div>
                             ) : (
                                 <div className="mt-3">
-                                    <div className="flex flex-col">
-                                        <label htmlFor="currentPassword">Current Password</label>
-                                        <input
-                                            type="password"
-                                            id="currentPassword"
-                                            className="border border-gray-300 p-1 mt-1"
-                                        />
-                                    </div>
 
-                                    <div className="flex flex-col mt-2">
-                                        <label htmlFor="newPassword">New Password</label>
-                                        <input
-                                            type="password"
-                                            id="newPassword"
-                                            className="border border-gray-300 p-1 mt-1"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col mt-2">
-                                        <label htmlFor="confirmNewPassword">Confirm New Password</label>
-                                        <input
-                                            type="password"
-                                            id="confirmNewPassword"
-                                            className="border border-gray-300 p-1 mt-1"
-                                        />
-                                    </div>
+<form onSubmit={updatePassword} className="mt-6 space-y-6">
+                <div>
+                    <InputLabel htmlFor="current_password" value="Current Password" />
 
-                                    <div className="flex justify-between w-full mt-2">
-                                        <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded">
-                                            Save
-                                        </button>
-                                        <p
-                                            className="text-emerald-600 hover:text-emerald-800 cursor-pointer"
-                                            onClick={() => setPasswordField(false)}
-                                        >
-                                            Cancel Change
-                                        </p>
-                                    </div>
+                    <TextInput
+                        id="current_password"
+                        ref={currentPasswordInput}
+                        value={data.current_password}
+                        onChange={(e) => setData('current_password', e.target.value)}
+                        type="password"
+                        className="mt-1 block w-full"
+                        autoComplete="current-password"
+                    />
+
+                    <InputError message={errors.current_password} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="password" value="New Password" />
+
+                    <TextInput
+                        id="password"
+                        ref={passwordInput}
+                        value={data.password}
+                        onChange={(e) => setData('password', e.target.value)}
+                        type="password"
+                        className="mt-1 block w-full"
+                        autoComplete="new-password"
+                    />
+
+                    <InputError message={errors.password} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
+
+                    <TextInput
+                        id="password_confirmation"
+                        value={data.password_confirmation}
+                        onChange={(e) => setData('password_confirmation', e.target.value)}
+                        type="password"
+                        className="mt-1 block w-full"
+                        autoComplete="new-password"
+                    />
+
+                    <InputError message={errors.password_confirmation} className="mt-2" />
+                </div>
+
+                <div className="flex justify-between w-full mt-2">
+                                <button type="button" onClick={()=>handleSubmit()}className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded">
+                                    Save
+                                </button>
+                                <p
+                                    className="text-emerald-600 hover:text-emerald-800 cursor-pointer"
+                                    onClick={() => setPasswordField(false)}
+                                >
+                                    Cancel Change
+                                </p>
+                            </div>
+            </form>
                                 </div>
                             )}
 
-                            <hr className="bg-gray-800 mt-3" />
-
-                            <div className="flex flex-wrap justify-between mt-3">
-                                <p>Account</p>
-                                <p
-                                    className="text-red-600 hover:text-red-800 cursor-pointer"
-                                >
-                                    Deactivate Account
-                                </p>
-                            </div>
                         </div>
                     </div>
                 </div>

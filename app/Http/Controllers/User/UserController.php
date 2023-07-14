@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
@@ -53,6 +56,35 @@ class UserController extends Controller
             // return Inertia::location(route('user.editProfile', ['error' => 'Failed to update the user!']));
         }
     }
+    
+    public function update(Request $request): RedirectResponse
+    {
+        return $request;
+        $validated = $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', Password::defaults(), 'confirmed'],
+        ]);
 
+        $request->user()->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        return back();
+    }
+
+
+    // public function update(Request $request){
+    //     $admin =  User::find(auth()->user()->id);
+        
+    //     if(isset($request->password) && $request->password != null){
+    //         $admin->password = Hash::make($request->password);
+    //     }
+       
+    //     if($admin->update()){
+    //         return back()->with('success' , 'Profile Successfully Updated.');
+    //     }else{
+    //         return back()->with('success' , 'Failed to update Profile.');
+    //     }
+    // }
 
 }
