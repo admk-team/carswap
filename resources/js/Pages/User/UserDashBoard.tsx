@@ -5,7 +5,7 @@ import { Head } from '@inertiajs/react'
 import Footer from '../Footer/Footer';
 
 const UserDashBoard = ({auth,success,cars,error}:any) => {
-  console.log(success)
+  
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   useEffect(() => {

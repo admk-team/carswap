@@ -1,18 +1,33 @@
-import React, { useState } from 'react';
+
 import NavBar2 from '@/Components/Navbar/NabBar2';
 import ProfilePic from '@/Assets/userprofile.jpg';
 import Footer from '../Footer/Footer';
 import { useForm } from '@inertiajs/react';
+import UserIcon from '@/Assets/user-icon.jpg';
+import React, { useState, useEffect } from "react";
 
-export default function EditProfile ({ auth }: any) {
+export default function EditProfile ({ auth,success,error}: any) {
     const [passwordField, setPasswordField] = useState(false);
     const [nameField, setNameField] = useState(false);
     const [mailField, setMailField] = useState(false);
     const [numbField, setNumbField] = useState(false);
     const [cnicField, setCnicField] = useState(false);
     const [addressField, setAddressField] = useState(false);
-    const [birthField, setBirthField] = useState(false);
+    const [birthField, setBirthField] = useState(false)
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [image, setImage] = useState('');
+    const [uploadNow, setUploadNow] = useState(false);
 
+    useEffect(() => {
+
+        if (success) {
+          setSuccessMessage(success);
+        }
+        if (error) {
+          setErrorMessage(error);
+        }
+      }, [success, error]);
 
     const { data, setData ,post} = useForm({
         first_name:auth.user.first_name || '',
@@ -24,35 +39,61 @@ export default function EditProfile ({ auth }: any) {
        
          email:auth.user.email || '',
         // password: user.password,
-        // image:[]
+         image:auth.user.image || '',
       });
+
+      useEffect(()=>{
+        setImage('/storage/' + data.image);
+      }, []);
     
-    //   function handleImageChange(e:any) {
-    //     setData('image',e.target.files[0]);
-    //   }
+      function handleImageChange(e:any) {
+        setImage(URL.createObjectURL(e.target.files[0]))
+        setUploadNow(true);
+        setData('image',e.target.files[0]);
+      }
     
-      function handleSubmit(e:any){
-        e.preventDefault();
+      function handleSubmit(){
         post(route('user.updateProfile'));
+        setUploadNow(false);
       }
     return (
         <div>
             <NavBar2 auth={auth}/>
+           
             <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
             <div className="grid grid-cols-12 gap-4 mt-7 p-4">
+                
                 <div className="col-span-12 md:col-span-6">
                     <div className="flex flex-col">
                         <p className="font-black text-gray-950 text-2xl">Edit Profile</p>
+                        {successMessage && (
+        <div className="alert alert-success alert-dismissible fade show" role="alert">
+          {successMessage}
+          <button className="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      )}
+      {errorMessage && (
+        <div className="alert alert-danger alert-dismissible fade show" role="alert">
+          {errorMessage}
+          <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      )}
                         <p className="text-gray-600 text-xl">Hello User, where do you want to apply the changes?</p>
-                        <div className="flex flex-col items-start mt-4">
+                        <form className="row g-3" method='post' encType='multipart/form-data'>
+                        <div className="flex flex-col items-start mt-4 relative transform hover:scale-110 transition-all duration-200">
+                            <input className="absolute top-0 left-0 w-full h-full opacity-0 z-10" type="file" name='image' onChange={handleImageChange} />
                             <img
-                                src={ProfilePic}
-                                className="w-80 h-80 object-cover shadow-md hover:shadow-lg transform hover:scale-110 transition-all duration-200 rounded"
-                                alt="Profile Picture"
+                            src={image ? image : UserIcon} 
+                            className="w-80 h-80 object-cover shadow-md hover:shadow-lg rounded"
+                            alt="Profile Picture"
+                            //   onClick={() => document.querySelector('input[type=file]').click()}
+                            
                             />
-
-                            <p className='text-center mt-2 mx-28 underline'>Change Photo</p>
                         </div>
+                            {uploadNow && (<div className='flex col-12'>
+                                <button type="button" onClick={()=>handleSubmit()} className='text-center underline py-2 px-3 bg-green-500 rounded text-white'>Upload Photo Now</button>
+                            </div>)}
+</form>
                     </div>
 
                     {!nameField ? (
@@ -76,7 +117,7 @@ export default function EditProfile ({ auth }: any) {
                         </div>
                     ) : (
                         <div className="mt-3 border p-4">
-                            <form className="row g-3" method='post' onSubmit={handleSubmit}>
+                            <form className="row g-3" method='post'>
                                 <div className="flex flex-col">
                                     <label >Edit Profile Name </label>
                                     <label >First Name </label>
@@ -92,7 +133,7 @@ export default function EditProfile ({ auth }: any) {
                                     />
                                 </div>
                                 <div className="flex justify-between w-full mt-2">
-                                    <button type="submit"className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded">
+                                    <button type="button" onClick={()=>handleSubmit()} className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded">
                                         Save
                                     </button>
                                     <p
@@ -137,7 +178,7 @@ export default function EditProfile ({ auth }: any) {
                                 />
                             </div>
                             <div className="flex justify-between w-full mt-2">
-                                <button type="submit"className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded">
+                                <button type="button" onClick={()=>handleSubmit()} className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded">
                                     Save
                                 </button>
                                 <p
@@ -241,7 +282,7 @@ export default function EditProfile ({ auth }: any) {
                                 />
                             </div>
                             <div className="flex justify-between w-full mt-2">
-                                <button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded">
+                                <button type="button" onClick={()=>handleSubmit()}className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded">
                                     Save
                                 </button>
                                 <p
