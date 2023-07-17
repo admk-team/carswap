@@ -18,11 +18,11 @@ export default function AllCars({ brands, cars,auth }:any) {
 
     const { data, setData, errors, get } = useForm({
         searchTerm: '',
-        min: 0,
-        model: 0,
-        max: 0,
-        minMileage:0,
-        maxMileage:0,
+        min: '0',
+        model: '0',
+        max: '0',
+        minMileage:'0',
+        maxMileage:'0',
         brand: ''
     })
 
