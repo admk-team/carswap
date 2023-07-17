@@ -1,1 +1,0 @@
-import{a as o}from"./app-f70b5a26.js";import{L as t}from"./Layout-ffbe2bd0.js";import"./headerlogo-80979cd7.js";import"./index-71feb1a7.js";function m(){return o("h2",{children:"hello world from dmeo"})}m.layout=r=>o(t,{children:r});export{m as default};

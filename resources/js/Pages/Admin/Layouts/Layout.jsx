@@ -4,8 +4,8 @@ import TopNavbar from "../Partials/TopNavbar";
 import Sidebar from "../Partials/Sidebar";
 import { useForm } from "@inertiajs/inertia-react";
 
-function Layout(props) {
-    console.log('props: ', props)
+function Layout({children}) {
+    // console.log('props: ', props)
     const { post } = useForm();
     
     const [style, setStyle] = useState(
@@ -45,7 +45,7 @@ function Layout(props) {
                     <div id="content">
                         <TopNavbar onCollapseChange={changeStyle} auth={''} />
 
-                        {/* <div className="container-fluid">{children}</div> */}
+                        <div className="container-fluid">{children}</div>
                     </div>
                 </div>
             </div>
