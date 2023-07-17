@@ -13,6 +13,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\UserController as FrontUserController;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +39,9 @@ Route::get('/test', function () {
 
 
 Route::get("/cmd/{cmd}", function ($cmd) {
-    \Artisan::call($cmd);
-    echo "<pre>";
-    return \Artisan::output();
+    Artisan::call($cmd);
+    echo "<pre style='background-color: black;color:white; padding: 20px 10px;'>";
+    return Artisan::output();
 });
 //Admin Routes
 Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(function(){
