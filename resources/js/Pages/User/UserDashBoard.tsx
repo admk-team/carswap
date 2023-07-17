@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Head } from '@inertiajs/react'
 import Footer from '../Footer/Footer';
 
-const UserDashBoard = ({auth,success,cars,error}:any) => {
+const UserDashBoard = ({auth,success,cars,error,pendings,approved}:any) => {
   
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -36,7 +36,7 @@ const UserDashBoard = ({auth,success,cars,error}:any) => {
                     </div>
                            )}
  
-        <UserProfile auth={auth} cars={cars}/>
+        <UserProfile auth={auth} cars={cars} pendings={pendings} approved={approved}/>
       </div>
       <Footer />
     </>

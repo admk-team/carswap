@@ -14,15 +14,41 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(){
-        $cars=Car::where('user_id',auth()->user()->id)->where('status',1)->latest()->get();
-        $data = $cars->map(function($item){
-            $image = explode(',',$item->images);
-            $item->images = $image;
-            
-            return $item;
-        });
-        return Inertia::render('User/UserDashBoard', ['cars' => $data,'success'=>request()->success,'error'=>request()->error]);
+        $cars = Car::where('user_id', auth()->user()->id)
+        ->latest()
+        ->get();
+    
+    $data = $cars->map(function ($item) {
+        $image = explode(',', $item->images);
+        $item->images = $image;
+    
+        return $item;
+    });
+    $pendings = Car::where('user_id', auth()->user()->id)
+    ->where('status', 0)
+    ->latest()
+    ->get();
+
+    $pendingsdata = $pendings->map(function ($item) {
+        $image = explode(',', $item->images);
+        $item->images = $image;
+
+        return $item;
+    });
+    $approved = Car::where('user_id', auth()->user()->id)
+    ->where('status', 1)
+    ->latest()
+    ->get();
+
+    $approved = $approved->map(function ($item) {
+        $image = explode(',', $item->images);
+        $item->images = $image;
+
+        return $item;
+    });
+        return Inertia::render('User/UserDashBoard', ['cars' => $data,'pendings'=>$pendingsdata,'approved'=>$approved,'success'=>request()->success,'error'=>request()->error]);
     }
+    
     public function EditProfile(){
         
         return Inertia::render('User/EditProfile');
@@ -33,11 +59,19 @@ class UserController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|unique:users,email,'.auth()->user()->id,
-            'city' => 'required',
-            'state' => 'required',
-            'address' => 'required',
-            'phone_no' => 'required'
+            'city' => 'max:256',
+            'state' => 'max:256',
+            'address' => 'max:256',
+            'phone_no' => 'max:256',
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', Password::defaults(), 'confirmed'],
         ]);
+
+        if($request->password){
+            $request->user()->update([
+                'password' => Hash::make($request->password),
+            ]);
+        }
         $user = User::findOrFail(auth()->user()->id);
         // $data = $request->all();
         $user->fill($data);
@@ -56,21 +90,24 @@ class UserController extends Controller
             // return Inertia::location(route('user.editProfile', ['error' => 'Failed to update the user!']));
         }
     }
-    
-    public function update(Request $request): RedirectResponse
-    {
-        return $request;
-        $validated = $request->validate([
-            'current_password' => ['required', 'current_password'],
-            'password' => ['required', Password::defaults(), 'confirmed'],
-        ]);
 
-        $request->user()->update([
-            'password' => Hash::make($validated['password']),
-        ]);
 
-        return back();
-    }
+    // approved cars
+    public function approved(){
+        $approved = Car::where('user_id', auth()->user()->id)
+            ->where('status', 1) // Filter cars with status 1
+            ->latest()
+            ->get();
+        
+        $data = $approved->map(function ($item) {
+            $image = explode(',', $item->images);
+            $item->images = $image;
+        
+            return $item;
+        });
+            return Inertia::render('User/UserDashBoard', ['approved' => $data]);
+        }
+
 
 
     // public function update(Request $request){
