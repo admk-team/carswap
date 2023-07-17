@@ -70,7 +70,7 @@ class PostacarController extends Controller
         $model=new Car();
         $model->title=$request->title;
         $model->brand_id= $request->brand_id;
-        // $model->user_id= auth()->id(1);// auth()->id();
+        $model->user_id= auth()->user()->id;
         $model->condition=$request->condition;
         $model->engine_capacity=$request->engineCapacity;
         $model->mileage=$request->mileage;
@@ -84,6 +84,7 @@ class PostacarController extends Controller
         $model->interior_color=$request->interiorColor;
         $model->exterior_color=$request->exteriorColor;
         $model->description=$request->description;
+        $model->status=0;
         if($model->save()){
             $model->slug=Str::slug($request->title).'-'.$model->id;
             $model->update();
