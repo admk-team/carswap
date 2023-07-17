@@ -102,8 +102,8 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                 </div>
                             </div>
                             <div className="px-3 pb-4">
-                                <Link href={route('CarDetail', car.slug)}>
-                                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">
+                                <Link href={route('CarDetail', car.slug)} className=''>
+                                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2 h-[36px] overflow-hidden">
                                         {car?.title}
                                     </h5>
                                 </Link>
