@@ -87,14 +87,23 @@ class FrontController extends Controller
     public function search(Request $request){
         $brands=Brand::where('status','1')->get();
         $query = Car::query();
+        if ($request->searchTerm && $request->searchTerm!='') {
+            $query->where('title', $request->searchTerm);
+        }
         if ($request->location) {
             $query->where('location', $request->location);
         }
         if ($request->min && $request->max) {
             $query->whereBetween('price', [$request->min, $request->max]);
         }
+        if ($request->minMileage && $request->maxMileage) {
+            $query->whereBetween('mileage', [$request->minMileage, $request->maxMileage]);
+        }
         if ($request->brand) {
             $query->where('brand_id', $request->brand);
+        }
+        if ($request->model) {
+            $query->where('model', $request->model);
         }
         $cars = $query->get();
         $cars=$cars->map(function($car){
