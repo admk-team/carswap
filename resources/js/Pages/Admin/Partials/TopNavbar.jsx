@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 
-function TopNavbar({ onCollapseChange }) {
+function TopNavbar({ onCollapseChange, auth }) {
+    // console.log(auth);
     return (
         <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
             <button
