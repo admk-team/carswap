@@ -63,15 +63,9 @@ class UserController extends Controller
             'state' => 'max:256',
             'address' => 'max:256',
             'phone_no' => 'max:256',
-            'current_password' => ['required', 'current_password'],
-            'password' => ['required', Password::defaults(), 'confirmed'],
+           
         ]);
 
-        if($request->password){
-            $request->user()->update([
-                'password' => Hash::make($request->password),
-            ]);
-        }
         $user = User::findOrFail(auth()->user()->id);
         // $data = $request->all();
         $user->fill($data);
@@ -90,38 +84,32 @@ class UserController extends Controller
             // return Inertia::location(route('user.editProfile', ['error' => 'Failed to update the user!']));
         }
     }
+    public function updatePassword(Request $request)
+    {
+        $data=$request->validate([
+          
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', Password::defaults(), 'confirmed'],
+        ]);
 
-
-    // approved cars
-    public function approved(){
-        $approved = Car::where('user_id', auth()->user()->id)
-            ->where('status', 1) // Filter cars with status 1
-            ->latest()
-            ->get();
-        
-        $data = $approved->map(function ($item) {
-            $image = explode(',', $item->images);
-            $item->images = $image;
-        
-            return $item;
-        });
-            return Inertia::render('User/UserDashBoard', ['approved' => $data]);
+        if($request->password){
+            $request->user()->update([
+                'password' => Hash::make($request->password),
+            ]);
         }
-
-
-
-    // public function update(Request $request){
-    //     $admin =  User::find(auth()->user()->id);
-        
-    //     if(isset($request->password) && $request->password != null){
-    //         $admin->password = Hash::make($request->password);
-    //     }
-       
-    //     if($admin->update()){
-    //         return back()->with('success' , 'Profile Successfully Updated.');
-    //     }else{
-    //         return back()->with('success' , 'Failed to update Profile.');
-    //     }
-    // }
+        $user = User::findOrFail(auth()->user()->id);
+        // $data = $request->all();
+        $user->fill($data);
+  
+        if($user->save()){
+            return redirect()->back()->withErrors(['success' => 'Profile updated successfully.']);
+           // return Inertia::render('User/EditProfile', ['success' => 'Profile updated successfully']);
+            // return  Inertia::location(route('user.editProfile', ['success' => 'Image updated successfully']));
+        }else{
+            return redirect()->back()->withErrors(['failed' => 'Profile not updated successfully.']);
+           // return Inertia::render('User/EditProfile', ['error' => 'Failed to update the user!']);
+            // return Inertia::location(route('user.editProfile', ['error' => 'Failed to update the user!']));
+        }
+    }
 
 }
