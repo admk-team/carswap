@@ -60,10 +60,8 @@ export default function EditProfile ({ auth,success,errors}: any) {
         setUploadNow(false);
       }
 
-      function updatePassword (e:any){
-        e.preventDefault();
-      
-        post(route('user.update'), {
+      function updatePassword(){
+      post(route('user.updatePassword'), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: (errors) => {
@@ -392,7 +390,7 @@ export default function EditProfile ({ auth,success,errors}: any) {
                 </div>
 
                 <div className="flex justify-between w-full mt-2">
-                                <button type="button" onClick={()=>handleSubmit()}className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded">
+                                <button type="button" onClick={()=>updatePassword()}className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded">
                                     Save
                                 </button>
                                 <p

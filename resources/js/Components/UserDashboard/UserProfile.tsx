@@ -7,7 +7,7 @@ import MySwapedCar from './MySwapedCar';
 import MyListedCar from './MyListedCar';
 import { Link } from '@inertiajs/react';
 
-const UserProfile = ({ auth,cars }: any) =>  {
+const UserProfile = ({ auth,cars,pendings,approved }: any) =>  {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (tabId: number) => {
@@ -34,7 +34,6 @@ const UserProfile = ({ auth,cars }: any) =>  {
             </div>
             <div className="flex flex-col">
               <Link href={route('user.editProfile')} className="underline hover: text-dark font-medium mb-2 text-center">Edit Profile</Link>
-              <button className="underline hover: text-dark font-medium mb-2">Liked Ads</button>
               <button className="underline hover: text-dark font-medium mb-2">Inbox</button>
             </div>
           </div>
@@ -43,10 +42,10 @@ const UserProfile = ({ auth,cars }: any) =>  {
           {/* User Table */}
           <div className="bg-white border border-gray-300 rounded-lg shadow-md">
             <UserTabs activeTab={activeTab} onTabClick={handleTabClick} />
-            {activeTab === 0 && <MyListedCar cars={cars}/>}
+            {activeTab === 0 && <MyListedCar cars={cars} />}
             {activeTab === 1 && <MySwapedCar />}
-            {activeTab === 2 && <PendingAprroval />}
-            {activeTab === 3 && <ApprovedCar />}
+            {activeTab === 2 && <PendingAprroval pendings={pendings}/>}
+            {activeTab === 3 && <ApprovedCar approved={approved} />}
           </div>
         </div>
       </div>
