@@ -12,7 +12,7 @@ const TopBanner = (brands: any) => {
             <div style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
 
                 <div className="top-0 w-full h-full">
-                    <div className="container flex flex-col lg:flex-row items-center xl:gap-y-12 xl:gap-x-80 lg:gap-x-32">
+                    <div className="container flex flex-col lg:flex-row items-center xl:gap-y-12 xl:gap-x-80 lg:gap-x-32 mx-auto max-w-7xl px-4">
                         <div className="lg:w-1/2 mt-6 lg:mb-0">
                             <h3 className="text-white font-medium text-base md:text-3xl md:text-start 	 text-shadow-sm">
                                 Need a better car? Swap it for the best.

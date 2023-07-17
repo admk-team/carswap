@@ -108,7 +108,7 @@ export default function EditProfile ({ auth,success,errors,error}: any) {
                         <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                            )}
-                        <p className="text-gray-600 text-xl">Hello User, where do you want to apply the changes?</p>
+                        <p className="text-gray-600 text-xl">Hello <strong>{auth.user?.first_name}</strong>, where do you want to apply the changes?</p>
                         <form className="row g-3" method='post' encType='multipart/form-data'>
                         <div className="flex flex-col items-start mt-4 relative transform hover:scale-110 transition-all duration-200">
                             <input className="absolute top-0 left-0 w-full h-full opacity-0 z-10" type="file" name='image' onChange={handleImageChange} />
@@ -135,7 +135,7 @@ export default function EditProfile ({ auth,success,errors,error}: any) {
                                     </svg>
                                     <p className='text-gray-950'>Profile Name</p>
                                 </div>
-                                <p className='mx-4'>{auth&&auth.user?auth.user.first_name +' '+ auth.user.last_name:''}</p>
+                                <p className='mx-4'>{(auth && auth.user) ? auth.user?.first_name +' '+ auth.user?.last_name:''}</p>
                             </div>
 
                             <p
@@ -332,7 +332,7 @@ export default function EditProfile ({ auth,success,errors,error}: any) {
                     <div className="flex flex-col mx-3 h-5/6">
                         <div className="bg-white rounded-lg shadow-md p-6">
                             <h2 className="text-lg font-bold text-gray-950 mb-3">Security:</h2>
-                            <p className="text-gray-700">User, here is your account security:</p>
+                            <p className="text-gray-700"><strong>{auth.user?.first_name}</strong>, here is your account security:</p>
                             <hr className="bg-gray-800 mt-3" />
 
                             {!passwordField ? (

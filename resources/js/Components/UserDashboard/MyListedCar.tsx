@@ -44,49 +44,63 @@ const MyListedCar = ({ cars, success }: any) => {
                 <h1 className="font-extrabold text-black">My Listed Cars</h1>
             </div>
 
-            {car.map((carItem: any, index) => (
-                <div className="px-4 pt-2 pb-3" key={index}>
-                    <div className="flex flex-col bg-white border-1 md:flex-row md:max-w-full hover:bg-gray-100">
-                        <img className="object-cover md:h-auto md:w-48" src={'/storage' + carItem?.images[0]} alt="" />
-                        <div className="flex flex-col justify-between p-2 leading-normal">
-                            <h5 className="mb-1 text-2xl font-bold text-gray-900">{carItem?.title}</h5>
-                            {carItem?.status&&carItem.status=="1"?'Approved':'Pending'}
-                            <h5 className="text-2xl font-bold dark:text-white text-amber-500">${carItem?.price}</h5>
-                            <div className="mt-1">
-                                <table className="w-full">
-                                    <tbody>
-                                        <tr>
-                                            <th className="px-2 font-bold-300 text-gray-800">Condition</th>
-                                            <th className="px-2 text-gray-800">Engine</th>
-                                            <th className="px-2 text-gray-800">Mileage</th>
-                                        </tr>
-                                        <tr>
-                                            <th className="px-2 text-sm sm:text-base text-gray-800">{carItem?.condition}</th>
-                                            <th className="px-2 text-sm sm:text-base text-gray-800">{carItem?.engine_capacity} CC</th>
-                                            <th className="px-2 text-sm sm:text-base text-gray-800">{carItem?.mileage} (MI)</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
+            {car&&car.length>0?
+            car.map((carItem: any, index) => (
+                    <div className="px-4 pt-2 pb-3" key={index}>
+                        <div className="flex flex-col bg-white border-1 md:flex-row md:max-w-full hover:bg-gray-100">
+                            <img className="object-cover md:h-auto md:w-48" src={'/storage' + carItem?.images[0]} alt="" />
+                            <div className="flex flex-col justify-between p-2 leading-normal">
+                                <h5 className="mb-1 text-2xl font-bold text-gray-900">{carItem?.title}</h5>
+                                {carItem?.status&&carItem.status=="1"?
+                                <div>
+                                    <span className="text-gray-900 me-3"><strong>Status</strong></span>
+                                    <button className="mt-2 px-2 py-1 text-white bg-green-500 ">Approved</button>
+                                </div>
+                                :
+                                <div>
+                                    <span className="text-gray-900 me-3"><strong>Status</strong></span>
+                                    <button className="mt-2 px-2 py-1 text-white bg-yellow-500">Pending</button>
+                                </div>
+                                }
+                                <h5 className="text-2xl font-bold dark:text-white text-amber-500">${carItem?.price}</h5>
+                                <div className="mt-1">
+                                    <table className="w-full">
+                                        <tbody>
+                                            <tr>
+                                                <th className="px-2 font-bold-300 text-gray-800">Condition</th>
+                                                <th className="px-2 text-gray-800">Engine</th>
+                                                <th className="px-2 text-gray-800">Mileage</th>
+                                            </tr>
+                                            <tr>
+                                                <th className="px-2 text-sm sm:text-base text-gray-800">{carItem?.condition}</th>
+                                                <th className="px-2 text-sm sm:text-base text-gray-800">{carItem?.engine_capacity} CC</th>
+                                                <th className="px-2 text-sm sm:text-base text-gray-800">{carItem?.mileage} (MI)</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
-                                <div className="flex flex-wrap mt-2 mx-2">
-                                    <Link href={route('user.editcar', carItem.slug)} className="mt-2 px-2 py-1 text-base font-medium text-center text-white bg-green-500 hover:bg-green-600 self-end">
-                                        Edit
-                                    </Link>
-                                    <button
-                                        className="mx-2 px-2 py-1 text-base font-medium text-center text-white bg-gray-950 hover:bg-green-600 self-end"
-                                        onClick={()=>deleteHandler(carItem.slug)}
-                                    >
-                                        Delete
-                                    </button>
-                                    {/* <Link href={route('user.delete', carItem.slug)} className="mx-2 px-2 py-1 text-base font-medium text-center text-white bg-gray-950 hover:bg-green-600 self-end">
-                                        Delete
-                                    </Link> */}
+                                    <div className="flex flex-wrap mt-2 mx-2">
+                                        <Link href={route('user.editcar', carItem.slug)} className="mt-2 px-2 py-1 text-base font-medium text-center text-white bg-green-500 hover:bg-green-600 self-end">
+                                            Edit
+                                        </Link>
+                                        <button
+                                            className="mx-2 px-2 py-1 text-base font-medium text-center text-white bg-gray-950 hover:bg-green-600 self-end"
+                                            onClick={()=>deleteHandler(carItem.slug)}
+                                        >
+                                            Delete
+                                        </button>
+                                        {/* <Link href={route('user.delete', carItem.slug)} className="mx-2 px-2 py-1 text-base font-medium text-center text-white bg-gray-950 hover:bg-green-600 self-end">
+                                            Delete
+                                        </Link> */}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            ))}
+                ))
+                :
+                <p className="text-center">No record found</p>
+            }
 
             {showDeleteModal && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
