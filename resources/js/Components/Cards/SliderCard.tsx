@@ -94,7 +94,7 @@ const SliderCard = (brands: any) => {
           {priceGroups?.map((pg: any, pgindex: any) => (
             <button key={pgindex} type="button"
               onClick={() => handlePrice(pg.min, pg.max)}
-              className="border text-sm focus:bg-emerald-500 font-bold bg-green border-gray-300 rounded-lg py-1 px-2 shadow-md mr-1">
+              className="border mb-3 text-sm focus:bg-emerald-500 font-bold bg-green border-gray-300 rounded-lg py-1 px-2 shadow-md mr-1">
               {pg?.name}
             </button>
           ))

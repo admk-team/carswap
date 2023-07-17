@@ -3,14 +3,79 @@ import NavBar2 from '@/Components/Navbar/NabBar2'
 import Footer from '../Footer/Footer';
 import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { Button } from 'flowbite-react';
+import PricingCard from '@/Components/Cards/PricingCard';
 
 export default function AllCars({ brands, cars,auth }:any) {
     const [showModal, setShowModal] = useState(false);
     const [compare, setCompare]:any = useState([])
     const [total, setTotal]:any = useState(0)
+    const [min, setMin] = useState('');
+    const [max, setMax] = useState('');
+    const [minMileage, setMinMileage] = useState('');
+    const [maxMileage, setMaxMileage] = useState('');
 
+    const { data, setData, errors, get } = useForm({
+        searchTerm: '',
+        min: 0,
+        model: 0,
+        max: 0,
+        minMileage:0,
+        maxMileage:0,
+        brand: ''
+    })
+
+    const handlePrice = (value:any) => {
+        let newMin = '';
+        let newMax = '';
+        if (value === 'option1') {
+            newMin = '0';
+            newMax = '3000000';
+        }
+        if (value === 'option2') {
+            newMin = '3000000';
+            newMax = '6000000';
+        }
+        if (value === 'option3') {
+            newMin = '6000000';
+            newMax = '10000000';
+        }
+        if (value === 'option4') {
+            newMin = '10000000';
+            newMax = '15000000';
+        }
+        if (value === 'option5') {
+            newMin = '15000000';
+            newMax = '0';
+        }
+        setData({ ...data, min: newMin, max: newMax });
+    };
+    const handleMileage = (value:any) => {
+        let newMinMileage = '';
+        let newMaxMileage = '';
+        if (value === 'mileage1') {
+            newMinMileage = '0';
+            newMaxMileage = '30000';
+        }
+        if (value === 'mileage2') {
+            newMinMileage = '30000';
+            newMaxMileage = '60000';
+        }
+        if (value === 'mileage3') {
+            newMinMileage = '60000';
+            newMaxMileage = '100000';
+        }
+        if (value === 'mileage4') {
+            newMinMileage = '100000';
+            newMaxMileage = '150000';
+        }
+        if (value === 'mileage5') {
+            newMinMileage = '150000';
+            newMaxMileage = '0';
+        }
+        setData({ ...data, minMileage: newMinMileage, maxMileage: newMaxMileage });
+    };
     const handleSetCar = (id=0)=>{
         let car = cars.find((item:any) => (item.id === id))
         setCompare(car);
@@ -19,6 +84,9 @@ export default function AllCars({ brands, cars,auth }:any) {
     useEffect(() => {
         setTotal(cars.length);
     }, [cars]);
+    const handleSearch = () => {
+        get(route('search'));
+    }
     return (
         <div>
             <Head title='All Cars'/>
@@ -26,54 +94,55 @@ export default function AllCars({ brands, cars,auth }:any) {
             <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
                 <div className="bg-gray-200 p-4">
                     <p className="font-black text-gray-950 text-3xl">Cars Up for Sale</p>
-                    <form action="">
+                    <form>
                         <div className="flex flex-col mt-2">
                             <div className="relative w-full max-w-xl shadow-md">
                                 <input
                                     type="text"
                                     placeholder="Search For car by Model, brand"
-                                    className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" name='search' value={data.searchTerm} onChange={(e) => setData('searchTerm',e.target.value)}
                                 />
-                                <button className="absolute top-0 right-0 h-full bg-green-500 text-white px-4 rounded-md focus:outline-none">
+                                <button className="absolute top-0 right-0 h-full bg-green-500 text-white px-4 rounded-md focus:outline-none" onClick={() => handleSearch()} type="button">
                                     Search
                                 </button>
                             </div>
 
                             <div className="flex flex-wrap mt-2 gap-2">
 
-                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
+                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md" onChange={(e) => handlePrice(e.target.value)}>
                                     <option value="">Price</option>
                                     <option value="option1">Under 3M</option>
                                     <option value="option2">3M-6M</option>
-                                    <option value="option2">6M-10M</option>
-                                    <option value="option2">10M-15M</option>
-                                    <option value="option2">Above 15M</option>
+                                    <option value="option3">6M-10M</option>
+                                    <option value="option4">10M-15M</option>
+                                    <option value="option5">Above 15M</option>
                                 </select>
 
-                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
+                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md" onChange={(e) => setData('brand',e.target.value)}>
                                     <option value="">Brand</option>
                                     {brands.map((option: any) => (
-                                        <option key={option.id} value={option.title}>
+                                        <option key={option.id} value={option.id}>
                                             {option.title}
                                         </option>
                                     ))}
 
                                 </select>
-                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
-                                    <option value="">Mileage</option>
-                                    <option value="option1">2019-2023</option>
-                                    <option value="option2">2014-2018</option>
-                                    <option value="option2">2009-2013</option>
-                                    <option value="option2">2004-2008</option>
-                                    <option value="option2">Below 2004</option>
+                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md" onChange={(e) => setData('model',e.target.value)}>
+                                    <option value="">Model</option>
+                                    <option value="2000">2000</option>
+                                    <option value="2001">2001</option>
+                                    <option value="2002">2002</option>
+                                    <option value="2003">2003</option>
+                                    <option value="2004">2004</option>
+                                    <option value="2005">2005</option>
                                 </select>
-                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
-                                    <option value="">Engine</option>
-                                    <option value="option1">0-30,000 KM</option>
-                                    <option value="option2">30,000-60,000 KM</option>
-                                    <option value="option2">60,000-120,000 KM</option>
-                                    <option value="option2">120,000-150,000 KM</option>
-                                    <option value="option2">Above 150,000 KM</option>
+                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md" onChange={(e) => handleMileage(e.target.value)}>
+                                    <option value="">Mileage</option>
+                                    <option value="mileage1">0-30,000 KM</option>
+                                    <option value="mileage2">30,000-60,000 KM</option>
+                                    <option value="mileage3">60,000-120,000 KM</option>
+                                    <option value="mileage4">120,000-150,000 KM</option>
+                                    <option value="mileage5">Above 150,000 KM</option>
                                 </select>
                             </div>
                         </div>
@@ -88,11 +157,8 @@ export default function AllCars({ brands, cars,auth }:any) {
                         </div>
                     </div>
                     <div>
-                
-
-                        
-                        <div className="flex justify-center">
-                            <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
+                        {/* <div className="flex justify-center">
+                            <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 mt-6">
                                 {cars?.map((car: any, index: any) => (
 
                                     <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg dark:bg-gray-800 dark:border-gray-700">
@@ -148,84 +214,11 @@ export default function AllCars({ brands, cars,auth }:any) {
                                     </div>
                                 ))}
                             </div>
+                        </div> */}
+
+                        <div>
+                        <PricingCard cars={cars}/>
                         </div>
-                        {showModal ? (
-                            <>
-                                <div
-                                    className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-                                >
-                                    <div className="relative w-50 my-6 mx-auto max-w-3xl ">
-                                        {/*content*/}
-                                        <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                                            {/*header*/}
-                                            <div className="flex justify-center pt-4 ">
-                                                <h3 className=" align-center text-2xl font-semibold">
-                                                    Swap Car
-                                                </h3>
-                                            </div>
-
-                                            {/*body*/}
-                                            <hr className="mt-2 border-t-2 border-solid border-emerald-500  mx-3 my-3" />
-                                            <div className="relative p-4 flex">
-                                                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 mt-6">
-                                                    <div className="col-span-1 md:col-span-2 lg:col-span-1">
-                                                        <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
-                                                        <img src={"/storage" + compare.images[0]}  className="w-full h-4/5 object-contain"></img>
-                                                        <p className='font-semibold text-gray-950 mt-2 text-2xl '>Price</p>
-                                                        <p className='text-emerald-500'>$ {compare.price}</p>
-                                                    </div>
-                                                    <div className="col-span-1 md:col-span-1 lg:col-span-1 flex justify-center items-center">
-                                                        <img src={Transfer} className="w-full h-20 object-contain"></img>
-                                                    </div>
-                                                    <div className="col-span-1 md:col-span-2 lg:col-span-1">
-                                                        <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>My Car</p>
-                                                        <img src={Cover} className="w-full h-4/5 object-contain"></img>
-                                                        <p className='font-semibold text-gray-950 mt-2 text-2xl '>Price</p>
-                                                        <p className='text-emerald-500 mb-2 mt-2'>$ 43496.10</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div className='p-4 mt-3'>
-                                                <p className='text-gray-950 text-2xl font-bold mb-2'>Difference</p>
-                                                <p className='text-emerald-500'>$ 32,360.81</p>
-                                                <p className='font-semibold'>You have to Pay <span className="text-emerald-500">$ 32,360.81</span> to make this Deal happen.</p>
-                                            </div>
-                                            <hr className="mt-2 border-t-2 border-solid border-emerald-500 mx-3 my-3" />
-                                            {/*footer*/}
-                                            <div className="flex flex-col items-center justify-center p-6">
-                                                <div className="flex flex-col space-y-2">
-                                                    <button
-                                                        className="bg-gray-950 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
-                                                        type="button"
-                                                        onClick={() => setShowModal(false)}
-                                                    >
-                                                        Pay Now
-                                                    </button>
-                                                    <button
-                                                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
-                                                        type="button"
-                                                        onClick={() => setShowModal(false)}
-                                                    >
-                                                        Book Inspection
-                                                    </button>
-                                                    <button
-                                                        className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none ease-linear transition-all duration-150"
-                                                        type="button"
-                                                        onClick={() => setShowModal(false)}
-                                                    >
-                                                        Close
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-                            </>
-                        ) : null}
-
                     </div>
                 </div>
             </div>

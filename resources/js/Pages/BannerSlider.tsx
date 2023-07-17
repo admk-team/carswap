@@ -44,10 +44,10 @@ const BannerSlider = () => {
           />
         </div>
       </div>
-     
+
 
       {/* side panel */}
-     
+
       {/* // side panel */}
       {/* Slider controls */}
       <button

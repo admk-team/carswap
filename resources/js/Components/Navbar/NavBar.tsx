@@ -3,6 +3,7 @@ import imagelogo1 from '@/Assets/headerlogo.png'
 import watsapImage from '@/Assets/whatsapp.png'
 import bellIcon from "@/Assets/bell.png"
 import { Link } from '@inertiajs/react';
+import backgroundImage from '@/Assets/navbarbg.png';
 
 const NavBar = (auth: any) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -23,7 +24,7 @@ const NavBar = (auth: any) => {
 
   return (
     <div>
-      <nav className="bg-gray-800">
+      <nav className="bg-gray-800" style={{ backgroundImage: `url(${backgroundImage})` }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
@@ -63,7 +64,7 @@ const NavBar = (auth: any) => {
                           href={route('user.login')}
                           className="rounded-md justify-content-center text-center text-base font-medium text-white"
                         >
-                          Login 
+                          Login
                         </Link>
                         <span className='text-white py-2'> / </span>
                         <Link

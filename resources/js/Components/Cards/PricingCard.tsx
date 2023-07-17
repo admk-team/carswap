@@ -6,129 +6,147 @@ import { Link } from '@inertiajs/react';
 
 const PricingCard = ({ brands, cars, auth }: any) => {
     const [showModal, setShowModal] = useState(false);
+    const [inspectionModal, setInspectionModal] = useState(false);
     const [compare, setCompare]: any = useState([])
     const [total, setTotal]: any = useState(0)
+    const [isTapped, setIsTapped] = useState(false);
+    const [selectedCarId, setSelectedCarId] = useState(0);
+
+
 
     const handleSetCar = (id = 0) => {
         let car = cars.find((item: any) => (item.id === id))
         setCompare(car);
         setShowModal(true);
+        setSelectedCarId(id);
     }
+
+    const handleSetBook = (id = 0) => {
+        let car = cars.find((item: any) => (item.id === id))
+        setInspectionModal(true);
+        setShowModal(false);
+
+
+    }
+    const handleSetHeart = (id = 0) => {
+        1
+        if (selectedCarId === id) {
+            setSelectedCarId(0);
+        } else {
+            setSelectedCarId(id);
+        }
+    };
+
+
     useEffect(() => {
         setTotal(cars.length);
     }, [cars]);
 
     return (
         <div className="mx-auto max-w-screen-xl w-full h-full mt-8 ">
-            <div className="flex justify-center mx-4">
-                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-6">
-                    {cars.cars?.map((car: any, index: any) => (
-
-                        <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                            <div className="relative">
-                                <Link href={route('CarDetail', car.slug)}>
-                                    <img className=" w-full h-72 rounded-t-lg object-cover" src={"storage/" + car?.images[0]} alt="product image" />
-                                </Link>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-red-500 absolute top-2 right-2" fill="red" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                                </svg>
-                                <div className="absolute bottom-5 left-1">
-                                    <svg aria-hidden="true" className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    </svg>
-                                    <span className=" flex justify-center bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#FFA534" viewBox="0 0 24 24" strokeWidth={0} stroke="currentColor" className="w-5 h-5">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-                                        </svg>
-                                        <p className='text-sm'>4.2</p>
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="px-2 pb-4">
-                                <Link href={route('CarDetail', car.slug)}>
-                                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">{car?.title}</h5>
-                                </Link>
-                                <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">$ {car?.price}</h5>
-                                <div className="flex items-center">
-                                </div>
-                                <hr className='border-t-2 border-black mt-2' />
-                                <div className="mt-4">
-                                    <table className="w-full">
-                                        <tbody>
-                                            <tr>
-                                                <th className="px-2 py-1 font-bold-300 text-gray-600">Condition</th>
-                                                <th className="px-2 py-1 text-gray-800">Engine</th>
-                                                <th className="px-2 py-1 text-gray-800">Mileage</th>
-                                            </tr>
-                                            <tr>
-                                                <th className="px-2 py-1 text-gray-600">{car?.condition}</th>
-                                                <th className="px-2 py-1 text-gray-800">{car?.engine_capacity}</th>
-                                                <th className="px-2 py-1 text-gray-800">{car?.mileage}</th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div className="flex items-center justify-between mt-4">
-                                    <a href="#" className="text-white bg-black hover:bg-gray-600 font-medium  text-sm px-6 py-2.5 text-center  w-36">Cash Purchase</a>
-                                    <a href='#' className="text-white bg-green-500 hover:bg-green-600 font-medium  px-6 py-2.5 text-sm  text-center" onClick={() => handleSetCar(car.id)}>Swap</a>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-            <div className="flex justify-center mx-4">
-                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
+            <div className="flex">
+                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 mt-6">
                     {cars?.map((car: any, index: any) => (
-
-                        <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                        <div
+                            key={index}
+                            className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg dark:bg-gray-800 dark:border-gray-700"
+                        >
                             <div className="relative">
                                 <Link href={route('CarDetail', car.slug)}>
-                                    <img className=" w-full h-72 rounded-t-lg object-cover" src={"/storage" + car?.images[0]} alt="product image" />
+                                    <img
+                                        className="w-full h-72 rounded-t-lg object-cover"
+                                        src={"/storage" + car?.images[0]}
+                                        alt="product image"
+                                    />
                                 </Link>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-red-500 absolute top-2 right-2" fill="red" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className={`w-7 h-7 ${selectedCarId === car.id ? 'text-red-500' : 'text-gray-500'
+                                        } absolute top-2 right-2`}
+                                    fill={selectedCarId === car.id ? 'red' : 'white'}
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    onClick={() => handleSetHeart(car.id)}
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                    />
                                 </svg>
                                 <div className="absolute bottom-5 left-1">
-                                    <svg aria-hidden="true" className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    </svg>
-                                    <span className=" flex justify-center bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#FFA534" viewBox="0 0 24 24" strokeWidth={0} stroke="currentColor" className="w-5 h-5">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                                    <svg
+                                        aria-hidden="true"
+                                        className="w-5 h-5 text-yellow-300"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    ></svg>
+                                    <span className="flex justify-center bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="#FFA534"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={0}
+                                            stroke="currentColor"
+                                            className="w-5 h-5"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+                                            />
                                         </svg>
-                                        <p className='text-sm'>4.2</p>
+                                        <p className="text-sm">4.2</p>
                                     </span>
                                 </div>
                             </div>
-                            <div className="px-2 pb-4">
+                            <div className="px-3 pb-4">
                                 <Link href={route('CarDetail', car.slug)}>
-                                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">{car?.title}</h5>
+                                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">
+                                        {car?.title}
+                                    </h5>
                                 </Link>
-                                <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">$ {car?.price}</h5>
-                                <div className="flex items-center">
-                                </div>
-                                <hr className='border-t-2 border-black mt-2' />
+                                <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">
+                                    $ {car?.price}
+                                </h5>
+                                <div className="flex items-center"></div>
+                                <hr className="border-t-2 border-black mt-2" />
                                 <div className="mt-4">
                                     <table className="w-full">
                                         <tbody>
                                             <tr>
-                                                <th className="px-2 py-1 font-bold-300 text-gray-600">Condition</th>
-                                                <th className="px-2 py-1 text-gray-800">Engine</th>
-                                                <th className="px-2 py-1 text-gray-800">Mileage</th>
+                                                <th className="px-2 py-1 font-bold-300 text-gray-600">
+                                                    Condition
+                                                </th>
+                                                <th className="px-3 py-1 text-gray-800">Engine</th>
+                                                <th className="px-3 py-1 text-gray-800">Mileage</th>
                                             </tr>
                                             <tr>
-                                                <th className="px-2 py-1 text-gray-600">{car?.condition}</th>
-                                                <th className="px-2 py-1 text-gray-800">{car?.engine_capacity}</th>
-                                                <th className="px-2 py-1 text-gray-800">{car?.mileage}</th>
+                                                <th className="px-2 py-1 text-gray-600">
+                                                    {car?.condition}
+                                                </th>
+                                                <th className="px-3 py-1 text-gray-800">
+                                                    {car?.engine_capacity}
+                                                </th>
+                                                <th className="px-3 py-1 text-gray-800">
+                                                    {car?.mileage}
+                                                </th>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
 
                                 <div className="flex items-center justify-between mt-4">
-
-                                    <p className="text-white bg-black hover:bg-gray-600 font-medium  text-sm px-6 py-2.5 text-center  w-34 cursor-pointer" >Purchase</p>
-                                    <button className="text-white bg-green-500 hover:bg-green-600 font-medium  px-8 py-2.5 text-sm w-34 text-center" onClick={() => handleSetCar(car.id)}>Swap</button>
+                                    <p className="text-white bg-black hover:bg-gray-600 font-medium text-sm px-6 py-2.5 text-center w-34 cursor-pointer">
+                                        Purchase
+                                    </p>
+                                    <button
+                                        className="text-white bg-green-500 hover:bg-green-600 font-medium px-8 py-2.5 text-sm w-34 text-center"
+                                        onClick={() => handleSetCar(car.id)}
+                                    >
+                                        Swap
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -144,10 +162,27 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                             {/*content*/}
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                 {/*header*/}
-                                <div className="flex justify-center pt-4 ">
-                                    <h3 className=" align-center text-2xl font-semibold">
-                                        Swap Car
-                                    </h3>
+                                <div className="flex justify-between items-center pt-4 px-4">
+                                    <h3 className="text-2xl font-semibold text-gray-950">Swap Car</h3>
+                                    <button
+                                        className="text-gray-500 hover:text-gray-800 focus:outline-none"
+                                        onClick={() => setShowModal(false)}
+                                    >
+                                        <svg
+                                            className="w-6 h-6"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M6 18L18 6M6 6l12 12"
+                                            />
+                                        </svg>
+                                    </button>
                                 </div>
 
                                 {/*body*/}
@@ -181,26 +216,13 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                 {/*footer*/}
                                 <div className="flex flex-col items-center justify-center p-6">
                                     <div className="flex flex-col space-y-2">
-                                        <button
-                                            className="bg-gray-950 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
-                                            type="button"
-                                            onClick={() => setShowModal(false)}
-                                        >
-                                            Pay Now
-                                        </button>
+
                                         <button
                                             className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
                                             type="button"
-                                            onClick={() => setShowModal(false)}
+                                            onClick={() => handleSetBook(compare.id)}
                                         >
                                             Book Inspection
-                                        </button>
-                                        <button
-                                            className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none ease-linear transition-all duration-150"
-                                            type="button"
-                                            onClick={() => setShowModal(false)}
-                                        >
-                                            Close
                                         </button>
                                     </div>
                                 </div>
@@ -211,6 +233,76 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                     <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
                 </>
             ) : null}
+            {inspectionModal ? (
+                <>
+                    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                        <div className="relative w-50 my-6 mx-auto max-w-3xl">
+                            {/*content*/}
+                            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                {/*header*/}
+                                <div className="flex justify-between items-center pt-4 px-4">
+                                    <h3 className="text-2xl font-semibold text-gray-950" >Book Inspection</h3>
+                                    <button
+                                        className="text-gray-500 hover:text-gray-800 focus:outline-none"
+                                        onClick={() => setInspectionModal(false)}
+                                    >
+                                        <svg
+                                            className="w-6 h-6"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M6 18L18 6M6 6l12 12"
+                                            />
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                {/*body*/}
+                                <hr className="mt-2 border-t-2 border-solid border-emerald-500 mx-3 my-3" />
+                                <div className="relative p-4 flex flex-col gap-5 items-center">
+                                    <div className="flex flex-wrap gap-4 items-center">
+                                        <p className="text-bold text-1xl text-gray-950">Date :</p>
+                                        <input
+                                            type="date"
+                                            className="border border-gray-300 p-2 rounded w-60 "
+                                        />
+                                    </div>
+                                    <div className="flex flex-wrap gap-4 items-center">
+                                        <p className="text-bold text-1xl text-gray-950">Time :</p>
+                                        <input
+                                            type="time"
+                                            className="border border-gray-300 p-2 rounded  w-60"
+                                        />
+                                    </div>
+                                </div>
+                                <hr className="mt-2 border-t-2 border-solid border-emerald-500 mx-3 my-3" />
+
+                                {/*footer*/}
+                                <div className="flex flex-col items-center justify-center p-6">
+                                    <div className="flex flex-col space-y-2">
+                                        <button
+                                            className="bg-gray-950 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+                                            type="button"
+                                            onClick={() => setShowModal(false)}
+                                        >
+                                            Book Now
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                </>
+            ) : null}
+
         </div>
     );
 };
