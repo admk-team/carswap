@@ -9,6 +9,7 @@ use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 class PostacarController extends Controller
 {
     /**
@@ -84,6 +85,8 @@ class PostacarController extends Controller
         $model->exterior_color=$request->exteriorColor;
         $model->description=$request->description;
         if($model->save()){
+            $model->slug=Str::slug($request->title).'-'.$model->id;
+            $model->update();
             return Inertia::location(route('user.dashboard', ['success' => 'Car added successfully.']));
         }else{
             return Inertia::location(route('user.dashboard', ['error' => 'Failed Car not added.']));
@@ -164,6 +167,8 @@ class PostacarController extends Controller
         $model->exterior_color=$request->exteriorColor;
         $model->description=$request->description;
         if($model->save()){
+            $model->slug=Str::slug($request->title).'-'.$model->id;
+            $model->update();
             return Inertia::location(route('user.dashboard', ['success' => 'Car update successfully.']));
         }else{
             return Inertia::location(route('user.dashboard', ['error' => 'Failed to update car.']));
