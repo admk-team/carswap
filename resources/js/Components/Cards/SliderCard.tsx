@@ -77,8 +77,8 @@ const SliderCard = (brands: any) => {
 
   return (
     <>
-      <div className="w-full max-w-sm p-4 bg-white bg-opacity-50 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 ">
-        <h1 className="text-center text-2xl font-bold mb-4">Find your ideal car</h1>
+      <div className="w-full max-w-sm p-4 bg-gray-50 bg-opacity-50 shadow-xl  rounded-lg shadow sm:p-6 md:p-8 ">
+        <h1 className="text-center text-2xl font-bold mb-4 text-gray-950">Find your ideal car</h1>
         <div className="flex items-center relative">
           <input id='searchLocation' type="search" placeholder="Search location..." value={location} onChange={(e) => handleSuggestions(e.target.value)} className="relative border border-gray-300 rounded-lg py-2 px-4 w-full shadow-md" onClick={handleInputChange} />
 
@@ -89,18 +89,18 @@ const SliderCard = (brands: any) => {
           </ul>)}
         </div>
 
-        <h3 className='font-extrabold text-xl mt-4'>By Price:</h3>
+        <h3 className='font-extrabold text-xl mt-4 text-gray-950'>By Price:</h3>
         <div className="mb-3 mt-2">
           {priceGroups?.map((pg: any, pgindex: any) => (
             <button key={pgindex} type="button"
               onClick={() => handlePrice(pg.min, pg.max)}
-              className="border mb-3 text-sm focus:bg-emerald-500 font-bold bg-green border-gray-300 rounded-lg py-1 px-2 shadow-md mr-1">
+              className="border mb-3 text-sm focus:bg-emerald-500 font-extrabold bg-green border-gray-900 rounded-lg py-1 px-2 shadow-md mr-1 text-gray-950 ">
               {pg?.name}
             </button>
           ))
           }
         </div>
-        <h3 className='font-extrabold text-xl'>By Brand:</h3>
+        <h3 className='font-extrabold text-xl text-gray-950'>By Brand:</h3>
         <div className="grid grid-cols-6 gap-0 mt-2">
           {
             brands.brands.brands?.map((brand: any) => (
