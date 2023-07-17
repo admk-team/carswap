@@ -11,7 +11,7 @@ import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { Transition } from '@headlessui/react';
 
-export default function EditProfile ({ auth,success,errors}: any) {
+export default function EditProfile ({ auth,success,errors,error}: any) {
     const currentPasswordInput = useRef<HTMLInputElement>();
     const passwordInput = useRef<HTMLInputElement>();
     const [passwordField, setPasswordField] = useState(false);
@@ -22,7 +22,15 @@ export default function EditProfile ({ auth,success,errors}: any) {
     const [addressField, setAddressField] = useState(false);
     const [birthField, setBirthField] = useState(false)
     const [successMessage, setSuccessMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  useEffect(() => {
+    if (success) {
+    setSuccessMessage(success);
+    }
+    if (error) {
+    setErrorMessage(error);
+    }
+}, []);
     const [image, setImage] = useState('');
     const [uploadNow, setUploadNow] = useState(false);
 
@@ -88,18 +96,18 @@ export default function EditProfile ({ auth,success,errors}: any) {
                 <div className="col-span-12 md:col-span-6">
                     <div className="flex flex-col">
                         <p className="font-black text-gray-950 text-2xl">Edit Profile</p>
-                        {
-                                errors && errors.success ?
-                                <p className="alert alert-success alert-dismissible fade show">{errors.success}</p>
-                                :
-                                ''
-                            }
-                              {
-                                errors && errors.failed ?
-                                <p className="alert alert-success alert-dismissible fade show">{errors.failed}</p>
-                                :
-                                ''
-                            }
+                        {successMessage && (
+                    <div className="alert alert-success alert-dismissible fade show" role="alert">
+                     {successMessage}
+                    <button className="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                )}
+                {errorMessage && (
+                    <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                        {errorMessage}
+                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                           )}
                         <p className="text-gray-600 text-xl">Hello User, where do you want to apply the changes?</p>
                         <form className="row g-3" method='post' encType='multipart/form-data'>
                         <div className="flex flex-col items-start mt-4 relative transform hover:scale-110 transition-all duration-200">
