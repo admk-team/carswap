@@ -43,7 +43,7 @@ Route::get("/cmd/{cmd}", function ($cmd) {
     return \Artisan::output();
 });
 //Admin Routes
-Route::prefix('admin')->name('admin.')->group(function(){
+Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(function(){
     //Dashboard
     Route::get('/',[AdminDashboardController::class,'index'])->name('dashboard.index');
     Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
@@ -59,7 +59,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
     //User
     Route::resource('/users',UserController::class);
     Route::get('users/{id}/{status}',[UserController::class,'status'])->name('users.status');
-})->middleware(['auth', 'verified']);
+
+});
 
 Route::get('/', [FrontController::class,'index'])->name('front.index');
 Route::get('/car-detail/{slug}', [FrontController::class,'CarDetail'])->name('CarDetail');

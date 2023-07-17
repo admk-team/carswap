@@ -81,14 +81,11 @@ function TopNavbar({ onCollapseChange }) {
                             <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
                         </a>
-                        <a className="dropdown-item" href="#">
+                        <a className="dropdown-item" href={route('user-profile')} onClick={()=>alert('Under Development')}>
                             <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                             Settings
                         </a>
-                        <a className="dropdown-item" href="#">
-                            <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Activity Log
-                        </a>
+                       
                         <div className="dropdown-divider"></div>
                         <a
                             className="dropdown-item"
