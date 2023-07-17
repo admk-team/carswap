@@ -51,7 +51,7 @@ class UserController extends Controller
     
     public function EditProfile(){
         
-        return Inertia::render('User/EditProfile');
+        return Inertia::render('User/EditProfile',['success'=>request()->success,'error'=>request()->error]);
     }
     public function updateProfile(Request $request)
     {
@@ -75,11 +75,12 @@ class UserController extends Controller
             $user->image = $img_path;
         }
         if($user->save()){
-            return redirect()->back()->withErrors(['success' => 'Profile updated successfully.']);
+             return Inertia::location(route('user.editProfile', ['success' => 'Profile updated successfully.']));
+            // return redirect()->back()->withErrors(['success' => 'Profile not updated successfully.']);
            // return Inertia::render('User/EditProfile', ['success' => 'Profile updated successfully']);
             // return  Inertia::location(route('user.editProfile', ['success' => 'Image updated successfully']));
         }else{
-            return redirect()->back()->withErrors(['failed' => 'Profile not updated successfully.']);
+            return Inertia::location(route('user.editProfile', ['error' => 'Failed to update the Profile']));
            // return Inertia::render('User/EditProfile', ['error' => 'Failed to update the user!']);
             // return Inertia::location(route('user.editProfile', ['error' => 'Failed to update the user!']));
         }
@@ -102,11 +103,11 @@ class UserController extends Controller
         $user->fill($data);
   
         if($user->save()){
-            return redirect()->back()->withErrors(['success' => 'Profile updated successfully.']);
+            return Inertia::location(route('user.editProfile', ['success' => 'Profile updated successfully.']));
            // return Inertia::render('User/EditProfile', ['success' => 'Profile updated successfully']);
             // return  Inertia::location(route('user.editProfile', ['success' => 'Image updated successfully']));
         }else{
-            return redirect()->back()->withErrors(['failed' => 'Profile not updated successfully.']);
+            return Inertia::location(route('user.editProfile', ['error' => 'Failed to update the Password']));
            // return Inertia::render('User/EditProfile', ['error' => 'Failed to update the user!']);
             // return Inertia::location(route('user.editProfile', ['error' => 'Failed to update the user!']));
         }
