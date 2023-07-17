@@ -9,6 +9,7 @@ use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 class PostacarController extends Controller
 {
     /**
@@ -69,7 +70,7 @@ class PostacarController extends Controller
         $model=new Car();
         $model->title=$request->title;
         $model->brand_id= $request->brand_id;
-        // $model->user_id= auth()->id(1);// auth()->id();
+        $model->user_id= auth()->user()->id;
         $model->condition=$request->condition;
         $model->engine_capacity=$request->engineCapacity;
         $model->mileage=$request->mileage;
@@ -83,7 +84,10 @@ class PostacarController extends Controller
         $model->interior_color=$request->interiorColor;
         $model->exterior_color=$request->exteriorColor;
         $model->description=$request->description;
+        $model->status=0;
         if($model->save()){
+            $model->slug=Str::slug($request->title).'-'.$model->id;
+            $model->update();
             return Inertia::location(route('user.dashboard', ['success' => 'Car added successfully.']));
         }else{
             return Inertia::location(route('user.dashboard', ['error' => 'Failed Car not added.']));
@@ -164,6 +168,8 @@ class PostacarController extends Controller
         $model->exterior_color=$request->exteriorColor;
         $model->description=$request->description;
         if($model->save()){
+            $model->slug=Str::slug($request->title).'-'.$model->id;
+            $model->update();
             return Inertia::location(route('user.dashboard', ['success' => 'Car update successfully.']));
         }else{
             return Inertia::location(route('user.dashboard', ['error' => 'Failed to update car.']));

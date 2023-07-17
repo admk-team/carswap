@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(){
-        $cars=Car::latest()->get();
+        $cars=Car::where('user_id',auth()->user()->id)->where('status',1)->latest()->get();
         $data = $cars->map(function($item){
             $image = explode(',',$item->images);
             $item->images = $image;
