@@ -26,7 +26,7 @@ export default function EditProfile ({ auth,success,errors}: any) {
     const [image, setImage] = useState('');
     const [uploadNow, setUploadNow] = useState(false);
 
-   
+
 
     const { data, setData ,post,put,reset,processing,recentlySuccessful} = useForm({
         first_name:auth.user.first_name || '',
@@ -35,7 +35,7 @@ export default function EditProfile ({ auth,success,errors}: any) {
         address: auth.user.address|| '',
         city:  auth.user.city|| '',
         state: auth.user.state|| '',
-       
+
          email:auth.user.email || '',
         // password: user.password,
          image:auth.user.image || '',
@@ -48,13 +48,13 @@ export default function EditProfile ({ auth,success,errors}: any) {
       useEffect(()=>{
         setImage('/storage/' + data.image);
       }, []);
-    
+
       function handleImageChange(e:any) {
         setImage(URL.createObjectURL(e.target.files[0]))
         setUploadNow(true);
         setData('image',e.target.files[0]);
       }
-    
+
       function handleSubmit(){
         post(route('user.updateProfile'));
         setUploadNow(false);
@@ -62,7 +62,7 @@ export default function EditProfile ({ auth,success,errors}: any) {
 
       function updatePassword (e:any){
         e.preventDefault();
-      
+
         post(route('user.update'), {
             preserveScroll: true,
             onSuccess: () => reset(),
@@ -84,10 +84,9 @@ export default function EditProfile ({ auth,success,errors}: any) {
     return (
         <div>
             <NavBar2 auth={auth}/>
-           
             <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
             <div className="grid grid-cols-12 gap-4 mt-7 p-4">
-                
+
                 <div className="col-span-12 md:col-span-6">
                     <div className="flex flex-col">
                         <p className="font-black text-gray-950 text-2xl">Edit Profile</p>
@@ -108,11 +107,11 @@ export default function EditProfile ({ auth,success,errors}: any) {
                         <div className="flex flex-col items-start mt-4 relative transform hover:scale-110 transition-all duration-200">
                             <input className="absolute top-0 left-0 w-full h-full opacity-0 z-10" type="file" name='image' onChange={handleImageChange} />
                             <img
-                            src={image ? image : UserIcon} 
+                            src={image ? image : UserIcon}
                             className="w-80 h-80 object-cover shadow-md hover:shadow-lg rounded"
                             alt="Profile Picture"
                             //   onClick={() => document.querySelector('input[type=file]').click()}
-                            
+
                             />
                         </div>
                             {uploadNow && (<div className='flex col-12'>
@@ -260,7 +259,7 @@ export default function EditProfile ({ auth,success,errors}: any) {
                             </form>
                         </div>
                     )}
-               
+
                     <hr className="bg-gray-800 mt-3" />
                     {!addressField ? (
                         <div className="flex flex-wrap justify-between mt-3">
@@ -320,7 +319,7 @@ export default function EditProfile ({ auth,success,errors}: any) {
                             </form>
                         </div>
                     )}
-                
+
                 </div>
 
                 <div className="col-span-12 md:col-span-6 mt-5">

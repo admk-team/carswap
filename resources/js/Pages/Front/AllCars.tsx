@@ -88,11 +88,8 @@ export default function AllCars({ brands, cars,auth }:any) {
                         </div>
                     </div>
                     <div>
-                
-
-                        
                         <div className="flex justify-center">
-                            <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
+                            <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 mt-6">
                                 {cars?.map((car: any, index: any) => (
 
                                     <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg dark:bg-gray-800 dark:border-gray-700">

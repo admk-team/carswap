@@ -64,6 +64,7 @@ Route::get('/', [FrontController::class,'index'])->name('front.index');
 Route::get('/car-detail/{slug}', [FrontController::class,'CarDetail'])->name('CarDetail');
 Route::get('/cars/all', [FrontController::class,'ViewAllCars'])->name('ViewAllCars');
 Route::get('/contactus', [FrontController::class,'contactus'])->name('contactus');
+Route::get('/wishlist', [FrontController::class,'wishlist'])->name('wishlist');
 Route::get('/aboutus', [FrontController::class,'aboutus'])->name('aboutus');
 Route::get('/search',[FrontController::class,'search'])->name('search');
 Route::get('/search',[FrontController::class,'search'])->name('search');
@@ -91,6 +92,7 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
     //Post car
     Route::resource('user/cars',PostacarController::class, ['as'=> 'user']);
     // Route::get('cars/{id}/{status}',[PostacarController::class,'status'])->name('cars.status');
+    //wishlist
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

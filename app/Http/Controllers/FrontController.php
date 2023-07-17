@@ -10,7 +10,7 @@ class FrontController extends Controller
 {
     public function index(){
         $brands=Brand::where('status','1')->get();
-        $cars=Car::where('status','1')->where('slug','!=',null)->limit(3)->latest()->get();
+        $cars=Car::where('status','1')->where('slug','!=',null)->limit(4)->latest()->get();
         $cars=$cars->map(function($car){
             $images=explode(',',$car->images);
             return [
@@ -66,7 +66,7 @@ class FrontController extends Controller
         $brands=Brand::where('status','1')->get();
         $car=Car::where('slug',$slug)->first();
         $car->images=explode(',',$car->images);
-        $similarCars=Car::where('status','1')->limit(3)->latest()->get();
+        $similarCars=Car::where('status','1')->limit(4)->latest()->get();
         $similarCars=$similarCars->map(function($car){
             $car->images=explode(',',$car->images);
             return $car;
@@ -75,15 +75,19 @@ class FrontController extends Controller
     }
 
     public function contactus(){
-       
+
         return Inertia::render('Front/ContactUsPage');
     }
 
+
     public function aboutus(){
-       
+
         return Inertia::render('Front/AboutUsPage');
     }
+    public function wishlist(){
 
+        return Inertia::render('Front/WishList');
+    }
     public function search(Request $request){
         $brands=Brand::where('status','1')->get();
         $query = Car::query();

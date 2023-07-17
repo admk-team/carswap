@@ -18,13 +18,13 @@ class UserController extends Controller
         $data = $cars->map(function($item){
             $image = explode(',',$item->images);
             $item->images = $image;
-            
+
             return $item;
         });
         return Inertia::render('User/UserDashBoard', ['cars' => $data,'success'=>request()->success,'error'=>request()->error]);
     }
     public function EditProfile(){
-        
+
         return Inertia::render('User/EditProfile');
     }
     public function updateProfile(Request $request)
@@ -41,7 +41,7 @@ class UserController extends Controller
         $user = User::findOrFail(auth()->user()->id);
         // $data = $request->all();
         $user->fill($data);
-    
+
         if ($request->hasFile('image')) {
             $img_path = $request->file('image')->store('/images/user', 'public');
             $user->image = $img_path;
@@ -56,7 +56,7 @@ class UserController extends Controller
             // return Inertia::location(route('user.editProfile', ['error' => 'Failed to update the user!']));
         }
     }
-    
+
     public function update(Request $request): RedirectResponse
     {
         return $request;
@@ -75,11 +75,11 @@ class UserController extends Controller
 
     // public function update(Request $request){
     //     $admin =  User::find(auth()->user()->id);
-        
+
     //     if(isset($request->password) && $request->password != null){
     //         $admin->password = Hash::make($request->password);
     //     }
-       
+
     //     if($admin->update()){
     //         return back()->with('success' , 'Profile Successfully Updated.');
     //     }else{

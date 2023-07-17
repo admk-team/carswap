@@ -63,7 +63,7 @@ const NavBar = (auth: any) => {
                           href={route('user.login')}
                           className="rounded-md justify-content-center text-center text-base font-medium text-white"
                         >
-                          Login 
+                          Login
                         </Link>
                         <span className='text-white py-2'> / </span>
                         <Link
