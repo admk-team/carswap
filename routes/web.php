@@ -45,6 +45,7 @@ Route::get("/cmd/{cmd}", function ($cmd) {
 //Admin Routes
 Route::prefix('admin')->name('admin.')->group(function(){
     //Dashboard
+    Route::get('/',[AdminDashboardController::class,'index'])->name('dashboard.index');
     Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
 
     //Brands
