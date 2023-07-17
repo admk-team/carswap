@@ -1,18 +1,21 @@
 import { PageProps } from "@/types";
 import Layout from "./Layouts/Layout";
+import Brands from "@/Assets/BrandLogos/brand-image.png"
+import ElectricCar from "@/Assets/BrandLogos/electric-car.png"
+import NoOfUsers from "@/Assets/BrandLogos/group.png"
 
 function Dashboard({ auth }: PageProps) {
     return (
         <div className="container-fluid">
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-                <a
+                {/* <a
                     href="#"
                     className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                 >
                     <i className="fas fa-download fa-sm text-white-50"></i>{" "}
                     Generate Report
-                </a>
+                </a> */}
             </div>
             <div className="row">
                 <div className="col-xl-3 col-md-6 mb-4">
@@ -21,14 +24,15 @@ function Dashboard({ auth }: PageProps) {
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
                                     <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Earnings (Monthly)
+                                        Brands
                                     </div>
                                     <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                        $40,000
+                                        20
                                     </div>
                                 </div>
                                 <div className="col-auto">
-                                    <i className="fas fa-calendar fa-2x text-gray-300"></i>
+                                    {/* <i className="fas fa-calendar fa-2x text-gray-300"></i> */}
+                                    <img src={Brands} className="w-8 h-8" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -40,14 +44,15 @@ function Dashboard({ auth }: PageProps) {
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
                                     <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Earnings (Annual)
+                                        Cars
                                     </div>
                                     <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                        $215,000
+                                        30
                                     </div>
                                 </div>
                                 <div className="col-auto">
-                                    <i className="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    {/* <i className="fas fa-dollar-sign fa-2x text-gray-300"></i> */}
+                                    <img src={ElectricCar} className="w-8 h-8" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -60,26 +65,27 @@ function Dashboard({ auth }: PageProps) {
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
                                     <div className="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                        Tasks
+                                        Users
                                     </div>
                                     <div className="row no-gutters align-items-center">
                                         <div className="col-auto">
                                             <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                50%
+                                                623
                                             </div>
                                         </div>
                                         <div className="col">
-                                            <div className="progress progress-sm mr-2">
+                                            {/* <div className="progress progress-sm mr-2">
                                                 <div
                                                     className="progress-bar bg-info a1"
                                                     role="progressbar"
                                                 ></div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-auto">
-                                    <i className="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                    {/* <i className="fas fa-clipboard-list fa-2x text-gray-300"></i> */}
+                                    <img src={NoOfUsers} className="w-9 h-9" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -106,7 +112,7 @@ function Dashboard({ auth }: PageProps) {
                 </div>
             </div>
 
-            <div className="row">
+            {/* <div className="row">
                 <div className="col-xl-8 col-lg-7">
                     <div className="card shadow mb-4">
                         <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -211,17 +217,17 @@ function Dashboard({ auth }: PageProps) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <div className="row">
+            {/* <div className="row">
                 <div className="col-lg-6 mb-4">
                     <div className="card shadow mb-4">
-                        <div className="card-header py-3">
+                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-primary">
                                 Projects
                             </h6>
-                        </div>
-                        <div className="card-body">
+                        </div> 
+                         <div className="card-body">
                             <h4 className="small font-weight-bold">
                                 Server Migration{" "}
                                 <span className="float-right">20%</span>
@@ -272,9 +278,9 @@ function Dashboard({ auth }: PageProps) {
                                     role="progressbar"
                                 ></div>
                             </div>
-                        </div>
+                        </div> 
                     </div>
-                    <div className="row">
+                <div className="row">
                         <div className="col-lg-6 mb-4">
                             <div className="card bg-primary text-white shadow">
                                 <div className="card-body">
@@ -355,10 +361,10 @@ function Dashboard({ auth }: PageProps) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> 
                 </div>
 
-                <div className="col-lg-6 mb-4">
+                 <div className="col-lg-6 mb-4">
                     <div className="card shadow mb-4">
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-primary">
@@ -397,7 +403,7 @@ function Dashboard({ auth }: PageProps) {
                         </div>
                     </div>
 
-                    {/* <!-- Approach --> */}
+                   
                     <div className="card shadow mb-4">
                         <div className="card-header py-3">
                             <h6 className="m-0 font-weight-bold text-primary">
@@ -420,7 +426,7 @@ function Dashboard({ auth }: PageProps) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

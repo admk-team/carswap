@@ -2,8 +2,11 @@ import React from "react";
 import { useState } from "react";
 import TopNavbar from "../Partials/TopNavbar";
 import Sidebar from "../Partials/Sidebar";
+import { useForm } from "@inertiajs/inertia-react";
 
 function Layout({ children }) {
+    const { post } = useForm();
+    
     const [style, setStyle] = useState(
         "navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
     );
@@ -73,9 +76,11 @@ function Layout({ children }) {
                             >
                                 Cancel
                             </button>
-                            <a className="btn btn-primary" href="login.html">
+                            <button className="btn btn-primary" type="button" onClick={()=>{
+                                post(route('logout'))
+                            }}>
                                 Logout
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>

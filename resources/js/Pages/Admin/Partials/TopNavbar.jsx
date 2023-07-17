@@ -53,7 +53,7 @@ function TopNavbar({ onCollapseChange }) {
                 </li>
 
                 <li className="nav-item dropdown no-arrow mx-1">
-                    <a
+                    {/* <a
                         className="nav-link dropdown-toggle"
                         href="#"
                         id="alertsDropdown"
@@ -67,7 +67,7 @@ function TopNavbar({ onCollapseChange }) {
                         <span className="badge badge-danger badge-counter">
                             3+
                         </span>
-                    </a>
+                    </a> */}
 
                     <div
                         className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -135,7 +135,7 @@ function TopNavbar({ onCollapseChange }) {
                 </li>
 
                 <li className="nav-item dropdown no-arrow mx-1">
-                    <a
+                    {/* <a
                         className="nav-link dropdown-toggle"
                         href="#"
                         id="messagesDropdown"
@@ -149,7 +149,7 @@ function TopNavbar({ onCollapseChange }) {
                         <span className="badge badge-danger badge-counter">
                             7
                         </span>
-                    </a>
+                    </a> */}
 
                     <div
                         className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -283,14 +283,11 @@ function TopNavbar({ onCollapseChange }) {
                             <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
                         </a>
-                        <a className="dropdown-item" href="#">
+                        <a className="dropdown-item" href={route('user-profile')} onClick={()=>alert('Under Development')}>
                             <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                             Settings
                         </a>
-                        <a className="dropdown-item" href="#">
-                            <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Activity Log
-                        </a>
+                       
                         <div className="dropdown-divider"></div>
                         <a
                             className="dropdown-item"

@@ -3,14 +3,78 @@ import NavBar2 from '@/Components/Navbar/NabBar2'
 import Footer from '../Footer/Footer';
 import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { Button } from 'flowbite-react';
 
 export default function AllCars({ brands, cars,auth }:any) {
     const [showModal, setShowModal] = useState(false);
     const [compare, setCompare]:any = useState([])
     const [total, setTotal]:any = useState(0)
+    const [min, setMin] = useState('');
+    const [max, setMax] = useState('');
+    const [minMileage, setMinMileage] = useState('');
+    const [maxMileage, setMaxMileage] = useState('');
+    
+    const { data, setData, errors, get } = useForm({
+        searchTerm: '',
+        min: 0,
+        model: 0,
+        max: 0,
+        minMileage:0,
+        maxMileage:0,
+        brand: ''
+    })
 
+    const handlePrice = (value:any) => {
+        let newMin = '';
+        let newMax = '';
+        if (value === 'option1') {
+            newMin = '0';
+            newMax = '3000000';
+        }
+        if (value === 'option2') {
+            newMin = '3000000';
+            newMax = '6000000';
+        }
+        if (value === 'option3') {
+            newMin = '6000000';
+            newMax = '10000000';
+        }
+        if (value === 'option4') {
+            newMin = '10000000';
+            newMax = '15000000';
+        }
+        if (value === 'option5') {
+            newMin = '15000000';
+            newMax = '0';
+        }
+        setData({ ...data, min: newMin, max: newMax });
+    };
+    const handleMileage = (value:any) => {
+        let newMinMileage = '';
+        let newMaxMileage = '';
+        if (value === 'mileage1') {
+            newMinMileage = '0';
+            newMaxMileage = '30000';
+        }
+        if (value === 'mileage2') {
+            newMinMileage = '30000';
+            newMaxMileage = '60000';
+        }
+        if (value === 'mileage3') {
+            newMinMileage = '60000';
+            newMaxMileage = '100000';
+        }
+        if (value === 'mileage4') {
+            newMinMileage = '100000';
+            newMaxMileage = '150000';
+        }
+        if (value === 'mileage5') {
+            newMinMileage = '150000';
+            newMaxMileage = '0';
+        }
+        setData({ ...data, minMileage: newMinMileage, maxMileage: newMaxMileage });
+    };
     const handleSetCar = (id=0)=>{
         let car = cars.find((item:any) => (item.id === id))
         setCompare(car);
@@ -19,6 +83,9 @@ export default function AllCars({ brands, cars,auth }:any) {
     useEffect(() => {
         setTotal(cars.length);
     }, [cars]);
+    const handleSearch = () => {
+        get(route('search'));
+    }
     return (
         <div>
             <Head title='All Cars'/>
@@ -26,54 +93,55 @@ export default function AllCars({ brands, cars,auth }:any) {
             <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
                 <div className="bg-gray-200 p-4">
                     <p className="font-black text-gray-950 text-3xl">Cars Up for Sale</p>
-                    <form action="">
+                    <form>
                         <div className="flex flex-col mt-2">
                             <div className="relative w-full max-w-xl shadow-md">
                                 <input
                                     type="text"
                                     placeholder="Search For car by Model, brand"
-                                    className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" name='search' value={data.searchTerm} onChange={(e) => setData('searchTerm',e.target.value)}
                                 />
-                                <button className="absolute top-0 right-0 h-full bg-green-500 text-white px-4 rounded-md focus:outline-none">
+                                <button className="absolute top-0 right-0 h-full bg-green-500 text-white px-4 rounded-md focus:outline-none" onClick={() => handleSearch()} type="button">
                                     Search
                                 </button>
                             </div>
 
                             <div className="flex flex-wrap mt-2 gap-2">
 
-                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
+                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md" onChange={(e) => handlePrice(e.target.value)}>
                                     <option value="">Price</option>
                                     <option value="option1">Under 3M</option>
                                     <option value="option2">3M-6M</option>
-                                    <option value="option2">6M-10M</option>
-                                    <option value="option2">10M-15M</option>
-                                    <option value="option2">Above 15M</option>
+                                    <option value="option3">6M-10M</option>
+                                    <option value="option4">10M-15M</option>
+                                    <option value="option5">Above 15M</option>
                                 </select>
 
-                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
+                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md" onChange={(e) => setData('brand',e.target.value)}>
                                     <option value="">Brand</option>
                                     {brands.map((option: any) => (
-                                        <option key={option.id} value={option.title}>
+                                        <option key={option.id} value={option.id}>
                                             {option.title}
                                         </option>
                                     ))}
 
                                 </select>
-                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
-                                    <option value="">Mileage</option>
-                                    <option value="option1">2019-2023</option>
-                                    <option value="option2">2014-2018</option>
-                                    <option value="option2">2009-2013</option>
-                                    <option value="option2">2004-2008</option>
-                                    <option value="option2">Below 2004</option>
+                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md" onChange={(e) => setData('model',e.target.value)}>
+                                    <option value="">Model</option>
+                                    <option value="2000">2000</option>
+                                    <option value="2001">2001</option>
+                                    <option value="2002">2002</option>
+                                    <option value="2003">2003</option>
+                                    <option value="2004">2004</option>
+                                    <option value="2005">2005</option>
                                 </select>
-                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md">
-                                    <option value="">Engine</option>
-                                    <option value="option1">0-30,000 KM</option>
-                                    <option value="option2">30,000-60,000 KM</option>
-                                    <option value="option2">60,000-120,000 KM</option>
-                                    <option value="option2">120,000-150,000 KM</option>
-                                    <option value="option2">Above 150,000 KM</option>
+                                <select className="w-full sm:w-auto max-w-xs mt-2 sm:mt-0 ml-0 sm:ml-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none shadow-md" onChange={(e) => handleMileage(e.target.value)}>
+                                    <option value="">Mileage</option>
+                                    <option value="mileage1">0-30,000 KM</option>
+                                    <option value="mileage2">30,000-60,000 KM</option>
+                                    <option value="mileage3">60,000-120,000 KM</option>
+                                    <option value="mileage4">120,000-150,000 KM</option>
+                                    <option value="mileage5">Above 150,000 KM</option>
                                 </select>
                             </div>
                         </div>

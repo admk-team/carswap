@@ -21,11 +21,11 @@ const SignUpPage = () => {
         };
     }, []);
 
-    const submit: FormEventHandler = (e) => {
-        e.preventDefault();
-
+    const submit = () => {
+        // e.preventDefault();
         post(route('user.signup'));
     };
+    
     return (
         <>
         <Head title='Register'/>
@@ -35,7 +35,7 @@ const SignUpPage = () => {
                         <div className='m-6 '>
                             <h2 className="text-2xl text-center text-dark uppercase font-bold mt-12">Sign Up</h2>
                             <p className="text xl text-center text-dark mb-4">Welcome to Carswap</p>
-                            <form onSubmit={submit}>
+                            <form >
                                 <div className="mb-3">
                                     <input
                                         type="text"
@@ -116,8 +116,9 @@ const SignUpPage = () => {
                                 </div>
                                 <div className="text-center">
                                     <button
-                                        type="submit"
+                                        type="button"
                                         className="bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-xl mt-2"
+                                        onClick={()=>submit()}
                                     >
                                         Sign Up
                                     </button>
