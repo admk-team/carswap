@@ -2,12 +2,15 @@ import React from "react";
 import { useState } from "react";
 import NavLink from "@/Components/NavLink";
 import { Link } from "@inertiajs/react";
+import Logo from "@/Assets/headerlogo.png"
+
 function Sidebar({ onCollapseChange, style }) {
     return (
         <ul className={style} id="accordionSidebar">
             <Link href="" className="sidebar-brand d-flex align-items-center justify-content-center">
-                <div className="sidebar-brand-icon rotate-n-15">
-                    <i className="fas fa-laugh-wink"></i>
+                <div className="sidebar-brand-icon ">
+                    {/* <i className="fas fa-laugh-wink"></i> */}
+                    <img src={Logo} alt=""  />
                 </div>
                 <div className="sidebar-brand-text mx-3">Car Swap</div>
                 <div className="text-center d-none d-md-inline mt-4">
