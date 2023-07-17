@@ -372,15 +372,21 @@ export default function CarDetail({ car, auth, similarCars }: any) {
                 <div className='p-4'>
                     <h3 className="font-bold text-gray-900 text-2xl">Reviews:</h3>
                     <div className="bg-white border border-gray-300 p-4 rounded-lg mt-3 shadow-md">
+
                         <h1 className='text-gray-950 font-extrabold text-lg'>What was your overall experience with our car swapping and purchasing service?</h1>
                         <div className="flex mt-3">
-                            <Star/>
+                            <Star />
                         </div>
 
                         <div className='mt-3'>
                             <textarea id="message" rows={4} className=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
                             <button className='bg-emerald-500 text-white px-3 py-2.5 rounded-md mt-3 hover:bg-emerald-600'>Submit</button>
                         </div>
+                        
+                       
+
+
+                    
                     </div>
                 </div>
                 {

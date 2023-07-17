@@ -14,7 +14,7 @@ const Star = () => {
 
         for (let i = 1; i <= 5; i++) {
             const starClass =
-                i <= rating ? 'text-yellow-300' : 'text-gray-400 ';
+                i <= rating ? 'text-emerald-400' : 'text-gray-400 ';
 
             stars.push(
                 <svg key={i}

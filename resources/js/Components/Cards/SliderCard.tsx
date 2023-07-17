@@ -77,7 +77,7 @@ const SliderCard = (brands: any) => {
 
   return (
     <>
-      <div className="w-full max-w-sm p-4 bg-gray-50 bg-opacity-50 shadow-xl  rounded-lg shadow sm:p-6 md:p-8 ">
+      <div className="w-full max-w-sm p-4 bg-gray-50 bg-opacity-70 shadow-xl  rounded-lg  sm:p-6 md:p-8 ">
         <h1 className="text-center text-2xl font-bold mb-4 text-gray-950">Find your ideal car</h1>
         <div className="flex items-center relative">
           <input id='searchLocation' type="search" placeholder="Search location..." value={location} onChange={(e) => handleSuggestions(e.target.value)} className="relative border border-gray-300 rounded-lg py-2 px-4 w-full shadow-md" onClick={handleInputChange} />
@@ -94,7 +94,7 @@ const SliderCard = (brands: any) => {
           {priceGroups?.map((pg: any, pgindex: any) => (
             <button key={pgindex} type="button"
               onClick={() => handlePrice(pg.min, pg.max)}
-              className="border mb-3 text-sm focus:bg-emerald-500 font-extrabold bg-green border-gray-900 rounded-lg py-1 px-2 shadow-md mr-1 text-gray-950 ">
+              className="border mb-3 text-sm focus:bg-emerald-500 font-extrabold bg-white-400 border-gray-900 rounded-lg py-1 px-2 shadow-md mr-1 text-gray-950 ">
               {pg?.name}
             </button>
           ))
@@ -104,7 +104,7 @@ const SliderCard = (brands: any) => {
         <div className="grid grid-cols-6 gap-0 mt-2">
           {
             brands.brands.brands?.map((brand: any) => (
-              <button key={brand.id} className="border pt-1 pl-1 focus:bg-emerald-500" onClick={() => setData('brand', brand?.id)}>
+              <button key={brand.id} className="border pt-1 pl-1 bg-white-400 focus:bg-emerald-500" onClick={() => setData('brand', brand?.id)}>
                 <img src={"/storage/" + brand?.image} alt="Image 1" className="w-10 h-10 object-contain" />
               </button>
             ))
