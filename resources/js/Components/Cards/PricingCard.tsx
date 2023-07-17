@@ -63,7 +63,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     xmlns="http://www.w3.org/2000/svg"
                                     className={`w-7 h-7 ${selectedCarId === car.id ? 'text-red-500' : 'text-gray-500'
                                         } absolute top-2 right-2`}
-                                    fill={selectedCarId === car.id ? 'red' : 'none'}
+                                    fill={selectedCarId === car.id ? 'red' : 'white'}
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
                                     onClick={() => handleSetHeart(car.id)}

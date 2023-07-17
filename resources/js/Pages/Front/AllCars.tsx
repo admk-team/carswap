@@ -5,6 +5,7 @@ import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"
 import { Head, Link, useForm } from '@inertiajs/react';
 import { Button } from 'flowbite-react';
+import PricingCard from '@/Components/Cards/PricingCard';
 
 export default function AllCars({ brands, cars,auth }:any) {
     const [showModal, setShowModal] = useState(false);
@@ -14,7 +15,7 @@ export default function AllCars({ brands, cars,auth }:any) {
     const [max, setMax] = useState('');
     const [minMileage, setMinMileage] = useState('');
     const [maxMileage, setMaxMileage] = useState('');
-    
+
     const { data, setData, errors, get } = useForm({
         searchTerm: '',
         min: 0,
@@ -156,7 +157,7 @@ export default function AllCars({ brands, cars,auth }:any) {
                         </div>
                     </div>
                     <div>
-                        <div className="flex justify-center">
+                        {/* <div className="flex justify-center">
                             <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 mt-6">
                                 {cars?.map((car: any, index: any) => (
 
@@ -213,84 +214,11 @@ export default function AllCars({ brands, cars,auth }:any) {
                                     </div>
                                 ))}
                             </div>
+                        </div> */}
+
+                        <div>
+                        <PricingCard cars={cars}/>
                         </div>
-                        {showModal ? (
-                            <>
-                                <div
-                                    className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-                                >
-                                    <div className="relative w-50 my-6 mx-auto max-w-3xl ">
-                                        {/*content*/}
-                                        <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                                            {/*header*/}
-                                            <div className="flex justify-center pt-4 ">
-                                                <h3 className=" align-center text-2xl font-semibold">
-                                                    Swap Car
-                                                </h3>
-                                            </div>
-
-                                            {/*body*/}
-                                            <hr className="mt-2 border-t-2 border-solid border-emerald-500  mx-3 my-3" />
-                                            <div className="relative p-4 flex">
-                                                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 mt-6">
-                                                    <div className="col-span-1 md:col-span-2 lg:col-span-1">
-                                                        <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
-                                                        <img src={"/storage" + compare.images[0]}  className="w-full h-4/5 object-contain"></img>
-                                                        <p className='font-semibold text-gray-950 mt-2 text-2xl '>Price</p>
-                                                        <p className='text-emerald-500'>$ {compare.price}</p>
-                                                    </div>
-                                                    <div className="col-span-1 md:col-span-1 lg:col-span-1 flex justify-center items-center">
-                                                        <img src={Transfer} className="w-full h-20 object-contain"></img>
-                                                    </div>
-                                                    <div className="col-span-1 md:col-span-2 lg:col-span-1">
-                                                        <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>My Car</p>
-                                                        <img src={Cover} className="w-full h-4/5 object-contain"></img>
-                                                        <p className='font-semibold text-gray-950 mt-2 text-2xl '>Price</p>
-                                                        <p className='text-emerald-500 mb-2 mt-2'>$ 43496.10</p>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div className='p-4 mt-3'>
-                                                <p className='text-gray-950 text-2xl font-bold mb-2'>Difference</p>
-                                                <p className='text-emerald-500'>$ 32,360.81</p>
-                                                <p className='font-semibold'>You have to Pay <span className="text-emerald-500">$ 32,360.81</span> to make this Deal happen.</p>
-                                            </div>
-                                            <hr className="mt-2 border-t-2 border-solid border-emerald-500 mx-3 my-3" />
-                                            {/*footer*/}
-                                            <div className="flex flex-col items-center justify-center p-6">
-                                                <div className="flex flex-col space-y-2">
-                                                    <button
-                                                        className="bg-gray-950 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
-                                                        type="button"
-                                                        onClick={() => setShowModal(false)}
-                                                    >
-                                                        Pay Now
-                                                    </button>
-                                                    <button
-                                                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
-                                                        type="button"
-                                                        onClick={() => setShowModal(false)}
-                                                    >
-                                                        Book Inspection
-                                                    </button>
-                                                    <button
-                                                        className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none ease-linear transition-all duration-150"
-                                                        type="button"
-                                                        onClick={() => setShowModal(false)}
-                                                    >
-                                                        Close
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-                            </>
-                        ) : null}
-
                     </div>
                 </div>
             </div>
