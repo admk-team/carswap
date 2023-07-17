@@ -50,6 +50,11 @@ const ApprovedCar = ({approved}: any) => {
                                     </tr>
                                 </tbody>
                             </table>
+                            <div className="flex flex-wrap mt-2 mx-2">
+                                    <h6 className="mt-2 px-2 py-1 text-base font-medium text-center text-white bg-blue-500 hover:bg-green-600 self-end">
+                                        Approved
+                                    </h6>
+                                </div>
                         </div>
                     </div>
                 </div>

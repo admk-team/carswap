@@ -34,7 +34,6 @@ const UserProfile = ({ auth,cars,pendings,approved }: any) =>  {
             </div>
             <div className="flex flex-col">
               <Link href={route('user.editProfile')} className="underline hover: text-dark font-medium mb-2 text-center">Edit Profile</Link>
-              <button className="underline hover: text-dark font-medium mb-2">Liked Ads</button>
               <button className="underline hover: text-dark font-medium mb-2">Inbox</button>
             </div>
           </div>
