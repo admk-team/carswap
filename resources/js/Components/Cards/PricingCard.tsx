@@ -29,7 +29,6 @@ const PricingCard = ({ brands, cars, auth }: any) => {
 
     }
     const handleSetHeart = (id = 0) => {
-        
         fetch('user/wishlist/' + id).then((response)=>{
             return response.json();
         }).then((data)=>{
