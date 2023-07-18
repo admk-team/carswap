@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"
-import { Link } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
 
 
 const PricingCard = ({ brands, cars, auth }: any) => {
@@ -11,7 +11,6 @@ const PricingCard = ({ brands, cars, auth }: any) => {
     const [total, setTotal]: any = useState(0)
     const [isTapped, setIsTapped] = useState(false);
     const [selectedCarId, setSelectedCarId] = useState(0);
-
 
 
     const handleSetCar = (id = 0) => {
@@ -29,14 +28,12 @@ const PricingCard = ({ brands, cars, auth }: any) => {
 
     }
     const handleSetHeart = (id = 0) => {
-        1
         if (selectedCarId === id) {
             setSelectedCarId(0);
         } else {
             setSelectedCarId(id);
         }
     };
-
 
     useEffect(() => {
         setTotal(cars.length);

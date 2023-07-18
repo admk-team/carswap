@@ -7,30 +7,9 @@ use Illuminate\Support\Facades\Validator;
 
 class RavepayController extends Controller
 {
-    public function store(Request $request){
-        $validator = Validator::make($request->all(), [
-            // 'amount' => 'required|numeric|min:1',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $rave = new \Rave\Rave(config('services.rave.public_key'), config('services.rave.secret_key'));
-
-        $paymentData = [
-            'amount' => $request->input('amount'),
-            'txref' => uniqid('TXREF_'),
-            'redirect_url' => route('user.callback'),
-        ];
-
-        $payment = $rave->initializePayment($paymentData);
-
-        if ($payment && $payment->data->link) {
-            return redirect($payment->data->link);
-        } else {
-            return redirect()->back()->withErrors(['error' => 'Failed to initiate payment. Please try again.']);
-        }
+    public function store(Request $request)
+    {
+        return redirect()->intended('https://flutterwave.com/pay/carswaplimitedsyuy');
     }
     public function handleCallback(Request $request)
     {

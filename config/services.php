@@ -30,10 +30,4 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-    'rave' => [
-        'public_key' => env('RAVE_PUBLIC_KEY'),
-        'secret_key' => env('RAVE_SECRET_KEY'),
-        'encryption_key' => env('RAVE_ENCRYPTION_KEY'),
-    ],
-
 ];
