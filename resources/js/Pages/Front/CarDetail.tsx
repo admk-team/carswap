@@ -15,6 +15,8 @@ import Footer from '../Footer/Footer';
 import { Head, Link } from '@inertiajs/react';
 import React, { useState } from 'react'
 import Star from '@/Components/Rating/Star';
+import Cover from "@/Assets/revo-img.png";
+import Transfer from "@/Assets/transfer.png"
 
 export default function CarDetail({ car, auth, similarCars }: any) {
     const formattedDate = new Date(car.created_at).toLocaleDateString('en-US', {
@@ -88,7 +90,7 @@ export default function CarDetail({ car, auth, similarCars }: any) {
                         <div className="col-span-12 md:col-span-6">
                             <div className="flex flex-col mx-3 h-5/6">
                                 <div className="bg-white rounded-lg shadow-md p-6">
-                                    <h2 className="text-lg font-bold mb-4 text-center text-emerald-500">Swap Buy Calculator:</h2>
+                                    <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Swap Buy Calculator</h2>
                                     <hr className='mb-4' />
                                     <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow'>
                                         <p className='font-bold'>Car Price</p>
@@ -114,11 +116,42 @@ export default function CarDetail({ car, auth, similarCars }: any) {
                                     >
                                         Calculate
                                     </button>
+                                    <div className="flex justify-center items-center mt-3">
+                                        <hr className="w-3/6 sm:w-1/6 border-0 border-t-2 border-black" />
+                                        <p className="font-bold text-2xl uppercase mx-4">or</p>
+                                        <hr className="w-3/6 sm:w-1/6 border-0 border-t-2 border-black" />
+                                    </div>
+                                    <button
+                                        className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3'
 
+                                    >
+                                        Buy Now
+                                    </button>
                                 </div>
                                 <div className="bg-white rounded-lg shadow-md p-6 mt-3">
-                                    <h2 className="text-lg font-bold mb-4">Dedicated Support Team:</h2>
-                                    <p className="text-gray-700">Carswap has a committed support team on hand to provide you with the necessary knowledge to help you make better purchasing decisions.</p>
+                                    <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Swapping</h2>
+                                    <hr />
+                                    <div className="relative p-4 flex">
+                                        <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 ">
+                                            <div className="col-span-1 md:col-span-2 lg:col-span-1">
+                                                <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
+                                                <img src={"/storage" + car.images[0]} className="w-full h-4/5 object-contain"></img>
+                                            </div>
+                                            <div className="col-span-1 md:col-span-1 lg:col-span-1 flex justify-center items-center">
+                                                <img src={Transfer} className="w-full h-20 object-contain"></img>
+                                            </div>
+                                            <div className="col-span-1 md:col-span-2 lg:col-span-1">
+                                                <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>My Car</p>
+                                                <img src={Cover} className="w-full h-4/5 object-contain"></img>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <button
+                                        className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
+                                    >
+                                        Swap Now
+                                    </button>
                                 </div>
 
                             </div>
@@ -471,11 +504,11 @@ export default function CarDetail({ car, auth, similarCars }: any) {
                                                     </table>
                                                 </div>
 
-                                                <div className="flex items-center justify-between mt-4">
+                                                {/* <div className="flex items-center justify-between mt-4">
 
                                                     <a href="#" className="text-white bg-black hover:bg-gray-600 font-medium  text-sm px-6 py-2.5 text-center  w-36">Cash Purchase</a>
                                                     <a href="#" className="text-white bg-green-500 hover:bg-green-600 font-medium  text-sm px-6 py-2.5 text-center  w-32">Swap</a>
-                                                </div>
+                                                </div> */}
 
 
                                             </div>

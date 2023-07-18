@@ -116,20 +116,20 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     <table className="w-full">
                                         <tbody>
                                             <tr>
-                                                <th className="px-2 py-1 font-bold-300 text-gray-600">
+                                                <th className="px-2 py-1 font-bold-300 font-1xl text-gray-600">
                                                     Condition
                                                 </th>
-                                                <th className="px-3 py-1 text-gray-800">Engine</th>
-                                                <th className="px-3 py-1 text-gray-800">Mileage</th>
+                                                <th className="px-3 py-1 font-bold font-1xl text-gray-800">Engine</th>
+                                                <th className="px-3 py-1 font-bold  font-1xl text-gray-800">Mileage</th>
                                             </tr>
                                             <tr>
-                                                <th className="px-2 py-1 text-gray-600">
+                                                <th className="px-2 py-1 font-normal">
                                                     {car?.condition}
                                                 </th>
-                                                <th className="px-3 py-1 text-gray-800">
+                                                <th className="px-3 py-1 font-normal">
                                                     {car?.engine_capacity}
                                                 </th>
-                                                <th className="px-3 py-1 text-gray-800">
+                                                <th className="px-3 py-1 font-normal">
                                                     {car?.mileage}
                                                 </th>
                                             </tr>
