@@ -114,6 +114,7 @@ class UserController extends Controller
     }
     public function wishlist(){
         $wishlist = auth()->user()->wishlist?->map(function ($item){
+            $item->images=explode(',',$item->images);
             $item->is_fav = true;
             return $item;
         });
@@ -130,9 +131,7 @@ class UserController extends Controller
             $msg='Car Added to wishlist';
 
         }
-
-        return response()->json(['message' => $msg, 'data'=> auth()->user()->wishlist()->pluck('cars.id')]);
-
+        return redirect()->back()->withSuccess(['message' => $msg, 'data'=> auth()->user()->wishlist()->pluck('cars.id')]);
     }
 
 }

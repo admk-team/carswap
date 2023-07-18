@@ -81,7 +81,7 @@ Route::post('/signup-post',[AuthController::class,'signup'])->name('user.signup'
 Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(function () {
     Route::get('/dashboard', [FrontUserController::class, 'index'])->name('dashboard');
     Route::get('/wishlist', [FrontUserController::class,'wishlist'])->name('wishlist');
-    Route::get('/wishlist/{id}', [FrontUserController::class,'add_to_wishlist'])->name('wishlist.add');
+    Route::get('/wishlist/{id}', [FrontUserController::class,'add_to_wishlist'])->name('add.wishlist');
     //User Edit Profile
     Route::get('/profile', [FrontUserController::class,'EditProfile'])->name('editProfile');
     Route::post('/updateProfile',[FrontUserController::class,'updateProfile'])->name('updateProfile');
