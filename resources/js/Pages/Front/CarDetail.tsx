@@ -33,15 +33,7 @@ export default function CarDetail({ car, auth, similarCars }: any) {
         setMessage(event.target.value);
     };
 
-    // const handleSubmit = () => {
 
-    //     console.log('Rating:', rating);
-    //     console.log('Message:', message);
-
-
-    //     setRating(0);
-    //     setMessage('');
-    // };
 
     const handleSubmit = () => {
         setIsEditMode(false);

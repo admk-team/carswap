@@ -4,6 +4,7 @@ import backgroundedImage from '../Assets/maxresdefault 1.jpg';
 import { useForm } from '@inertiajs/inertia-react';
 import InputError from '@/Components/InputError';
 import { Head, Link } from '@inertiajs/react';
+import PreviouImage from "@/Assets/left.png"
 
 const SignUpPage = () => {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -31,6 +32,11 @@ const SignUpPage = () => {
         <Head title='Register'/>
             <div className="mx-auto max-w-screen-xl w-full h-full mt-12 p-12">
                 <div className="border border-gray-500 rounded-xl shadow-md">
+                <div className='absolute flex mt-1 ml-3'>
+                        <Link href={route('front.index')} className=' text-blue-500 text-lg'>Home</Link>
+                        <img src={PreviouImage} alt="" className='w-6 h-6 mt-1' />
+                        <p className='text-lg'>SignUp</p>
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 ">
                         <div className='m-6 '>
                             <h2 className="text-2xl text-center text-dark uppercase font-bold mt-12">Sign Up</h2>

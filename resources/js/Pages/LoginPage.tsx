@@ -1,16 +1,17 @@
-import React, { useEffect,FormEventHandler, useState } from 'react'
+import React, { useEffect, FormEventHandler, useState } from 'react'
 import backgroundedImage from '../Assets/Login.png';
 import GoogImage from "@/Assets/Google.png"
 import FacImage from "@/Assets/facebook.png"
 import { Head, Link, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
+import PreviouImage from '@/Assets/left.png';
 
 const LoginPage = ({ status, canResetPassword }: { status?: string, canResetPassword?: boolean }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
         remember: false,
-        deactivated:false
+        deactivated: false
     });
     useEffect(() => {
         return () => {
@@ -25,19 +26,26 @@ const LoginPage = ({ status, canResetPassword }: { status?: string, canResetPass
     };
     return (
         <>
-        <Head title="Log in" />
-        {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+            <Head title="Log in" />
+            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
             <div className="mx-auto max-w-screen-xl w-full h-full mt-12 p-12">
+
                 <div className="border border-gray-500 rounded-xl shadow-md">
+                    <div className='absolute flex mt-1 ml-3'>
+                        <Link href={route('front.index')} className=' text-blue-500 text-lg'>Home</Link>
+                        <img src={PreviouImage} alt="" className='w-6 h-6 mt-1' />
+                        <p className='text-lg'>LogIn</p>
+                    </div>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 ">
                         <div className='m-6'>
                             <h2 className="text-2xl text-center text-dark uppercase font-bold mt-12">Login</h2>
                             <p className="text xl text-center text-dark mb-4">Welcome to Carswap</p>
                             {
                                 errors && errors.deactivated ?
-                                <p className="text xl text-center text-danger mb-4">{errors.deactivated}</p>
-                                :
-                                ''
+                                    <p className="text xl text-center text-danger mb-4">{errors.deactivated}</p>
+                                    :
+                                    ''
                             }
                             <form onSubmit={submit}>
 

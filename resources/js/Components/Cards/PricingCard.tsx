@@ -45,7 +45,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
     return (
         <div className="mx-auto max-w-screen-xl w-full h-full mt-8 ">
             <div className="flex">
-                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 mt-6">
+                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 mt-6 p-4  ">
                     {cars?.map((car: any, index: any) => (
                         <div
                             key={index}
