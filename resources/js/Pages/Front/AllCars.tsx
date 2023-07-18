@@ -87,6 +87,14 @@ export default function AllCars({ brands, cars,auth }:any) {
     const handleSearch = () => {
         get(route('search'));
     }
+    const handleSetHeart = (id = 0) => {
+        
+        fetch('user/wishlist/' + id).then((response)=>{
+            return response.json();
+        }).then((data)=>{
+            console.log(data);
+        });
+    };
     return (
         <div>
             <Head title='All Cars'/>

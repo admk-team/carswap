@@ -5,13 +5,14 @@ import { Link, useForm } from '@inertiajs/react';
 
 
 const PricingCard = ({ brands, cars, auth }: any) => {
+    console.log(cars)
     const [showModal, setShowModal] = useState(false);
     const [inspectionModal, setInspectionModal] = useState(false);
     const [compare, setCompare]: any = useState([])
     const [total, setTotal]: any = useState(0)
     const [isTapped, setIsTapped] = useState(false);
     const [selectedCarId, setSelectedCarId] = useState(0);
-
+    const {data,setData,errors,get}=useForm();
 
     const handleSetCar = (id = 0) => {
         let car = cars.find((item: any) => (item.id === id))
@@ -33,6 +34,13 @@ const PricingCard = ({ brands, cars, auth }: any) => {
         } else {
             setSelectedCarId(id);
         }
+        get(route('user.add.wishlist',id))
+        // .then((response)=>{
+        //     setSelectedCarId(id)
+        //     return response.json();
+        // }).then((data)=>{
+        //     console.log(data);
+        // });
     };
 
     useEffect(() => {
@@ -58,9 +66,9 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                 </Link>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className={`w-7 h-7 ${selectedCarId === car.id ? 'text-red-500' : 'text-gray-500'
+                                    className={`w-7 h-7 ${selectedCarId === car.id || car.is_fav==true ? 'text-red-500' : 'text-gray-500'
                                         } absolute top-2 right-2`}
-                                    fill={selectedCarId === car.id ? 'red' : 'white'}
+                                    fill={selectedCarId === car.id || car.is_fav==true ? 'red' : 'white'}
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
                                     onClick={() => handleSetHeart(car.id)}
