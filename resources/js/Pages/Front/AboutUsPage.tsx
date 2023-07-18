@@ -25,46 +25,56 @@ const AboutUsPage = (auth: any) => {
                 </div>
                 <div className="mx-auto max-w-screen-xl w-full h-full mt-12 ">
 
-                    <div className="flex flex-col md:flex-row mx-8">
+                    <div className="flex flex-col justify-center md:flex-row mx-8">
                         <div className="">
-                            <div className="bg-white border border-gray-300 rounded-lg shadow-md mt-6 lg:mt-36">
-                                <img src={smallImage} alt="" />
+                            <div className="bg-white border border-gray-300 rounded-lg shadow-md mt-10 lg:mt-36">
+                                <img src={smallImage} alt=""  />
                             </div>
                         </div>
                         <div className="md:w-2/3 ll-2 lg:pl-28">
-                           
-                                <h1 className='text-gray-950 text-lg font-extrabold mb-2 mt-4'>Welcome To Carswap.ng</h1>
-                                <p className='text-gray-900 text-lg border-b border-gray-950 pb-4 mb-2'>Elevate Your Ride With Our  Carswap  Company – Experience The Finest In Transportation Services.</p>
-                                
-                                <div className="flex ">
-                                    <div className='flex flex-col '>
-                                        <div className="flex flex-col items-center mt-3 mr-10 ">
-                                            <img src={Icon1} alt="" className='w-20 h-20' />
-                                            <h2 className="text-gray-900 text-base font-bold text-center mt-2">24/7 Assistance Support</h2>
-                                            <p className="text-gray-700 text-sm text-center">We are here for you around the clock. Our dedicated support team is ready to assist you anytime, ensuring prompt responses and resolving any queries or concerns you may have.</p>
-                                        </div>
-                                        <div className="flex flex-col items-center mt-5 mr-10">
-                                            <img src={Icon3} alt="" className='w-16 h-16' />
-                                            <h2 className="text-gray-900 text-base text-center font-bold mt-3">Zero Wait Time</h2>
-                                            <p className="text-gray-700 text-sm text-center">You don't have to wait for replies and after purchase your car will be delivered to you. </p>
-                                        </div>
+
+                            <h1 className='text-gray-950 text-lg font-extrabold mb-2 mt-4'>Welcome To Carswap.ng</h1>
+                            <p className='text-gray-900 text-lg border-b border-gray-950 pb-4 mb-2'>Carswap.ng is Nigeria's first largest car swap marketplace launched in 2018 and incorporated in Nigeria as Carswap Limited. It promises to make car ownership seamless among users.
+                                <br /><br />
+                                Our mission is to end the tussle of car replacement (selling an existing car to buy a new one), and selling a car to meet financial need. At Carswap.ng, you can use your old to buy a new car by paying the price difference (upgrade), or use your car to get quick cash and a cheaper car (downgrade). You must always have a car to drive!
+                                <br /><br />
+                                Our range of services are designed to ensure privacy of users, anti fraud, and ensure
+                                security of users. No stranger shall contact a user. We are totally responsible for our
+                                users.
+                                <br /><br />
+                                As we continue to expand the online marketplace across Nigeria, we hope to be at your
+                                doorstep soon.
+                            </p>
+
+                            <div className="flex ">
+                                <div className='flex flex-col '>
+                                    <div className="flex flex-col items-center mt-3 mr-10 ">
+                                        <img src={Icon1} alt="" className='w-20 h-20' />
+                                        <h2 className="text-gray-900 text-base font-bold text-center mt-2">24/7 Assistance Support</h2>
+                                        <p className="text-gray-700 text-sm text-center">We are here for you around the clock. Our dedicated support team is ready to assist you anytime, ensuring prompt responses and resolving any queries or concerns you may have.</p>
                                     </div>
-                                    <div className='flex flex-col'>
-                                        <div className="flex flex-col items-center  mt-3 ml-10">
-                                            <img src={Icon2} alt="" className='w-20 h-20' />
-                                            <h2 className="text-gray-900 text-base text-center font-bold mt-2 ">Cilent Satisfication</h2>
-                                            <p className="text-gray-700 text-sm text-center">We have a client satisfaction rate. Our dedicated support team is ready to assist you anytime, ensuring prompt responses and resolving any queries or concerns you may have contact with us.</p>
-                                        </div>
-                                        <div className="flex flex-col items-center mt-9 ml-10">
-                                            <img src={Icon4} alt="" className='w-20 h-20' />
-                                            <h2 className="text-gray-900 text-base text-center font-bold mt-2">Fixed Rates</h2>
-                                            <p className="text-gray-700 text-sm text-center">There are fixed rates of car the car will be of price
-                                                that is being negotiated and there will be no
-                                                complains about it </p>
-                                        </div>
+                                    <div className="flex flex-col items-center mt-5 mr-10">
+                                        <img src={Icon3} alt="" className='w-16 h-16' />
+                                        <h2 className="text-gray-900 text-base text-center font-bold mt-3">Zero Wait Time</h2>
+                                        <p className="text-gray-700 text-sm text-center">You don't have to wait for replies and after purchase your car will be delivered to you. </p>
                                     </div>
                                 </div>
-                           
+                                <div className='flex flex-col'>
+                                    <div className="flex flex-col items-center  mt-3 ml-10">
+                                        <img src={Icon2} alt="" className='w-20 h-20' />
+                                        <h2 className="text-gray-900 text-base text-center font-bold mt-2 ">Cilent Satisfication</h2>
+                                        <p className="text-gray-700 text-sm text-center">We have a client satisfaction rate. Our dedicated support team is ready to assist you anytime, ensuring prompt responses and resolving any queries or concerns you may have contact with us.</p>
+                                    </div>
+                                    <div className="flex flex-col items-center mt-9 ml-10">
+                                        <img src={Icon4} alt="" className='w-20 h-20' />
+                                        <h2 className="text-gray-900 text-base text-center font-bold mt-2">Fixed Rates</h2>
+                                        <p className="text-gray-700 text-sm text-center">There are fixed rates of car the car will be of price
+                                            that is being negotiated and there will be no
+                                            complains about it </p>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 

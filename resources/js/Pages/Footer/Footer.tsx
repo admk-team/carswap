@@ -12,7 +12,7 @@ const Footer = () => {
                             <Link href={route('front.index')}>
                                 <img src={LogoFooter} className="h-8 mr-3 mt-10" alt="Flowbite Logo" />
                             </Link>
-                            <p className='text-white mt-3'>Powered by Carswap Limited <br />RC-1443296 <br /> Head Office <br />3rd Floor, Africa Reinsurance Building, Plot 1679 Karimu kuton St, Victoria Island, 101241, Logas Nageria. <br />Hotline: 07031555235</p>
+                            <p className='text-white mt-3'>Powered by Carswap Limited <br />RC-1443296 <br /> Head Office <br />3rd Floor, Africa Reinsurance Building, Plot 1679 Karimu kuton St, Victoria Island, 101241, Logas Nageria. <br />Hotline: 08120222922</p>
                             <div className="flex mt-5 space-x-6  md:mt-0">
                                 <a href="#" className="text-white hover:text-gray-300 dark:hover:text-white mt-4">
                                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" /></svg>
@@ -40,16 +40,16 @@ const Footer = () => {
                             <h2 className="mb-6 text-xl font-semibold text-white mt-10 dark:text-white">Popular Locations</h2>
                             <ul className="text-gray-300 dark:text-gray-400 font-medium">
                                 <li className="mb-4">
-                                    <a href="#" className="t hover:underline">Bristol</a>
+                                    <a href="#" className="t hover:underline">Lagos</a>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Liverpool</a>
+                                    <a href="#" className="hover:underline">Abuja</a>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Manchester</a>
+                                    <a href="#" className="hover:underline">Port Harcourt</a>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">England</a>
+                                    <a href="#" className="hover:underline">Kano</a>
                                 </li>
                             </ul>
                         </div>
@@ -57,16 +57,16 @@ const Footer = () => {
                             <h2 className="mb-6 text-xl font-semibold text-white mt-10  dark:text-white">Featured Makes</h2>
                             <ul className="text-gray-300 dark:text-gray-400 font-medium">
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Audi</a>
+                                    <a href="#" className="hover:underline">Honda</a>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Mercedes Benz</a>
+                                    <a href="#" className="hover:underline">Mercedes</a>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Explorer Plutinum</a>
+                                    <a href="#" className="hover:underline">KIA</a>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Sportage</a>
+                                    <a href="#" className="hover:underline">Hyundai</a>
                                 </li>
                             </ul>
                         </div>
@@ -84,7 +84,10 @@ const Footer = () => {
                                 </li>
                                 <li className="mb-4">
                                     <Link href={route('user.register')} className="hover:underline">Sign Up</Link>
-                                </li> 
+                                </li>
+                                <li className="mb-4">
+                                    <Link href={route('user.register')} className="hover:underline">Become a partner</Link>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -92,7 +95,7 @@ const Footer = () => {
                 </div>
                 <hr className=' border-t-2 border-gray-500 dark:border-white ' />
                 <div className="px-4 py-6  flex justify-center lg:flex lg:justify-center dark:bg-gray-700 md:flex md:items-center md:justify-between" style={{ backgroundColor: "#0A1F34" }}>
-                    <span className=" text-sm text-white sm:text-center dark:text-gray-400">copyright © carswapdotng, All Rights Reserved.</span>
+                    <span className=" text-sm text-white sm:text-center dark:text-gray-400">Copyright 2023 @Carswap Limited. All Rights Reserved.</span>
                 </div>
             </footer>
 

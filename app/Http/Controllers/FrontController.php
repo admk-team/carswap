@@ -88,6 +88,10 @@ class FrontController extends Controller
 
         return Inertia::render('Front/WishList');
     }
+    public function partner(){
+
+        return Inertia::render('Front/Partner');
+    }
     public function search(Request $request){
         $brands=Brand::where('status','1')->get();
         $query = Car::query();
