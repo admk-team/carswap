@@ -10,6 +10,7 @@ use App\Http\Controllers\User\PostacarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\RavepayController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\UserController as FrontUserController;
 use Inertia\Inertia;
@@ -92,6 +93,12 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
     Route::get('/edit-car/{slug}',[PostacarController::class,'edit'])->name('editcar');
     Route::any('/update-car/{slug}',[PostacarController::class,'update'])->name('updateCar');
     Route::get('/delete-car/{slug}',[PostacarController::class,'delete'])->name('deleteCar');
+
+    // Payment initiation route
+    Route::post('/initiate-payment', [RavepayController::class, 'store'])->name('pay');
+
+    // Payment callback route
+    Route::post('/payment/callback', [RavepayController::class, 'handleCallback'])->name('callback');
 
 });
 
