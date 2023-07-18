@@ -32,7 +32,7 @@ class FrontController extends Controller
                 'transmission' => $car->transmission,
                 'interiorColor' => $car->interior_color,
                 'exteriorColor' => $car->exterior_color,
-                'is_fav' => ($fav->where('id', $car->id)->first() ? true : false)
+                'is_fav' => $fav&&$fav!=null?($fav->where('id', $car->id)->first() ? true : false):false
             ];
         });
         return Inertia::render('Front/Index',['brands'=>$brands,'cars'=>$cars]);
