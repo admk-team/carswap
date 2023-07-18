@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"
-import { Link } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
 
 
 const PricingCard = ({ brands, cars, auth }: any) => {
@@ -11,7 +11,6 @@ const PricingCard = ({ brands, cars, auth }: any) => {
     const [total, setTotal]: any = useState(0)
     const [isTapped, setIsTapped] = useState(false);
     const [selectedCarId, setSelectedCarId] = useState(0);
-
 
 
     const handleSetCar = (id = 0) => {
@@ -29,14 +28,12 @@ const PricingCard = ({ brands, cars, auth }: any) => {
 
     }
     const handleSetHeart = (id = 0) => {
-        1
         if (selectedCarId === id) {
             setSelectedCarId(0);
         } else {
             setSelectedCarId(id);
         }
     };
-
 
     useEffect(() => {
         setTotal(cars.length);
@@ -116,20 +113,20 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     <table className="w-full">
                                         <tbody>
                                             <tr>
-                                                <th className="px-2 py-1 font-bold-300 font-1xl text-gray-600">
+                                                <th className="px-2 py-1 font-bold-300 text-gray-600">
                                                     Condition
                                                 </th>
-                                                <th className="px-3 py-1 font-bold font-1xl text-gray-800">Engine</th>
-                                                <th className="px-3 py-1 font-bold  font-1xl text-gray-800">Mileage</th>
+                                                <th className="px-3 py-1 text-gray-800">Engine</th>
+                                                <th className="px-3 py-1 text-gray-800">Mileage</th>
                                             </tr>
                                             <tr>
-                                                <th className="px-2 py-1 font-normal">
+                                                <th className="px-2 py-1 text-gray-600">
                                                     {car?.condition}
                                                 </th>
-                                                <th className="px-3 py-1 font-normal">
-                                                    {car?.engine_capacity}
+                                                <th className="px-3 py-1 text-gray-800">
+                                                    {car.engine_capacity}
                                                 </th>
-                                                <th className="px-3 py-1 font-normal">
+                                                <th className="px-3 py-1 text-gray-800">
                                                     {car?.mileage}
                                                 </th>
                                             </tr>
@@ -137,7 +134,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     </table>
                                 </div>
 
-                                {/* <div className="flex items-center justify-between mt-4">
+                                <div className="flex items-center justify-between mt-4">
                                     <p className="text-white bg-black hover:bg-gray-600 font-medium text-sm px-6 py-2.5 text-center w-34 cursor-pointer">
                                         Purchase
                                     </p>
@@ -147,7 +144,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     >
                                         Swap
                                     </button>
-                                </div> */}
+                                </div>
                             </div>
                         </div>
                     ))}
