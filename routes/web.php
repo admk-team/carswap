@@ -67,7 +67,7 @@ Route::get('/', [FrontController::class,'index'])->name('front.index');
 Route::get('/car-detail/{slug}', [FrontController::class,'CarDetail'])->name('CarDetail');
 Route::get('/cars/all', [FrontController::class,'ViewAllCars'])->name('ViewAllCars');
 Route::get('/contactus', [FrontController::class,'contactus'])->name('contactus');
-Route::get('/wishlist', [FrontController::class,'wishlist'])->name('wishlist');
+
 Route::get('/aboutus', [FrontController::class,'aboutus'])->name('aboutus');
 Route::get('/search',[FrontController::class,'search'])->name('search');
 Route::get('/search',[FrontController::class,'search'])->name('search');
@@ -80,7 +80,8 @@ Route::post('/signup-post',[AuthController::class,'signup'])->name('user.signup'
 
 Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(function () {
     Route::get('/dashboard', [FrontUserController::class, 'index'])->name('dashboard');
-
+    Route::get('/wishlist', [FrontUserController::class,'wishlist'])->name('wishlist');
+    Route::get('/wishlist/{id}', [FrontUserController::class,'add_to_wishlist'])->name('wishlist.add');
     //User Edit Profile
     Route::get('/profile', [FrontUserController::class,'EditProfile'])->name('editProfile');
     Route::post('/updateProfile',[FrontUserController::class,'updateProfile'])->name('updateProfile');
