@@ -32,7 +32,7 @@ const Steps = () => {
                                     <img
                                         src={Calender}
                                         alt="Image 2"
-                                        className="w-20 h-20 object-cover mt-10"
+                                        className="w-20 h-20 mt-10"
                                     />
                                 </div>
                                 <div className='flex justify-center text-center'>

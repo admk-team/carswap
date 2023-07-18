@@ -49,7 +49,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                     {cars?.map((car: any, index: any) => (
                         <div
                             key={index}
-                            className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg dark:bg-gray-800 dark:border-gray-700"
+                            className="w-full bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700"
                         >
                             <div className="relative">
                                 <Link href={route('CarDetail', car.slug)}>
@@ -127,7 +127,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                                     {car?.condition}
                                                 </th>
                                                 <th className="px-3 py-1 text-gray-800">
-                                                    {car?.engine_capacity}
+                                                    {car?.engineCapacity}
                                                 </th>
                                                 <th className="px-3 py-1 text-gray-800">
                                                     {car?.mileage}
@@ -137,7 +137,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     </table>
                                 </div>
 
-                                <div className="flex items-center justify-between mt-4">
+                                {/* <div className="flex items-center justify-between mt-4">
                                     <p className="text-white bg-black hover:bg-gray-600 font-medium text-sm px-6 py-2.5 text-center w-34 cursor-pointer">
                                         Purchase
                                     </p>
@@ -147,7 +147,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     >
                                         Swap
                                     </button>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     ))}
