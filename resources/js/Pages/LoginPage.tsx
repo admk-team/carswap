@@ -34,7 +34,7 @@ const LoginPage = ({ status, canResetPassword }: { status?: string, canResetPass
                     <div className='absolute flex mt-1 ml-3'>
                         <Link href={route('front.index')} className=' text-blue-500 text-lg'>Home</Link>
                         <img src={PreviouImage} alt="" className='w-6 h-6 mt-1' />
-                        <p className='text-lg'>LogIn</p>
+                        <p className='text-lg'>Login</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 ">
