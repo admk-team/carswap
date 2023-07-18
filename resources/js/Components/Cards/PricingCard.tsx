@@ -30,11 +30,11 @@ const PricingCard = ({ brands, cars, auth }: any) => {
     }
     const handleSetHeart = (id = 0) => {
         
-        fetch('user/wishlist/' + id).then((response)=>{
-            return response.json();
-        }).then((data)=>{
-            console.log(data);
-        });
+        if (selectedCarId === id) {
+            setSelectedCarId(0);
+        } else {
+            setSelectedCarId(id);
+        }
     };
 
 
@@ -61,9 +61,9 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                 </Link>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className={`w-7 h-7 ${car.is_fav ? 'text-red-500' : 'text-gray-500'
+                                    className={`w-7 h-7 ${selectedCarId === car.id ? 'text-red-500' : 'text-gray-500'
                                         } absolute top-2 right-2`}
-                                    fill={car.is_fav ? 'red' : 'white'}
+                                    fill={selectedCarId === car.id ? 'red' : 'white'}
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
                                     onClick={() => handleSetHeart(car.id)}
