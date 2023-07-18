@@ -1,3 +1,4 @@
+
 import NavBar2 from '@/Components/Navbar/NabBar2';
 import TimeClock from "@/Assets/timeclock.png";
 import PriceTag from "@/Assets/pricetag.png";
@@ -13,7 +14,9 @@ import Color1 from "@/Assets/car-color.png";
 import Footer from '../Footer/Footer';
 import { Head, Link } from '@inertiajs/react';
 import React, { useState } from 'react'
-//import Star from '@/Components/Rating/Star';
+import Star from '@/Components/Rating/Star';
+import Cover from "@/Assets/revo-img.png";
+import Transfer from "@/Assets/transfer.png"
 
 export default function CarDetail({ car, auth, similarCars }: any) {
 
@@ -50,9 +53,15 @@ export default function CarDetail({ car, auth, similarCars }: any) {
         year: 'numeric',
     });
 
+    const [yourCarPrice, setYourCarPrice] = useState('');
+    const [priceDifference, setPriceDifference] = useState(0);
+    const carPrice = car?.price || 0;
 
-
-
+    const calculatePriceDifference = () => {
+        const enteredPrice = parseInt(yourCarPrice);
+        const difference = enteredPrice - carPrice;
+        setPriceDifference(difference);
+    };
     return (
         <div>
             <Head title={car.title} />
@@ -109,17 +118,70 @@ export default function CarDetail({ car, auth, similarCars }: any) {
                         <div className="col-span-12 md:col-span-6">
                             <div className="flex flex-col mx-3 h-5/6">
                                 <div className="bg-white rounded-lg shadow-md p-6">
-                                    <h2 className="text-lg font-bold mb-4">Verified Cars:</h2>
-                                    <p className="text-gray-700">Carswap carries out many inspections on cars to make sure a high quality is kept. These inspections cover both the documentation and the state of the vehicle.</p>
+                                    <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Swap Buy Calculator</h2>
+                                    <hr className='mb-4' />
+                                    <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow'>
+                                        <p className='font-bold'>Car Price</p>
+                                        <p>$ {car?.price}</p>
+                                    </div>
+                                    <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
+                                        <p className='font-bold mt-1'>Your Car Price</p>
+                                        <input
+                                            type='text'
+                                            className='w-48 border-gray-300 rounded px-2 py-1'
+                                            placeholder='Enter price'
+                                            value={yourCarPrice}
+                                            onChange={(e) => setYourCarPrice(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
+                                        <p className='font-bold mt-1'>Price Difference</p>
+                                        <p>$ {priceDifference}</p>
+                                    </div>
+                                    <button
+                                        className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
+                                        onClick={calculatePriceDifference}
+                                    >
+                                        Calculate
+                                    </button>
+                                    <div className="flex justify-center items-center mt-3">
+                                        <hr className="w-3/6 sm:w-1/6 border-0 border-t-2 border-black" />
+                                        <p className="font-bold text-2xl uppercase mx-4">or</p>
+                                        <hr className="w-3/6 sm:w-1/6 border-0 border-t-2 border-black" />
+                                    </div>
+                                    <button
+                                        className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3'
+
+                                    >
+                                        Buy Now
+                                    </button>
                                 </div>
                                 <div className="bg-white rounded-lg shadow-md p-6 mt-3">
-                                    <h2 className="text-lg font-bold mb-4">Dedicated Support Team:</h2>
-                                    <p className="text-gray-700">Carswap has a committed support team on hand to provide you with the necessary knowledge to help you make better purchasing decisions.</p>
+                                    <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Swapping</h2>
+                                    <hr />
+                                    <div className="relative p-4 flex">
+                                        <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 ">
+                                            <div className="col-span-1 md:col-span-2 lg:col-span-1">
+                                                <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
+                                                <img src={"/storage" + car.images[0]} className="w-full h-4/5 object-contain"></img>
+                                            </div>
+                                            <div className="col-span-1 md:col-span-1 lg:col-span-1 flex justify-center items-center">
+                                                <img src={Transfer} className="w-full h-20 object-contain"></img>
+                                            </div>
+                                            <div className="col-span-1 md:col-span-2 lg:col-span-1">
+                                                <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>My Car</p>
+                                                <img src={Cover} className="w-full h-4/5 object-contain"></img>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <button
+                                        className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
+                                    >
+                                        Swap Now
+                                    </button>
                                 </div>
-                                <div className="bg-white rounded-lg shadow-md p-6 mt-3">
-                                    <h2 className="text-lg font-bold mb-4">Inspection:</h2>
-                                    <p className="text-gray-700">Carswap carries out best inspections on cars to make sure a high quality is kept. These inspections cover both the documentation and the state of the vehicle. We deal with the best vehicles out there.</p>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -430,11 +492,6 @@ export default function CarDetail({ car, auth, similarCars }: any) {
                                         ))}
                                     </div>
                                 </div>
-
-                                <div className='mt-3'>
-                                    <textarea id="message" value={message} onChange={handleMessageChange} rows={4} className=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
-                                    <button className='bg-emerald-500 text-white px-3 py-2.5 rounded-md mt-3 hover:bg-emerald-600' onClick={handleSubmit}>Submit</button>
-                                </div>
                             </>
                         ) : (
                             <>
@@ -468,6 +525,15 @@ export default function CarDetail({ car, auth, similarCars }: any) {
                                 </div>
                             </>
                         )}
+                        <div className='mt-3'>
+                            <textarea id="message" rows={4} className=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                            <button className='bg-emerald-500 text-white px-3 py-2.5 rounded-md mt-3 hover:bg-emerald-600'>Submit</button>
+                        </div>
+
+
+
+
+
                     </div>
                 </div>
                 {
@@ -523,11 +589,11 @@ export default function CarDetail({ car, auth, similarCars }: any) {
                                                     </table>
                                                 </div>
 
-                                                <div className="flex items-center justify-between mt-4">
+                                                {/* <div className="flex items-center justify-between mt-4">
 
                                                     <a href="#" className="text-white bg-black hover:bg-gray-600 font-medium  text-sm px-6 py-2.5 text-center  w-36">Cash Purchase</a>
                                                     <a href="#" className="text-white bg-green-500 hover:bg-green-600 font-medium  text-sm px-6 py-2.5 text-center  w-32">Swap</a>
-                                                </div>
+                                                </div> */}
 
 
                                             </div>

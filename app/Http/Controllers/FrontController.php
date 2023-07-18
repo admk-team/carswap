@@ -11,7 +11,8 @@ class FrontController extends Controller
     public function index(){
         $brands=Brand::where('status','1')->get();
         $cars=Car::where('status','1')->where('slug','!=',null)->limit(4)->latest()->get();
-        $cars=$cars->map(function($car){
+        $fav = auth()->user()?->wishlist;
+        $cars=$cars->map(function($car) use ($fav){
             $images=explode(',',$car->images);
             return [
                 'id'=>$car->id,
@@ -22,7 +23,7 @@ class FrontController extends Controller
                 'images'=>$images ?? null,
                 'user_id' =>$car->user_id,
                 'condition' => $car->condition,
-                'engineCapacity' => $car->engine_capacity,
+                'engine_capacity' => $car->engine_capacity,
                 'mileage' => $car->mileage,
                 'location' => $car->location,
                 'price' => $car->price,
@@ -31,6 +32,7 @@ class FrontController extends Controller
                 'transmission' => $car->transmission,
                 'interiorColor' => $car->interior_color,
                 'exteriorColor' => $car->exterior_color,
+                'is_fav' => ($fav->where('id', $car->id)->first() ? true : false)
             ];
         });
         return Inertia::render('Front/Index',['brands'=>$brands,'cars'=>$cars]);
@@ -49,7 +51,7 @@ class FrontController extends Controller
                 'images'=>$images ?? null,
                 'user_id' =>$car->user_id,
                 'condition' => $car->condition,
-                'engineCapacity' => $car->engine_capacity,
+                'engine_capacity' => $car->engine_capacity,
                 'mileage' => $car->mileage,
                 'location' => $car->location,
                 'price' => $car->price,

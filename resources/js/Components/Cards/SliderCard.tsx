@@ -78,7 +78,7 @@ const SliderCard = (brands: any) => {
   return (
     <>
       <div className="w-full max-w-sm p-4 bg-gray-50 bg-opacity-70 shadow-xl  rounded-lg  sm:p-6 md:p-8 ">
-        <h1 className="text-center text-2xl font-bold mb-4 text-gray-950">Find your ideal car</h1>
+        <h1 className="text-center text-2xl font-bold mb-4 text-gray-950">Find Your Ideal Car</h1>
         <div className="flex items-center relative">
           <input id='searchLocation' type="search" placeholder="Search location..." value={location} onChange={(e) => handleSuggestions(e.target.value)} className="relative border border-gray-300 rounded-lg py-2 px-4 w-full shadow-md" onClick={handleInputChange} />
 

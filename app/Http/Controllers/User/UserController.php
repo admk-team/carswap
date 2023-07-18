@@ -112,5 +112,26 @@ class UserController extends Controller
             // return Inertia::location(route('user.editProfile', ['error' => 'Failed to update the user!']));
         }
     }
+    public function wishlist(){
+        $wishlist = auth()->user()->wishlist?->map(function ($item){
+            $item->images=explode(',',$item->images);
+            $item->is_fav = true;
+            return $item;
+        });
+        return Inertia::render('Front/WishList', ['wishlist' => $wishlist]);
+    }
+    public function add_to_wishlist($id){
+        $msg = 'Something wrong';
+        if(auth()->user()->wishlist()->where('car_id', $id)->first()){
+            auth()->user()->wishlist()->detach($id);
+            $msg='Car Removed from wishlist';
+            
+        }else{
+            auth()->user()->wishlist()->attach($id);
+            $msg='Car Added to wishlist';
+
+        }
+        return redirect()->back()->withSuccess(['message' => $msg, 'data'=> auth()->user()->wishlist()->pluck('cars.id')]);
+    }
 
 }

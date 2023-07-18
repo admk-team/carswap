@@ -20,7 +20,7 @@ const Index: React.FC<IndexProps> = ({ brands,cars,auth }) =>{
       <NavBar auth={auth} />
       <TopBanner brands={brands}/>
       <div className="text-3xl font-bold text-center w-full mt-12">
-        <h1 className='text-gray-950 font-extrabold'>Finds the Best Deals For You</h1>
+        <h1 className='text-gray-950 font-semibold'>Finds The Best Deals For You</h1>
       </div>
       <PricingCard cars={cars} />
       <div className="mx-auto flex justify-center max-w-screen-xl w-full h-full mt-12 ">

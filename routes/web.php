@@ -10,6 +10,7 @@ use App\Http\Controllers\User\PostacarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\RavepayController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\UserController as FrontUserController;
 use Inertia\Inertia;
@@ -69,6 +70,7 @@ Route::get('/cars/all', [FrontController::class,'ViewAllCars'])->name('ViewAllCa
 Route::get('/contactus', [FrontController::class,'contactus'])->name('contactus');
 Route::get('/wishlist', [FrontController::class,'wishlist'])->name('wishlist');
 Route::get('/partner', [FrontController::class,'partner'])->name('partner');
+
 Route::get('/aboutus', [FrontController::class,'aboutus'])->name('aboutus');
 Route::get('/search',[FrontController::class,'search'])->name('search');
 Route::get('/search',[FrontController::class,'search'])->name('search');
@@ -81,7 +83,8 @@ Route::post('/signup-post',[AuthController::class,'signup'])->name('user.signup'
 
 Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(function () {
     Route::get('/dashboard', [FrontUserController::class, 'index'])->name('dashboard');
-
+    Route::get('/wishlist', [FrontUserController::class,'wishlist'])->name('wishlist');
+    Route::get('/wishlist/{id}', [FrontUserController::class,'add_to_wishlist'])->name('add.wishlist');
     //User Edit Profile
     Route::get('/profile', [FrontUserController::class,'EditProfile'])->name('editProfile');
     Route::post('/updateProfile',[FrontUserController::class,'updateProfile'])->name('updateProfile');
@@ -90,6 +93,12 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
     Route::get('/edit-car/{slug}',[PostacarController::class,'edit'])->name('editcar');
     Route::any('/update-car/{slug}',[PostacarController::class,'update'])->name('updateCar');
     Route::get('/delete-car/{slug}',[PostacarController::class,'delete'])->name('deleteCar');
+
+    // Payment initiation route
+    Route::post('/initiate-payment', [RavepayController::class, 'store'])->name('pay');
+
+    // Payment callback route
+    Route::post('/payment/callback', [RavepayController::class, 'handleCallback'])->name('callback');
 
 });
 
