@@ -1,4 +1,4 @@
-
+import { usePage, useForm } from '@inertiajs/react';
 import NavBar2 from '@/Components/Navbar/NabBar2';
 import TimeClock from "@/Assets/timeclock.png";
 import PriceTag from "@/Assets/pricetag.png";
@@ -13,18 +13,34 @@ import Fuel from "@/Assets/gas-station.png";
 import Color1 from "@/Assets/car-color.png";
 import Footer from '../Footer/Footer';
 import { Head, Link } from '@inertiajs/react';
-import React, { useState } from 'react'
 import Star from '@/Components/Rating/Star';
 import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"
-
-export default function CarDetail({ car, auth, similarCars }: any) {
-
+import React, { useState, useEffect } from "react";
+ 
+export default function CarDetail({ car, auth, similarCars,success,error }: any) {
+    const { errors } = usePage().props
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    useEffect(() => {
+        if (success) {
+            setSuccessMessage(success);
+        }
+        if (error) {
+            setErrorMessage(error);
+        }
+    }, []);
 
     const [rating, setRating] = useState(0);
     const [message, setMessage] = useState('');
     const [IsEditMode, setIsEditMode] = useState(true);
-
+    const { data, setData, post, processing,} = useForm({
+        star: '',
+        car_id:car.id||'',
+        user_id:auth.user.id||'',
+        message: '',
+       
+    });
 
 
 
@@ -39,6 +55,8 @@ export default function CarDetail({ car, auth, similarCars }: any) {
 
 
     const handleSubmit = () => {
+        // console.log(data)
+        post(route('user.ratings.store'))
         setIsEditMode(false);
     };
 
@@ -459,13 +477,16 @@ export default function CarDetail({ car, auth, similarCars }: any) {
                     <h3 className="font-bold text-gray-900 text-2xl">Description:</h3>
                     <p>{car.description}</p>
                 </div>
+                <form className="row g-3" method='post'>
                 <div className='p-4'>
                     <h3 className="font-bold text-gray-900 text-2xl">Reviews:</h3>
-                    <div className="bg-white border border-gray-300 p-4 rounded-lg mt-3 shadow-md">
+                 <div className="bg-white border border-gray-300 p-4 rounded-lg mt-3 shadow-md">
                         {IsEditMode ? (
                             <>
                                 <h1 className='text-gray-950 font-extrabold text-lg'>What was your overall experience with our car swapping and purchasing service?</h1>
-                                <div className="flex mt-3">
+                        
+                              
+                          <div className="flex mt-3">
                                     {/* <Star /> */}
 
                                     <div className="flex space-x-1">
@@ -476,10 +497,13 @@ export default function CarDetail({ car, auth, similarCars }: any) {
                                                     type="radio"
                                                     name="rating"
                                                     value={star}
-                                                    onChange={handleRatingChange}
+                                                    onClick={handleRatingChange}
+                                                    onChange={(e) => setData('star', e.target.value)}
                                                     checked={rating === star}
                                                     className="hidden"
+                                                    
                                                 />
+                                                     {errors.star && <div className='text-danger'>{errors.star}</div>}
                                                 <svg className={`w-8 h-8 cursor-pointer ${star <= rating ? 'text-emerald-400' : 'text-gray-400'}`}
                                                     aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -492,7 +516,9 @@ export default function CarDetail({ car, auth, similarCars }: any) {
                                         ))}
                                     </div>
                                 </div>
+                              
                             </>
+
                         ) : (
                             <>
                                 <div className="mb-2">
@@ -526,16 +552,14 @@ export default function CarDetail({ car, auth, similarCars }: any) {
                             </>
                         )}
                         <div className='mt-3'>
-                            <textarea id="message" rows={4} className=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
-                            <button className='bg-emerald-500 text-white px-3 py-2.5 rounded-md mt-3 hover:bg-emerald-600'>Submit</button>
+                            <textarea id="message" name="message" rows={4}value={data.message} onChange={(e) => setData('message', e.target.value)}
+                             className=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                                {errors.message && <div className='text-danger'>{errors.message}</div>}
+                            <button  type="button" onClick={() => handleSubmit()} className='bg-emerald-500 text-white px-3 py-2.5 rounded-md mt-3 hover:bg-emerald-600'>Submit</button>
                         </div>
-
-
-
-
-
                     </div>
                 </div>
+                </form>
                 {
                     similarCars ?
                         <div className='p-4 '>

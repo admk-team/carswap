@@ -10,9 +10,11 @@ use App\Http\Controllers\User\PostacarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RavepayController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\UserController as FrontUserController;
+use App\Models\Rating;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Artisan;
 
@@ -104,6 +106,8 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
 
     //Post car
     Route::resource('user/cars',PostacarController::class, ['as'=> 'user']);
+    //ratings
+    Route::resource('user/ratings',RatingController::class, ['as'=> 'user']);
     // Route::get('cars/{id}/{status}',[PostacarController::class,'status'])->name('cars.status');
     //wishlist
 
