@@ -5,6 +5,10 @@ import NavBar from '@/Components/Navbar/NavBar'
 import Bg from '@/Assets/bgcontact.png'
 // import backgroundedImage from '@/Assets/';
 import contactimg from "@/Assets/contactimg.png"
+import PreviouImage from '@/Assets/left.png';
+import { Head, Link, useForm } from '@inertiajs/react';
+
+
 const ContactUsPage = (auth: any) => {
     return (
         <>
@@ -18,6 +22,11 @@ const ContactUsPage = (auth: any) => {
                 </div>
                 <div className="mx-auto max-w-screen-xl w-full h-full mt-12 p-12">
                     <div className="border border-gray-500 rounded-xl shadow-md">
+                    <div className='absolute flex mt-1 ml-3'>
+                        <Link href={route('front.index')} className=' text-blue-500 text-lg'>Home</Link>
+                        <img src={PreviouImage} alt="" className='w-6 h-6 mt-1' />
+                        <p className='text-lg'>Contact Us</p>
+                    </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 ">
                             <div className='mt-9 mx-4 my-4 align-center'>
                                 <h2 className="text-2xl text-center text-dark uppercase font-bold mt-12">Contact Now</h2>

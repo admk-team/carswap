@@ -4,7 +4,7 @@ import { link } from "fs";
 import React, { useState, useEffect } from "react";
 
 const MyListedCar = ({ cars, success }: any) => {
- 
+
     const [currentPage, setCurrentPage] = useState(1);
     const [carsData, setCarsData] = useState([]);
     const itemsPerPage = 3;
@@ -23,13 +23,13 @@ const MyListedCar = ({ cars, success }: any) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedCarSlug, setSelectedCarSlug] = useState('');
 
-    const deleteHandler=((slug:any)=>{
+    const deleteHandler = ((slug: any) => {
         setSelectedCarSlug(slug);
         setShowDeleteModal(true);
     });
     const confirmDeleteHandler = () => {
         if (selectedCarSlug !== null) {
-          get(route("user.deleteCar", selectedCarSlug));
+            get(route("user.deleteCar", selectedCarSlug));
         }
         setShowDeleteModal(false);
     };
@@ -44,23 +44,23 @@ const MyListedCar = ({ cars, success }: any) => {
                 <h1 className="font-extrabold text-black">My Listed Cars</h1>
             </div>
 
-            {car&&car.length>0?
-            car.map((carItem: any, index) => (
+            {car && car.length > 0 ?
+                car.map((carItem: any, index) => (
                     <div className="px-4 pt-2 pb-3" key={index}>
                         <div className="flex flex-col bg-white border-1 md:flex-row md:max-w-full hover:bg-gray-100">
                             <img className="object-cover md:h-auto md:w-48" src={'/storage' + carItem?.images[0]} alt="" />
                             <div className="flex flex-col justify-between p-2 leading-normal">
                                 <h5 className="mb-1 text-2xl font-bold text-gray-900">{carItem?.title}</h5>
-                                {carItem?.status&&carItem.status=="1"?
-                                <div>
-                                    <span className="text-gray-900 me-3"><strong>Status</strong></span>
-                                    <button className="mt-2 px-2 py-1 text-white bg-green-500 ">Approved</button>
-                                </div>
-                                :
-                                <div>
-                                    <span className="text-gray-900 me-3"><strong>Status</strong></span>
-                                    <button className="mt-2 px-2 py-1 text-white bg-yellow-500">Pending</button>
-                                </div>
+                                {carItem?.status && carItem.status == "1" ?
+                                    <div>
+                                        <span className="text-gray-900 me-3"><strong>Status</strong></span>
+                                        <button className="mt-2 px-2 py-1 text-white bg-green-500 ">Approved</button>
+                                    </div>
+                                    :
+                                    <div>
+                                        <span className="text-gray-900 me-3"><strong>Status</strong></span>
+                                        <button className="mt-2 px-2 py-1 text-white bg-yellow-500">Pending</button>
+                                    </div>
                                 }
                                 <h5 className="text-2xl font-bold dark:text-white text-amber-500">${carItem?.price}</h5>
                                 <div className="mt-1">
@@ -85,7 +85,7 @@ const MyListedCar = ({ cars, success }: any) => {
                                         </Link>
                                         <button
                                             className="mx-2 px-2 py-1 text-base font-medium text-center text-white bg-gray-950 hover:bg-green-600 self-end"
-                                            onClick={()=>deleteHandler(carItem.slug)}
+                                            onClick={() => deleteHandler(carItem.slug)}
                                         >
                                             Delete
                                         </button>
@@ -123,8 +123,8 @@ const MyListedCar = ({ cars, success }: any) => {
                     </div>
                 </div>
             )}
-            <div className="d-flex justify-content-center pb-3">
-                <ul className="pagination">
+            <div className="d-flex justify-content pb-3">
+                <ul className="pagination flex justify-center mt-4 ">
                     {Array(Math.ceil(carsData.length / itemsPerPage))
                         .fill(0)
                         .map((_, index) => (
@@ -133,7 +133,7 @@ const MyListedCar = ({ cars, success }: any) => {
                                 className={`page-item ${currentPage === index + 1 ? "active" : ""}`}
                             >
                                 <button
-                                    className="page-link"
+                                    className={`page-link px-3 py-1 ${currentPage === index + 1 ? "bg-emerald-500 text-white" : "text-black"}`}
                                     onClick={() => handlePageChange(index + 1)}
                                 >
                                     {index + 1}
