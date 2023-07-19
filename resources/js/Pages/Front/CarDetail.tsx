@@ -165,11 +165,11 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
                                                 >
                                                     Calculate
                                                 </button>
-                                                <div className="flex justify-center items-center mt-3">
+                                                {/* <div className="flex justify-center items-center mt-3">
                                                     <hr className="w-3/6 sm:w-1/6 border-0 border-t-2 border-black" />
                                                     <p className="font-bold text-2xl uppercase mx-4">or</p>
                                                     <hr className="w-3/6 sm:w-1/6 border-0 border-t-2 border-black" />
-                                                </div>
+                                                </div> */}
                                             </>
                                             :
                                             auth && auth.user ?
