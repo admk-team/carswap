@@ -22,7 +22,7 @@ class RavepayController extends Controller
                 return Inertia::location(route('user.dashboard', ['error' => 'Payment Failed']));
             }
             if($request->status=='successful'){
-                return Inertia::location(route('user.dashboard', ['success' => 'Payment Done Successfully']));
+                return Inertia::location(route('user.dashboard', ['success' => 'Congratulations! Your Payment Was Successful.']));
             }
         }else{
             return Inertia::location(route('user.dashboard', ['error' => 'Payment Failed']));
