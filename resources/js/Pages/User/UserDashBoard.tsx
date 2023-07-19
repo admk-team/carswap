@@ -21,21 +21,18 @@ const UserDashBoard = ({auth,success,cars,error,pendings,approved}:any) => {
     <Head title='User | Dashboard'/>
       <NavBar2 auth={auth}/>
       <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
-        <h1 className='font-bold text-xl text-dark sm:text-lg md:text-xl lg:text-2xl'>My Dashboard</h1>
-        
+        <h1 className='font-bold text-xl text-dark sm:text-lg md:text-xl lg:text-2xl mb-2'>My Dashboard</h1>
         {successMessage && (
-                    <div className="alert alert-success alert-dismissible fade show" role="alert">
-                     {successMessage}
-                    <button className="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                )}
-                {errorMessage && (
-                    <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                        {errorMessage}
-                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                           )}
- 
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <span className="block sm:inline">{successMessage}</span>
+          </div>
+        )}
+        {errorMessage && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <span className="block sm:inline">{errorMessage}</span>
+          </div>
+        )}
+
         <UserProfile auth={auth} cars={cars} pendings={pendings} approved={approved}/>
       </div>
       <Footer />

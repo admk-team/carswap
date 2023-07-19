@@ -40,6 +40,8 @@ class PostacarController extends Controller
             'condition' => 'required',
             'engineCapacity' => 'required',
             'mileage' => 'required',
+            'type' => 'required',
+            'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
             'fuelType' => 'required',
@@ -79,6 +81,8 @@ class PostacarController extends Controller
         $model->drive=$request->drive;
         $model->images=$images;
         $model->fuel_Type=$request->fuelType;
+        $model->type=$request->type;
+        $model->trim=$request->trim;
         $model->model=$request->model;
         $model->transmission=$request->transmission;
         $model->interior_color=$request->interiorColor;
@@ -125,6 +129,8 @@ class PostacarController extends Controller
             'condition' => 'required',
             'engineCapacity' => 'required',
             'mileage' => 'required',
+            'type' => 'required',
+            'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
             'fuelType' => 'required',
@@ -163,6 +169,8 @@ class PostacarController extends Controller
         $model->images=$images;
         $model->fuel_Type=$request->fuelType;
         $model->model=$request->model;
+        $model->type=$request->type;
+        $model->trim=$request->trim;
         $model->transmission=$request->transmission;
         $model->interior_color=$request->interiorColor;
         $model->exterior_color=$request->exteriorColor;
