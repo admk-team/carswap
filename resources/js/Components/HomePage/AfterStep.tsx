@@ -7,14 +7,14 @@ import Screen4 from "@/Assets/StepsImages/screen4.png"
 const AfterStep = () => {
     return (
         <>
-            <div className="mx-auto max-w-screen-xl w-full h-full -mt-8 ">
-                <div className=" mt-24 md:container md:mx-auto">
+            <div className="mx-auto max-w-screen-xl w-full h-full mt-6 ">
+                <div className=" md:container md:mx-auto">
                     <div className="container mx-auto py-8 flex flex-wrap justify-center">
                         <div className="text-2xl md:text-3xl font-semibold text-center mb-6 w-full">
                             <h1>Your reliable partner for car sales</h1>
                         </div>
-                        <div className="container mx-auto px-4">
-                            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 px-20 py-8 justify-center">
+                        <div className="container mx-auto">
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 px-20 mt-4 justify-center">
                                 <div className="md:flex md:flex-col items-center md:text-center  ">
                                     <div className='flex justify-center'>
                                         <img
