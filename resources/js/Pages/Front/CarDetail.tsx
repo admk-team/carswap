@@ -37,6 +37,7 @@ export default function CarDetail({ car, auth, similarCars }: any) {
     };
 
 
+console.log(rating);
 
     const handleSubmit = () => {
         setIsEditMode(false);

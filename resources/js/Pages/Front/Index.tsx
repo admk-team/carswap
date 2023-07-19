@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import PricingCard from '@/Components/Cards/PricingCard'
 import Footer from '@/Pages/Footer/Footer'
 //import BannerTwo from '@/Components/Banner/BannerTwo'
-import Reviews from '@/Components/Reviews/Reviews'
+//import Reviews from '@/Components/Reviews/Reviews'
 import NavBar from '@/Components/Navbar/NavBar'
 import TopBanner from '@/Components/Banner/TopBanner';
 import { Head, Link } from '@inertiajs/react';
-import Steps from '../Admin/Users/Steps';
+import Steps from '../../Components/HomePage/Steps';
+import AfterStep from '@/Components/HomePage/AfterStep';
+import Featured from '@/Components/HomePage/Featured';
 interface IndexProps {
     brands: any;
     cars: any;
@@ -19,7 +21,7 @@ const Index: React.FC<IndexProps> = ({ brands,cars,auth }) =>{
     <Head title='Index'/>
       <NavBar auth={auth} />
       <TopBanner brands={brands}/>
-      <div className="text-3xl font-bold text-center w-full mt-12">
+      <div className="text-3xl text-center w-full mt-12">
         <h1 className='text-gray-950 font-semibold'>Finds The Best Deals For You</h1>
       </div>
       <PricingCard cars={cars} />
@@ -28,7 +30,9 @@ const Index: React.FC<IndexProps> = ({ brands,cars,auth }) =>{
       </div>
       {/* <BannerTwo /> */}
       <Steps/>
-      <Reviews />
+      {/* <Reviews /> */}
+      <AfterStep/>
+      <Featured/>
       <Footer />
     </>
   )
