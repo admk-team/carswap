@@ -97,12 +97,11 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
     Route::get('/delete-car/{slug}',[PostacarController::class,'delete'])->name('deleteCar');
 
     // Payment initiation route
-    Route::post('/initiate-payment', [RavepayController::class, 'store'])->name('pay');
+    Route::any('/initiate-payment', [RavepayController::class, 'store'])->name('pay');
+});
 
     // Payment callback route
-    Route::post('/payment/callback', [RavepayController::class, 'handleCallback'])->name('callback');
-
-});
+    Route::get('/payment/callback', [RavepayController::class, 'handleCallback'])->name('callback');
 
     //Post car
     Route::resource('user/cars',PostacarController::class, ['as'=> 'user']);
