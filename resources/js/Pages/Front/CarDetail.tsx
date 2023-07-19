@@ -17,16 +17,25 @@ import React, { useState } from 'react'
 import Star from '@/Components/Rating/Star';
 import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"
+import ShareModal from '@/Components/Modal/ShareModal';
 
 export default function CarDetail({ car, auth, similarCars }: any) {
 
+    
 
     const [rating, setRating] = useState(0);
     const [message, setMessage] = useState('');
     const [IsEditMode, setIsEditMode] = useState(true);
-
-
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    
+    const handleShareButtonClick = () => {
+        setIsModalOpen(true);
+      };
+    
+      const handleModalClose = () => {
+        setIsModalOpen(false);
+      };
+  
 
     const handleRatingChange = (event: any) => {
         setRating(Number(event.target.value));
@@ -99,7 +108,8 @@ console.log(rating);
                         </div>
                         <div className="flex items-center mr-10" >
                             <img src={Share} className="w-6 h-6" />
-                            <p className="ml-2 underline hover:text-blue-500 cursor-pointer">Share Now</p>
+                            <p className="ml-2 underline hover:text-blue-500 cursor-pointer" onClick={handleShareButtonClick}>Share Now</p>
+                            <ShareModal isOpen={isModalOpen} onClose={handleModalClose}/>
                         </div>
                     </div>
                     <div className="grid grid-cols-12 gap-4 mt-7">
