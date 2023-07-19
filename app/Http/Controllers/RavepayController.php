@@ -4,35 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class RavepayController extends Controller
 {
     public function store(Request $request)
     {
-        return redirect()->intended('https://flutterwave.com/pay/carswaplimitedsyuy');
+        $data = $request->all();
+        $paymentUrl = 'https://checkout.flutterwave.com/v3/hosted/pay';
+        return new RedirectResponse($paymentUrl, 302);
     }
     public function handleCallback(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'txref' => 'required',
-            'status' => 'required|in:successful,failed,pending',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['status' => 'error', 'message' => 'Invalid callback data'], 400);
+        if($request->status){
+            if($request->status=='cancelled'){
+                return Inertia::location(route('user.dashboard', ['error' => 'Payment Failed']));
+            }
+            if($request->status=='success'){
+                return Inertia::location(route('user.dashboard', ['success' => 'Payment Done Successfully']));
+            }
         }
-
-        $transactionReference = $request->input('txref');
-        $paymentStatus = $request->input('status');
-
-        if ($paymentStatus === 'successful') {
-            // Update your application's database with the successful payment status
-            // You can also perform additional actions for successful payments
-        } else {
-            // Handle payment failure or pending status
-            // Update your application's database accordingly
-        }
-
-        return response()->json(['status' => 'success', 'message' => 'Payment callback processed successfully']);
     }
 }

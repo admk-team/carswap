@@ -12,6 +12,8 @@ const  EditCarForm= ({ auth,brands,car}: any) => {
         condition: car.condition || '',
         engineCapacity:car.engine_capacity || '',
         mileage: car.mileage ||'',
+        type: car.type || '',
+        trim: car.trim || '',
         location: car.location || '',
         price: car.price || '',
         fuelType: car.fuel_type || '',
@@ -36,6 +38,7 @@ const  EditCarForm= ({ auth,brands,car}: any) => {
     }
     return (
         <>
+        <Head title={'Edit '+car.title}/>
             <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
                 <div className="border border-gray-300 p-8 rounded-lg shadow-md">
                     <h1 className="text-xl text-gray-950 font-bold">Car Information:</h1>
@@ -84,8 +87,24 @@ const  EditCarForm= ({ auth,brands,car}: any) => {
                                    {errors.mileage && <div className='text-danger'>{errors.mileage}</div>}
                                     <label htmlFor="" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Mileage*</label>
                                 </div>
-                            </div>
+                                <div className="relative z-0 w-full mb-6 group">
+                                    <select name="type" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.type} onChange={(e) => setData('type', e.target.value)}>
+                                        <option value="">Selecet Type</option>
+                                        <option value="swap" selected={car.type && car.type === 'swap'}>For Swap</option>
+                                        <option value="sale" selected={car.type && car.type === 'sale'}>For Sale</option>
+                                    </select>
+                                    {errors.type && <div className='text-red-500'>{errors.type}</div>}
+                                    <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
 
+                                </div>
+                            </div>
+                            <div className="grid md:grid-cols-2 md:gap-x-6">
+                                <div className="relative z-0 w-full mb-6 group">
+                                    <input type="text" name="trim" id="floating_company" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0  focus:border-blue-600 peer" placeholder=" " value={data.trim} onChange={(e) => setData('trim', e.target.value)} />
+                                    {errors.trim && <div className='text-red-500'>{errors.trim}</div>}
+                                    <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Trim *</label>
+                                </div>
+                            </div>
                             <div className="grid md:grid-cols-2 md:gap-x-6">
                                 <div className="relative z-0 w-full mb-6 group">
                                     <input type="text" name="price" id="floating_company" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0  focus:border-blue-600 peer" placeholder=" "  value={data.price} onChange={(e)=>setData('price',e.target.value)} />

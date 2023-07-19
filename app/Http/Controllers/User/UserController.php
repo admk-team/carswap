@@ -50,7 +50,6 @@ class UserController extends Controller
     }
 
     public function EditProfile(){
-        
         return Inertia::render('User/EditProfile',['success'=>request()->success,'error'=>request()->error]);
     }
     public function updateProfile(Request $request)
