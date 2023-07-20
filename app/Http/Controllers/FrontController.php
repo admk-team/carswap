@@ -14,6 +14,11 @@ class FrontController extends Controller
         $fav = auth()->user()?->wishlist;
         $cars=$cars->map(function($car) use ($fav){
             $images=explode(',',$car->images);
+            if($car->type=='swap'){
+                $type="For Swap";
+            }else if($car->type=='sale'){
+                $type="For Sale";
+            }
             return [
                 'id'=>$car->id,
                 'title'=>$car->title,
@@ -25,6 +30,8 @@ class FrontController extends Controller
                 'condition' => $car->condition,
                 'engine_capacity' => $car->engine_capacity,
                 'mileage' => $car->mileage,
+                'type' => $type ?? '',
+                'trim' => $car->trim,
                 'location' => $car->location,
                 'price' => $car->price,
                 'fuelType' => $car->fuel_type,
@@ -42,6 +49,11 @@ class FrontController extends Controller
         $cars=Car::where('status','1')->where('slug','!=',null)->latest()->get();
         $cars=$cars->map(function($car){
             $images=explode(',',$car->images);
+            if($car->type=='swap'){
+                $type="For Swap";
+            }else if($car->type=='sale'){
+                $type="For Sale";
+            }
             return [
                 'id'=>$car->id,
                 'title'=>$car->title,
@@ -53,6 +65,8 @@ class FrontController extends Controller
                 'condition' => $car->condition,
                 'engine_capacity' => $car->engine_capacity,
                 'mileage' => $car->mileage,
+                'type' => $type ?? '',
+                'trim' => $car->trim,
                 'location' => $car->location,
                 'price' => $car->price,
                 'fuelType' => $car->fuel_type,
@@ -66,7 +80,7 @@ class FrontController extends Controller
     }
     public function CarDetail($slug){
         $brands=Brand::where('status','1')->get();
-        $car=Car::with('rattings.user')->where('slug',$slug)->first();
+        $car=Car::with('ratings.user')->where('slug',$slug)->first();
         $car->images=explode(',',$car->images);
         $similarCars=Car::where('status','1')->limit(4)->latest()->get();
         $similarCars=$similarCars->map(function($car){
