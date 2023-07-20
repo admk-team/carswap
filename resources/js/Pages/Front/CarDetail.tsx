@@ -24,6 +24,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Cover1 from '@/Assets/cover1.jpg'
 import Cover2 from '@/Assets/cover2.jpg'
+import { useFlutterwave } from 'flutterwave-react-v3';
 
 export default function CarDetail({ car, auth, similarCars, success, error }: any) {
     const { errors } = usePage().props
@@ -59,7 +60,7 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
         message: '',
 
     });
-    const baseUrl = window.location.origin;
+    const baseUrl = "https://admksol.com";
 
     const handleRatingChange = (event: any) => {
         setRating(Number(event.target.value));
@@ -106,6 +107,25 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
         slidesToShow: 1,
         slidesToScroll: 1,
     };
+    const config = {
+        public_key: 'FLWPUBK_TEST-5362dd26662af2fa2bb22c99f29ab2c3-X',
+        tx_ref: Date.now(),
+        amount: 100,
+        currency: 'NGN',
+        payment_options: 'card,mobilemoney,ussd',
+        customer: {
+          email: auth.user.email,
+          phone_number: auth.user.phone_no,
+          name: auth.user.first_name,
+        },
+        customizations: {
+          title: 'Car Swap Payment',
+          description: 'Payment for items in cart',
+          logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
+        },
+      };
+    
+      const handleFlutterPayment = useFlutterwave(config);
 
     return (
         <div>
@@ -200,17 +220,14 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
                                             </>
                                             :
                                             auth && auth.user ?
-                                                <form method="POST" action="https://checkout.flutterwave.com/v3/hosted/pay">
-                                                    <input type="hidden" name="public_key" value="FLWPUBK_TEST-5362dd26662af2fa2bb22c99f29ab2c3-X" />
-                                                    <input type="hidden" name="customer[email]" value={auth.user.email} />
-                                                    <input type="hidden" name="customer[name]" value={auth.user.first_name} />
-                                                    <input type="hidden" name="tx_ref" value="bitethtx-019203" />
-                                                    <input type="hidden" name="amount" value="1000" />
-                                                    <input type="hidden" name="currency" value="NGN" />
-                                                    <input type="hidden" name="meta[token]" value="54" />
-                                                    <input type="hidden" name="redirect_url" value={baseUrl + '/payment/callback'} />
-                                                    <button type='submit' className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
-                                                </form>
+                                                <button onClick={() => {
+                                                    handleFlutterPayment({
+                                                      callback: (response) => {
+                                                         console.log(response);
+                                                      },
+                                                      onClose: () => {},
+                                                    });
+                                                  }} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
                                                 :
                                                 <Link href={route('user.login')} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </Link>
 
@@ -244,11 +261,14 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
                                                 </div>
 
                                             </div>
-                                            <button
-                                                className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
-                                            >
-                                                Swap Now
-                                            </button>
+                                            <button onClick={() => {
+                                                handleFlutterPayment({
+                                                    callback: (response) => {
+                                                    console.log(response);
+                                                    },
+                                                    onClose: () => {},
+                                                });
+                                                }} className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'>Swap Now</button>
                                         </div>
                                         :
                                         ''
