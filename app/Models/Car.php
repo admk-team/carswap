@@ -11,7 +11,7 @@ class Car extends Model
     public function brand(){
         return $this->belongsTo(Brand::class);
     }
-    public function rattings(){
+    public function ratings(){
         return $this->hasMany(Rating::class);
     }
 }
