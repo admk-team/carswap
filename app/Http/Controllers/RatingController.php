@@ -38,14 +38,12 @@ class RatingController extends Controller
            
 
         ]);
-        $model=new Rating();
+        $model=Rating::where('user_id',auth()->user()->id)->where('car_id',$request->car_id)->first() ?? new Rating();
         $model->rating=$request->star;
         $model->car_id= $request->car_id;
         $model->user_id= auth()->user()->id;
         $model->message=$request->message;
         if($model->save()){
-           // $model->slug=Str::slug($request->title).'-'.$model->id;
-           // $model->update();
            return redirect()->back()->withSuccess(['success' => 'Reviews addedd successfully.']);
         }else{
             return Inertia::location(route('user.dashboard', ['error' => 'Failed Car not added.']));

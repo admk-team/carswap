@@ -25,9 +25,9 @@ import 'slick-carousel/slick/slick-theme.css';
 import Cover1 from '@/Assets/cover1.jpg'
 import Cover2 from '@/Assets/cover2.jpg'
 import { useFlutterwave } from 'flutterwave-react-v3';
-import ReviewForm from '@/Components/Forms/ReviewForm';
 
 export default function CarDetail({ car, auth, similarCars, success, error }: any) {
+    const { errors } = usePage().props
     const [checkReview, setCheckReview] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -40,6 +40,9 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
         }
     }, []);
 
+    const [rating, setRating] = useState(0);
+    const [message, setMessage] = useState('');
+    const [IsEditMode, setIsEditMode] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleShareButtonClick = () => {
@@ -49,6 +52,36 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
       const handleModalClose = () => {
         setIsModalOpen(false);
       };
+
+    const { data, setData, post, processing, } = useForm({
+        star: '',
+        car_id: car.id || '',
+        user_id: auth&&auth.user?auth.user.id:'',
+        message: '',
+
+    });
+    const baseUrl = "https://admksol.com";
+
+    const handleRatingChange = (event: any) => {
+        setRating(Number(event.target.value));
+    };
+
+    const handleMessageChange = (event: any) => {
+        setMessage(event.target.value);
+    };
+
+    const handleSubmit = () => {
+        post(route('user.ratings.store'))
+        setIsEditMode(false);
+    };
+
+    const handleEdit = () => {
+        setIsEditMode(true);
+    };
+    const handleOnEdit = () => {
+        setIsEditMode(false);
+    };
+
 
     const formattedDate = new Date(car.created_at).toLocaleDateString('en-US', {
         month: 'long',
@@ -81,9 +114,9 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
-          email: auth && auth.user ? auth.user.email : null,
-          phone_number: auth && auth.user ? auth.user.phone_no : null,
-          name: auth && auth.user ? auth.user.first_name+' '+ auth.user.last_name: null,
+          email: auth.user.email,
+          phone_number: auth.user.phone_no,
+          name: auth.user.first_name,
         },
         customizations: {
           title: 'Car Swap Payment',
@@ -179,6 +212,11 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
                                                 >
                                                     Calculate
                                                 </button>
+                                                {/* <div className="flex justify-center items-center mt-3">
+                                                    <hr className="w-3/6 sm:w-1/6 border-0 border-t-2 border-black" />
+                                                    <p className="font-bold text-2xl uppercase mx-4">or</p>
+                                                    <hr className="w-3/6 sm:w-1/6 border-0 border-t-2 border-black" />
+                                                </div> */}
                                             </>
                                             :
                                             auth && auth.user ?
@@ -356,17 +394,178 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
                 </div>
                 {
                     car.ratings&&car.ratings.length>0?
-                        car.ratings.map((review:any)=>(
-                            review&&review.user?
-                                auth&&auth.user&&auth.user.id==review.user_id?
-                                    <ReviewForm auth={auth} car={car} review={review}/>
-                                :
-                                <ReviewForm auth={auth} car={car}/>
-                            :
-                            <ReviewForm auth={auth} car={car} review={review}/>
-                        ))
+                    car.ratings.map((review:any)=>(
+                        review&&review.user?
+                        auth&&auth.user&&auth.user.id==review.user_id?
+                        <form className="row g-3" method='post'>
+                            <div className='p-4'>
+                                <h3 className="font-bold text-gray-900 text-2xl">Reviews:</h3>
+                                <div className="bg-white border border-gray-300 p-4 rounded-lg mt-3 shadow-md">
+                                {IsEditMode ? (
+                                        <>
+                                            <div className="mb-2">
+                                                <div className='flex justify-between items-center'>
+                                                    <div className="flex space-x-1">
+                                                        {Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
+                                                            <svg
+                                                                key={star}
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                className={`h-8 w-8 ${star <= rating ? 'text-emerald-500' : 'hidden'
+                                                                    }`}
+                                                                fill="currentColor"
+                                                                viewBox="0 0 22 20"
+                                                                stroke="currentColor"
+                                                            >
+                                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                            </svg>
+                                                        ))}
+                                                    </div>
+                                                    <div className='flex cursor-pointer space-x-0.5'>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="blue" className="w-6 h-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                        </svg>
+                                                        <button onClick={handleOnEdit} className=" text-blue-500">
+                                                            Edit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <h3 className='mt-4 font-semibold text-lg'>{message}</h3>
+                                            </div>
+                                        </>
+
+                                    ) : (
+                                        <>
+                                            <h1 className='text-gray-950 font-extrabold text-lg'>What was your overall experience with our car swapping and purchasing service?</h1>
+                                            <div className="flex mt-3">
+                                                {/* <Star /> */}
+
+                                                <div className="flex space-x-1">
+                                                    {Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
+                                                        <label >
+                                                            <input
+                                                                key={star}
+                                                                type="radio"
+                                                                name="rating"
+                                                                value={star}
+                                                                onClick={handleRatingChange}
+                                                                onChange={(e) => setData('star', e.target.value)}
+                                                                checked={rating === star}
+                                                                className="hidden"
+
+                                                            />
+                                                            {errors.star && <div className='text-danger'>{errors.star}</div>}
+                                                            <svg className={`w-8 h-8 cursor-pointer ${star <= review.rating ? 'text-emerald-400' : 'text-gray-400'}`}
+                                                                aria-hidden="true"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="currentColor"
+                                                                viewBox="0 0 22 20">
+                                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                            </svg>
+
+                                                        </label>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
+                                    <div className='mt-3'>
+                                        <textarea id="message" name="message" rows={4} value={review.message} onChange={(e) => setData('message', e.target.value)}
+                                            className=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                                        {errors.message && <div className='text-danger'>{errors.message}</div>}
+                                        <button type="button" onClick={() => handleSubmit()} className='bg-emerald-500 text-white px-3 py-2.5 rounded-md mt-3 hover:bg-emerald-600'>Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        :
+                        "Show User Reviews"
+                        :
+                        ''
+                    ))
                     :
-                    <ReviewForm auth={auth} car={car}/>
+                    <form className="row g-3" method='post'>
+                        <div className='p-4'>
+                            <h3 className="font-bold text-gray-900 text-2xl">Reviews:</h3>
+                            <div className="bg-white border border-gray-300 p-4 rounded-lg mt-3 shadow-md">
+                                {IsEditMode ? (
+                                    <>
+                                        <h1 className='text-gray-950 font-extrabold text-lg'>What was your overall experience with our car swapping and purchasing service?</h1>
+
+
+                                        <div className="flex mt-3">
+                                            {/* <Star /> */}
+
+                                            <div className="flex space-x-1">
+                                                {Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
+                                                    <label >
+                                                        <input
+                                                            key={star}
+                                                            type="radio"
+                                                            name="rating"
+                                                            value={star}
+                                                            onClick={handleRatingChange}
+                                                            onChange={(e) => setData('star', e.target.value)}
+                                                            checked={rating === star}
+                                                            className="hidden"
+
+                                                        />
+                                                        {errors.star && <div className='text-danger'>{errors.star}</div>}
+                                                        <svg className={`w-8 h-8 cursor-pointer ${star <= rating ? 'text-emerald-400' : 'text-gray-400'}`}
+                                                            aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="currentColor"
+                                                            viewBox="0 0 22 20">
+                                                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                        </svg>
+
+                                                    </label>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                    </>
+
+                                ) : (
+                                    <>
+                                        <div className="mb-2">
+                                            <div className='flex justify-between items-center'>
+                                                <div className="flex space-x-1">
+                                                    {Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
+                                                        <svg
+                                                            key={star}
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            className={`h-8 w-8 ${star <= rating ? 'text-emerald-500' : 'hidden'
+                                                                }`}
+                                                            fill="currentColor"
+                                                            viewBox="0 0 22 20"
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                        </svg>
+                                                    ))}
+                                                </div>
+                                                <div className='flex cursor-pointer space-x-0.5'>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="blue" className="w-6 h-6">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                    </svg>
+                                                    <button onClick={handleEdit} className=" text-blue-500">
+                                                        Edit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <h3 className='mt-4 font-semibold text-lg'>{message}</h3>
+                                        </div>
+                                    </>
+                                )}
+                                <div className='mt-3'>
+                                    <textarea id="message" name="message" rows={4} value={data.message} onChange={(e) => setData('message', e.target.value)}
+                                        className=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                                    {errors.message && <div className='text-danger'>{errors.message}</div>}
+                                    <button type="button" onClick={() => handleSubmit()} className='bg-emerald-500 text-white px-3 py-2.5 rounded-md mt-3 hover:bg-emerald-600'>Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 }
                 {
                     similarCars ?
