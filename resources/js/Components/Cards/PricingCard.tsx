@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"
 import { Link, useForm } from '@inertiajs/react';
+import Conditon from "@/Assets/car-settings.png";
+import Engine from "@/Assets/car-engine.png";
+
 
 
 const PricingCard = ({ brands, cars, auth }: any) => {
@@ -12,7 +15,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
     const [total, setTotal]: any = useState(0)
     const [isTapped, setIsTapped] = useState(false);
     const [selectedCarId, setSelectedCarId] = useState(0);
-    const {data,setData,errors,get}=useForm();
+    const { data, setData, errors, get } = useForm();
 
     const handleSetCar = (id = 0) => {
         let car = cars.find((item: any) => (item.id === id))
@@ -34,7 +37,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
         } else {
             setSelectedCarId(id);
         }
-        get(route('user.add.wishlist',id))
+        get(route('user.add.wishlist', id))
         // .then((response)=>{
         //     setSelectedCarId(id)
         //     return response.json();
@@ -64,11 +67,14 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                         alt="product image"
                                     />
                                 </Link>
-                                <svg
+                                <div className='absolute top-2 right-2 bg-emerald-500 rounded p-1 shadow-2xl'>
+                                    <p className='font-bold'>{car?.type}</p>
+                                    </div>
+                                {/* <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className={`w-7 h-7 ${selectedCarId === car.id || car.is_fav==true ? 'text-red-500' : 'text-gray-500'
+                                    className={`w-7 h-7 ${selectedCarId === car.id || car.is_fav == true ? 'text-red-500' : 'text-gray-500'
                                         } absolute top-2 right-2`}
-                                    fill={selectedCarId === car.id || car.is_fav==true ? 'red' : 'white'}
+                                    fill={selectedCarId === car.id || car.is_fav == true ? 'red' : 'white'}
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
                                     onClick={() => handleSetHeart(car.id)}
@@ -78,15 +84,15 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                         strokeLinejoin="round"
                                         d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
                                     />
-                                </svg>
+                                </svg> */}
                                 <div className="absolute bottom-5 left-1">
-                                    <svg
+                                    {/* <svg
                                         aria-hidden="true"
                                         className="w-5 h-5 text-yellow-300"
                                         fill="currentColor"
                                         viewBox="0 0 20 20"
                                         xmlns="http://www.w3.org/2000/svg"
-                                    ></svg>
+                                    ></svg> */}
                                     <span className="flex justify-center bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +124,31 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                 <div className="flex items-center"></div>
                                 <hr className="border-t-2 border-black mt-2" />
                                 <div className="mt-4">
-                                    <table className="w-full">
+                                    <div className='flex flex-wrap justify-between'>
+                                        <div className='flex flex wrap'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                            </svg>
+                                            <p className='mx-2 '>{car?.location}</p>
+                                        </div>
+
+                                    </div>
+                                    <div className='flex flex-wrap justify-between mt-3'>
+                                        <div className='flex flex wrap'>
+                                            <img src={Conditon} className='w-6 h-6'/>
+                                            <p className='mx-2 '>{car?.condition}</p>
+                                        </div>
+
+                                    </div>
+                                    <div className='flex flex-wrap justify-between mt-3'>
+                                        <div className='flex flex wrap'>
+                                            <img src={Engine} className='w-6 h-6'/>
+                                            <p className='mx-2 '>{car?.engine_capacity}</p>
+                                        </div>
+
+                                    </div>
+                                    {/* <table className="w-full">
                                         <tbody>
                                             <tr>
                                                 <th className="px-2 py-1 font-bold-300 text-gray-600">
@@ -139,7 +169,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                                 </th>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> */}
                                 </div>
 
                                 {/* <div className="flex items-center justify-between mt-4">
