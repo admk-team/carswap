@@ -76,21 +76,21 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
     };
     const config = {
         public_key: 'FLWPUBK_TEST-5362dd26662af2fa2bb22c99f29ab2c3-X',
-        tx_ref: Date.now(),
+        tx_ref: 'car-swap',
         amount: 100,
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
           email: auth && auth.user ? auth.user.email : null,
           phone_number: auth && auth.user ? auth.user.phone_no : null,
-          name: auth && auth.user ? auth.user.first_name+' '+ auth.user.last_name: null,
+          name: auth && auth.user ? auth.user.first_name + ' ' + auth.user.last_name : null,
         },
         customizations: {
           title: 'Car Swap Payment',
           description: 'Payment for items in cart',
           logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
         },
-      };
+    };
     
       const handleFlutterPayment = useFlutterwave(config);
 
