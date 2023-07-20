@@ -10,9 +10,11 @@ use App\Http\Controllers\User\PostacarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RavepayController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\UserController as FrontUserController;
+use App\Models\Rating;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Artisan;
 
@@ -95,15 +97,16 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
     Route::get('/delete-car/{slug}',[PostacarController::class,'delete'])->name('deleteCar');
 
     // Payment initiation route
-    Route::post('/initiate-payment', [RavepayController::class, 'store'])->name('pay');
+    Route::any('/initiate-payment', [RavepayController::class, 'store'])->name('pay');
+});
 
     // Payment callback route
-    Route::post('/payment/callback', [RavepayController::class, 'handleCallback'])->name('callback');
-
-});
+    Route::get('/payment/callback', [RavepayController::class, 'handleCallback'])->name('callback');
 
     //Post car
     Route::resource('user/cars',PostacarController::class, ['as'=> 'user']);
+    //ratings
+    Route::resource('user/ratings',RatingController::class, ['as'=> 'user']);
     // Route::get('cars/{id}/{status}',[PostacarController::class,'status'])->name('cars.status');
     //wishlist
 

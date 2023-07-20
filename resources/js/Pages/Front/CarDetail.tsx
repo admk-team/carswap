@@ -1,4 +1,4 @@
-
+import { usePage, useForm } from '@inertiajs/react';
 import NavBar2 from '@/Components/Navbar/NabBar2';
 import TimeClock from "@/Assets/timeclock.png";
 import PriceTag from "@/Assets/pricetag.png";
@@ -13,16 +13,26 @@ import Fuel from "@/Assets/gas-station.png";
 import Color1 from "@/Assets/car-color.png";
 import Footer from '../Footer/Footer';
 import { Head, Link } from '@inertiajs/react';
-import React, { useState } from 'react'
 import Star from '@/Components/Rating/Star';
 import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"
 import ShareModal from '@/Components/Modal/ShareModal';
 import { title } from 'process';
+import React, { useState, useEffect } from "react";
 
-export default function CarDetail({ car, auth, similarCars }: any) {
-
-    
+export default function CarDetail({ car, auth, similarCars, success, error }: any) {
+    const { errors } = usePage().props
+    const [checkReview, setCheckReview] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    useEffect(() => {
+        if (success) {
+            setSuccessMessage(success);
+        }
+        if (error) {
+            setErrorMessage(error);
+        }
+    }, []);
 
     const [rating, setRating] = useState(0);
     const [message, setMessage] = useState('');
@@ -37,6 +47,14 @@ export default function CarDetail({ car, auth, similarCars }: any) {
         setIsModalOpen(false);
       };
   
+    const { data, setData, post, processing, } = useForm({
+        star: '',
+        car_id: car.id || '',
+        user_id: auth&&auth.user?auth.user.id:'',
+        message: '',
+
+    });
+    const baseUrl = window.location.origin;
 
     const handleRatingChange = (event: any) => {
         setRating(Number(event.target.value));
@@ -46,15 +64,16 @@ export default function CarDetail({ car, auth, similarCars }: any) {
         setMessage(event.target.value);
     };
 
-
-console.log(rating);
-
     const handleSubmit = () => {
+        post(route('user.ratings.store'))
         setIsEditMode(false);
     };
 
     const handleEdit = () => {
         setIsEditMode(true);
+    };
+    const handleOnEdit = () => {
+        setIsEditMode(false);
     };
 
 
@@ -82,7 +101,6 @@ console.log(rating);
             <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
                 <div className="bg-gray-200 p-4">
                     <div className="flex">
-                        <div className="bg-green-600 text-white py-2 px-4 mr-2">Nigerian</div>
                         <div className="bg-emerald-500 text-white py-2 px-4 mr-2">{car.condition}</div>
                     </div>
                     <div className="flex mt-3">
@@ -131,70 +149,90 @@ console.log(rating);
                         <div className="col-span-12 md:col-span-6">
                             <div className="flex flex-col mx-3 h-5/6">
                                 <div className="bg-white rounded-lg shadow-md p-6">
-                                    <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Swap Buy Calculator</h2>
-                                    <hr className='mb-4' />
-                                    <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow'>
-                                        <p className='font-bold'>Car Price</p>
-                                        <p>$ {car?.price}</p>
-                                    </div>
-                                    <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
-                                        <p className='font-bold mt-1'>Your Car Price</p>
-                                        <input
-                                            type='text'
-                                            className='w-48 border-gray-300 rounded px-2 py-1'
-                                            placeholder='Enter price'
-                                            value={yourCarPrice}
-                                            onChange={(e) => setYourCarPrice(e.target.value)}
-                                        />
-                                    </div>
-                                    <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
-                                        <p className='font-bold mt-1'>Price Difference</p>
-                                        <p>$ {priceDifference}</p>
-                                    </div>
-                                    <button
-                                        className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
-                                        onClick={calculatePriceDifference}
-                                    >
-                                        Calculate
-                                    </button>
-                                    <div className="flex justify-center items-center mt-3">
-                                        <hr className="w-3/6 sm:w-1/6 border-0 border-t-2 border-black" />
-                                        <p className="font-bold text-2xl uppercase mx-4">or</p>
-                                        <hr className="w-3/6 sm:w-1/6 border-0 border-t-2 border-black" />
-                                    </div>
-                                    <button
-                                        className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3'
+                                    {
+                                        car.type && car.type == 'swap' ?
+                                            <>
+                                                <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Swap Buy Calculator</h2>
+                                                <hr className='mb-4' />
+                                                <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow'>
+                                                    <p className='font-bold'>Car Price</p>
+                                                    <p>$ {car?.price}</p>
+                                                </div>
+                                                <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
+                                                    <p className='font-bold mt-1'>Your Car Price</p>
+                                                    <input
+                                                        type='text'
+                                                        className='w-48 border-gray-300 rounded px-2 py-1'
+                                                        placeholder='Enter price'
+                                                        value={yourCarPrice}
+                                                        onChange={(e) => setYourCarPrice(e.target.value)}
+                                                    />
+                                                </div>
+                                                <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
+                                                    <p className='font-bold mt-1'>Price Difference</p>
+                                                    <p>$ {priceDifference}</p>
+                                                </div>
+                                                <button
+                                                    className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
+                                                    onClick={calculatePriceDifference}
+                                                >
+                                                    Calculate
+                                                </button>
+                                                {/* <div className="flex justify-center items-center mt-3">
+                                                    <hr className="w-3/6 sm:w-1/6 border-0 border-t-2 border-black" />
+                                                    <p className="font-bold text-2xl uppercase mx-4">or</p>
+                                                    <hr className="w-3/6 sm:w-1/6 border-0 border-t-2 border-black" />
+                                                </div> */}
+                                            </>
+                                            :
+                                            auth && auth.user ?
+                                                <form method="POST" action="https://checkout.flutterwave.com/v3/hosted/pay">
+                                                    <input type="hidden" name="public_key" value="FLWPUBK_TEST-5362dd26662af2fa2bb22c99f29ab2c3-X" />
+                                                    <input type="hidden" name="customer[email]" value={auth.user.email} />
+                                                    <input type="hidden" name="customer[name]" value={auth.user.first_name} />
+                                                    <input type="hidden" name="tx_ref" value="bitethtx-019203" />
+                                                    <input type="hidden" name="amount" value="1000" />
+                                                    <input type="hidden" name="currency" value="NGN" />
+                                                    <input type="hidden" name="meta[token]" value="54" />
+                                                    <input type="hidden" name="redirect_url" value={baseUrl + '/payment/callback'} />
+                                                    <button type='submit' className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
+                                                </form>
+                                                :
+                                                <Link href={route('user.login')} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </Link>
 
-                                    >
-                                        Buy Now
-                                    </button>
+                                    }
                                 </div>
-                                <div className="bg-white rounded-lg shadow-md p-6 mt-3">
-                                    <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Swapping</h2>
-                                    <hr />
-                                    <div className="relative p-4 flex">
-                                        <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 ">
-                                            <div className="col-span-1 md:col-span-2 lg:col-span-1">
-                                                <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
-                                                <img src={"/storage" + car.images[0]} className="w-full h-4/5 object-contain"></img>
+                                {
+                                    car.type && car.type == 'swap' ?
+
+                                        <div className="bg-white rounded-lg shadow-md p-6 mt-3">
+                                            <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Swapping</h2>
+                                            <hr />
+                                            <div className="relative p-4 flex">
+                                                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 ">
+                                                    <div className="col-span-1 md:col-span-2 lg:col-span-1">
+                                                        <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
+                                                        <img src={"/storage" + car.images[0]} className="w-full h-4/5 object-contain"></img>
+                                                    </div>
+                                                    <div className="col-span-1 md:col-span-1 lg:col-span-1 flex justify-center items-center">
+                                                        <img src={Transfer} className="w-full h-20 object-contain"></img>
+                                                    </div>
+                                                    <div className="col-span-1 md:col-span-2 lg:col-span-1">
+                                                        <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>My Car</p>
+                                                        <img src={Cover} className="w-full h-4/5 object-contain"></img>
+                                                    </div>
+                                                </div>
+
                                             </div>
-                                            <div className="col-span-1 md:col-span-1 lg:col-span-1 flex justify-center items-center">
-                                                <img src={Transfer} className="w-full h-20 object-contain"></img>
-                                            </div>
-                                            <div className="col-span-1 md:col-span-2 lg:col-span-1">
-                                                <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>My Car</p>
-                                                <img src={Cover} className="w-full h-4/5 object-contain"></img>
-                                            </div>
+                                            <button
+                                                className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
+                                            >
+                                                Swap Now
+                                            </button>
                                         </div>
-
-                                    </div>
-                                    <button
-                                        className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
-                                    >
-                                        Swap Now
-                                    </button>
-                                </div>
-
+                                        :
+                                        ''
+                                }
                             </div>
                         </div>
                     </div>
@@ -206,15 +244,6 @@ console.log(rating);
                     <h3 className="font-bold text-gray-900 text-2xl">Key Features:</h3>
                     <div className="grid grid-cols-12 gap-4 mt-7">
                         <div className="col-span-12 md:col-span-6 lg:col-span-4">
-                            {/* <div className='flex justify-between bg-purple-50 p-4'>
-                                <div className="flex gap-2">
-                                    <img src={Body} className="w-6 h-6" />
-                                    <p>Body Type</p>
-                                </div>
-                                <div>
-                                    <p>Truck</p>
-                                </div>
-                            </div> */}
                             <hr />
                             <div className='flex justify-between bg-purple-50 p-4'>
                                 <div className="flex gap-2">
@@ -283,17 +312,6 @@ console.log(rating);
                                 </div>
                             </div>
                             <hr />
-                            {/* <div className='flex justify-between bg-purple-50 p-4'>
-                                <div className="flex gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                    <p>Seller Type</p>
-                                </div>
-                                <div>
-                                    <p>Dealer</p>
-                                </div>
-                            </div> */}
                         </div>
                         <div className="col-span-12 md:col-span-6 lg:col-span-4">
                             <div className='flex justify-between bg-purple-50 p-4'>
@@ -326,224 +344,189 @@ console.log(rating);
                                 </div>
                             </div>
                             <hr />
-                            {/* <div className='flex justify-between bg-purple-50 p-4'>
-                                <div className="flex gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
-                                    </svg>
-
-                                    <p>No of Owners</p>
-                                </div>
-                                <div>
-                                    <p>First Owner</p>
-                                </div>
-                            </div> */}
                         </div>
                     </div>
                 </div>
-                <div className="p-4">
-                    <h3 className="font-bold text-gray-900 text-2xl">Features:</h3>
-                    <div className="grid grid-cols-12 gap-4 mt-7">
-                        <div className="col-span-12 md:col-span-6 lg:col-span-3">
-
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>ABS</p>
-                            </div>
-
-
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>AM/FM Radio</p>
-                            </div>
-
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>Immobilizer Key</p>
-                            </div>
-
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>Rear Parking Sensor</p>
-                            </div>
-                        </div>
-                        <div className="col-span-12 md:col-span-6 lg:col-span-3">
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>Air Bags</p>
-                            </div>
-
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>Brake Assist</p>
-                            </div>
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>Navigation System</p>
-                            </div>
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>Steering Adjustment</p>
-                            </div>
-                        </div>
-                        <div className="col-span-12 md:col-span-6 lg:col-span-3">
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>Air Condition</p>
-                            </div>
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>Central Locking</p>
-                            </div>
-
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>Power Steering</p>
-                            </div>
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>Xenon Headlight</p>
-                            </div>
-                        </div>
-                        <div className="col-span-12 md:col-span-6 lg:col-span-3">
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>Alloy Rims</p>
-                            </div>
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>Cruise Control</p>
-                            </div>
-
-                            <div className="flex gap-2 mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="green" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-
-                                <p>Power Windows</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                
                 <div className='p-4'>
                     <h3 className="font-bold text-gray-900 text-2xl">Description:</h3>
                     <p>{car.description}</p>
                 </div>
-                <div className='p-4'>
-                    <h3 className="font-bold text-gray-900 text-2xl">Reviews:</h3>
-                    <div className="bg-white border border-gray-300 p-4 rounded-lg mt-3 shadow-md">
-                        {IsEditMode ? (
-                            <>
-                                <h1 className='text-gray-950 font-extrabold text-lg'>What was your overall experience with our car swapping and purchasing service?</h1>
-                                <div className="flex mt-3">
-                                    {/* <Star /> */}
+                {  
+                    car.ratings?
+                    car.ratings.map((review:any)=>(
+                        review&&review.user?
+                        auth&&auth.user&&auth.user.id==review.user_id?
+                        <form className="row g-3" method='post'>
+                            <div className='p-4'>
+                                <h3 className="font-bold text-gray-900 text-2xl">Reviews:</h3>
+                                <div className="bg-white border border-gray-300 p-4 rounded-lg mt-3 shadow-md">
+                                {IsEditMode ? (
+                                        <>
+                                            <div className="mb-2">
+                                                <div className='flex justify-between items-center'>
+                                                    <div className="flex space-x-1">
+                                                        {Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
+                                                            <svg
+                                                                key={star}
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                className={`h-8 w-8 ${star <= rating ? 'text-emerald-500' : 'hidden'
+                                                                    }`}
+                                                                fill="currentColor"
+                                                                viewBox="0 0 22 20"
+                                                                stroke="currentColor"
+                                                            >
+                                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                            </svg>
+                                                        ))}
+                                                    </div>
+                                                    <div className='flex cursor-pointer space-x-0.5'>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="blue" className="w-6 h-6">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                        </svg>
+                                                        <button onClick={handleOnEdit} className=" text-blue-500">
+                                                            Edit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <h3 className='mt-4 font-semibold text-lg'>{message}</h3>
+                                            </div>
+                                        </>
 
-                                    <div className="flex space-x-1">
-                                        {Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
-                                            <label >
-                                                <input
-                                                    key={star}
-                                                    type="radio"
-                                                    name="rating"
-                                                    value={star}
-                                                    onChange={handleRatingChange}
-                                                    checked={rating === star}
-                                                    className="hidden"
-                                                />
-                                                <svg className={`w-8 h-8 cursor-pointer ${star <= rating ? 'text-emerald-400' : 'text-gray-400'}`}
-                                                    aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 22 20">
-                                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                                </svg>
+                                    ) : (
+                                        <>
+                                            <h1 className='text-gray-950 font-extrabold text-lg'>What was your overall experience with our car swapping and purchasing service?</h1>
+                                            <div className="flex mt-3">
+                                                {/* <Star /> */}
 
-                                            </label>
-                                        ))}
+                                                <div className="flex space-x-1">
+                                                    {Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
+                                                        <label >
+                                                            <input
+                                                                key={star}
+                                                                type="radio"
+                                                                name="rating"
+                                                                value={star}
+                                                                onClick={handleRatingChange}
+                                                                onChange={(e) => setData('star', e.target.value)}
+                                                                checked={rating === star}
+                                                                className="hidden"
+
+                                                            />
+                                                            {errors.star && <div className='text-danger'>{errors.star}</div>}
+                                                            <svg className={`w-8 h-8 cursor-pointer ${star <= review.rating ? 'text-emerald-400' : 'text-gray-400'}`}
+                                                                aria-hidden="true"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="currentColor"
+                                                                viewBox="0 0 22 20">
+                                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                            </svg>
+
+                                                        </label>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
+                                    <div className='mt-3'>
+                                        <textarea id="message" name="message" rows={4} value={review.message} onChange={(e) => setData('message', e.target.value)}
+                                            className=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                                        {errors.message && <div className='text-danger'>{errors.message}</div>}
+                                        <button type="button" onClick={() => handleSubmit()} className='bg-emerald-500 text-white px-3 py-2.5 rounded-md mt-3 hover:bg-emerald-600'>Submit</button>
                                     </div>
                                 </div>
-                            </>
-                        ) : (
-                            <>
-                                <div className="mb-2">
-                                    <div className='flex justify-between items-center'>
-                                        <div className="flex space-x-1">
-                                            {Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
-                                                <svg
-                                                    key={star}
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    className={`h-8 w-8 ${star <= rating ? 'text-emerald-500' : 'hidden'
-                                                        }`}
-                                                    fill="currentColor"
-                                                    viewBox="0 0 22 20"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                                </svg>
-                                            ))}
+                            </div>
+                        </form>
+                        :
+                        "Show User Reviews"
+                        :
+                        ''
+                    ))
+                    :
+                    <form className="row g-3" method='post'>
+                        <div className='p-4'>
+                            <h3 className="font-bold text-gray-900 text-2xl">Reviews:</h3>
+                            <div className="bg-white border border-gray-300 p-4 rounded-lg mt-3 shadow-md">
+                                {IsEditMode ? (
+                                    <>
+                                        <h1 className='text-gray-950 font-extrabold text-lg'>What was your overall experience with our car swapping and purchasing service?</h1>
+
+
+                                        <div className="flex mt-3">
+                                            {/* <Star /> */}
+
+                                            <div className="flex space-x-1">
+                                                {Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
+                                                    <label >
+                                                        <input
+                                                            key={star}
+                                                            type="radio"
+                                                            name="rating"
+                                                            value={star}
+                                                            onClick={handleRatingChange}
+                                                            onChange={(e) => setData('star', e.target.value)}
+                                                            checked={rating === star}
+                                                            className="hidden"
+
+                                                        />
+                                                        {errors.star && <div className='text-danger'>{errors.star}</div>}
+                                                        <svg className={`w-8 h-8 cursor-pointer ${star <= rating ? 'text-emerald-400' : 'text-gray-400'}`}
+                                                            aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="currentColor"
+                                                            viewBox="0 0 22 20">
+                                                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                        </svg>
+
+                                                    </label>
+                                                ))}
+                                            </div>
                                         </div>
-                                        <div className='flex cursor-pointer space-x-0.5'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="blue" className="w-6 h-6">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                            </svg>
-                                            <button onClick={handleEdit} className=" text-blue-500">
-                                                Edit
-                                            </button>
+
+                                    </>
+
+                                ) : (
+                                    <>
+                                        <div className="mb-2">
+                                            <div className='flex justify-between items-center'>
+                                                <div className="flex space-x-1">
+                                                    {Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
+                                                        <svg
+                                                            key={star}
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            className={`h-8 w-8 ${star <= rating ? 'text-emerald-500' : 'hidden'
+                                                                }`}
+                                                            fill="currentColor"
+                                                            viewBox="0 0 22 20"
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                        </svg>
+                                                    ))}
+                                                </div>
+                                                <div className='flex cursor-pointer space-x-0.5'>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="blue" className="w-6 h-6">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                    </svg>
+                                                    <button onClick={handleEdit} className=" text-blue-500">
+                                                        Edit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <h3 className='mt-4 font-semibold text-lg'>{message}</h3>
                                         </div>
-                                    </div>
-                                    <h3 className='mt-4 font-semibold text-lg'>{message}</h3>
+                                    </>
+                                )}
+                                <div className='mt-3'>
+                                    <textarea id="message" name="message" rows={4} value={data.message} onChange={(e) => setData('message', e.target.value)}
+                                        className=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                                    {errors.message && <div className='text-danger'>{errors.message}</div>}
+                                    <button type="button" onClick={() => handleSubmit()} className='bg-emerald-500 text-white px-3 py-2.5 rounded-md mt-3 hover:bg-emerald-600'>Submit</button>
                                 </div>
-                            </>
-                        )}
-                        <div className='mt-3'>
-                            <textarea id="message" rows={4} className=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
-                            <button className='bg-emerald-500 text-white px-3 py-2.5 rounded-md mt-3 hover:bg-emerald-600'>Submit</button>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </form>
+                }
                 {
                     similarCars ?
                         <div className='p-4 '>
@@ -596,14 +579,6 @@ console.log(rating);
                                                         </tbody>
                                                     </table>
                                                 </div>
-
-                                                {/* <div className="flex items-center justify-between mt-4">
-
-                                                    <a href="#" className="text-white bg-black hover:bg-gray-600 font-medium  text-sm px-6 py-2.5 text-center  w-36">Cash Purchase</a>
-                                                    <a href="#" className="text-white bg-green-500 hover:bg-green-600 font-medium  text-sm px-6 py-2.5 text-center  w-32">Swap</a>
-                                                </div> */}
-
-
                                             </div>
                                         </div>
                                     ))}
