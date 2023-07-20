@@ -19,6 +19,12 @@ import Transfer from "@/Assets/transfer.png"
 import ShareModal from '@/Components/Modal/ShareModal';
 import { title } from 'process';
 import React, { useState, useEffect } from "react";
+import Test from '../Test';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Cover1 from '@/Assets/cover1.jpg'
+import Cover2 from '@/Assets/cover2.jpg'
 
 export default function CarDetail({ car, auth, similarCars, success, error }: any) {
     const { errors } = usePage().props
@@ -38,15 +44,15 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
     const [message, setMessage] = useState('');
     const [IsEditMode, setIsEditMode] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    
+
     const handleShareButtonClick = () => {
         setIsModalOpen(true);
       };
-    
+
       const handleModalClose = () => {
         setIsModalOpen(false);
       };
-  
+
     const { data, setData, post, processing, } = useForm({
         star: '',
         car_id: car.id || '',
@@ -92,6 +98,16 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
         const difference = enteredPrice - carPrice;
         setPriceDifference(difference);
     };
+    const cars = [Cover1, Cover2];
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+    };
+
     return (
         <div>
             <Head title={car.title} />
@@ -219,7 +235,13 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
                                                     </div>
                                                     <div className="col-span-1 md:col-span-2 lg:col-span-1">
                                                         <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>My Car</p>
-                                                        <img src={Cover} className="w-full h-4/5 object-contain"></img>
+                                                        <Slider {...settings}>
+                                                            {cars.map((car, index) => (
+                                                                <div key={index}>
+                                                                    <img src={car} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
+                                                                </div>
+                                                            ))}
+                                                        </Slider>
                                                     </div>
                                                 </div>
 
@@ -347,12 +369,12 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
                         </div>
                     </div>
                 </div>
-                
+
                 <div className='p-4'>
                     <h3 className="font-bold text-gray-900 text-2xl">Description:</h3>
                     <p>{car.description}</p>
                 </div>
-                {  
+                {
                     car.ratings?
                     car.ratings.map((review:any)=>(
                         review&&review.user?
