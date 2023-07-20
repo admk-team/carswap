@@ -11,6 +11,8 @@ const Edit = ({ auth,brands,car,users}: any) => {
     condition: car.condition,
     engine_capacity: car.engine_capacity,
     mileage: car.mileage,
+    type: car.type,
+    trim: car.trim,
     location: car.location,
     price: car.price,
     fuel_type: car.fuel_type,
@@ -97,6 +99,20 @@ const Edit = ({ auth,brands,car,users}: any) => {
                 <label className="form-label">Mileage <span className='text-danger'>*</span></label>
                 <input type="text" name="mileage" className="form-control" placeholder="Mileage"  value={data.mileage} onChange={(e)=>setData('mileage',e.target.value)} />
                 {errors.mileage && <div className='text-danger'>{errors.mileage}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label">Select Type <span className='text-danger'>*</span></label>
+                <select name="type" id="" className="form-control" onChange={(e)=>setData('type',e.target.value)}>
+                <option value="">Select Type</option>
+                <option value="swap" selected={car.type && car.type === 'swap'}>For Swap</option>
+                <option value="sale" selected={car.type && car.type === 'sale'}>For Sale</option>
+                </select>
+                {errors.type && <div className='text-danger'>{errors.type}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label">Trim <span className='text-danger'>*</span></label>
+                <input type="text" name="trim" className="form-control" placeholder="Enter Trim"  value={data.trim} onChange={(e)=>setData('trim',e.target.value)} />
+                {errors.trim && <div className='text-danger'>{errors.trim}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Price <span className='text-danger'>*</span></label>

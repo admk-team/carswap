@@ -127,6 +127,8 @@ class CarController extends Controller
             'condition' => 'required',
             'engine_capacity' => 'required',
             'mileage' => 'required',
+            'type' => 'required',
+            'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
             'fuel_type' => 'required',
@@ -164,6 +166,8 @@ class CarController extends Controller
         $model->condition=$request->condition;
         $model->engine_capacity=$request->engine_capacity;
         $model->mileage=$request->mileage;
+        $model->type=$request->type;
+        $model->trim=$request->trim;
         $model->location=$request->location;
         $model->price=$request->price;
         $model->drive=$request->drive;
