@@ -66,7 +66,7 @@ class FrontController extends Controller
     }
     public function CarDetail($slug){
         $brands=Brand::where('status','1')->get();
-        $car=Car::with('rattings.user')->where('slug',$slug)->first();
+        $car=Car::with('ratings.user')->where('slug',$slug)->first();
         $car->images=explode(',',$car->images);
         $similarCars=Car::where('status','1')->limit(4)->latest()->get();
         $similarCars=$similarCars->map(function($car){
