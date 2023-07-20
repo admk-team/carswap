@@ -1,8 +1,8 @@
 import React from 'react'
-import Screen1 from "@/Assets/StepsImages/screen1.png"
-import Screen2 from "@/Assets/StepsImages/Untitled design.png"
-import Screen3 from "@/Assets/StepsImages/screen3.png"
-import Screen4 from "@/Assets/StepsImages/screen4.png"
+import Screen1 from "@/Assets/StepsImages/Untitled design (2).png"
+import Screen2 from "@/Assets/StepsImages/Untitled design (1).png"
+import Screen3 from "@/Assets/StepsImages/Untitled design (4).png"
+import Screen4 from "@/Assets/StepsImages/Untitled design (3).png"
 
 const AfterStep = () => {
     return (
@@ -23,7 +23,7 @@ const AfterStep = () => {
                                             className=" "
                                         />
                                     </div>
-                                    <div className='justify-center text-center mt-3 w-48'>
+                                    <div className='justify-center text-center mt-3 '>
                                         <h1 className=" font-semibold text-xl">Guaranteed Purchase</h1>
                                         <p className='text-md mt-3'>We guarantee to buy any car at a fair price</p>
                                     </div>
@@ -36,8 +36,8 @@ const AfterStep = () => {
                                             className="  "
                                         />
                                     </div>
-                                    <div className='justify-center text-center mt-3 w-44'>
-                                        <h1 className=" font-semibold text-xl">No Costs. <br /> No Obligation</h1>
+                                    <div className='justify-center text-center mt-3'>
+                                        <h1 className=" font-semibold text-xl">No Costs. No Obligation</h1>
                                         <p className='mt-3'>Book an appointment at any of our many branches across UAE at a date and time of your convenience</p>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@ const AfterStep = () => {
                                             className="  "
                                         />
                                     </div>
-                                    <div className='justify-center text-center mt-3 w-44'>
+                                    <div className='justify-center text-center mt-3'>
                                         <h1 className=" font-semibold text-xl">Quick and Easy</h1>
                                         <p className='mt-3'>All done in 30 minutes. Nation wide branches near you.</p>
                                     </div>
@@ -64,7 +64,7 @@ const AfterStep = () => {
                                             className="  "
                                         />
                                     </div>
-                                    <div className='justify-center text-center mt-3 w-44'>
+                                    <div className='justify-center text-center mt-3'>
                                         <h1 className=" font-semibold text-xl">Fast and Secure</h1>
                                         <p className='mt-3'>No dodgy deals. We transfer the money straight in your bank account.</p>
                                     </div>

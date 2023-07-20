@@ -18,6 +18,7 @@ import Star from '@/Components/Rating/Star';
 import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"
 import ShareModal from '@/Components/Modal/ShareModal';
+import { title } from 'process';
 
 export default function CarDetail({ car, auth, similarCars }: any) {
 
@@ -106,11 +107,12 @@ console.log(rating);
                             <img src={Location} className="w-6 h-6" />
                             <p className="mx-2">{car.location}</p>
                         </div>
-                        <div className="flex items-center mr-10" >
+                        <div className="flex cursor-pointer items-center mr-10" onClick={handleShareButtonClick} >
                             <img src={Share} className="w-6 h-6" />
-                            <p className="ml-2 underline hover:text-blue-500 cursor-pointer" onClick={handleShareButtonClick}>Share Now</p>
-                            <ShareModal isOpen={isModalOpen} onClose={handleModalClose}/>
+                            <p className="ml-2 underline hover:text-blue-500 cursor-pointer" >Share Now</p>
+                            
                         </div>
+                        <ShareModal isOpen={isModalOpen} onClose={handleModalClose}/>
                     </div>
                     <div className="grid grid-cols-12 gap-4 mt-7">
                         <div className="col-span-12 md:col-span-6">
@@ -540,11 +542,6 @@ console.log(rating);
                             <textarea id="message" rows={4} className=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
                             <button className='bg-emerald-500 text-white px-3 py-2.5 rounded-md mt-3 hover:bg-emerald-600'>Submit</button>
                         </div>
-
-
-
-
-
                     </div>
                 </div>
                 {
