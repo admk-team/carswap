@@ -1,8 +1,8 @@
 import React from 'react'
-import Screen1 from "@/Assets/StepsImages/Untitled design (2).png"
-import Screen2 from "@/Assets/StepsImages/Untitled design (1).png"
-import Screen3 from "@/Assets/StepsImages/Untitled design (4).png"
-import Screen4 from "@/Assets/StepsImages/Untitled design (3).png"
+import Screen1 from "@/Assets/StepsImages/no1.png"
+import Screen2 from "@/Assets/StepsImages/no2.png"
+import Screen3 from "@/Assets/StepsImages/no3.png"
+import Screen4 from "@/Assets/StepsImages/no4-removebg-preview (2).png"
 
 const AfterStep = () => {
   return (
@@ -15,13 +15,13 @@ const AfterStep = () => {
             </div>
             <div className="container mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-12 px-20 mt-4 justify-center">
-                {/* First item */}
-                <div className="md:flex md:flex-col items-center md:text-center">
-                  <div className='flex justify-center'>
+               
+                <div className="md:flex md:flex-col flex flex-col items-center md:text-center">
+                  <div className='flex justify-center items-center bg-emerald-500 rounded-full w-36 h-36'>
                     <img
                       src={Screen1}
                       alt="Image 1"
-                      className="object-contain w-44 h-44"
+                      className="object-contain w-20 h-20 "
                     />
                   </div>
                   <div className='justify-center text-center mt-3 w-full md:w-48'>
@@ -30,13 +30,12 @@ const AfterStep = () => {
                   </div>
                 </div>
 
-                {/* Second item */}
-                <div className="md:flex md:flex-col items-center md:text-center">
-                  <div className='flex justify-center'>
+                <div className="md:flex md:flex-col flex flex-col items-center md:text-center ">
+                  <div className='flex justify-center items-center bg-emerald-500 rounded-full w-36 h-36'>
                     <img
                       src={Screen2}
                       alt="Image 1"
-                      className="object-contain w-44 h-44"
+                      className="object-contain w-20 h-20 "
                     />
                   </div>
                   <div className='justify-center text-center mt-3 w-full md:w-44'>
@@ -45,13 +44,13 @@ const AfterStep = () => {
                   </div>
                 </div>
 
-                {/* Third item */}
-                <div className="md:flex md:flex-col items-center md:text-center">
-                  <div className='flex justify-center'>
+                
+                <div className="md:flex md:flex-col flex flex-col items-center md:text-center">
+                  <div className='flex justify-center items-center bg-emerald-500 rounded-full w-36 h-36'>
                     <img
                       src={Screen3}
                       alt="Image 1"
-                      className="object-contain w-44 h-44"
+                      className="object-contain w-24 h-24"
                     />
                   </div>
                   <div className='justify-center text-center mt-3 w-full md:w-44'>
@@ -60,13 +59,13 @@ const AfterStep = () => {
                   </div>
                 </div>
 
-                {/* Fourth item */}
-                <div className="md:flex md:flex-col items-center md:text-center">
-                  <div className='flex justify-center'>
+               
+                <div className="md:flex md:flex-col flex flex-col items-center md:text-center">
+                  <div className='flex justify-center items-center bg-emerald-500 rounded-full w-36 h-36'>
                     <img
                       src={Screen4}
                       alt="Image 1"
-                      className="object-contain w-44 h-44"
+                      className="object-contain w-24 h-24"
                     />
                   </div>
                   <div className='justify-center text-center mt-3 w-full md:w-44'>
@@ -85,4 +84,7 @@ const AfterStep = () => {
   )
 }
 
-export default AfterStep
+export default AfterStep;
+
+
+
