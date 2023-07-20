@@ -98,7 +98,7 @@ const CarInfohtmlForm = ({ auth, brands, users }: any) => {
                                 
                                 <div className="relative z-0 w-full mb-6 group">
                                     <select name="type" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.type} onChange={(e) => setData('type', e.target.value)}>
-                                        <option value="">Selecet Type</option>
+                                        <option value="">Select Type</option>
                                         <option value="swap">For Swap</option>
                                         <option value="sale">For Sale</option>
                                     </select>
