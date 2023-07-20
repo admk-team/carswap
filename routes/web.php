@@ -102,6 +102,7 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
 
     // Payment callback route
     Route::get('/payment/callback', [RavepayController::class, 'handleCallback'])->name('callback');
+    Route::any('/test', [RavepayController::class, 'test']);
 
     //Post car
     Route::resource('user/cars',PostacarController::class, ['as'=> 'user']);
