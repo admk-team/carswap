@@ -54,10 +54,10 @@ function ReviewForm({ auth,car,review }: any) {
                       <>
                         <div className="mt-3 flex justify-between"> {/* Remove the extra 'justify-' prefix */}
                           <div className="flex">
-                            <img src={auth && auth.user&&auth.user.image  ? '/storage/' + auth.user.image : Avatar} alt="" className="rounded-full w-20 h-20" />
+                            <img src={auth && auth.user&&auth.user.image  ? '/storage/' + auth.user.image : Avatar} alt="" className="rounded-full w-12 h-12 mt-1" />
                             <div className="grid">
-                              <span className="mt-2 ms-2 max-w-lg text-xl font-semibold leading-relaxed text-gray-900 dark:text-white">{auth && auth.user ? auth.user.first_name + ' ' + auth.user.last_name : 'N/A'}</span>
-                              <span className="ms-2 mt-0 text-lg font-small text-gray-900 dark:text-white">{formattedDate ? formattedDate : 'N/A'}</span>
+                              <span className=" ms-2 max-w-lg text-lg font-semibold leading-relaxed text-gray-900 dark:text-white">{auth && auth.user ? auth.user.first_name + ' ' + auth.user.last_name : 'N/A'}</span>
+                              <span className="ms-2 mt-0 text-md font-small text-gray-900 dark:text-white">{formattedDate ? formattedDate : 'N/A'}</span>
                             </div>
                           </div>
                           <div className="text-end">
@@ -77,7 +77,7 @@ function ReviewForm({ auth,car,review }: any) {
                             starLength&&starLength.length>0?
                               starLength.map((_, index) => (
                                 <label >
-                                <svg className={`w-8 h-8 cursor-pointer text-emerald-400`}
+                                <svg className={`w-5 h-5 cursor-pointer text-emerald-400`}
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="currentColor"
@@ -90,7 +90,7 @@ function ReviewForm({ auth,car,review }: any) {
                             ''
                           }
                           </div>
-                          <p className='text-gray-950 text-lg mt-2'>{review&&review.message?review.message:'N/A'}</p>
+                          <p className='text-gray-950 text-md mt-2'>{review&&review.message?review.message:'N/A'}</p>
                         </div>
                       </>
                     :

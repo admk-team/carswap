@@ -368,7 +368,7 @@ export default function CarDetail(auth: any) {
                     <div className="flex justify-center">
                         <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
                             {Array.from({ length: 3 }).map((_, index) => (
-                                <div key={index} className="w-full bg-white border border-gray-200 shadow-2xl rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                <div key={index} className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                     <div className="relative">
                                         <a href="#">
                                             <img className=" w-full rounded-t-lg object-cover" src={backgroundImage} alt="product image" />
