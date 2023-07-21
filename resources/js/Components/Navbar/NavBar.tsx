@@ -42,7 +42,7 @@ const NavBar = (auth: any) => {
                 <div className="flex items-center">
                   <a href="https://api.whatsapp.com/send?phone=08120222922" className="flex items-center" target="_blank" rel="noopener noreferrer">
                     <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
-                    <span className="text-white text-sm">08120222922</span>
+                    <span className="text-white text-sm">+2348120222922</span>
                   </a>
                 </div>
 
@@ -153,7 +153,7 @@ const NavBar = (auth: any) => {
               <div className="flex items-center ml-3 mt-3">
                 <a href="https://api.whatsapp.com/send?phone=08120222922" className="flex items-center" target="_blank" rel="noopener noreferrer">
                   <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
-                  <span className="text-base font-medium text-white">08120222922</span>
+                  <span className="text-base font-medium text-white">+2348120222922</span>
                 </a>
               </div>
 
