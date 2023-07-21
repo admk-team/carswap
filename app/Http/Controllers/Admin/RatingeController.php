@@ -6,6 +6,7 @@ use App\Models\Rating;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Car;
+use App\Models\Payment;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Storage;
@@ -19,6 +20,11 @@ class RatingeController extends Controller
     {
         $ratings = Rating::with('user', 'car')->latest()->get();
         return Inertia::render('Admin/Ratings/Index', ['ratings' => $ratings, 'success' => request()->get('success')]);
+    }
+    public function payment()
+    {
+        $payments = Payment::with('user')->latest()->get();
+        return Inertia::render('Admin/Payment/Index', ['payments' => $payments]);
     }
 
     /**

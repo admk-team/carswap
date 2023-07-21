@@ -66,7 +66,7 @@ Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(functi
     Route::get('users/{id}/{status}',[UserController::class,'status'])->name('users.status');
     //Rating(reviews)
     Route::resource('/ratings',RatingeController::class);
-    Route::get('ratings/{id}/{status}',[RatingeController::class,'status'])->name('ratings.status');
+    Route::get('/payments',[RatingeController::class,'payment'])->name('payments.index');
 
 });
 

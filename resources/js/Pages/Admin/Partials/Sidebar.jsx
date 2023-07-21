@@ -50,6 +50,13 @@ function Sidebar({ onCollapseChange, style }) {
                 </Link>
             </li>
             <hr className="sidebar-divider my-0" />
+            <li className={`nav-item ${ route().current("admin.payments.index") ? "active" : "collapsed" }`} >
+                <Link href={route("admin.payments.index")} className="nav-link collapsed">
+                    <i className="fa fa-sign"></i>
+                    <span>Payments</span>
+                </Link>
+            </li>
+            <hr className="sidebar-divider d-none d-md-block" />
             <li className={`nav-item ${ route().current("admin.ratings.index") ? "active" : "collapsed" }`} >
                 <Link href={route("admin.ratings.index")} className="nav-link collapsed">
                     <i className="fa fa-star"></i>
