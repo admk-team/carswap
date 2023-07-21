@@ -67,8 +67,8 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                         alt="product image"
                                     />
                                 </Link>
-                                <div className='absolute top-2 right-2 bg-emerald-500 rounded p-1 shadow-2xl'>
-                                    <p className='font-bold'>{car?.type}</p>
+                                <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
+                                    <p className='font-semibold text-white'>{car?.type}</p>
                                     </div>
                                 {/* <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -127,8 +127,8 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     <div className='flex flex-wrap justify-between'>
                                         <div className='flex flex wrap'>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                                             </svg>
                                             <p className='mx-2 '>{car?.location}</p>
                                         </div>

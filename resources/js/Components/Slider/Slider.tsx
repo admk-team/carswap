@@ -5,11 +5,10 @@ import Image3 from '@/Assets/SliderImages/sedan.webp';
 import Image4 from '@/Assets/SliderImages/jeep.webp';
 
 
-const Slider = () => {
+const Slider = ({ images }:any) => {
 
     const [currentSlide, setCurrentSlide] = useState(0);
-
-    const slides = [Image1, Image2, Image3, Image4];
+    const slides = (images?.length > 0) ? images : [Image1, Image2, Image3, Image4];
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -24,17 +23,17 @@ const Slider = () => {
     return (
         <>
             <div id="default-carousel" className="relative w-full ">
-                <div className="relative overflow-hidden md:h-64">
+                <div className={`relative overflow-hidden ${(images?.length>0) ? 'h-screen' : ' md:h-64'}`}>
                     {slides.map((slide, index) => (
                         <div
                             key={index}
-                            className={`absolute w-full transform duration-700 ${index === currentSlide ? 'translate-x-0' : 'translate-x-full'
+                            className={`absolute w-full ${(images?.length>0) ? ' transform duration-700' : ''} ${index === currentSlide ? 'translate-x-0' : 'translate-x-full'
                                 }`}
 
                         >
                             <img
                                 src={slide}
-                                className={`absolute block -translate-x-1/2 top-10 left-1/2 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+                                className={`absolute block ${index === currentSlide ? 'opacity-100' : 'opacity-0'} ${(images?.length>0) ? 'h-screen ' : ' -translate-x-1/2 top-10 left-1/2'}`}
                                 alt={`Slide ${index + 1}`}
                             />
                         </div>
