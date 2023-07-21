@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Brand;
 use App\Models\Car;
+use App\Models\Rating;
+
 class FrontController extends Controller
 {
     public function index(){
@@ -87,7 +89,10 @@ class FrontController extends Controller
             $car->images=explode(',',$car->images);
             return $car;
         });
-        return Inertia::render('Front/CarDetail',['brands'=>$brands,'car'=>$car,'similarCars'=>$similarCars]);
+        if(auth()->user()){
+            $user_rating=Rating::where('user_id',auth()->user()->id)->where('car_id',$car->id)->first();
+        }
+        return Inertia::render('Front/CarDetail',['brands'=>$brands,'car'=>$car,'similarCars'=>$similarCars,'user_rating'=>$user_rating ?? null]);
     }
 
     public function contactus(){
