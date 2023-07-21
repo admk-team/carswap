@@ -4,7 +4,7 @@ import SliderCard from '../Cards/SliderCard';
 import Slider from '../Slider/Slider';
 
 const TopBanner = ({ brands }:any) => {
-    const typeFormItems = ['Swap for Better Car', 'Swap For Cash', 'Buy & Sell'];
+    const typeFormItems = ['Swap For Better Car', 'Swap For Cash', 'Buy & Sell'];
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
     const [currentText, setCurrentText] = useState('');
 

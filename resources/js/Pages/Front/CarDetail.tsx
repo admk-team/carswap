@@ -18,7 +18,6 @@ import Cover from "@/Assets/revo-img.png";
 import Transfer from "@/Assets/transfer.png"
 import ShareModal from '@/Components/Modal/ShareModal';
 import React, { useState, useEffect } from "react";
-import Test from '../Test';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -29,12 +28,14 @@ import ReviewForm from '@/Components/Forms/ReviewForm';
 import ReviewListing from '@/Components/Reviews/ReviewListing';
 import Conditon from "@/Assets/car-settings.png";
 import CarEngine from "@/Assets/car-engine.png";
+import ImageGallery from '@/Components/Slider/ImageGallery';
 
 
 export default function CarDetail({ car, auth, similarCars, success, error, user_rating }: any) {
     const [checkReview, setCheckReview] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [images, setImages] = useState([]);
     useEffect(() => {
         if (success) {
             setSuccessMessage(success);
@@ -112,9 +113,18 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         setLimit(3); // Reset the limit to show only 3 reviews
     };
 
-
+    const handleFullImages = (ims: any) => {
+        let tims = ims.map((i:any)=>{
+            return "/storage" + i;
+        })
+        setImages(tims);
+    };
     return (
-        <div>
+        <>
+        {images && (images.length > 0) && <ImageGallery images={images} setImages={setImages} />}
+
+            {(!images || (images?.length == 0) )&&
+       <div>
             <Head title={car.title} />
             <div>
                 <NavBar2 auth={auth} />
@@ -155,11 +165,11 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                     <div className="grid grid-cols-12 gap-4 mt-7">
                         <div className="col-span-12 md:col-span-6">
                             <div className="flex flex-col">
-                                <img src={'/storage/' + car.images[0]} className="w-full h-5/6 object-cover" alt="Cover Image" />
+                                <img src={'/storage/' + car.images[0]} className="w-full h-5/6 object-cover cursor-pointer" alt="Cover Image" onClick={()=>handleFullImages(car.images)}/>
                                 <div className="flex flex-wrap gap-2 mt-3">
                                     {
                                         car.images.map((image: any, index: any) => (
-                                            <img key={index} src={'/storage/' + image} className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/6" />
+                                            <img key={index} src={'/storage/' + image} className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/6 cursor-pointer" onClick={()=>handleFullImages(car.images)} />
                                         ))
                                     }
                                 </div>
@@ -493,6 +503,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
         </div>
 
-
+}
+        </>
     )
 }
