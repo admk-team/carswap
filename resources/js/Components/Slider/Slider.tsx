@@ -24,7 +24,7 @@ const Slider = ({ images }:any) => {
         <>
             <div id="default-carousel" className="relative w-full ">
                 <div className={`relative overflow-hidden ${(images?.length>0) ? 'h-screen' : ' md:h-64'}`}>
-                    {slides.map((slide, index) => (
+                    {slides.map((slide:any, index:any) => (
                         <div
                             key={index}
                             className={`absolute w-full ${(images?.length>0) ? ' transform duration-700' : ''} ${index === currentSlide ? 'translate-x-0' : 'translate-x-full'
