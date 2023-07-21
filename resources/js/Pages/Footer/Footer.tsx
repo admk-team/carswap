@@ -1,6 +1,8 @@
 import React from 'react'
 import LogoFooter from "@/Assets/headerlogo.png";
 import { Link } from '@inertiajs/inertia-react';
+import Address from "@/Assets/SocialMeiaIcons/home.png"
+import PhoneIcon from "@/Assets/SocialMeiaIcons/viber.png"
 
 const Footer = () => {
     return (
@@ -12,8 +14,16 @@ const Footer = () => {
                             <Link href={route('front.index')}>
                                 <img src={LogoFooter} className="h-8 mr-3 mt-10" alt="Flowbite Logo" />
                             </Link>
-                            <p className='text-white mt-3'>Powered by Carswap Limited <br />RC-1443296 <br /> Head Office <br />3rd Floor, Africa Reinsurance Building, Plot 1679 Karimu kuton St, Victoria Island, 101241, Logas Nageria. <br />Hotline: 08120222922</p>
-                            <div className="flex mt-5 space-x-6  md:mt-0">
+                            {/* <p className='text-white mt-3'>Powered by Carswap Limited <br />RC-1443296 <br /> Head Office <br />3rd Floor, Africa Reinsurance Building, Plot 1679 Karimu kuton St, Victoria Island, 101241, Logas Nageria. <br />Hotline: 08120222922</p> */}
+                            <div className='flex mt-6'>
+                                <img src={Address} alt="" className='w-6 h-6 mr-2.5 mt-0' />
+                                <p className='text-white '> No 17, Akinsanya Street, <br /> Beside FRSC Building,<br /> Ojodu, 100001, Lagos</p>
+                            </div>
+                            <div className='flex mt-1'>
+                                <img src={PhoneIcon} alt="" className='w-5 h-5 mr-3 mt-1' />
+                                <p className='text-white '>08120222922</p>
+                            </div>
+                            <div className="flex mt-5 space-x-6  md:mt-4">
                                 <a href="#" className="text-white hover:text-gray-300 dark:hover:text-white mt-4">
                                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" /></svg>
                                     <span className="sr-only">Facebook page</span>
@@ -86,7 +96,7 @@ const Footer = () => {
                                     <Link href={route('user.register')} className="hover:underline">Sign Up</Link>
                                 </li>
                                 <li className="mb-4">
-                                    <Link href={route('user.register')} className="hover:underline">Become a partner</Link>
+                                    <Link href={route('partner')} className="hover:underline">Become a partner</Link>
                                 </li>
                             </ul>
                         </div>
