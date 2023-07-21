@@ -10,11 +10,11 @@ const Featured = () => {
         <div className="mx-auto max-w-screen-xl w-full h-full mt-8">
                 <h1 className='text-2xl md:text-3xl font-semibold text-center w-full '>Featured in</h1>
                     <div className='flex flex=wrap mt-6 justify-center'>
-                    <div className='grid grid-cols-1 md:grid-cols-4'>
-                        <img src={Featured1} alt="" />
-                        <img src={Featured2} alt="" />
-                        <img src={Featured3} alt="" />
-                        <img src={Featured4} alt="" />
+                    <div className='grid grid-cols-2 md:grid-cols-4 gap-20 justify-center'>
+                        <img src={Featured1} alt=""className="w-25 h-25  md:w-45  md:h-60   object-contain"  />
+                        <img src={Featured2} alt=""className="w-25 h-20  md:w-45  md:h-60  object-contain"  />
+                        <img src={Featured3} alt="" className="w-50 h-50 md:w-50  md:h-60  object-contain" />
+                        <img src={Featured4} alt="" className="w-35 h-35 md:w-60  md:h-60  object-contain" />
                     </div>
                 </div>
             </div>
