@@ -2,6 +2,7 @@ import React from 'react'
 import Avatar from "@/Assets/user-icon.jpg";
 
 function ReviewListing({ auth, review }: any) {
+  console.log(review);
     const dateString = review && review.created_at ? review.created_at : null;
     const formattedDate = new Date(dateString).toLocaleDateString('en-US', {
         year: 'numeric',
@@ -13,9 +14,9 @@ function ReviewListing({ auth, review }: any) {
         <div>
             <div className="mt-3 flex justify-between"> {/* Remove the extra 'justify-' prefix */}
                 <div className="flex">
-                    <img src={auth && auth.user && auth.user.image ? '/storage/' + auth.user.image : Avatar} alt="" className="rounded-full w-20 h-20 mt-3" />
+                    <img src={review && review.user && review.user.image ? '/storage/' + review.user.image : Avatar} alt="" className="rounded-full w-20 h-20 mt-3" />
                     <div className="grid">
-                        <span className="mt-2 ms-2 max-w-lg text-xl font-semibold leading-relaxed text-gray-900 dark:text-white">{auth && auth.user ? auth.user.first_name + ' ' + auth.user.last_name : 'N/A'}</span>
+                        <span className="mt-2 ms-2 max-w-lg text-xl font-semibold leading-relaxed text-gray-900 dark:text-white">{review && review.user ? review.user.first_name + ' ' + (review.user.last_name?review.user.last_name:'') : 'N/A'}</span>
                         <div className="flex space-x-1 mx-2">
                             {
                                 starLength && starLength.length > 0 ?
