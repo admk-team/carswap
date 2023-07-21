@@ -3,17 +3,17 @@ import backgroundImage from "@/Assets/hero-section.jpg";
 import SliderCard from '../Cards/SliderCard';
 import Slider from '../Slider/Slider';
 
-const TopBanner = ({ brands }) => {
+const TopBanner = ({ brands }:any) => {
     const typeFormItems = ['Swap for Better Car', 'Swap For Cash', 'Buy & Sell'];
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
     const [currentText, setCurrentText] = useState('');
 
     useEffect(() => {
-        let typingTimeout;
+        let typingTimeout:any;
         const currentTextToType = typeFormItems[currentTextIndex];
         const textLength = currentTextToType.length;
 
-        const animateTyping = (currentIndex) => {
+        const animateTyping = (currentIndex:any) => {
             setCurrentText(currentTextToType.slice(0, currentIndex));
             if (currentIndex <= textLength) {
                 typingTimeout = setTimeout(() => {

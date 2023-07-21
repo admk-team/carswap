@@ -27,6 +27,9 @@ import Cover2 from '@/Assets/cover2.jpg'
 import { useFlutterwave } from 'flutterwave-react-v3';
 import ReviewForm from '@/Components/Forms/ReviewForm';
 import ReviewListing from '@/Components/Reviews/ReviewListing';
+import Conditon from "@/Assets/car-settings.png";
+import CarEngine from "@/Assets/car-engine.png";
+
 
 export default function CarDetail({ car, auth, similarCars, success, error, user_rating }: any) {
     const [checkReview, setCheckReview] = useState(false);
@@ -82,9 +85,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
-          email: auth?.user ? auth.user.email : '',
-          phone_number: auth?.user ? auth.user.phone_no : '',
-          name: auth?.user ? auth.user.first_name + ' ' + auth.user.last_name : '',
+            email: auth?.user ? auth.user.email : '',
+            phone_number: auth?.user ? auth.user.phone_no : '',
+            name: auth?.user ? auth.user.first_name + ' ' + auth.user.last_name : '',
         },
         customizations: {
             title: 'Car Swap Payment',
@@ -102,7 +105,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const handleLoadMore = () => {
         setExpanded(true);
         setLimit(reviews.length); // Set the limit to show all reviews
-      };
+    };
 
     const handleLoadLess = () => {
         setExpanded(false);
@@ -418,7 +421,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                             <h3 className="font-bold text-3xl text-green-600">Explore More:</h3>
                             <h3 className="font-bold text-gray-900 text-2xl mt-2">Similar Listings</h3>
                             <div className="flex justify-center">
-                                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-6">
+                                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 mt-6">
                                     {similarCars?.map((car: any, index: any) => (
 
                                         <div key={index} className="w-full bg-white border border-gray-200  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -426,9 +429,12 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                 <Link href={route('CarDetail', car.slug)}>
                                                     <img className=" w-full h-72 rounded-t-lg object-cover" src={"/storage" + car?.images[0]} alt="product image" />
                                                 </Link>
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-red-500 absolute top-2 right-2" fill="red" viewBox="0 0 24 24" stroke="currentColor">
+                                                <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
+                                                    <p className='font-semibold text-white'>{car?.type}</p>
+                                                </div>
+                                                {/* <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-red-500 absolute top-2 right-2" fill="red" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                                                </svg>
+                                                </svg> */}
                                                 <div className="absolute bottom-5 left-1">
                                                     <svg aria-hidden="true" className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                     </svg>
@@ -445,25 +451,34 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                     <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">{car?.title}</h5>
                                                 </Link>
                                                 <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">$ {car?.price}</h5>
-                                                <div className="flex items-center">
-                                                </div>
                                                 <hr className='border-t-2 border-black mt-2' />
-                                                <div className="mt-4">
-                                                    <table className="w-full">
-                                                        <tbody>
-                                                            <tr>
-                                                                <th className="px-2 py-1 font-bold-300 text-gray-600">Condition</th>
-                                                                <th className="px-2 py-1 text-gray-800">Engine</th>
-                                                                <th className="px-2 py-1 text-gray-800">Mileage</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <th className="px-2 py-1 text-gray-600">{car?.condition}</th>
-                                                                <th className="px-2 py-1 text-gray-800">{car?.engine_capacity}</th>
-                                                                <th className="px-2 py-1 text-gray-800">{car?.mileage}</th>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                <div className='flex flex-col'>
+                                                    <div className='flex flex-wrap justify-between mt-3'>
+                                                        <div className='flex flex wrap'>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                                            </svg>
+                                                            <p className='mx-2 '>{car?.location}</p>
+                                                        </div>
+
+                                                    </div>
+                                                    <div className='flex flex-wrap justify-between mt-3'>
+                                                        <div className='flex flex wrap'>
+                                                            <img src={Conditon} className='w-6 h-6' />
+                                                            <p className='mx-2 '>{car?.condition}</p>
+                                                        </div>
+
+                                                    </div>
+                                                    <div className='flex flex-wrap justify-between mt-3'>
+                                                        <div className='flex flex wrap'>
+                                                            <img src={Engine} className='w-6 h-6' />
+                                                            <p className='mx-2 '>{car?.engine_capacity}</p>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     ))}
