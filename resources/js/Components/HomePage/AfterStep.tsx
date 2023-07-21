@@ -10,8 +10,8 @@ const AfterStep = () => {
             <div className="mx-auto max-w-screen-xl w-full h-full mt-6 ">
                 <div className=" md:container md:mx-auto">
                     <div className="container mx-auto py-8 flex flex-wrap justify-center">
-                        <div className="text-2xl md:text-3xl font-semibold text-center mb-6 w-full">
-                            <h1>Your reliable partner for car sales</h1>
+                        <div className="text-3xl md:text-3xl font-semibold text-center mb-6 w-full">
+                            <h1>Your Reliable Partner For Car Sales</h1>
                         </div>
                         <div className="container mx-auto">
                             <div className="grid grid-cols-1 md:grid-cols-4 gap-12 px-20 mt-4 justify-center">
