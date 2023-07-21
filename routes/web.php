@@ -97,7 +97,7 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
     Route::get('/delete-car/{slug}',[PostacarController::class,'delete'])->name('deleteCar');
 
     // Payment initiation route
-    Route::any('/initiate-payment', [RavepayController::class, 'store'])->name('pay');
+    Route::any('/store-payment', [RavepayController::class, 'store'])->name('storePayment');
 
     //ratings
     Route::post('user/ratings',[RatingController::class,'store'])->name('ratings.store');

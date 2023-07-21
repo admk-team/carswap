@@ -27,6 +27,7 @@ import Cover2 from '@/Assets/cover2.jpg'
 import { useFlutterwave } from 'flutterwave-react-v3';
 import ReviewForm from '@/Components/Forms/ReviewForm';
 import ReviewListing from '@/Components/Reviews/ReviewListing';
+import { Inertia } from '@inertiajs/inertia';
 
 export default function CarDetail({ car, auth, similarCars, success, error, user_rating }: any) {
     const [checkReview, setCheckReview] = useState(false);
@@ -98,18 +99,27 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const [limit, setLimit] = useState(3);
     const [expanded, setExpanded] = useState(false);
 
-
     const handleLoadMore = () => {
         setExpanded(true);
-        setLimit(reviews.length); // Set the limit to show all reviews
+        setLimit(reviews.length);
       };
 
     const handleLoadLess = () => {
         setExpanded(false);
-        setLimit(3); // Reset the limit to show only 3 reviews
+        setLimit(3);
     };
+    const [paymentData,setPaymentData]=useState(null)
+    useEffect(() => {
+        if (paymentData !== null) {
+          paymentResponse();
+        }
+      }, [paymentData]);
 
-
+    const paymentResponse = () =>{
+        if (paymentData !== null) {
+            Inertia.post(route('user.storePayment'), { paymentData });
+        }
+    }
     return (
         <div>
             <Head title={car.title} />
@@ -200,15 +210,19 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                             auth && auth.user ?
                                                 <button onClick={() => {
                                                     handleFlutterPayment({
-                                                        callback: (response) => {
-                                                            console.log(response);
+                                                        callback: (response:any) => {
+                                                            setPaymentData(response);
+                                                            setTimeout(() => {
+                                                                paymentResponse();
+                                                            }, 3000);
                                                         },
-                                                        onClose: () => { },
+                                                        onClose: () => {},
                                                     });
                                                 }} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
                                                 :
-                                                <Link href={route('user.login')} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </Link>
-
+                                                <button className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >
+                                                    <Link href={route('user.login')}> Buy Now </Link>
+                                                </button>
                                     }
                                 </div>
                                 {
@@ -239,14 +253,21 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                 </div>
 
                                             </div>
-                                            <button onClick={() => {
-                                                handleFlutterPayment({
-                                                    callback: (response) => {
-                                                        console.log(response);
-                                                    },
-                                                    onClose: () => { },
-                                                });
-                                            }} className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'>Swap Now</button>
+                                            {
+                                                auth?.user?
+                                                <button onClick={() => {
+                                                    handleFlutterPayment({
+                                                        callback: (response) => {
+                                                            console.log(response);
+                                                        },
+                                                        onClose: () => { },
+                                                    });
+                                                }} className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'>Swap Now</button>
+                                                :
+                                                <button className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'>
+                                                    <Link href={route('user.login')}>Swap Now</Link>
+                                                </button>
+                                            }
                                         </div>
                                         :
                                         ''
@@ -372,44 +393,56 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                 </div>
                 {
                     <>
-                        {auth && auth.user ? (
-                            car.ratings && car.ratings.length > 0 ? (
-                                <>
-                                    <ReviewForm auth={auth} car={car} review={user_rating ? user_rating : null} />
-                                    <div className="bg-white border mx-4 border-gray-300 p-4 rounded-lg mt-3 shadow-md">
-                                        {reviews.slice(0, limit).map((review: any) => (
-                                            <div key={review.id}>
-                                                {auth?.user.id !== review.user_id && <ReviewListing auth={auth} car={car} review={review ? review : null} />}
-                                            </div>
-                                        ))}
-                                        {reviews.length > 3 && (
-                                            <div className="flex justify-center mt-3">
-                                                {expanded ? (
-                                                    <button
-                                                        className="bg-emerald-500 text-white px-7 py-3 rounded-full shadow-md hover:shadow-lg"
-                                                        onClick={handleLoadLess}
-                                                    >
-                                                        Load Less
-                                                    </button>
-                                                ) : (
-                                                    <button
-                                                        className="bg-emerald-500 text-white px-7 py-3 rounded-full shadow-md hover:shadow-lg"
-                                                        onClick={handleLoadMore}
-                                                    >
-                                                        Load More
-                                                    </button>
-                                                )}
-                                            </div>
-                                        )}
-                                    </div>
+                        {car.ratings && car.ratings.length > 0 ? (
+                            <>
+                                {
+                                     auth && auth.user?
+                                         <ReviewForm auth={auth} car={car} review={user_rating ? user_rating : null} />
+                                     :
+                                     ''
+                                }
+                                <div className="bg-white border mx-4 border-gray-300 p-4 rounded-lg mt-3 shadow-md">
+                                    {reviews.slice(0, limit).map((review: any) => (
+                                        (
+                                            auth && auth.user ?
+                                                <div key={review.id}>
+                                                    {auth?.user.id !== review.user_id && <ReviewListing auth={auth} car={car} review={review ? review : null} />}
+                                                </div>
+                                            :
+                                                <div key={review.id}>
+                                                     <ReviewListing auth={auth} car={car} review={review ? review : null} />
+                                                </div>
+                                        )
+                                    ))}
+                                    {reviews.length > 3 && (
+                                        <div className="flex justify-center mt-3">
+                                            {expanded ? (
+                                                <button
+                                                    className="bg-emerald-500 text-white px-7 py-3 rounded-full shadow-md hover:shadow-lg"
+                                                    onClick={handleLoadLess}
+                                                >
+                                                    Load Less
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    className="bg-emerald-500 text-white px-7 py-3 rounded-full shadow-md hover:shadow-lg"
+                                                    onClick={handleLoadMore}
+                                                >
+                                                    Load More
+                                                </button>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
 
-                                </>
-                            ) : (
-                                <ReviewForm auth={auth} car={car} />
-                            )
+                            </>
                         ) : (
-                            ''
-                        )}
+                            auth && auth.user ?
+                                <ReviewForm auth={auth} car={car} />
+                            :
+                                ''
+                        )
+                        }
                     </>
                 }
                 {
