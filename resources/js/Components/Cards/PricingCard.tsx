@@ -66,8 +66,8 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                         alt="product image"
                                     />
                                 </Link>
-                                <div className='absolute top-2 right-2 bg-emerald-500 rounded p-1 shadow-2xl'>
-                                    <p className='font-bold'>{car?.type}</p>
+                                <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
+                                    <p className='font-semibold text-white'>{car?.type}</p>
                                     </div>
                                 {/* <svg
                                     xmlns="http://www.w3.org/2000/svg"

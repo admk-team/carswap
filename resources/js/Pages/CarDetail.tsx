@@ -437,6 +437,6 @@ export default function CarDetail(auth: any) {
                 </div>
 
             </div>
-            
+
             )
 }

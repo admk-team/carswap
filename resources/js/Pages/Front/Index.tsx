@@ -33,7 +33,7 @@ const Index: React.FC<IndexProps> = ({ brands,cars,auth }) =>{
       {/* <Reviews /> */}
       <AfterStep/>
       <Featured/>
-      <Footer  auth={auth}/>
+      <Footer auth={auth}/>
     </>
   )
 }
