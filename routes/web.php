@@ -98,15 +98,17 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
 
     // Payment initiation route
     Route::any('/initiate-payment', [RavepayController::class, 'store'])->name('pay');
+
+    //ratings
+    Route::post('user/ratings',[RatingController::class,'store'])->name('ratings.store');
 });
 
     // Payment callback route
     Route::get('/payment/callback', [RavepayController::class, 'handleCallback'])->name('callback');
+    Route::any('/test', [RavepayController::class, 'test']);
 
     //Post car
     Route::resource('user/cars',PostacarController::class, ['as'=> 'user']);
-    //ratings
-    Route::resource('user/ratings',RatingController::class, ['as'=> 'user']);
     // Route::get('cars/{id}/{status}',[PostacarController::class,'status'])->name('cars.status');
     //wishlist
 

@@ -68,7 +68,7 @@ const  EditCarForm= ({ auth,brands,car}: any) => {
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
                                 <select name="condition" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"value={data.condition} onChange={(e) => setData('condition', e.target.value)}>
-                                        <option value="">Selecet Condition</option>
+                                        <option value="">Select Condition</option>
                                         <option value="Nigerian used" selected={car.condition && car.condition === 'Nigerian used'}>Nigerian used</option>
                                         <option value="Foreign used" selected={car.condition && car.condition === 'Foreign used'}>Foreign used</option>
                                         <option value="Brand New" selected={car.condition && car.condition === 'Brand New'}>Brand New</option>
@@ -89,7 +89,7 @@ const  EditCarForm= ({ auth,brands,car}: any) => {
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
                                     <select name="type" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.type} onChange={(e) => setData('type', e.target.value)}>
-                                        <option value="">Selecet Type</option>
+                                        <option value="">Select Type</option>
                                         <option value="swap" selected={car.type && car.type === 'swap'}>For Swap</option>
                                         <option value="sale" selected={car.type && car.type === 'sale'}>For Sale</option>
                                     </select>

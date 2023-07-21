@@ -8,7 +8,6 @@ import Engine from "@/Assets/car-engine.png";
 
 
 const PricingCard = ({ brands, cars, auth }: any) => {
-    console.log(cars)
     const [showModal, setShowModal] = useState(false);
     const [inspectionModal, setInspectionModal] = useState(false);
     const [compare, setCompare]: any = useState([])
