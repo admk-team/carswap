@@ -440,7 +440,7 @@ export default function CarDetail({ car, auth, similarCars, success, error,user_
                         : ''}
             </div>
             <div>
-                <Footer />
+                <Footer auth={auth}/>
             </div>
 
         </div>

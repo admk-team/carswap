@@ -16,7 +16,7 @@ const PostCar = ({auth,brands}:any) => {
       <NavBar2 auth={auth}/>
       <Frame/>
       <CarInfohtmlForm auth={auth} brands={brands}/>
-      <Footer/>
+      <Footer auth={auth}/>
     </>
   )
 }

@@ -9,7 +9,7 @@ import PreviouImage from '@/Assets/left.png';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 
-const ContactUsPage = (auth: any) => {
+const ContactUsPage = ({auth}: any) => {
     return (
         <>
             <NavBar auth={auth} />
@@ -89,7 +89,7 @@ const ContactUsPage = (auth: any) => {
                     </div>
                 </div>
             </section>
-            <Footer />
+            <Footer auth={auth}/>
         </>
     )
 }

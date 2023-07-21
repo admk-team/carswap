@@ -59,19 +59,19 @@ const NavBar = (auth: any) => {
                       </button>
                       :
                       <>
-                      <div className='m-2'>
-                        <Link
-                          href={route('user.login')}
-                          className="rounded-md justify-content-center text-center text-base font-medium text-white"
-                        >
-                          Login
-                        </Link>
-                        <span className='text-white py-2'> / </span>
-                        <Link
-                          href={route('user.register')}
-                          className="rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
-                        > SignUp
-                        </Link>
+                        <div className='m-2'>
+                          <Link
+                            href={route('user.login')}
+                            className="rounded-md justify-content-center text-center text-base font-medium text-white"
+                          >
+                            Login
+                          </Link>
+                          <span className='text-white py-2'> / </span>
+                          <Link
+                            href={route('user.register')}
+                            className="rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
+                          > SignUp
+                          </Link>
                         </div>
                       </>
                   }
@@ -167,20 +167,20 @@ const NavBar = (auth: any) => {
                   </div>
                   :
                   <>
-                  <div className='m-3'>
-                    <Link
-                      href={route('user.login')}
-                      className="   text-base font-medium text-white"
-                    >
-                      LogIn
-                    </Link>
-                    <span className='px-2 text-white'>/</span>
-                    <Link
-                      href={route('user.register')}
-                      className="  text-base font-medium text-white"
-                    >
-                      SignUp
-                    </Link>
+                    <div className='m-3'>
+                      <Link
+                        href={route('user.login')}
+                        className="   text-base font-medium text-white"
+                      >
+                        LogIn
+                      </Link>
+                      <span className='px-2 text-white'>/</span>
+                      <Link
+                        href={route('user.register')}
+                        className="  text-base font-medium text-white"
+                      >
+                        SignUp
+                      </Link>
                     </div>
                   </>
               }

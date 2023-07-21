@@ -19,7 +19,7 @@ import Color1 from "@/Assets/car-color.png";
 import backgroundImage from '@/Assets/card1.jpg';
 import Footer from './Footer/Footer';
 
-export default function CarDetail() {
+export default function CarDetail(auth: any) {
 
     return (
         <div>
@@ -433,7 +433,7 @@ export default function CarDetail() {
                 </div>
                 </div>
                 <div>
-                    <Footer />
+                    <Footer auth={auth}/>
                 </div>
 
             </div>

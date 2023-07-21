@@ -35,7 +35,7 @@ const UserDashBoard = ({auth,success,cars,error,pendings,approved}:any) => {
 
         <UserProfile auth={auth} cars={cars} pendings={pendings} approved={approved}/>
       </div>
-      <Footer />
+      <Footer auth={auth}/>
     </>
   )
 }

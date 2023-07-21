@@ -11,7 +11,7 @@ const EditCar = ({auth,brands,car}:any) => {
         <p className='font-bold text-2xl text-gray-950'>Here you can edit your car :</p>
     </div>
       <EditCarForm auth={auth} brands={brands} car={car}/>
-      <Footer/>
+      <Footer auth={auth}/>
     </>
   )
 }

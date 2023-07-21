@@ -11,7 +11,7 @@ import backgroundImage from '@/Assets/card1.jpg';
 import Footer from './Footer/Footer';
 
 
-export default function AllDetail() {
+export default function AllDetail(auth: any) {
     return (
         <div>
             <NavBar2 />
@@ -318,7 +318,7 @@ export default function AllDetail() {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer auth={auth}/>
         </div>
 
     )

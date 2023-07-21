@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/inertia-react';
 import Address from "@/Assets/SocialMeiaIcons/home.png"
 import PhoneIcon from "@/Assets/SocialMeiaIcons/viber.png"
 
-const Footer = () => {
+const Footer = (auth: any) => {
     return (
         <>
             <footer className="dark:bg-gray-900 mt-16" style={{ backgroundColor: '#0A1F34' }}>
@@ -92,9 +92,16 @@ const Footer = () => {
                                 <li className="mb-4">
                                     <Link href={route('contactus')} className="hover:underline">Contact Us</Link>
                                 </li>
-                                <li className="mb-4">
-                                    <Link href={route('user.register')} className="hover:underline">Sign Up</Link>
-                                </li>
+                                {
+                                    auth && auth.auth.user ?
+                                        <li className="mb-4">
+                                            <Link href={route('Logout')} className="hover:underline">Log Out</Link>
+                                        </li>
+                                        :
+                                        <li className="mb-4">
+                                            <Link href={route('user.register')} className="hover:underline">Sign Up</Link>
+                                        </li>
+                                }
                                 <li className="mb-4">
                                     <Link href={route('partner')} className="hover:underline">Become a partner</Link>
                                 </li>
