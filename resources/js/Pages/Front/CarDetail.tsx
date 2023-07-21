@@ -96,10 +96,19 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const handleFlutterPayment = useFlutterwave(config);
     const [reviews, setReviews] = useState(car.ratings);
     const [limit, setLimit] = useState(3);
+    const [expanded, setExpanded] = useState(false);
+
 
     const handleLoadMore = () => {
+        setExpanded(true);
         setLimit(reviews.length); // Set the limit to show all reviews
+      };
+
+    const handleLoadLess = () => {
+        setExpanded(false);
+        setLimit(3); // Reset the limit to show only 3 reviews
     };
+
 
     return (
         <div>
@@ -368,16 +377,28 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                 <>
                                     <ReviewForm auth={auth} car={car} review={user_rating ? user_rating : null} />
                                     <div className="bg-white border mx-4 border-gray-300 p-4 rounded-lg mt-3 shadow-md">
-                                        {reviews.slice(0, limit).map((review:any) => (
+                                        {reviews.slice(0, limit).map((review: any) => (
                                             <div key={review.id}>
                                                 {auth?.user.id !== review.user_id && <ReviewListing auth={auth} car={car} review={review ? review : null} />}
                                             </div>
                                         ))}
-                                        {reviews.length > 3 && limit < reviews.length && (
-                                            <div className="flex justify-center"> {/* Center the button */}
-                                                <button className="mt-3 bg-blue-500 text-white px-4 py-2 rounded-md" onClick={handleLoadMore}>
-                                                    Load More
-                                                </button>
+                                        {reviews.length > 3 && (
+                                            <div className="flex justify-center mt-3">
+                                                {expanded ? (
+                                                    <button
+                                                        className="bg-emerald-500 text-white px-7 py-3 rounded-full shadow-md hover:shadow-lg"
+                                                        onClick={handleLoadLess}
+                                                    >
+                                                        Load Less
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        className="bg-emerald-500 text-white px-7 py-3 rounded-full shadow-md hover:shadow-lg"
+                                                        onClick={handleLoadMore}
+                                                    >
+                                                        Load More
+                                                    </button>
+                                                )}
                                             </div>
                                         )}
                                     </div>
