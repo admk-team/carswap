@@ -77,14 +77,14 @@ export default function CarDetail({ car, auth, similarCars, success, error,user_
     };
     const config = {
         public_key: 'FLWPUBK_TEST-5362dd26662af2fa2bb22c99f29ab2c3-X',
-        tx_ref: Date.now().toString(),
+        tx_ref: `${auth?.user?.id}-${Date.now().toString()}`,
         amount: 100,
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
-          email: auth && auth.user ? auth.user.email : null,
-          phone_number: auth && auth.user ? auth.user.phone_no : null,
-          name: auth && auth.user ? auth.user.first_name + ' ' + auth.user.last_name : null,
+          email: auth?.user ? auth.user.email : '',
+          phone_number: auth?.user ? auth.user.phone_no : '',
+          name: auth?.user ? auth.user.first_name + ' ' + auth.user.last_name : '',
         },
         customizations: {
           title: 'Car Swap Payment',
