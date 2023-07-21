@@ -82,9 +82,9 @@ export default function CarDetail({ car, auth, similarCars, success, error,user_
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
-          email: auth && auth.user ? auth.user.email : null,
-          phone_number: auth && auth.user ? auth.user.phone_no : null,
-          name: auth && auth.user ? auth.user.first_name + ' ' + auth.user.last_name : null,
+          email: auth?.user ? auth.user.email : '',
+          phone_number: auth?.user ? auth.user.phone_no : '',
+          name: auth?.user ? auth.user.first_name + ' ' + auth.user.last_name : '',
         },
         customizations: {
           title: 'Car Swap Payment',
@@ -364,9 +364,11 @@ export default function CarDetail({ car, auth, similarCars, success, error,user_
                                     <div className="bg-white border border-gray-300 p-4 rounded-lg mt-3 shadow-md">
                                         {
                                             car.ratings.map((review:any)=>(
-                                                (
-                                                    <ReviewListing  auth={auth} car={car} review={review?review:null}/>
-                                                )
+                                                <div key={review.id}>
+                                                    {
+                                                        (auth?.user.id!=review.user_id) && <ReviewListing  auth={auth} car={car} review={review?review:null}/>
+                                                    }
+                                                </div>
                                             ))
                                         }
                                     </div>
