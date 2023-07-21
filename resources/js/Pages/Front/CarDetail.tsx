@@ -27,8 +27,9 @@ import Cover1 from '@/Assets/cover1.jpg'
 import Cover2 from '@/Assets/cover2.jpg'
 import { useFlutterwave } from 'flutterwave-react-v3';
 import ReviewForm from '@/Components/Forms/ReviewForm';
+import ReviewListing from '@/Components/Reviews/ReviewListing';
 
-export default function CarDetail({ car, auth, similarCars, success, error }: any) {
+export default function CarDetail({ car, auth, similarCars, success, error,user_rating}: any) {
     const [checkReview, setCheckReview] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -77,7 +78,7 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
     };
     const config = {
         public_key: 'FLWPUBK_TEST-5362dd26662af2fa2bb22c99f29ab2c3-X',
-        tx_ref: 'car-swap',
+        tx_ref: Date.now().toString(),
         amount: 100,
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
@@ -357,18 +358,26 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
                     <p>{car.description}</p>
                 </div>
                 {
-                    car.ratings&&car.ratings.length>0?
-                        car.ratings.map((review:any)=>(
-                            review&&review.user?
-                                auth&&auth.user&&auth.user.id==review.user_id?
-                                    <ReviewForm auth={auth} car={car} review={review}/>
-                                :
-                                <ReviewForm auth={auth} car={car}/>
+                    auth && auth.user?
+                        (
+                            car.ratings&&car.ratings.length>0?
+                                <>
+                                    <ReviewForm auth={auth} car={car} review={user_rating?user_rating:null}/>
+                                    <div className="bg-white border border-gray-300 p-4 rounded-lg mt-3 shadow-md">
+                                        {
+                                            car.ratings.map((review:any)=>(
+                                                (
+                                                    <ReviewListing  auth={auth} car={car} review={review?review:null}/>
+                                                )
+                                            ))
+                                        }
+                                    </div>
+                                </>
                             :
-                            <ReviewForm auth={auth} car={car} review={review}/>
-                        ))
+                                <ReviewForm auth={auth} car={car}/>
+                        )
                     :
-                    <ReviewForm auth={auth} car={car}/>
+                        ''
                 }
                 {
                     similarCars ?
