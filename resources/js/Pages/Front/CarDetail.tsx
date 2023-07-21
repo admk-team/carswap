@@ -76,7 +76,7 @@ export default function CarDetail({ car, auth, similarCars, success, error }: an
     };
     const config = {
         public_key: 'FLWPUBK_TEST-5362dd26662af2fa2bb22c99f29ab2c3-X',
-        tx_ref: 'car-swap',
+        tx_ref: Date.now().toString(),
         amount: 100,
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
