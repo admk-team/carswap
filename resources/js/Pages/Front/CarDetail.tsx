@@ -28,7 +28,7 @@ import { useFlutterwave } from 'flutterwave-react-v3';
 import ReviewForm from '@/Components/Forms/ReviewForm';
 import ReviewListing from '@/Components/Reviews/ReviewListing';
 
-export default function CarDetail({ car, auth, similarCars, success, error,user_rating}: any) {
+export default function CarDetail({ car, auth, similarCars, success, error, user_rating }: any) {
     const [checkReview, setCheckReview] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -45,11 +45,11 @@ export default function CarDetail({ car, auth, similarCars, success, error,user_
 
     const handleShareButtonClick = () => {
         setIsModalOpen(true);
-      };
+    };
 
-      const handleModalClose = () => {
+    const handleModalClose = () => {
         setIsModalOpen(false);
-      };
+    };
 
     const formattedDate = new Date(car.created_at).toLocaleDateString('en-US', {
         month: 'long',
@@ -87,13 +87,28 @@ export default function CarDetail({ car, auth, similarCars, success, error,user_
           name: auth?.user ? auth.user.first_name + ' ' + auth.user.last_name : '',
         },
         customizations: {
-          title: 'Car Swap Payment',
-          description: 'Payment for items in cart',
-          logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
+            title: 'Car Swap Payment',
+            description: 'Payment for items in cart',
+            logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
         },
     };
-    
-      const handleFlutterPayment = useFlutterwave(config);
+
+    const handleFlutterPayment = useFlutterwave(config);
+    const [reviews, setReviews] = useState(car.ratings);
+    const [limit, setLimit] = useState(3);
+    const [expanded, setExpanded] = useState(false);
+
+
+    const handleLoadMore = () => {
+        setExpanded(true);
+        setLimit(reviews.length); // Set the limit to show all reviews
+      };
+
+    const handleLoadLess = () => {
+        setExpanded(false);
+        setLimit(3); // Reset the limit to show only 3 reviews
+    };
+
 
     return (
         <div>
@@ -131,7 +146,7 @@ export default function CarDetail({ car, auth, similarCars, success, error,user_
                         <div className="flex items-center mr-10" >
                             <img src={Share} className="w-6 h-6" />
                             <p className="ml-2 underline hover:text-blue-500 cursor-pointer" onClick={handleShareButtonClick}>Share Now</p>
-                            <ShareModal isOpen={isModalOpen} onClose={handleModalClose}/>
+                            <ShareModal isOpen={isModalOpen} onClose={handleModalClose} />
                         </div>
                     </div>
                     <div className="grid grid-cols-12 gap-4 mt-7">
@@ -185,12 +200,12 @@ export default function CarDetail({ car, auth, similarCars, success, error,user_
                                             auth && auth.user ?
                                                 <button onClick={() => {
                                                     handleFlutterPayment({
-                                                      callback: (response) => {
-                                                         console.log(response);
-                                                      },
-                                                      onClose: () => {},
+                                                        callback: (response) => {
+                                                            console.log(response);
+                                                        },
+                                                        onClose: () => { },
                                                     });
-                                                  }} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
+                                                }} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
                                                 :
                                                 <Link href={route('user.login')} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </Link>
 
@@ -227,11 +242,11 @@ export default function CarDetail({ car, auth, similarCars, success, error,user_
                                             <button onClick={() => {
                                                 handleFlutterPayment({
                                                     callback: (response) => {
-                                                    console.log(response);
+                                                        console.log(response);
                                                     },
-                                                    onClose: () => {},
+                                                    onClose: () => { },
                                                 });
-                                                }} className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'>Swap Now</button>
+                                            }} className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'>Swap Now</button>
                                         </div>
                                         :
                                         ''
@@ -356,26 +371,46 @@ export default function CarDetail({ car, auth, similarCars, success, error,user_
                     <p>{car.description}</p>
                 </div>
                 {
-                    auth && auth.user?
-                        (
-                            car.ratings&&car.ratings.length>0?
+                    <>
+                        {auth && auth.user ? (
+                            car.ratings && car.ratings.length > 0 ? (
                                 <>
-                                    <ReviewForm auth={auth} car={car} review={user_rating?user_rating:null}/>
-                                    <div className="bg-white border border-gray-300 p-4 rounded-lg mt-3 shadow-md">
-                                        {
-                                            car.ratings.map((review:any)=>(
-                                                (
-                                                    <ReviewListing  auth={auth} car={car} review={review?review:null}/>
-                                                )
-                                            ))
-                                        }
+                                    <ReviewForm auth={auth} car={car} review={user_rating ? user_rating : null} />
+                                    <div className="bg-white border mx-4 border-gray-300 p-4 rounded-lg mt-3 shadow-md">
+                                        {reviews.slice(0, limit).map((review: any) => (
+                                            <div key={review.id}>
+                                                {auth?.user.id !== review.user_id && <ReviewListing auth={auth} car={car} review={review ? review : null} />}
+                                            </div>
+                                        ))}
+                                        {reviews.length > 3 && (
+                                            <div className="flex justify-center mt-3">
+                                                {expanded ? (
+                                                    <button
+                                                        className="bg-emerald-500 text-white px-7 py-3 rounded-full shadow-md hover:shadow-lg"
+                                                        onClick={handleLoadLess}
+                                                    >
+                                                        Load Less
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        className="bg-emerald-500 text-white px-7 py-3 rounded-full shadow-md hover:shadow-lg"
+                                                        onClick={handleLoadMore}
+                                                    >
+                                                        Load More
+                                                    </button>
+                                                )}
+                                            </div>
+                                        )}
                                     </div>
+
                                 </>
-                            :
-                                <ReviewForm auth={auth} car={car}/>
-                        )
-                    :
-                        ''
+                            ) : (
+                                <ReviewForm auth={auth} car={car} />
+                            )
+                        ) : (
+                            ''
+                        )}
+                    </>
                 }
                 {
                     similarCars ?

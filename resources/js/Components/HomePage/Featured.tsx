@@ -7,8 +7,8 @@ import Featured4 from "@/Assets/StepsImages/feature4.png"
 const Featured = () => {
     return (
         <>
-        <div className="mx-auto max-w-screen-xl w-full h-full mt-8">
-                <h1 className='text-2xl md:text-3xl font-semibold text-center w-full '>Featured in</h1>
+            <div className="mx-auto max-w-screen-xl w-full h-full mt-8">
+                <h1 className='text-gray-950 font-semibold text-3xl text-center'>Featured In</h1>
                     <div className='flex flex=wrap mt-6 justify-center'>
                     <div className='grid grid-cols-2 md:grid-cols-4 gap-20 justify-center'>
                         <img src={Featured1} alt=""className="w-25 h-25  md:w-45  md:h-60   object-contain"  />
