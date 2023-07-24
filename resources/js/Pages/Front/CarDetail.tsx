@@ -261,7 +261,6 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             :
                                                             <button
                                                                 className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
-                                                                onClick={calculatePriceDifference}
                                                             >
                                                                 <Link href={route('user.login')}>
                                                                     Calculate
