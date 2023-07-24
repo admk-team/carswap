@@ -33,7 +33,8 @@ import ImageGallery from '@/Components/Slider/ImageGallery';
 
 import { Inertia } from '@inertiajs/inertia';
 
-export default function CarDetail({ car, auth, similarCars, success, error, user_rating }: any) {
+export default function CarDetail({ car, auth, similarCars, success, error, user_rating,my_cars }: any) {
+    console.log('my_cars :',my_cars)
     const [checkReview, setCheckReview] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -261,9 +262,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                     <div className="col-span-1 md:col-span-2 lg:col-span-1">
                                                         <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>My Car</p>
                                                         <Slider {...settings}>
-                                                            {cars.map((car, index) => (
+                                                            {my_cars.map((my_car, index) => (
                                                                 <div key={index}>
-                                                                    <img src={car} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
+                                                                    <img src={'/storage'+ my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
                                                                 </div>
                                                             ))}
                                                         </Slider>
@@ -419,39 +420,43 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                     :
                                     ''
                                 }
-                                <div className="bg-white border mx-4 border-gray-300 p-4 rounded-lg mt-3 shadow-md">
-                                    {reviews.slice(0, limit).map((review: any) => (
-                                        (
-                                            auth && auth.user ?
-                                                <div key={review.id}>
-                                                    {auth?.user.id !== review.user_id && <ReviewListing auth={auth} car={car} review={review ? review : null} />}
-                                                </div>
-                                            :
-                                                <div key={review.id}>
-                                                    <ReviewListing auth={auth} car={car} review={review ? review : null} />
-                                                </div>
-                                        )
-                                    ))}
-                                    {reviews.length > 3 && (
-                                        <div className="flex justify-center mt-3">
-                                            {expanded ? (
-                                                <button
-                                                    className="bg-emerald-500 text-white px-7 py-3 rounded-full shadow-md hover:shadow-lg"
-                                                    onClick={handleLoadLess}
-                                                >
-                                                    Load Less
-                                                </button>
-                                            ) : (
-                                                <button
-                                                    className="bg-emerald-500 text-white px-7 py-3 rounded-full shadow-md hover:shadow-lg"
-                                                    onClick={handleLoadMore}
-                                                >
-                                                    Load More
-                                                </button>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
+                                {car.ratings.length > 1?
+                                    <div className="bg-white border mx-4 border-gray-300 p-4 rounded-lg mt-3 shadow-md">
+                                        {reviews.slice(0, limit).map((review: any) => (
+                                            (
+                                                auth && auth.user ?
+                                                    <div key={review.id}>
+                                                        {auth?.user.id !== review.user_id && <ReviewListing auth={auth} car={car} review={review ? review : null} />}
+                                                    </div>
+                                                :
+                                                    <div key={review.id}>
+                                                        <ReviewListing auth={auth} car={car} review={review ? review : null} />
+                                                    </div>
+                                            )
+                                        ))}
+                                        {reviews.length > 3 && (
+                                            <div className="flex justify-center mt-3">
+                                                {expanded ? (
+                                                    <button
+                                                        className="bg-emerald-500 text-white px-7 py-3 rounded-full shadow-md hover:shadow-lg"
+                                                        onClick={handleLoadLess}
+                                                    >
+                                                        Load Less
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        className="bg-emerald-500 text-white px-7 py-3 rounded-full shadow-md hover:shadow-lg"
+                                                        onClick={handleLoadMore}
+                                                    >
+                                                        Load More
+                                                    </button>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                    :
+                                    ''
+                                }
 
                             </>
                         ) : (
