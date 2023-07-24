@@ -112,6 +112,7 @@ class PostacarController extends Controller
      */
     public function edit($slug)
     {
+        
         $brands=Brand::where('status',1)->get();
         $car=Car::where('slug',$slug)->first();
         $car->images=explode(",",$car->images);
@@ -145,19 +146,26 @@ class PostacarController extends Controller
             'brand_id.required' =>'The brand field is required',
 
         ]);
-        $images = '';
-        $arr=[];
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $item) {
+        $model=Car::find($id);
+        if($request->hasFile('images')){
+            if ($request->hasFile('images')) {
+                $existingImages = explode(',', $model->images);
+                foreach ($existingImages as $existingImage) {
+                    Storage::disk('public')->delete($existingImage);
+                }
+            }
+            $images = '';
+            $arr=[];
+            foreach ($request->images ?? [] as $item){
                 $var = date_create();
                 $time = date_format($var, 'YmdHis');
                 $imageName = $time . '-' . $item->getClientOriginalName();
                 $item->move(public_path('storage/images/cars'), $imageName);
-                array_push($arr, '/images/cars/' . $imageName);
+                array_push($arr,'/images/cars/'.$imageName);
             }
+            $images = implode(",", $arr);
+            $model->images=$images;
         }
-        $images = implode(",", $arr);
-        $model=Car::find($id);
         $model->title=$request->title;
         $model->brand_id= $request->brand_id;
         $model->condition=$request->condition;
@@ -166,7 +174,6 @@ class PostacarController extends Controller
         $model->location=$request->location;
         $model->price=$request->price;
         $model->drive=$request->drive;
-        $model->images=$images;
         $model->fuel_Type=$request->fuelType;
         $model->model=$request->model;
         $model->type=$request->type;
