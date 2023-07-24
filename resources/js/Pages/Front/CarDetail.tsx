@@ -150,7 +150,8 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         setSelectedMyCarImages(myCarImage);
         setSelectedMyCarPrice(myCarPrice);
         setShowSwapModal(true);
-        setMyCarId(myCarId)
+        setMyCarId(myCarId);
+        setData('my_car_id', myCarId);
     };
     
     //For car swap 
@@ -169,7 +170,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     
     function handleSubmit() {
          console.log(data);
-        //post(route('user.swap.store'));
+        post(route('user.swap.store'));
     }
     const [myCar,setMyCar]=useState(null);
     function CarId(e:any){

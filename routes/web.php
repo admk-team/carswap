@@ -109,7 +109,7 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
     Route::post('user/ratings',[RatingController::class,'store'])->name('ratings.store');
 
     //swap
-    Route::post('user/swap', [SwapController::class, 'store'])->name('user.swap.store');
+    Route::post('user/swap', [SwapController::class, 'store'])->name('swap.store');
 });
 
     // Payment callback route
