@@ -416,7 +416,7 @@ export default function EditProfile({ auth, success, errors, error }: any) {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer auth={auth}/>
         </div>
     );
 }

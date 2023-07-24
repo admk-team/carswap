@@ -27,6 +27,6 @@ class RavepayController extends Controller
             'transaction_id'=>$paymentData['transaction_id'],
             'tx_ref'=>$paymentData['tx_ref'],
         ]);
-        return response()->json(['message' => 'Payment data stored successfully'], 201);
+        return redirect()->back()->with(['message' => 'Payment data stored successfully'], 201);
     }
 }

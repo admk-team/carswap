@@ -230,7 +230,7 @@ export default function AllCars({ brands, cars,auth }:any) {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer auth={auth}/>
         </div>
 
     )

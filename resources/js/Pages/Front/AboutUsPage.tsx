@@ -10,12 +10,14 @@ import Icon2 from "@/Assets/AboutUsIcon2.png"
 import Icon3 from "@/Assets/AboutUsIcon3.png"
 import Icon4 from "@/Assets/AboutUsicon4.png"
 
-const AboutUsPage = (auth: any) => {
-
+const AboutUsPage = ({auth}: any) => {
+   
 
     return (
         <>
             <NavBar auth={auth} />
+            
+            
             <section className="bg-white">
                 <div className=" hero-section bg-cover bg-center h-96 flex justify-center items-center" style={{ backgroundImage: `url(${AnotherBG})` }}>
                     <div className="hero-content text-center">
@@ -102,7 +104,7 @@ const AboutUsPage = (auth: any) => {
                 </div>
 
             </section >
-            <Footer />
+            <Footer auth={auth}/>
         </>
     )
 }

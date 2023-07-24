@@ -42,7 +42,7 @@ const NavBar = (auth: any) => {
                 <div className="flex items-center">
                   <a href="https://api.whatsapp.com/send?phone=08120222922" className="flex items-center" target="_blank" rel="noopener noreferrer">
                     <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
-                    <span className="text-white text-sm">08120222922</span>
+                    <span className="text-white text-sm">+2348120222922</span>
                   </a>
                 </div>
 
@@ -59,19 +59,19 @@ const NavBar = (auth: any) => {
                       </button>
                       :
                       <>
-                      <div className='m-2'>
-                        <Link
-                          href={route('user.login')}
-                          className="rounded-md justify-content-center text-center text-base font-medium text-white"
-                        >
-                          Login
-                        </Link>
-                        <span className='text-white py-2'> / </span>
-                        <Link
-                          href={route('user.register')}
-                          className="rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
-                        > SignUp
-                        </Link>
+                        <div className='m-2'>
+                          <Link
+                            href={route('user.login')}
+                            className="rounded-md justify-content-center text-center text-base font-medium text-white"
+                          >
+                            Login
+                          </Link>
+                          <span className='text-white py-2'> / </span>
+                          <Link
+                            href={route('user.register')}
+                            className="rounded-md justify-content-center align-center self-center text-center text-base font-medium text-white"
+                          > SignUp
+                          </Link>
                         </div>
                       </>
                   }
@@ -153,7 +153,7 @@ const NavBar = (auth: any) => {
               <div className="flex items-center ml-3 mt-3">
                 <a href="https://api.whatsapp.com/send?phone=08120222922" className="flex items-center" target="_blank" rel="noopener noreferrer">
                   <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
-                  <span className="text-base font-medium text-white">08120222922</span>
+                  <span className="text-base font-medium text-white">+2348120222922</span>
                 </a>
               </div>
 
@@ -167,20 +167,20 @@ const NavBar = (auth: any) => {
                   </div>
                   :
                   <>
-                  <div className='m-3'>
-                    <Link
-                      href={route('user.login')}
-                      className="   text-base font-medium text-white"
-                    >
-                      LogIn
-                    </Link>
-                    <span className='px-2 text-white'>/</span>
-                    <Link
-                      href={route('user.register')}
-                      className="  text-base font-medium text-white"
-                    >
-                      SignUp
-                    </Link>
+                    <div className='m-3'>
+                      <Link
+                        href={route('user.login')}
+                        className="   text-base font-medium text-white"
+                      >
+                        LogIn
+                      </Link>
+                      <span className='px-2 text-white'>/</span>
+                      <Link
+                        href={route('user.register')}
+                        className="  text-base font-medium text-white"
+                      >
+                        SignUp
+                      </Link>
                     </div>
                   </>
               }

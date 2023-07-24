@@ -2,6 +2,9 @@ import React from 'react';
 import NavBar from '@/Components/Navbar/NavBar';
 import AnotherBG from '@/Assets/AboutUsWalpeper.png';
 import Footer from '../Footer/Footer';
+import { Head, Link } from '@inertiajs/react';
+import PreviouImage from "@/Assets/left.png"
+
 
 export default function Partner({ auth, success, errors }: any) {
     return (
@@ -9,6 +12,11 @@ export default function Partner({ auth, success, errors }: any) {
             <div className="absolute inset-0 bg-black opacity-50"></div>
             <div className="flex justify-center items-center h-full">
                 <div className="bg-white w-11/12 p-7 rounded-md shadow-lg max-w-xl mx-auto bg-opacity-80 backdrop-blur-lg">
+                <div className='absolute flex -mt-4 -ml-2'>
+                        <Link href={route('front.index')} className=' text-blue-500 text-lg'>Home</Link>
+                        <img src={PreviouImage} alt="" className='w-6 h-6 mt-1' />
+                        <p className='text-lg'>Become A Partner</p>
+                    </div>
                     <h2 className="text-3xl text-center text-dark uppercase font-bold mt-12">Become A Partner</h2>
                     <p className="text-lg text-center text-dark mb-6">Become a partner with us right now.</p>
                     <hr className="mb-6 border-t-2 border-gray-500 border-opacity-50" />
