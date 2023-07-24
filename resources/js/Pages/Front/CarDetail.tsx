@@ -72,7 +72,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     });
 
     const carPrice = car?.price || 0;
-    const yourCarPrice = my_cars[selectedCarIndex]?.price || 0;
+    const yourCarPrice = my_cars?my_cars[selectedCarIndex]?.price : 0;
 
     const calculatePriceDifference = () => {
         console.log("Calculating price difference...");
@@ -244,18 +244,30 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                         </div>
                                                         <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
                                                             <p className='font-bold mt-1'>Your Car Price</p>
-                                                            <p>$ {formatNumberWithCommas(my_cars[selectedCarIndex]?.price)}</p>
+                                                            <p>$ {formatNumberWithCommas(my_cars?my_cars[selectedCarIndex]?.price:0)}</p>
                                                         </div>
                                                         <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
                                                             <p className='font-bold mt-1'>Price Difference</p>
                                                             <p>$ {formatNumberWithCommas(priceDifference)}</p>
                                                         </div>
-                                                        <button
-                                                            className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
-                                                            onClick={calculatePriceDifference}
-                                                        >
-                                                            Calculate
-                                                        </button>
+                                                        {
+                                                            auth?.user?
+                                                                <button
+                                                                className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
+                                                                onClick={calculatePriceDifference}
+                                                                >
+                                                                    Calculate
+                                                                </button>
+                                                            :
+                                                            <button
+                                                                className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
+                                                                onClick={calculatePriceDifference}
+                                                            >
+                                                                <Link href={route('user.login')}>
+                                                                    Calculate
+                                                                </Link>
+                                                            </button>
+                                                        }
                                                     </>
                                                     :
                                                     auth && auth.user ?
@@ -295,11 +307,20 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             <div className="col-span-1 md:col-span-2 lg:col-span-1">
                                                                 <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>My Our</p>
                                                                 <Slider {...settings}>
-                                                                    {my_cars.map((my_car:any, index:any) => (
-                                                                        <div key={index} onClick={() => setSelectedCarIndex(index)}> {/* Add onClick handler */}
-                                                                            <img src={'/storage' + my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
+                                                                    {
+                                                                        auth?.user?
+                                                                        <>
+                                                                            {my_cars.map((my_car:any, index:any) => (
+                                                                                <div key={index} onClick={() => setSelectedCarIndex(index)}> {/* Add onClick handler */}
+                                                                                    <img src={'/storage' + my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
+                                                                                </div>
+                                                                            ))}
+                                                                        </>
+                                                                        :
+                                                                        <div>
+                                                                            <h4>Login First to view your cars to swap</h4>
                                                                         </div>
-                                                                    ))}
+                                                                    }
                                                                 </Slider>
                                                             </div>
                                                         </div>
