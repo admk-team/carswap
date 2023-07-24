@@ -91,8 +91,15 @@ class FrontController extends Controller
         });
         if(auth()->user()){
             $user_rating=Rating::where('user_id',auth()->user()->id)->where('car_id',$car->id)->first();
-        }
-        return Inertia::render('Front/CarDetail',['brands'=>$brands,'car'=>$car,'similarCars'=>$similarCars,'user_rating'=>$user_rating ?? null]);
+            $my_cars=Car::where('user_id',auth()->user()->id)->get();
+            if($my_cars){
+                $my_cars=$my_cars->map(function($car){
+                    $car->images=explode(',',$car->images);
+                    return $car;
+                });
+            }
+        };
+        return Inertia::render('Front/CarDetail',['brands'=>$brands,'car'=>$car,'similarCars'=>$similarCars,'user_rating'=>$user_rating ?? null,'my_cars'=>$my_cars ?? null]);
     }
 
     public function contactus(){

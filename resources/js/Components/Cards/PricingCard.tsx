@@ -49,6 +49,11 @@ const PricingCard = ({ brands, cars, auth }: any) => {
         setTotal(cars.length);
     }, [cars]);
 
+    function formatNumberWithCommas(number:any) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+
+
     return (
         <div className="mx-auto max-w-screen-xl w-full h-full mt-8 ">
             <div className="flex">
@@ -118,7 +123,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     </h5>
                                 </Link>
                                 <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">
-                                    $ {car?.price}
+                                $ {formatNumberWithCommas(car.price)}
                                 </h5>
                                 <div className="flex items-center"></div>
                                 <hr className="border-t-2 border-black mt-2" />
