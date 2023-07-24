@@ -31,7 +31,7 @@ class SwapController extends Controller
       
         $model=new Swap();
         $model->car_id=$swap->car_id;
-        $model->mycar_id= $swap->mycar_id;
+        $model->mycar_id= $swap->my_car_id;
         $model->Inspection_date=$swap->Inspection_date;
         $model->Inspection_Time=$swap->Inspection_Time;
         if($model->save()){
