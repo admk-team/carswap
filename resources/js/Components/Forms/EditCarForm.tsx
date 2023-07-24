@@ -5,7 +5,7 @@ import ImagCheck from '@/Assets/check.png';
 
 const  EditCarForm= ({ auth,brands,car}: any) => {
     const { errors } = usePage().props
-    const [images, setImages] = useState([]);
+ 
     const { data, setData, post, processing } = useForm({
         title:car.title || '',
         brand_id: car.brand_id || '',
@@ -27,6 +27,7 @@ const  EditCarForm= ({ auth,brands,car}: any) => {
         _method:'put'
     });
 
+    const [images, setImages] = useState([null]);
     const handleImageChange = (e:any) => {
         if (e.target.files) {
             setData('images',e.target.files);

@@ -42,7 +42,6 @@ const CarInfohtmlForm = ({ auth, brands, users }: any) => {
     };
 
     function handleSubmit() {
-
         post(route('user.cars.store'))
     }
     return (
