@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Swap;
 use Illuminate\Http\Request;
-
+use Inertia\Inertia;
 class SwapController extends Controller
 {
     /**
@@ -28,22 +28,17 @@ class SwapController extends Controller
      */
     public function store(Request $swap)
     {
-        return $swap;
-        $swap->validate([
-            'star' => 'required',
-            'user_id' => 'required',
-            'car_id' => 'required',
-            'message' => 'required',
-           
-
-        ]);
-        
-        // $model->message=$swap->message;
-        // if($model->save()){
-        //    return redirect()->back()->withSuccess(['success' => 'Reviews addedd successfully.']);
-        // }else{
-        //     return Inertia::location(route('user.dashboard', ['error' => 'Failed Car not added.']));
-        // }
+      
+        $model=new Swap();
+        $model->car_id=$swap->car_id;
+        $model->mycar_id= $swap->mycar_id;
+        $model->Inspection_date=$swap->Inspection_date;
+        $model->Inspection_Time=$swap->Inspection_Time;
+        if($model->save()){
+           return redirect()->back()->withSuccess(['success' => 'Reviews addedd successfully.']);
+        }else{
+            return Inertia::location(route('user.dashboard', ['error' => 'Failed Car not added.']));
+        }
     }
 
     /**

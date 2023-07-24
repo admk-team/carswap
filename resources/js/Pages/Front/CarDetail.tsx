@@ -169,7 +169,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
     
     function handleSubmit() {
-         console.log(data);
+        //  console.log(data);
         post(route('user.swap.store'));
     }
     const [myCar,setMyCar]=useState(null);
