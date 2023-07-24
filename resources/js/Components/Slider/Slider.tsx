@@ -12,8 +12,8 @@ import Image9 from '@/Assets/SliderImages/Slider (3).png';
 
 
 const slides = [
-    Image1,
     Image3,
+    Image1,  
     Image4,
     Image5,
     Image6,
