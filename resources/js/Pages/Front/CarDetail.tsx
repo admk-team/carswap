@@ -46,6 +46,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const [selectedMyCarTitle, setSelectedMyCarTitle] = useState(null);
     const [selectedMyCarImages, setSelectedMyCarImages] = useState([]);
     const [selectedMyCarPrice, setSelectedMyCarPrice] = useState();
+    const [my_CarId, setMyCarId] = useState();
 
     useEffect(() => {
         if (success) {
@@ -141,20 +142,40 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     function formatNumberWithCommas(number: any) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-    const handleSwapNowClick = (carId: any, myCarId, myCarTitle, myCarImage, myCarPrice) => {
+    
+    const handleSwapNowClick = (carId: any, myCarId:any, myCarTitle:any, myCarImage:any, myCarPrice:any) => {
         setSelectedCarId(carId);
         setSelectedMyCarId(myCarId);
         setSelectedMyCarTitle(myCarTitle);
         setSelectedMyCarImages(myCarImage);
         setSelectedMyCarPrice(myCarPrice);
         setShowSwapModal(true);
+        setMyCarId(myCarId)
     };
+    
+    //For car swap 
+    const { data, setData, post,} = useForm({
+        Inspection_date:'',
+        Inspection_Time:'',
+        car_id:car.id || null,
+        my_car_id:my_CarId || '',
 
+    });
     const handleSwapModalClose = () => {
         setShowSwapModal(false);
     };
     const swapPriceDifference = carPrice - selectedMyCarPrice;
 
+    
+    function handleSubmit() {
+         console.log(data);
+        //post(route('user.swap.store'));
+    }
+    const [myCar,setMyCar]=useState(null);
+    function CarId(e:any){
+        console.log("CarId ",e)
+
+    }
     return (
         <>
             {images && (images.length > 0) && <ImageGallery images={images} setImages={setImages} />}
@@ -247,6 +268,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                     setPaymentData(response);
                                                                     setTimeout(() => {
                                                                         paymentResponse();
+
                                                                     }, 3000);
                                                                 },
                                                                 onClose: () => { },
@@ -555,6 +577,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                             ))}
                                             {showSwapModal && selectedCarId && (
                                                 <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
+                                           
                                                     <div className="flex flex-col  w-full bg-white rounded p-4 max-w-md">
                                                         <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Book Inspection</h2>
                                                         <hr className='mb-2' />
@@ -583,15 +606,25 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                         <input
                                                             type="time"
                                                             id="swapTime"
+                                                            name="Inspection_Time"
+                                                            value={data.Inspection_Time} onChange={(e) => setData('Inspection_Time', e.target.value)}
+                                                        />
+                                                        <input
+                                                            type="hidden"
+                                                            id="my_car_id"
+                                                            name="my_car_id"
+                                                            value={my_CarId} onChange={(e) => setData('my_car_id', my_CarId)}
                                                         />
                                                         <label htmlFor="swapDate" className='mt-3'>Date:</label>
                                                         <input
                                                             type="date"
                                                             id="swapDate"
+                                                            name="Inspection_date"
+                                                            value={data.Inspection_date} onChange={(e) => setData('Inspection_date', e.target.value)}
                                                         />
                                                         <div className="flex justify-end mt-4">
-                                                            <button
-                                                                className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2'
+                                                        <button  onClick={() => handleSubmit()} 
+                                                                className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2'      
                                                             >
                                                                 Book Now
                                                             </button>
@@ -603,6 +636,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             </button>
                                                         </div>
                                                     </div>
+                                                    
                                                 </div>
                                             )}
                                         </div>

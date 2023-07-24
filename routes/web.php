@@ -14,8 +14,10 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RavepayController;
 use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\User\SwapController;
 use App\Http\Controllers\User\UserController as FrontUserController;
 use App\Models\Rating;
+use App\Models\Swap;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Artisan;
 
@@ -105,6 +107,9 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
 
     //ratings
     Route::post('user/ratings',[RatingController::class,'store'])->name('ratings.store');
+
+    //swap
+    Route::post('user/swap', [SwapController::class, 'store'])->name('user.swap.store');
 });
 
     // Payment callback route
