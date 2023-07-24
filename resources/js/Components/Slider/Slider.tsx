@@ -1,102 +1,47 @@
-
-import React, { useEffect, useState } from 'react';
-import Image1 from '@/Assets/SliderImages/Slider (1).png';
-import Image3 from '@/Assets/SliderImages/Slider (2).png';
-import Image4 from '@/Assets/SliderImages/Slider (3).png';
-import Image5 from '@/Assets/SliderImages/Slider (4).png';
-import Image6 from '@/Assets/SliderImages/Slider (5).png';
-import Image7 from '@/Assets/SliderImages/Slider (6).png';
-import Image8 from '@/Assets/SliderImages/Slider (7).png';
-import Image9 from '@/Assets/SliderImages/Slider (3).png';
+import React, { useState, useEffect } from 'react';
+import Image1 from '@/Assets/SliderImages/blanco.png';
+import Image3 from '@/Assets/SliderImages/mers.png';
+import Image4 from '@/Assets/SliderImages/kia.png';
 
 
+const Slider = ({ images }: any) => {
 
-const slides = [
-    Image3,
-    Image1,  
-    Image4,
-    Image5,
-    Image6,
-    Image7,
-    Image8,
-    Image9,
-    Image1,
-    Image3,
-    Image4,
-    Image5,
-    Image6,
-    Image7,
-    Image8,
-    Image9,
-    Image1,
-    Image3,
-    Image4,
-    Image5,
-    Image6,
-    Image7,
-    Image8,
-    Image9,
-    Image1,
-    Image3,
-    Image4,
-    Image5,
-    Image6,
-    Image7,
-    Image8,
-    Image9,
-    Image1,
-    Image3,
-    Image4,
-    Image5,
-    Image6,
-    Image7,
-    Image8,
-    Image9,
-    Image1,
-    Image3,
-    Image4,
-    Image5,
-    Image6,
-    Image7,
-    Image8,
-    Image9,
-];
-
-const Slider = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const slides = (images?.length > 0) ? images : [Image1, Image3, Image4];
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentSlide((prevSlide) => (prevSlide + 1) % (slides.length) );
-        }, 4000);
+            setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+        }, 3000);
 
-        return () => clearInterval(interval);
-    }, []);
+        return () => {
+            clearInterval(interval);
+        };
+    }, [slides.length]);
 
     return (
-        <div className="relative overflow-hidden">
-            <div
-                className="flex transition-transform duration-1000 ease-in-out"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-            >
-                {slides.map((slide, index) => (
-                    <img
-                        key={index}
-                        src={slide}
-                        alt={`Slide ${index + 1}`}
-                        className="w-full h-auto"
-                    />
-                ))}
-                <img
-                    src={slides[0]} 
-                    alt={`Slide 1`}
-                    className="w-full h-auto"
-                />
+        <>
+            <div id="default-carousel" className="relative w-full ">
+                <div className={`relative overflow-hidden ${(images?.length > 0) ? 'h-screen  bg-black  flex justify-center ' : 'md:h-64'}`}>
+                    {slides.map((slide:any, index:any) => (
+                        <div
+                            key={index}
+                            className={`absolute w-full ${images?.length > 0 ? 'transform duration-700' : ''} ${index === currentSlide ? 'translate-x-0' : 'translate-x-full'
+                                }`}
+                        >
+                            <img
+                                src={slide}
+                                className={`absolute block ${index === currentSlide ? 'opacity-100 mx-4' : 'opacity-0'} ${images?.length > 0 ? 'h-screen object-contain ' : 'w-full'
+                                    } `}
+                                alt={`Slide ${index + 1}`}
+                            />
+                        </div>
+                    ))}
+                </div>
+
             </div>
-        </div>
-    );
-};
+        </>
+    )
+}
 
-export default Slider;
-
-
+export default Slider
