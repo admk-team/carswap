@@ -45,7 +45,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const [selectedMyCarId, setSelectedMyCarId] = useState(null);
     const [selectedMyCarTitle, setSelectedMyCarTitle] = useState(null);
     const [selectedMyCarImages, setSelectedMyCarImages] = useState([]);
-    const [selectedMyCarPrice, setSelectedMyCarPrice] = useState();
+    const [selectedMyCarPrice, setSelectedMyCarPrice] = useState(0);
     const [my_CarId, setMyCarId] = useState();
 
     useEffect(() => {
@@ -172,11 +172,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         //  console.log(data);
         post(route('user.swap.store'));
     }
-    const [myCar,setMyCar]=useState(null);
-    function CarId(e:any){
-        console.log("CarId ",e)
-
-    }
+    console.log('images : ',images)
     return (
         <>
             {images && (images.length > 0) && <ImageGallery images={images} setImages={setImages} />}
@@ -299,7 +295,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             <div className="col-span-1 md:col-span-2 lg:col-span-1">
                                                                 <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>My Our</p>
                                                                 <Slider {...settings}>
-                                                                    {my_cars.map((my_car, index) => (
+                                                                    {my_cars.map((my_car:any, index:any) => (
                                                                         <div key={index} onClick={() => setSelectedCarIndex(index)}> {/* Add onClick handler */}
                                                                             <img src={'/storage' + my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
                                                                         </div>
@@ -610,12 +606,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             name="Inspection_Time"
                                                             value={data.Inspection_Time} onChange={(e) => setData('Inspection_Time', e.target.value)}
                                                         />
-                                                        <input
-                                                            type="hidden"
-                                                            id="my_car_id"
-                                                            name="my_car_id"
-                                                            value={my_CarId} onChange={(e) => setData('my_car_id', my_CarId)}
-                                                        />
+                                                        
                                                         <label htmlFor="swapDate" className='mt-3'>Date:</label>
                                                         <input
                                                             type="date"
