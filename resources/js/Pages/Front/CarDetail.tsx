@@ -75,9 +75,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const yourCarPrice = my_cars?my_cars[selectedCarIndex]?.price : 0;
 
     const calculatePriceDifference = () => {
-        console.log("Calculating price difference...");
         const difference =  carPrice - yourCarPrice ;
         setPriceDifference(difference);
+        setData('price_diff', difference);
     };
 
     const settings = {
@@ -152,6 +152,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         setShowSwapModal(true);
         setMyCarId(myCarId);
         setData('my_car_id', myCarId);
+        calculatePriceDifference();
     };
     
     //For car swap 
@@ -160,19 +161,15 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         Inspection_Time:'',
         car_id:car.id || null,
         my_car_id:my_CarId || '',
-        price_diff: (carPrice - 100) || '', 
+        price_diff:0, 
     });
+    console.log(data);
+    console.log('selectedMyCarId',selectedMyCarId);
+    console.log('my_CarId ',my_CarId);
     const handleSwapModalClose = () => {
         setShowSwapModal(false);
     };
     const swapPriceDifference = carPrice - selectedMyCarPrice;
-
-    console.log('selectedMyCarPrice ',selectedMyCarPrice)
-    function handleSubmit() {
-        console.log("data",data);
-        post(route('user.swap.store'));
-    }
-    console.log('images : ',images)
     return (
         <>
             {images && (images.length > 0) && <ImageGallery images={images} setImages={setImages} />}
@@ -327,7 +324,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                     </div>
                                                     {
                                                         auth?.user ?
-                                                            <button className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3' onClick={() => handleSwapNowClick(car.id, my_cars[selectedCarIndex]?.id, my_cars[selectedCarIndex]?.title, my_cars[selectedCarIndex]?.images, my_cars[selectedCarIndex]?.price)}
+                                                            <button className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3' onClick={() => handleSwapNowClick(car.id, my_cars[selectedCarIndex]?.id, my_cars[selectedCarIndex]?.title, my_cars[selectedCarIndex]?.images, my_cars[selectedCarIndex]?.price)
+                                                            
+                                                            }
                                                             >
                                                                 Swap Now
                                                             </button>
