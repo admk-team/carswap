@@ -180,6 +180,18 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const handleSwapModalClose = () => {
         setShowSwapModal(false);
     };
+    useEffect(()=>{
+        setGalleryImages(car.images.map((img:any)=>{
+            return {
+                original: '/storage' + img,
+                thumbnail: '/storage' + img,
+            };
+        }))
+    },[car])
+
+    useEffect(() => {
+        console.log(galleryImages);
+    }, [galleryImages])
     const swapPriceDifference = selectedMyCarPrice !== null ? carPrice - selectedMyCarPrice : 0;
     return (
 
