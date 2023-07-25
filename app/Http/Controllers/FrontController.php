@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactEmail;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Rating;
+use Illuminate\Support\Facades\Mail;
 
 class FrontController extends Controller
 {
@@ -105,6 +107,47 @@ class FrontController extends Controller
     public function contactus(){
 
         return Inertia::render('Front/ContactUsPage');
+    }
+    public function handleMailForm(Request $request){
+        $to = "depami5024@ridteam.com";
+        $subject = "Contact Us";
+        
+        $message = "
+        <html>
+        <head>
+        <title>HTML email</title>
+        </head>
+        <body>
+        <p>This email contains user Issues!</p>
+        <table>
+        <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Messag</th>
+        </tr>
+        <tr>
+        <td>$request->first_name</td>
+        <td>$request->last_name</td>
+        <td>$request->email</td>
+        <td>$request->phone_number</td>
+        <td>$request->message</td>
+        </tr>
+        </table>
+        </body>
+        </html>
+        ";
+        // return $message;
+        // Always set content-type when sending HTML email
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        
+        // More headers
+        $headers .= 'From: <depami5024@ridteam.com>' . "\r\n";
+        $headers .= 'Cc: depami5024@ridteam.com' . "\r\n";
+        Mail::to($to)->send(new ContactEmail($request));
+        return redirect()->back();
     }
 
 
