@@ -110,6 +110,8 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
 
     //swap
     Route::post('user/swap', [SwapController::class, 'store'])->name('swap.store');
+    //contactus mail function call
+    Route::post('user/mail',[FrontController::class,'handleMailForm'])->name('user.mail');
 });
 
     // Payment callback route
