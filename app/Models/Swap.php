@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Swap extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'Inspection_Time',
+        'Inspection_date',
+        'mycar_id',
+        'car_id',
+    ];
 }

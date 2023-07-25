@@ -131,7 +131,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
     const paymentResponse = () => {
         if (paymentData !== null) {
-            Inertia.post(route('user.storePayment'), { paymentData });
+            Inertia.post(route('user.storePayment'), { paymentData,data });
         }
     }
     const handleFullImages = (ims: any) => {
@@ -170,7 +170,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
 
     function handleSubmit() {
-        //  console.log(data);
+        console.log("data",data);
         post(route('user.swap.store'));
     }
     console.log('images : ',images)
@@ -636,7 +636,18 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             value={data.Inspection_date} onChange={(e) => setData('Inspection_date', e.target.value)}
                                                         />
                                                         <div className="flex justify-end mt-4">
-                                                        <button  onClick={() => handleSubmit()}
+                                                        <button   onClick={() => {
+                                                            handleFlutterPayment({
+                                                                callback: (response: any) => {
+                                                                    setPaymentData(response);
+                                                                    setTimeout(() => {
+                                                                        paymentResponse();
+
+                                                                    }, 3000);
+                                                                },
+                                                                onClose: () => { },
+                                                            });
+                                                        }}
                                                                 className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2'
                                                             >
                                                                 Book Now
