@@ -28,14 +28,19 @@ class SwapController extends Controller
      */
     public function store(Request $swap)
     {
-      
+        $swap->validate([
+            'car_id' => 'required',
+            'my_car_id' => 'required',
+            'Inspection_date' => 'required',
+            'Inspection_Time' => 'required',
+        ]);
         $model=new Swap();
         $model->car_id=$swap->car_id;
         $model->mycar_id= $swap->my_car_id;
         $model->Inspection_date=$swap->Inspection_date;
         $model->Inspection_Time=$swap->Inspection_Time;
         if($model->save()){
-           return redirect()->back()->withSuccess(['success' => 'Reviews addedd successfully.']);
+            return Inertia::location(route('user.dashboard', ['success' => 'Book Inspection completed.']));
         }else{
             return Inertia::location(route('user.dashboard', ['error' => 'Failed Car not added.']));
         }
