@@ -33,3 +33,13 @@
     overflow: hidden;
   }
 
+  .image-gallery-thumbnails .image-gallery-thumbnails-container {
+    cursor: pointer;
+    text-align: start;
+    white-space: nowrap;
+    display: flex     ;
+}
+.image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {
+    height: 70px !important;
+    width: 23px !important;
+}
