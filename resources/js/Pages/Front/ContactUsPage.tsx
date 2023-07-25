@@ -21,7 +21,7 @@ const ContactUsPage = ({auth}: any) => {
     const handleSubmit = (e: any) => {
         // console.log('data',data)
         e.preventDefault();
-        post(route('user.user.mail'));
+        post(route('mail'));
     };
     return (
         <>

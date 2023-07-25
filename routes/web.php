@@ -110,10 +110,10 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
 
     //swap
     Route::post('user/swap', [SwapController::class, 'store'])->name('swap.store');
-    //contactus mail function call
-    Route::post('user/mail',[FrontController::class,'handleMailForm'])->name('user.mail');
 });
 
+    //contactus mail function call
+    Route::post('user/mail',[FrontController::class,'handleMailForm'])->name('mail');
     // Payment callback route
     Route::get('/payment/callback', [RavepayController::class, 'handleCallback'])->name('callback');
     Route::any('/test', [RavepayController::class, 'test']);

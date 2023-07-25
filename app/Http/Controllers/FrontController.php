@@ -109,9 +109,7 @@ class FrontController extends Controller
         return Inertia::render('Front/ContactUsPage');
     }
     public function handleMailForm(Request $request){
-       
-
-        $to = "jogiviy976@miqlab.com";
+        $to = "depami5024@ridteam.com";
         $subject = "Contact Us";
         
         $message = "
@@ -146,15 +144,10 @@ class FrontController extends Controller
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         
         // More headers
-        $headers .= 'From: <jogiviy976@miqlab.com>' . "\r\n";
-        $headers .= 'Cc: jogiviy976@miqlab.com' . "\r\n";
-        // Mail::to($to)->send(new ContactEmail($request));
-        if(mail($to,$subject,$message,$headers)){
-            return "success";
-        }else{
-            return "fail";
-        }
-        return Inertia::render('Front/ContactUsPage');
+        $headers .= 'From: <depami5024@ridteam.com>' . "\r\n";
+        $headers .= 'Cc: depami5024@ridteam.com' . "\r\n";
+        Mail::to($to)->send(new ContactEmail($request));
+        return redirect()->back();
     }
 
 
