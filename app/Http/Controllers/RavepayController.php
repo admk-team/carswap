@@ -34,6 +34,7 @@ class RavepayController extends Controller
             'mycar_id' => $data['my_car_id'],
             'Inspection_date' => $data['Inspection_date'],
             'Inspection_Time' => $data['Inspection_Time'],
+            'price_diff' => $data['price_diff'],
         ]);
         return redirect()->back()->with(['message' => 'Payment data stored successfully'], 201);
     }

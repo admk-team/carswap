@@ -160,14 +160,14 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         Inspection_Time:'',
         car_id:car.id || null,
         my_car_id:my_CarId || '',
-
+        price_diff: (carPrice - 100) || '', 
     });
     const handleSwapModalClose = () => {
         setShowSwapModal(false);
     };
     const swapPriceDifference = carPrice - selectedMyCarPrice;
 
-    
+    console.log('selectedMyCarPrice ',selectedMyCarPrice)
     function handleSubmit() {
         console.log("data",data);
         post(route('user.swap.store'));

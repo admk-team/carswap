@@ -13,5 +13,6 @@ class Swap extends Model
         'Inspection_date',
         'mycar_id',
         'car_id',
+        'price_diff',
     ];
 }
