@@ -112,6 +112,10 @@ class FrontController extends Controller
 
         return Inertia::render('Front/AboutUsPage');
     }
+    public function livechat(){
+
+        return Inertia::render('Front/LiveChat');
+    }
     public function wishlist(){
 
         return Inertia::render('Front/WishList');

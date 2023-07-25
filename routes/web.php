@@ -78,6 +78,7 @@ Route::get('/cars/all', [FrontController::class,'ViewAllCars'])->name('ViewAllCa
 Route::get('/contactus', [FrontController::class,'contactus'])->name('contactus');
 Route::get('/wishlist', [FrontController::class,'wishlist'])->name('wishlist');
 Route::get('/partner', [FrontController::class,'partner'])->name('partner');
+Route::get('/livechat', [FrontController::class,'livechat'])->name('livechat');
 
 Route::get('/aboutus', [FrontController::class,'aboutus'])->name('aboutus');
 Route::get('/search',[FrontController::class,'search'])->name('search');
