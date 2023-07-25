@@ -2,7 +2,6 @@ import React from 'react'
 import Avatar from "@/Assets/user-icon.jpg";
 
 function ReviewListing({ auth, review }: any) {
-  console.log(review);
     const dateString = review && review.created_at ? review.created_at : null;
     const formattedDate = new Date(dateString).toLocaleDateString('en-US', {
         year: 'numeric',

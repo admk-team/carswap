@@ -53,7 +53,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const [selectedMyCarTitle, setSelectedMyCarTitle] = useState(null);
     const [selectedMyCarImages, setSelectedMyCarImages] = useState([]);
     const [selectedMyCarPrice, setSelectedMyCarPrice] = useState(0);
-    const [my_CarId, setMyCarId] = useState();
+    const [myCarId, setMyCarId] = useState(0);
     const [galleryImages,setGalleryImages] = useState([]);
 
     useEffect(() => {
@@ -83,9 +83,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const yourCarPrice = my_cars ? my_cars[selectedCarIndex]?.price : 0;
 
     const calculatePriceDifference = () => {
-        console.log("Calculating price difference...");
-        const difference = carPrice - ourCarPrice;
+        const difference =  carPrice - yourCarPrice ;
         setPriceDifference(difference);
+        setData('price_diff', difference);
     };
 
 
@@ -160,28 +160,26 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         setSelectedMyCarPrice(myCarPrice);
         setShowSwapModal(true);
         setMyCarId(myCarId);
-        setData('my_car_id', myCarId);
+        // setData({...data, ...{'my_car_id':myCarId}});
+        calculatePriceDifference();
     };
-
-    //For car swap
-    const { data, setData, post, } = useForm({
-        Inspection_date: '',
-        Inspection_Time: '',
-        car_id: car.id || null,
-        my_car_id: my_CarId || '',
-
+    
+    //For car swap 
+    const { data, setData, post} = useForm({
+        Inspection_date:'',
+        Inspection_Time:'',
+        car_id:car.id || null,
+        my_car_id: null,
+        price_diff:0, 
     });
+
+    useEffect(()=>{
+        setData({...data, ...{'my_car_id':selectedMyCarId}});
+    }, [selectedMyCarId])
+
     const handleSwapModalClose = () => {
         setShowSwapModal(false);
     };
-    const swapPriceDifference = selectedMyCarPrice !== null ? carPrice - selectedMyCarPrice : 0;
-
-
-    function handleSubmit() {
-        console.log("data", data);
-        post(route('user.swap.store'));
-    }
-
     useEffect(()=>{
         setGalleryImages(car.images.map((img:any)=>{
             return {
@@ -194,6 +192,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     useEffect(() => {
         console.log(galleryImages);
     }, [galleryImages])
+    const swapPriceDifference = selectedMyCarPrice !== null ? carPrice - selectedMyCarPrice : 0;
     return (
 
                 <div>
@@ -347,7 +346,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                     </div>
                                                     {
                                                         auth?.user ?
-                                                            <button className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3' onClick={() => handleSwapNowClick(car.id, my_cars[selectedCarIndex]?.id, my_cars[selectedCarIndex]?.title, my_cars[selectedCarIndex]?.images, my_cars[selectedCarIndex]?.price)}
+                                                            <button className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3' onClick={() => handleSwapNowClick(car.id, my_cars[selectedCarIndex]?.id, my_cars[selectedCarIndex]?.title, my_cars[selectedCarIndex]?.images, my_cars[selectedCarIndex]?.price)
+                                                            
+                                                            }
                                                             >
                                                                 Swap Now
                                                             </button>
@@ -585,7 +586,8 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                         <div className='flex flex-col'>
                                                             <div className='flex flex-wrap justify-between mt-3'>
                                                                 <div className='flex flex wrap'>
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth
+                                                                    ="1.5" stroke="currentColor" className="w-6 h-6">
                                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                                                                     </svg>

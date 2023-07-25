@@ -43,7 +43,7 @@ const UserProfile = ({ auth,cars,pendings,approved }: any) =>  {
           {/* User Table */}
           <div className="bg-white border border-gray-300 rounded-lg shadow-md">
             <UserTabs activeTab={activeTab} onTabClick={handleTabClick} />
-            {activeTab === 0 && <MyListedCar cars={cars} />}
+            {activeTab === 0 && <MyListedCar cars={cars} auth={auth} />}
             {activeTab === 1 && <MySwapedCar />}
             {activeTab === 2 && <PendingAprroval pendings={pendings}/>}
             {activeTab === 3 && <ApprovedCar approved={approved} />}

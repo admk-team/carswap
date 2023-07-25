@@ -85,6 +85,7 @@ const Index = ({ auth, cars, success, error }: any) => {
                                         <th>Condition</th>
                                         <th>Fuel Type</th>
                                         <th>Status</th>
+                                        <th>Payment Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -118,6 +119,14 @@ const Index = ({ auth, cars, success, error }: any) => {
                                                   </button>
                                               </div>
                                           </div>
+                                            </td>
+                                            <td>
+                                                {
+                                                    car?.payment?
+                                                    <span className="btn btn-success">Paid</span>
+                                                    :
+                                                    <span className="btn btn-danger">Pending</span>
+                                                }
                                             </td>
                                             <td>
                                               <div className="dropdown mb-4">
