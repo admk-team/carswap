@@ -84,7 +84,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
     const calculatePriceDifference = () => {
         console.log("Calculating price difference...");
-        const difference = carPrice - ourCarPrice;
+        const difference = carPrice - yourCarPrice;
         setPriceDifference(difference);
     };
 
