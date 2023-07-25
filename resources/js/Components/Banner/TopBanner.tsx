@@ -4,34 +4,6 @@ import SliderCard from '../Cards/SliderCard';
 import Slider from '../Slider/Slider';
 
 const TopBanner = ({ brands }: any) => {
-    // const typeFormItems = ['Swap For Better Car', 'Swap For Cash', 'Buy & Sell'];
-    // const [currentTextIndex, setCurrentTextIndex] = useState(0);
-    // const [currentText, setCurrentText] = useState('');
-
-    // useEffect(() => {
-    //     let typingTimeout:any;
-    //     const currentTextToType = typeFormItems[currentTextIndex];
-    //     const textLength = currentTextToType.length;
-
-    //     const animateTyping = (currentIndex:any) => {
-    //         setCurrentText(currentTextToType.slice(0, currentIndex));
-    //         if (currentIndex <= textLength) {
-    //             typingTimeout = setTimeout(() => {
-    //                 animateTyping(currentIndex + 1);
-    //             }, 100); // Adjust the typing speed here (smaller value means faster typing)
-    //         } else {
-    //             // Typing complete, wait for a few seconds, and then move to the next text
-    //             setTimeout(() => {
-    //                 setCurrentTextIndex((prevIndex) => (prevIndex + 1) % typeFormItems.length);
-    //             }, 2000); // Wait for 2 seconds before moving to the next text
-    //         }
-    //     };
-
-    //     animateTyping(0);
-
-    //     return () => clearTimeout(typingTimeout);
-    // }, [currentTextIndex]);
-
     return (
         <>
             <div style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
