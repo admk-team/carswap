@@ -45,7 +45,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const [selectedMyCarId, setSelectedMyCarId] = useState(null);
     const [selectedMyCarTitle, setSelectedMyCarTitle] = useState(null);
     const [selectedMyCarImages, setSelectedMyCarImages] = useState([]);
-    const [selectedMyCarPrice, setSelectedMyCarPrice] = useState();
+    const [selectedMyCarPrice, setSelectedMyCarPrice] = useState(null);
 
     useEffect(() => {
         if (success) {
@@ -70,14 +70,15 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         year: 'numeric',
     });
 
-    const carPrice = car?.price || 0;
-    const yourCarPrice = my_cars[selectedCarIndex]?.price || 0;
+    const carPrice = car?.price ?? 0;
+    const ourCarPrice = my_cars[selectedCarIndex]?.price ?? 0;
 
     const calculatePriceDifference = () => {
-        console.log("Calculating price difference...");
-        const difference =  carPrice - yourCarPrice ;
-        setPriceDifference(difference);
+      console.log("Calculating price difference...");
+      const difference = carPrice - ourCarPrice;
+      setPriceDifference(difference);
     };
+
 
     const settings = {
         dots: true,
@@ -153,7 +154,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const handleSwapModalClose = () => {
         setShowSwapModal(false);
     };
-    const swapPriceDifference = carPrice - selectedMyCarPrice;
+    const swapPriceDifference = selectedMyCarPrice !== null ? carPrice - selectedMyCarPrice : 0;
 
     return (
         <>
@@ -562,7 +563,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 ">
                                                                 <div className="col-span-1 md:col-span-2 lg:col-span-1">
                                                                     <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
-                                                                    <img src={"/storage" + car.images[0]} className="w-full h-3/5 object-contain"></img>
+                                                                    <img src={"/storage" + car?.images[0]} className="w-full h-3/5 object-contain"></img>
                                                                     <p className='font-bold'>Price</p>
                                                                     <p>$ {formatNumberWithCommas(carPrice)}</p>
                                                                     <p className='font-bold'>Price Difference</p>
