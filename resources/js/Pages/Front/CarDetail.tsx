@@ -46,7 +46,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const [selectedMyCarTitle, setSelectedMyCarTitle] = useState(null);
     const [selectedMyCarImages, setSelectedMyCarImages] = useState([]);
     const [selectedMyCarPrice, setSelectedMyCarPrice] = useState(0);
-    const [my_CarId, setMyCarId] = useState();
+    const [myCarId, setMyCarId] = useState();
 
     useEffect(() => {
         if (success) {
@@ -160,12 +160,12 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         Inspection_date:'',
         Inspection_Time:'',
         car_id:car.id || null,
-        my_car_id:my_CarId || '',
+        my_car_id:myCarId || '',
         price_diff:0, 
     });
     console.log(data);
     console.log('selectedMyCarId',selectedMyCarId);
-    console.log('my_CarId ',my_CarId);
+    console.log('myCarId ',myCarId);
     const handleSwapModalClose = () => {
         setShowSwapModal(false);
     };
