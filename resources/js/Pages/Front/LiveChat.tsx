@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef,RefObject  } from 'react';
 import NavBar2 from '@/Components/Navbar/NabBar2';
 import Footer from '../Footer/Footer';
 import Talk from 'talkjs';
@@ -13,7 +13,7 @@ interface User {
 }
 
 const LiveChat = ({ auth }:any) => {
-    const chatboxEl = useRef();
+    const chatboxEl = useRef<HTMLDivElement>(null);
     const [talkLoaded, markTalkLoaded] = useState(false);
 
     useEffect(() => {

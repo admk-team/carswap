@@ -30,7 +30,8 @@ class RavepayController extends Controller
             'tx_ref'=>$paymentData['tx_ref'],
             'car_id'=>$carId ?? null,
         ]);
-        $data = $request->input('data');
+        $data1 = $request->input('data');
+        $data = json_decode($data1 ?? '{}', true);
         if(isset($data) && $data!=null){
             Swap::create([
                 'car_id' => $data['car_id'],

@@ -87,7 +87,7 @@ const Footer = (auth: any) => {
                                     <Link href={route('aboutus')} className="hover:underline">About</Link>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Live Chat</a>
+                                    <Link href={route('livechat')} className="hover:underline">Live Chat</Link>
                                 </li>
                                 <li className="mb-4">
                                     <Link href={route('contactus')} className="hover:underline">Contact Us</Link>

@@ -34,11 +34,6 @@ import { Inertia } from '@inertiajs/inertia';
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 
-
-
-
-
-
 export default function CarDetail({ car, auth, similarCars, success, error, user_rating, my_cars }: any) {
     const [checkReview, setCheckReview] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
@@ -130,16 +125,17 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         setExpanded(false);
         setLimit(3);
     };
-    const [paymentData, setPaymentData] = useState(null)
+    const [paymentData, setPaymentData]:any = useState()
     useEffect(() => {
         if (paymentData !== null) {
-            paymentResponse();
         }
     }, [paymentData]);
 
-    const paymentResponse = () => {
+    const paymentResponse = (response:any) => {
         if (paymentData !== null) {
-            Inertia.post(route('user.storePayment'), { paymentData, data });
+            const data1 = JSON.stringify(data)
+            let data2 = { paymentData: response, data:data1 }
+            Inertia.post(route('user.storePayment'), data2);
         }
     }
     const handleFullImages = (ims: any) => {
@@ -168,7 +164,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const { data, setData, post} = useForm({
         Inspection_date:'',
         Inspection_Time:'',
-        car_id:car.id || null,
+        car_id:car.id || '',
         my_car_id: null,
         price_diff:0, 
     });
@@ -294,7 +290,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                 callback: (response: any) => {
                                                                     setPaymentData(response);
                                                                     setTimeout(() => {
-                                                                        paymentResponse();
+                                                                        paymentResponse(response);
 
                                                                     }, 3000);
                                                                 },
@@ -662,7 +658,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                     callback: (response: any) => {
                                                                         setPaymentData(response);
                                                                         setTimeout(() => {
-                                                                            paymentResponse();
+                                                                            paymentResponse(response);
 
                                                                         }, 3000);
                                                                     },
