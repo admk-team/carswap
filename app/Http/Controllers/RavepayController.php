@@ -15,6 +15,7 @@ class RavepayController extends Controller
     public function store(Request $request)
     {
         $paymentData = $request->input('paymentData');
+        $carId = $request->input('carId');
         Payment::create([
             'status' => $paymentData['status'],
             'user_id' => auth()->user()->id,
@@ -27,15 +28,17 @@ class RavepayController extends Controller
             'flw_ref'=>$paymentData['flw_ref'],
             'transaction_id'=>$paymentData['transaction_id'],
             'tx_ref'=>$paymentData['tx_ref'],
+            'car_id'=>$carId ?? null,
         ]);
         $data = $request->input('data');
-        Swap::create([
-            'car_id' => $data['car_id'],
-            'mycar_id' => $data['my_car_id'],
-            'Inspection_date' => $data['Inspection_date'],
-            'Inspection_Time' => $data['Inspection_Time'],
-            'price_diff' => $data['price_diff'],
-        ]);
+        if(isset($data) && $data!=null){
+            Swap::create([
+                'car_id' => $data['car_id'],
+                'mycar_id' => $data['my_car_id'],
+                'Inspection_date' => $data['Inspection_date'],
+                'Inspection_Time' => $data['Inspection_Time'],
+            ]);
+        }
         return redirect()->back()->with(['message' => 'Payment data stored successfully'], 201);
     }
 }
