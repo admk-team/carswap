@@ -45,7 +45,8 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const [selectedMyCarId, setSelectedMyCarId] = useState(null);
     const [selectedMyCarTitle, setSelectedMyCarTitle] = useState(null);
     const [selectedMyCarImages, setSelectedMyCarImages] = useState([]);
-    const [selectedMyCarPrice, setSelectedMyCarPrice] = useState(null);
+    const [selectedMyCarPrice, setSelectedMyCarPrice] = useState(0);
+    const [my_CarId, setMyCarId] = useState();
 
     useEffect(() => {
         if (success) {
@@ -70,8 +71,8 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         year: 'numeric',
     });
 
-    const carPrice = car?.price ?? 0;
-    const ourCarPrice = my_cars[selectedCarIndex]?.price ?? 0;
+    const carPrice = car?.price || 0;
+    const yourCarPrice = my_cars?my_cars[selectedCarIndex]?.price : 0;
 
     const calculatePriceDifference = () => {
       console.log("Calculating price difference...");
@@ -142,20 +143,37 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     function formatNumberWithCommas(number: any) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-    const handleSwapNowClick = (carId: any, myCarId, myCarTitle, myCarImage, myCarPrice) => {
+
+    const handleSwapNowClick = (carId: any, myCarId:any, myCarTitle:any, myCarImage:any, myCarPrice:any) => {
         setSelectedCarId(carId);
         setSelectedMyCarId(myCarId);
         setSelectedMyCarTitle(myCarTitle);
         setSelectedMyCarImages(myCarImage);
         setSelectedMyCarPrice(myCarPrice);
         setShowSwapModal(true);
+        setMyCarId(myCarId);
+        setData('my_car_id', myCarId);
     };
 
+    //For car swap
+    const { data, setData, post,} = useForm({
+        Inspection_date:'',
+        Inspection_Time:'',
+        car_id:car.id || null,
+        my_car_id:my_CarId || '',
+
+    });
     const handleSwapModalClose = () => {
         setShowSwapModal(false);
     };
     const swapPriceDifference = selectedMyCarPrice !== null ? carPrice - selectedMyCarPrice : 0;
 
+
+    function handleSubmit() {
+        //  console.log(data);
+        post(route('user.swap.store'));
+    }
+    console.log('images : ',images)
     return (
         <>
             {images && (images.length > 0) && <ImageGallery images={images} setImages={setImages} />}
@@ -227,18 +245,29 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                         </div>
                                                         <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
                                                             <p className='font-bold mt-1'>Your Car Price</p>
-                                                            <p>$ {formatNumberWithCommas(my_cars[selectedCarIndex]?.price)}</p>
+                                                            <p>$ {formatNumberWithCommas(my_cars?my_cars[selectedCarIndex]?.price:0)}</p>
                                                         </div>
                                                         <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
                                                             <p className='font-bold mt-1'>Price Difference</p>
                                                             <p>$ {formatNumberWithCommas(priceDifference)}</p>
                                                         </div>
-                                                        <button
-                                                            className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
-                                                            onClick={calculatePriceDifference}
-                                                        >
-                                                            Calculate
-                                                        </button>
+                                                        {
+                                                            auth?.user?
+                                                                <button
+                                                                className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
+                                                                onClick={calculatePriceDifference}
+                                                                >
+                                                                    Calculate
+                                                                </button>
+                                                            :
+                                                            <button
+                                                                className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
+                                                            >
+                                                                <Link href={route('user.login')}>
+                                                                    Calculate
+                                                                </Link>
+                                                            </button>
+                                                        }
                                                     </>
                                                     :
                                                     auth && auth.user ?
@@ -248,6 +277,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                     setPaymentData(response);
                                                                     setTimeout(() => {
                                                                         paymentResponse();
+
                                                                     }, 3000);
                                                                 },
                                                                 onClose: () => { },
@@ -277,11 +307,20 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             <div className="col-span-1 md:col-span-2 lg:col-span-1">
                                                                 <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>My Our</p>
                                                                 <Slider {...settings}>
-                                                                    {my_cars.map((my_car, index) => (
-                                                                        <div key={index} onClick={() => setSelectedCarIndex(index)}> {/* Add onClick handler */}
-                                                                            <img src={'/storage' + my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
+                                                                    {
+                                                                        auth?.user?
+                                                                        <>
+                                                                            {my_cars.map((my_car:any, index:any) => (
+                                                                                <div key={index} onClick={() => setSelectedCarIndex(index)}> {/* Add onClick handler */}
+                                                                                    <img src={'/storage' + my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
+                                                                                </div>
+                                                                            ))}
+                                                                        </>
+                                                                        :
+                                                                        <div>
+                                                                            <h4>Login First to view your cars to swap</h4>
                                                                         </div>
-                                                                    ))}
+                                                                    }
                                                                 </Slider>
                                                             </div>
                                                         </div>
@@ -556,6 +595,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                             ))}
                                             {showSwapModal && selectedCarId && (
                                                 <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
+
                                                     <div className="flex flex-col  w-full bg-white rounded p-4 max-w-md">
                                                         <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Book Inspection</h2>
                                                         <hr className='mb-2' />
@@ -584,14 +624,19 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                         <input
                                                             type="time"
                                                             id="swapTime"
+                                                            name="Inspection_Time"
+                                                            value={data.Inspection_Time} onChange={(e) => setData('Inspection_Time', e.target.value)}
                                                         />
+
                                                         <label htmlFor="swapDate" className='mt-3'>Date:</label>
                                                         <input
                                                             type="date"
                                                             id="swapDate"
+                                                            name="Inspection_date"
+                                                            value={data.Inspection_date} onChange={(e) => setData('Inspection_date', e.target.value)}
                                                         />
                                                         <div className="flex justify-end mt-4">
-                                                            <button
+                                                        <button  onClick={() => handleSubmit()}
                                                                 className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2'
                                                             >
                                                                 Book Now
@@ -604,6 +649,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             </button>
                                                         </div>
                                                     </div>
+
                                                 </div>
                                             )}
                                         </div>

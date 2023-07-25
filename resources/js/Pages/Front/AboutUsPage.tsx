@@ -55,7 +55,7 @@ const AboutUsPage = ({auth}: any) => {
                                         <h2 className="text-gray-900 text-base font-bold text-center mt-2">24/7 Assistance Support</h2>
                                         <p className="text-gray-700 text-sm text-center">We are here for you around the clock. Our dedicated support team is ready to assist you anytime, ensuring prompt responses and resolving any queries or concerns you may have.</p>
                                     </div>
-                                    <div className="flex flex-col items-center mt-5 mr-10">
+                                    <div className="flex flex-col items-center mt-12 mr-10">
                                         <img src={Icon3} alt="" className='w-16 h-16' />
                                         <h2 className="text-gray-900 text-base text-center font-bold mt-3">Zero Wait Time</h2>
                                         <p className="text-gray-700 text-sm text-center">You don't have to wait for replies and after purchase your car will be delivered to you. </p>

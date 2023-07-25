@@ -45,6 +45,3 @@ const Slider = ({ images }: any) => {
 }
 
 export default Slider
-
-
-

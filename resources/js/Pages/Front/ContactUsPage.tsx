@@ -32,14 +32,14 @@ const ContactUsPage = ({auth}: any) => {
                                 <h2 className="text-2xl text-center text-dark uppercase font-bold mt-12">Contact Now</h2>
                                 <p className="text xl text-center text-dark mb-4">Got any issue ? No problem contact us now</p>
                                 <form>
-                                    <div className="flex flex-wrap gap-2 mb-3">
-                                        <div className="w-60">
+                                    <div className="flex flex-wrap gap-1 mb-3">
+                                        <div className="w-64">
                                             <input
                                                 placeholder="First Name"
                                                 className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"
                                             />
                                         </div>
-                                        <div className="w-60">
+                                        <div className="w-64">
                                             <input
                                                 placeholder="Last Name"
                                                 className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"

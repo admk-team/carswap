@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, router } from '@inertiajs/react';
 
-const SliderCard = (brands: any) => {
+const SliderCard = ({brands}: any) => {
 
   const [showResults, setShowResults] = useState(false);
   const [location, setlocation] = useState('');
@@ -103,7 +103,7 @@ const SliderCard = (brands: any) => {
         <h3 className='font-extrabold text-xl text-gray-950'>By Brand:</h3>
         <div className="grid grid-cols-6 gap-0 mt-2">
           {
-            brands.brands.brands?.map((brand: any) => (
+            brands?.map((brand: any) => (
               <button key={brand.id} className="border pt-1 pl-1 bg-white-400 focus:bg-emerald-500" onClick={() => setData('brand', brand?.id)}>
                 <img src={"/storage/" + brand?.image} alt="Image 1" className="w-10 h-10 object-contain" />
               </button>
