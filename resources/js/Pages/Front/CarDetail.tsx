@@ -130,7 +130,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
     const paymentResponse = () => {
         if (paymentData !== null) {
-            Inertia.post(route('user.storePayment'), { paymentData });
+            Inertia.post(route('user.storePayment'), { paymentData,data });
         }
     }
     const handleFullImages = (ims: any) => {
@@ -169,7 +169,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
     
     function handleSubmit() {
-        //  console.log(data);
+        console.log("data",data);
         post(route('user.swap.store'));
     }
     console.log('images : ',images)
@@ -641,7 +641,6 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                     setPaymentData(response);
                                                                     setTimeout(() => {
                                                                         paymentResponse();
-                                                                        handleSubmit();
 
                                                                     }, 3000);
                                                                 },
