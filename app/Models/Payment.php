@@ -20,6 +20,7 @@ class Payment extends Model
         'status',
         'transaction_id',
         'tx_ref',
+        'car_id',
     ];
     public function user()
     {

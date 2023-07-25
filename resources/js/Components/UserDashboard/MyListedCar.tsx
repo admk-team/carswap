@@ -1,10 +1,10 @@
 import { Inertia } from "@inertiajs/inertia";
 import { Link, useForm } from "@inertiajs/react";
+import { useFlutterwave } from "flutterwave-react-v3";
 import { link } from "fs";
 import React, { useState, useEffect } from "react";
 
-const MyListedCar = ({ cars, success }: any) => {
-
+const MyListedCar = ({ cars, success,auth }: any) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [carsData, setCarsData] = useState([]);
     const itemsPerPage = 3;
@@ -38,6 +38,38 @@ const MyListedCar = ({ cars, success }: any) => {
         setShowDeleteModal(false);
         setSelectedCarSlug('');
     };
+    const config = {
+        public_key: 'FLWPUBK_TEST-5362dd26662af2fa2bb22c99f29ab2c3-X',
+        tx_ref: `${auth?.user?.id}-${Date.now().toString()}`,
+        amount: 100,
+        currency: 'NGN',
+        payment_options: 'card,mobilemoney,ussd',
+        customer: {
+            email: auth?.user ? auth.user.email : '',
+            phone_number: auth?.user ? auth.user.phone_no : '',
+            name: auth?.user ? auth.user.first_name + ' ' + auth.user.last_name : '',
+        },
+        customizations: {
+            title: 'Car Swap Payment',
+            description: 'Payment for items in cart',
+            logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
+        },
+    };
+    const [paymentData, setPaymentData] = useState(null)
+    const [carId, setCarId] = useState(null)
+    useEffect(() => {
+        if (paymentData !== null) {
+            paymentResponse();
+        }
+    }, [paymentData]);
+
+    const paymentResponse = () => {
+        if (paymentData !== null) {
+            Inertia.post(route('user.storePayment'), { paymentData, carId });
+        }
+    }
+    const handleFlutterPayment = useFlutterwave(config);
+    console.log("carId :",carId)
     return (
         <>
             <div className="pt-4 pl-4">
@@ -51,6 +83,32 @@ const MyListedCar = ({ cars, success }: any) => {
                             <img className="object-cover md:h-auto md:w-48" src={'/storage' + carItem?.images[0]} alt="" />
                             <div className="flex flex-col justify-between p-2 leading-normal">
                                 <h5 className="mb-1 text-2xl font-bold text-gray-900">{carItem?.title}</h5>
+                                {
+                                    carItem?.payment?
+                                    <div className="flex gap-2">
+                                        <span className="text-gray-900 me-3"><strong>Payment Status</strong></span>
+                                        <button className="px-2 py-1 text-white bg-green-500 rounded">Paid</button>
+                                    </div>
+                                    :
+                                    <div className="flex gap-2">
+                                        <span className="text-red-700 me-3"><strong>You wouldn't make payment yet</strong></span>
+                                        <button className="px-2 py-1 text-white bg-yellow-500 "
+                                            onClick={() => {
+                                                handleFlutterPayment({
+                                                    callback: (response: any) => {
+                                                        setPaymentData(response);
+                                                        setCarId(carItem.id);
+                                                        setTimeout(() => {
+                                                            paymentResponse();
+
+                                                        }, 3000);
+                                                    },
+                                                    onClose: () => { },
+                                                });
+                                            }}
+                                        >Make Payment</button>
+                                    </div>
+                                }
                                 {carItem?.status && carItem.status == "1" ?
                                     <div>
                                         <span className="text-gray-900 me-3"><strong>Status</strong></span>
