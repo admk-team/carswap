@@ -31,7 +31,7 @@ const Slider = ({ images }: any) => {
                         >
                             <img
                                 src={slide}
-                                className={`absolute block ${index === currentSlide ? 'opacity-100 mx-4' : 'opacity-0'} ${images?.length > 0 ? 'h-screen object-contain ' : 'w-full'
+                                className={`absolute block w-screen ${index === currentSlide ? 'opacity-100 mx-4' : 'opacity-0'} ${images?.length > 0 ? 'h-screen object-contain ' : 'w-full'
                                     } `}
                                 alt={`Slide ${index + 1}`}
                             />
