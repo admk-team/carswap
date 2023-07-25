@@ -11,7 +11,7 @@ class Swap extends Model
     protected $fillable = [
         'Inspection_Time',
         'Inspection_date',
-        'my_car_id',
+        'mycar_id',
         'car_id',
     ];
 }
