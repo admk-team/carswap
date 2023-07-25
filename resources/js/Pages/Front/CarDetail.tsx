@@ -80,6 +80,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         setData('price_diff', difference);
     };
 
+
     const settings = {
         dots: true,
         infinite: true,
@@ -142,7 +143,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     function formatNumberWithCommas(number: any) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-    
+
     const handleSwapNowClick = (carId: any, myCarId:any, myCarTitle:any, myCarImage:any, myCarPrice:any) => {
         setSelectedCarId(carId);
         setSelectedMyCarId(myCarId);
@@ -171,7 +172,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const handleSwapModalClose = () => {
         setShowSwapModal(false);
     };
-    const swapPriceDifference = carPrice - selectedMyCarPrice;
+    const swapPriceDifference = selectedMyCarPrice !== null ? carPrice - selectedMyCarPrice : 0;
     return (
         <>
             {images && (images.length > 0) && <ImageGallery images={images} setImages={setImages} />}
@@ -595,7 +596,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                             ))}
                                             {showSwapModal && selectedCarId && (
                                                 <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
-                                           
+
                                                     <div className="flex flex-col  w-full bg-white rounded p-4 max-w-md">
                                                         <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Book Inspection</h2>
                                                         <hr className='mb-2' />
@@ -603,7 +604,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 ">
                                                                 <div className="col-span-1 md:col-span-2 lg:col-span-1">
                                                                     <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
-                                                                    <img src={"/storage" + car.images[0]} className="w-full h-3/5 object-contain"></img>
+                                                                    <img src={"/storage" + car?.images[0]} className="w-full h-3/5 object-contain"></img>
                                                                     <p className='font-bold'>Price</p>
                                                                     <p>$ {formatNumberWithCommas(carPrice)}</p>
                                                                     <p className='font-bold'>Price Difference</p>
@@ -627,7 +628,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             name="Inspection_Time"
                                                             value={data.Inspection_Time} onChange={(e) => setData('Inspection_Time', e.target.value)}
                                                         />
-                                                        
+
                                                         <label htmlFor="swapDate" className='mt-3'>Date:</label>
                                                         <input
                                                             type="date"
@@ -648,7 +649,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                 onClose: () => { },
                                                             });
                                                         }}
-                                                                className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2'      
+                                                                className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2'
                                                             >
                                                                 Book Now
                                                             </button>
@@ -660,7 +661,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
                                             )}
                                         </div>
