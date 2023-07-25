@@ -46,7 +46,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const [selectedMyCarTitle, setSelectedMyCarTitle] = useState(null);
     const [selectedMyCarImages, setSelectedMyCarImages] = useState([]);
     const [selectedMyCarPrice, setSelectedMyCarPrice] = useState(0);
-    const [myCarId, setMyCarId] = useState();
+    const [myCarId, setMyCarId] = useState(0);
 
     useEffect(() => {
         if (success) {
@@ -151,21 +151,23 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         setSelectedMyCarPrice(myCarPrice);
         setShowSwapModal(true);
         setMyCarId(myCarId);
-        setData('my_car_id', myCarId);
+        // setData({...data, ...{'my_car_id':myCarId}});
         calculatePriceDifference();
     };
     
     //For car swap 
-    const { data, setData, post,} = useForm({
+    const { data, setData, post} = useForm({
         Inspection_date:'',
         Inspection_Time:'',
         car_id:car.id || null,
-        my_car_id:myCarId || '',
+        my_car_id: null,
         price_diff:0, 
     });
-    console.log(data);
-    console.log('selectedMyCarId',selectedMyCarId);
-    console.log('myCarId ',myCarId);
+
+    useEffect(()=>{
+        setData({...data, ...{'my_car_id':selectedMyCarId}});
+    }, [selectedMyCarId])
+
     const handleSwapModalClose = () => {
         setShowSwapModal(false);
     };
