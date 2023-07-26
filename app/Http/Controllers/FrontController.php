@@ -109,40 +109,14 @@ class FrontController extends Controller
         return Inertia::render('Front/ContactUsPage');
     }
     public function handleMailForm(Request $request){
-        $to = "info@wehosttravel.com";
-        $subject = $request->first_name. ' '. $request->last_name. " Want's to connect through contact from";
-        
-        $message = '
-        <!DOCTYPE html>
-        <html>
-        <head>
-        <title>HTML email</title>
-        </head>
-        <body>
-        <p style="font-weight: bold;">CONTACT From ' .$request->first_name .'</p>
-        <div style="display: flex; margin-top: 2px;">
-            <div style="flex: 1;margin-top:0.5rem"><b>Name:</b>'. $request->first_name. ' '. $request->last_name.'</div>
-            <div style="flex: 1;margin-top:0.5rem"><b>Email:</b> '.$request->email .'</div>
-        </div>
-        <div style="display: flex;">
-            <div style="flex: 1;margin-top:0.5rem"><b>Phone No:</b> '.$request->phone_number .'</div>
-        </div>
-        <div style="display: flex;">
-            <div style="flex: 1;margin-top:0.5rem"><b>Message:</b></div>
-        </div>
-        <div style="display: flex;margin-top:0.5rem">
-            <div style="flex: 1;">'.$request->message .'</div>
-        </div>
-        </body>
-        </html>';
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        
-        // More headers
-        $headers .= 'From: <info@wehosttravel.com>' . "\r\n";
-        $headers .= 'Cc: info@wehosttravel.com' . "\r\n";
-        mail($to, $subject, $message, $headers);
-        // Mail::to($to)->send(new ContactEmail($request));
+        $to = "wanikhan919@gmail.com";
+        $data=[
+            'first_name'=>$request->first_name,
+            'last_name'=>$request->last_name,
+            'phone'=>$request->phone_number,
+            'message'=>$request->message,
+        ];
+        Mail::to($to)->send(new ContactEmail($data));
         return redirect()->back();
     }
 
