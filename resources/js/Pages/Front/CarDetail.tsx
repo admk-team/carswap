@@ -652,9 +652,21 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                     name="Inspection_date"
                                                     value={data.Inspection_date} onChange={(e) => setData('Inspection_date', e.target.value)}
                                                 />
+
                                                 <div className="flex justify-end mt-4">
-                                                    <button onClick={() => handleBookNow()}
-                                                        className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2'
+                                                    <button onClick={() => {
+                                                        handleFlutterPayment({
+                                                            callback: (response: any) => {
+                                                                setPaymentData(response);
+                                                                setTimeout(() => {
+                                                                    paymentResponse(response);
+
+                                                                }, 3000);
+                                                            },
+                                                            onClose: () => { },
+                                                        });
+                                                    }}
+                                                        className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2 '
                                                     >
                                                         Book Now
                                                     </button>
@@ -702,7 +714,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             onClose: () => { },
                                                         });
                                                     }}
-                                                        className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2'
+                                                        className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2 '
                                                     >
                                                         Book Now
                                                     </button>
