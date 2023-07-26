@@ -30,16 +30,16 @@ const LiveChat = ({ auth }:any) => {
                 id: auth.user.id,
                 name: auth.user.first_name,
                 email: auth.user.email,
-                photoUrl: 'henry.jpeg',
+                photoUrl: auth?.user?'/storage/'+auth.user.image:'N/A',
                 welcomeMessage: 'Hello!',
                 role: 'default',
               });
 
               const otherUser = new Talk.User({
-                id: '2',
-                name: 'Jessica Wells',
-                email: 'jessicawells@example.com',
-                photoUrl: 'jessica.jpeg',
+                id: '1',
+                name: 'Admin',
+                email: 'admin@example.com',
+                photoUrl: 'https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png',
                 welcomeMessage: 'Hello!',
                 role: 'default',
               });

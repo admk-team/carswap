@@ -109,44 +109,15 @@ class FrontController extends Controller
         return Inertia::render('Front/ContactUsPage');
     }
     public function handleMailForm(Request $request){
-        $to = "depami5024@ridteam.com";
-        $subject = "Contact Us";
-        
-        $message = "
-        <html>
-        <head>
-        <title>HTML email</title>
-        </head>
-        <body>
-        <p>This email contains user Issues!</p>
-        <table>
-        <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-        <th>Phone Number</th>
-        <th>Messag</th>
-        </tr>
-        <tr>
-        <td>$request->first_name</td>
-        <td>$request->last_name</td>
-        <td>$request->email</td>
-        <td>$request->phone_number</td>
-        <td>$request->message</td>
-        </tr>
-        </table>
-        </body>
-        </html>
-        ";
-        // return $message;
-        // Always set content-type when sending HTML email
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        
-        // More headers
-        $headers .= 'From: <depami5024@ridteam.com>' . "\r\n";
-        $headers .= 'Cc: depami5024@ridteam.com' . "\r\n";
-        Mail::to($to)->send(new ContactEmail($request));
+        $to = "cars@carswap.ng";
+        $data=[
+            'first_name'=>$request->first_name,
+            'last_name'=>$request->last_name,
+            'email'=>$request->email,
+            'phone'=>$request->phone_number,
+            'message'=>$request->message,
+        ];
+        Mail::to($to)->send(new ContactEmail($data));
         return redirect()->back();
     }
 
@@ -190,6 +161,25 @@ class FrontController extends Controller
         }
         $cars = $query->get();
         $cars=$cars->map(function($car){
+            $car->images=explode(',',$car->images);
+            return $car;
+        });
+        return Inertia::render('Front/AllCars',['brands'=>$brands,'cars'=>$cars]);
+    }
+    public function footerLocation($location){
+        $brands=Brand::where('status','1')->get();
+        $cars=Car::where('location','like', '%' . $location . '%')->get();
+        $cars=$cars->map(function($car){
+            $car->images=explode(',',$car->images);
+            return $car;
+        });
+        return Inertia::render('Front/AllCars',['brands'=>$brands,'cars'=>$cars]);
+    }
+    public function footerBrands($brand){
+        $brands=Brand::where('status','1')->get();
+        $footerBrand = Brand::where('title', 'like', '%' . $brand . '%')->with('cars')->get();
+        $carData = $footerBrand->pluck('cars')->flatten();
+        $cars=$carData->map(function($car){
             $car->images=explode(',',$car->images);
             return $car;
         });
