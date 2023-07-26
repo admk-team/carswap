@@ -40,8 +40,8 @@ const MySwapedCar = ({swaped, cars}: any) => {
                 return (<>
                 <div className='' key={index}>
                     <div className='px-4  mb-2 flex flex-wrap justify-center'>
-                        <div className='max-w-xs mx-auto bg-white border m-2'>
-                            <img className='w-full h-auto' src={'/storage' + myCar?.images[0]} alt='Product' />
+                        <div className='w-80 mx-auto bg-white border m-2'>
+                            <img className='w-full h-48 object-cover' src={'/storage' + myCar?.images[0]} alt='Product' />
                             <div className='p-2'>
                                 <h5 className='mb-1 text-2xl font-bold text-gray-900'>{myCar.title}</h5>
                                 <h5 className='text-2xl font-bold dark:text-white text-amber-500'>$ {myCar.price}</h5>
@@ -67,8 +67,8 @@ const MySwapedCar = ({swaped, cars}: any) => {
                         <div className='flex items-center justify-center'>
                             <img className='w-10 h-10' src={SwappedImage} alt="" />
                         </div>
-                        <div className='max-w-xs mx-auto bg-white border m-2'>
-                             <img className='w-full h-auto' src={'/storage' + swap.car?.images.split(',')[0] } alt='Product' />
+                        <div className='w-80 mx-auto bg-white border m-2'>
+                             <img className='w-full h-48 object-cover' src={'/storage' + swap.car?.images.split(',')[0] } alt='Product' />
                             <div className='p-2'>
                                 <h5 className='mb-1 text-2xl font-bold text-gray-900'>{swap.car?.title}</h5>
                                 <h5 className='text-2xl font-bold dark:text-white text-amber-500'>$ {swap.car?.price}</h5>
