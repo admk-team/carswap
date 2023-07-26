@@ -109,43 +109,40 @@ class FrontController extends Controller
         return Inertia::render('Front/ContactUsPage');
     }
     public function handleMailForm(Request $request){
-        $to = "depami5024@ridteam.com";
+        $to = "info@wehosttravel.com";
         $subject = "Contact Us";
         
-        $message = "
+        $message = '
+        <!DOCTYPE html>
         <html>
         <head>
         <title>HTML email</title>
         </head>
         <body>
-        <p>This email contains user Issues!</p>
-        <table>
-        <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-        <th>Phone Number</th>
-        <th>Messag</th>
-        </tr>
-        <tr>
-        <td>$request->first_name</td>
-        <td>$request->last_name</td>
-        <td>$request->email</td>
-        <td>$request->phone_number</td>
-        <td>$request->message</td>
-        </tr>
-        </table>
+        <p style="font-weight: bold;">CONTACT From ' .$request->first_name .'</p>
+        <div style="display: flex; margin-top: 2px;">
+            <div style="flex: 1;margin-top:0.5rem"><b>Name:</b>'. $request->first_name. ' '. $request->last_name.'</div>
+            <div style="flex: 1;margin-top:0.5rem"><b>Email:</b> '.$request->email .'</div>
+        </div>
+        <div style="display: flex;">
+            <div style="flex: 1;margin-top:0.5rem"><b>Phone No:</b> '.$request->phone_number .'</div>
+        </div>
+        <div style="display: flex;">
+            <div style="flex: 1;margin-top:0.5rem"><b>Message:</b></div>
+        </div>
+        <div style="display: flex;margin-top:0.5rem">
+            <div style="flex: 1;">'.$request->message .'</div>
+        </div>
         </body>
-        </html>
-        ";
+        </html>';
         // return $message;
         // Always set content-type when sending HTML email
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         
         // More headers
-        $headers .= 'From: <depami5024@ridteam.com>' . "\r\n";
-        $headers .= 'Cc: depami5024@ridteam.com' . "\r\n";
+        $headers .= 'From: <info@wehosttravel.com>' . "\r\n";
+        $headers .= 'Cc: info@wehosttravel.com' . "\r\n";
         Mail::to($to)->send(new ContactEmail($request));
         return redirect()->back();
     }
