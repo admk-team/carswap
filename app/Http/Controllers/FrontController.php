@@ -109,7 +109,7 @@ class FrontController extends Controller
         return Inertia::render('Front/ContactUsPage');
     }
     public function handleMailForm(Request $request){
-        $to = "admin@gmail.com";
+        $to = "cars@carswap.ng";
         $data=[
             'first_name'=>$request->first_name,
             'last_name'=>$request->last_name,
