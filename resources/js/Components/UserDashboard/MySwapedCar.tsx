@@ -7,15 +7,15 @@ import React, { useState, useEffect } from "react";
 const MySwapedCar = ({swaped, cars}: any) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [carsData, setCarsData] = useState([]);
-    const itemsPerPage = 3;
+    const itemsPerPage = 2;
 
     useEffect(() => {
         setCarsData(swaped);
     }, [swaped]);
-    const { get } = useForm()
+
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const car = carsData.slice(indexOfFirstItem, indexOfLastItem);
+    const car = swaped.slice(indexOfFirstItem, indexOfLastItem);
 
     const handlePageChange = (pageNumber: number) => {
         setCurrentPage(pageNumber);
@@ -31,7 +31,7 @@ const MySwapedCar = ({swaped, cars}: any) => {
 
             {/* start */}
             {car && car.length > 0 ?
-            swaped.map((swap:any, index:any) =>{
+            car.map((swap:any, index:any) =>{
                 console.log('sc :  ', swap.car)
                 let myCar = cars.find((mcar:any)=>{
                     return mcar.id === swap.mycar_id
@@ -99,9 +99,26 @@ const MySwapedCar = ({swaped, cars}: any) => {
             }) 
             :
             <p className="text-center">No record found</p>
-        }              
-            {/* end */}
-           
+        }
+              <div className="d-flex justify-content pb-3">
+                <ul className="pagination flex justify-center mt-4 ">
+                    {Array(Math.ceil(swaped.length / itemsPerPage))
+                        .fill(0)
+                        .map((_, index) => (
+                            <li
+                                key={index}
+                                className={`page-item ${currentPage === index + 1 ? "active" : ""}`}
+                            >
+                                <button
+                                    className={`page-link px-3 py-1 ${currentPage === index + 1 ? "bg-emerald-500 text-white" : "text-black"}`}
+                                    onClick={() => handlePageChange(index + 1)}
+                                >
+                                    {index + 1}
+                                </button>
+                            </li>
+                        ))}
+                </ul>
+            </div>
         </>
         
     );

@@ -66,8 +66,8 @@ const PendingAprroval = ({pendings }: any) => {
                 :
                 <p className="text-center">No record found</p>
             }
-            <div className="d-flex justify-content-center pb-3">
-                <ul className="pagination">
+            <div className="d-flex justify-content pb-3">
+                <ul className="pagination flex justify-center mt-4 ">
                     {Array(Math.ceil(carsData.length / itemsPerPage))
                         .fill(0)
                         .map((_, index) => (
@@ -76,7 +76,7 @@ const PendingAprroval = ({pendings }: any) => {
                                 className={`page-item ${currentPage === index + 1 ? "active" : ""}`}
                             >
                                 <button
-                                    className="page-link"
+                                    className={`page-link px-3 py-1 ${currentPage === index + 1 ? "bg-emerald-500 text-white" : "text-black"}`}
                                     onClick={() => handlePageChange(index + 1)}
                                 >
                                     {index + 1}
