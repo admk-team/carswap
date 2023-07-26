@@ -9,7 +9,7 @@ const Steps = () => {
         <>
             <div className="mx-auto max-w-screen-xl w-full h-full mt-12 ">
                 <div className='text-center text-3xl font-bold w-full'>
-                    <h1 className='text-gray-950 font-semibold text-3xl'>All In 4 Simple Steps</h1>
+                    <h1 className='text-gray-950 font-semibold text-3xl'>4 Simple Steps To Swap A Car</h1>
                 </div>
                 <div>
                     <div className="container mx-auto px-4">

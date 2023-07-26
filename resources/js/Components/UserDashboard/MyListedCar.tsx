@@ -90,7 +90,7 @@ const MyListedCar = ({ cars, success,auth }: any) => {
                                     </div>
                                     :
                                     <div className="flex gap-2">
-                                        <span className="text-red-700 me-3"><strong>You wouldn't make payment yet</strong></span>
+                                        <span className="text-red-700 me-3"><strong>Make payment </strong></span>
                                         <button className="px-2 py-1 text-white bg-yellow-500 "
                                             onClick={() => {
                                                 handleFlutterPayment({
