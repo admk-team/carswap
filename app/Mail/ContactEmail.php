@@ -39,6 +39,9 @@ class ContactEmail extends Mailable
     {
         return new Content(
             view: 'emails.contact-email',
+            with: [
+                'data' => $this->data,
+            ],
         );
     }
 
