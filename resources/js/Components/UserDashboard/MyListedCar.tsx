@@ -69,7 +69,6 @@ const MyListedCar = ({ cars, success,auth }: any) => {
         }
     }
     const handleFlutterPayment = useFlutterwave(config);
-    console.log("carId :",carId)
     return (
         <>
             <div className="pt-4 pl-4">

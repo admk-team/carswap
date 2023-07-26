@@ -15,4 +15,8 @@ class Swap extends Model
         'car_id',
         'price_diff',
     ];
+
+    public function car(){
+        return $this->belongsTo(Car::class);
+    }
 }

@@ -17,4 +17,8 @@ class Car extends Model
     public function payment(){
         return $this->hasOne(Payment::class);
     }
+    public function swaps()
+    {
+        return $this->hasMany(Swap::class, 'car_id');
+    }
 }

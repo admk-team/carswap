@@ -6,7 +6,7 @@ import Footer from '../Footer/Footer';
 import { useFlutterwave } from 'flutterwave-react-v3';
 import { Inertia } from '@inertiajs/inertia';
 
-const UserDashBoard = ({auth,success,cars,error,pendings,approved}:any) => {
+const UserDashBoard = ({auth,success,cars,error,pendings,approved,swaped}:any) => {
   
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -66,7 +66,7 @@ const UserDashBoard = ({auth,success,cars,error,pendings,approved}:any) => {
           </div>
         )}
 
-        <UserProfile auth={auth} cars={cars} pendings={pendings} approved={approved}/>
+        <UserProfile auth={auth} cars={cars} pendings={pendings} approved={approved} swaped={swaped}/>
       </div>
       <Footer auth={auth}/>
     </>

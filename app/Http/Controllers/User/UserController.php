@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\Swap;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -46,7 +47,16 @@ class UserController extends Controller
 
         return $item;
     });
-        return Inertia::render('User/UserDashBoard', ['cars' => $data,'pendings'=>$pendingsdata,'approved'=>$approved,'success'=>request()->success,'error'=>request()->error]);
+    
+    $swaped=Swap::where('status',1)
+    ->whereIn('mycar_id',$cars->pluck('id'))->with('car')->get();
+    // return $swaped = $swaped->map(function ($item1) {
+    //     $image = explode(',', $item1->car->images ?? ''));
+    //     $item1->car->images = $image;
+
+    //     return $item1;
+    // });
+        return Inertia::render('User/UserDashBoard', ['cars' => $data,'pendings'=>$pendingsdata,'approved'=>$approved,'swaped'=>$swaped,'success'=>request()->success,'error'=>request()->error]);
     }
 
     public function EditProfile(){
