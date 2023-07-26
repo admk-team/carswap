@@ -37,12 +37,6 @@ const PricingCard = ({ brands, cars, auth }: any) => {
             setSelectedCarId(id);
         }
         get(route('user.add.wishlist', id))
-        // .then((response)=>{
-        //     setSelectedCarId(id)
-        //     return response.json();
-        // }).then((data)=>{
-        //     console.log(data);
-        // });
     };
 
     useEffect(() => {
@@ -123,7 +117,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     </h5>
                                 </Link>
                                 <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">
-                                $ {formatNumberWithCommas(car.price)}
+                                ₦ {formatNumberWithCommas(car.price)}
                                 </h5>
                                 <div className="flex items-center"></div>
                                 <hr className="border-t-2 border-black mt-2" />

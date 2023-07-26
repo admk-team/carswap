@@ -101,10 +101,10 @@ const SliderCard = ({brands}: any) => {
           }
         </div>
         <h3 className='font-extrabold text-xl text-gray-950'>By Brand:</h3>
-        <div className="grid grid-cols-6 gap-0 mt-2">
+        <div className="grid grid-cols-6 gap-0 mt-2 h-20 overflow-y-scroll">
           {
             brands?.map((brand: any) => (
-              <button key={brand.id} className="border pt-1 pl-1 bg-white-400 focus:bg-emerald-500" onClick={() => setData('brand', brand?.id)}>
+              <button key={brand.id} className="border pt-1  pl-1 bg-white-400 focus:bg-emerald-500" onClick={() => setData('brand', brand?.id)}>
                 <img src={"/storage/" + brand?.image} alt="Image 1" className="w-10 h-10 object-contain" />
               </button>
             ))
