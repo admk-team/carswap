@@ -41,7 +41,7 @@ const ApprovedCar = ({approved}: any) => {
                                         Pending
                                     </h6>
                                 </div>
-                                <h5 className="text-2xl font-bold dark:text-white text-amber-500">${carItem?.price}</h5>
+                                <h5 className="text-2xl font-bold dark:text-white text-amber-500">₦{carItem?.price}</h5>
                                 <div className="mt-1">
                                     <table className="w-full">
                                         <tbody>

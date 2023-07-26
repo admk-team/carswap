@@ -44,7 +44,7 @@ const MySwapedCar = ({swaped, cars}: any) => {
                             <img className='w-full h-48 object-cover' src={'/storage' + myCar?.images[0]} alt='Product' />
                             <div className='p-2'>
                                 <h5 className='mb-1 text-2xl font-bold text-gray-900'>{myCar.title}</h5>
-                                <h5 className='text-2xl font-bold dark:text-white text-amber-500'>$ {myCar.price}</h5>
+                                <h5 className='text-2xl font-bold dark:text-white text-amber-500'>₦ {myCar.price}</h5>
                                 <div className='h-1 bg-gray-500 my-2'></div>
                                 <div className='mt-1'>
                                     <table className='w-full'>
@@ -71,7 +71,7 @@ const MySwapedCar = ({swaped, cars}: any) => {
                              <img className='w-full h-48 object-cover' src={'/storage' + swap.car?.images.split(',')[0] } alt='Product' />
                             <div className='p-2'>
                                 <h5 className='mb-1 text-2xl font-bold text-gray-900'>{swap.car?.title}</h5>
-                                <h5 className='text-2xl font-bold dark:text-white text-amber-500'>$ {swap.car?.price}</h5>
+                                <h5 className='text-2xl font-bold dark:text-white text-amber-500'>₦  {swap.car?.price}</h5>
                                 <div className='h-1 bg-gray-500 my-2'></div>
                                 <div className='mt-1'>
                                     <table className='w-full'>
