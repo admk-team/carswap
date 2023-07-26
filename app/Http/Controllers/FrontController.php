@@ -195,4 +195,23 @@ class FrontController extends Controller
         });
         return Inertia::render('Front/AllCars',['brands'=>$brands,'cars'=>$cars]);
     }
+    public function footerLocation($location){
+        $brands=Brand::where('status','1')->get();
+        $cars=Car::where('location','like', '%' . $location . '%')->get();
+        $cars=$cars->map(function($car){
+            $car->images=explode(',',$car->images);
+            return $car;
+        });
+        return Inertia::render('Front/AllCars',['brands'=>$brands,'cars'=>$cars]);
+    }
+    public function footerBrands($brand){
+        $brands=Brand::where('status','1')->get();
+        $footerBrand = Brand::where('title', 'like', '%' . $brand . '%')->with('cars')->get();
+        $carData = $footerBrand->pluck('cars')->flatten();
+        $cars=$carData->map(function($car){
+            $car->images=explode(',',$car->images);
+            return $car;
+        });
+        return Inertia::render('Front/AllCars',['brands'=>$brands,'cars'=>$cars]);
+    }
 }

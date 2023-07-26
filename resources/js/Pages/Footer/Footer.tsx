@@ -50,16 +50,16 @@ const Footer = (auth: any) => {
                             <h2 className="mb-6 text-xl font-semibold text-white mt-10 dark:text-white">Popular Locations</h2>
                             <ul className="text-gray-300 dark:text-gray-400 font-medium">
                                 <li className="mb-4">
-                                    <a href="#" className="t hover:underline">Lagos</a>
+                                    <Link href={route('footer.location','lagos')} className="t hover:underline">Lagos</Link>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Abuja</a>
+                                    <Link href={route('footer.location', 'abuja')} className="hover:underline">Abuja</Link>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Port Harcourt</a>
+                                    <Link href={route('footer.location','portHarcourt')} className="hover:underline">Port Harcourt</Link>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Kano</a>
+                                    <Link href={route('footer.location','kano')} className="hover:underline">Kano</Link>
                                 </li>
                             </ul>
                         </div>
@@ -67,16 +67,16 @@ const Footer = (auth: any) => {
                             <h2 className="mb-6 text-xl font-semibold text-white mt-10  dark:text-white">Featured Makes</h2>
                             <ul className="text-gray-300 dark:text-gray-400 font-medium">
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Honda</a>
+                                    <Link href={route('footer.brands','honda')} className="hover:underline">Honda</Link>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Mercedes</a>
+                                    <Link href={route('footer.brands','mercedes')} className="hover:underline">Mercedes</Link>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">KIA</a>
+                                    <Link href={route('footer.brands','kia')} className="hover:underline">KIA</Link>
                                 </li>
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">Hyundai</a>
+                                    <Link href={route('footer.brands','hyundai')} className="hover:underline">Hyundai</Link>
                                 </li>
                             </ul>
                         </div>

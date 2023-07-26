@@ -133,5 +133,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/user-profile' , [ProfileController::class , 'user_profile'])->name('user-profile');
     Route::get('/Logout' , [ProfileController::class , 'Logout'])->name('Logout');
 });
-
+Route::name('footer.')->group(function () {
+    Route::get('/location/{location}' , [FrontController::class, 'footerLocation'])->name('location');
+    Route::get('/brand/{brand}' , [FrontController::class, 'footerBrands'])->name('brands');
+});
 require __DIR__.'/auth.php';
