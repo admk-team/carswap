@@ -110,7 +110,7 @@ class FrontController extends Controller
     }
     public function handleMailForm(Request $request){
         $to = "info@wehosttravel.com";
-        $subject = "Contact Us";
+        $subject = $request->first_name. ' '. $request->last_name. " Want's to connect through contact from";
         
         $message = '
         <!DOCTYPE html>
@@ -135,15 +135,14 @@ class FrontController extends Controller
         </div>
         </body>
         </html>';
-        // return $message;
-        // Always set content-type when sending HTML email
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         
         // More headers
         $headers .= 'From: <info@wehosttravel.com>' . "\r\n";
         $headers .= 'Cc: info@wehosttravel.com' . "\r\n";
-        Mail::to($to)->send(new ContactEmail($request));
+        mail($to, $subject, $message, $headers);
+        // Mail::to($to)->send(new ContactEmail($request));
         return redirect()->back();
     }
 
