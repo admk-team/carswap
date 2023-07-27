@@ -25,7 +25,7 @@ const LiveChat = ({ auth }:any) => {
     }, []);
 
     useEffect(() => {
-        if (talkLoaded) {
+        if (talkLoaded && auth.user) {
             const currentUser = new Talk.User({
                 id: auth.user.id,
                 name: auth.user.first_name,
@@ -64,7 +64,9 @@ const LiveChat = ({ auth }:any) => {
     return (
         <div>
             <NavBar2 auth={auth} />
-            <div className='mt-3' ref={chatboxEl} style={{ width: '100%', height: '500px' }} />
+            {!auth?.user && <div style={{ width: '100%', height: '43vh' }} className='text-4xl flex items-center justify-center animate-bounce '>Please login first!</div>}
+            {auth.user && <div className='mt-3' ref={chatboxEl} style={{ width: '100%', height: '500px' }} />}
+
             <Footer auth={auth} />
         </div>
     );
