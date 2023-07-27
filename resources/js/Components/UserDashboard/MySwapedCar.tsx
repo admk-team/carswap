@@ -35,7 +35,7 @@ const MySwapedCar = ({swaped, cars}: any) => {
                 console.log('sc :  ', swap)
                 console.log('all c :  ', cars);
                 let my__usercar = cars.find((mcar:any)=>{
-                    return mcar.id === swap?.mycar_id
+                    return mcar.id == parseInt(swap?.mycar_id)
                 })
                 
                 return (<> {
