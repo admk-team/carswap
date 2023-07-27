@@ -37,7 +37,7 @@ const MySwapedCar = ({swaped, cars}: any) => {
                     return mcar.id === swap.mycar_id
                 })
                 
-                return (<>
+                return (<> {myCar &&
                 <div className='' key={index}>
                     <div className='px-4  mb-2 flex flex-wrap justify-center'>
                         <div className='w-80 mx-auto bg-white border m-2'>
@@ -95,7 +95,7 @@ const MySwapedCar = ({swaped, cars}: any) => {
                     </div>
                     <hr />
                 </div>
-                </>)
+             } </>)
             }) 
             :
             <p className="text-center">No record found</p>
