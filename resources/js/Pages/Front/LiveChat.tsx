@@ -63,8 +63,9 @@ const LiveChat = ({ auth }:any) => {
 
     return (
         <div>
-            <NavBar2 auth={auth} />
-            {!auth?.user && <div style={{ width: '100%', height: '43vh' }} className='text-4xl flex items-center justify-center animate-bounce '>Please login first!</div>}
+            <NavBar2 auth={auth} className='relative z-10' />
+            
+            {!auth?.user && <div style={{ width: '100%', height: '43vh' }} className='text-4xl flex items-center justify-center '> <span className='animate-bounce'>Please login first!</span></div>}
             {auth.user && <div className='mt-3' ref={chatboxEl} style={{ width: '100%', height: '500px' }} />}
 
             <Footer auth={auth} />
