@@ -18,7 +18,7 @@ interface IndexProps {
 const Index: React.FC<IndexProps> = ({ brands,cars,auth }) =>{
   return (
     <>
-    <Head title='Index'/>
+    <Head title='Best Deals For You | Home'/>
       <NavBar auth={auth} />
       <TopBanner brands={brands}/>
       <div className="text-3xl text-center w-full mt-12">
