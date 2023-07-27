@@ -32,10 +32,10 @@ const MySwapedCar = ({swaped, cars}: any) => {
             {/* start */}
             {car && car.length > 0 ?
             car.map((swap:any, index:any) =>{
-                console.log('sc :  ', swap.car)
+                console.log('sc :  ', swap)
                 console.log('all c :  ', cars);
                 let myCar = cars.find((mcar:any)=>{
-                    return mcar.id === swap.car?.mycar_id
+                    return mcar.id === swap?.mycar_id
                 })
                 
                 return (<> {
