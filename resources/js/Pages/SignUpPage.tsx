@@ -1,13 +1,13 @@
 
 import React, { FormEventHandler, useEffect } from 'react';
 import backgroundedImage from '../Assets/maxresdefault 1.jpg';
-import { useForm } from '@inertiajs/inertia-react';
+// import { useForm } from '@inertiajs/inertia-react';
 import InputError from '@/Components/InputError';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import PreviouImage from "@/Assets/left.png"
 
 const SignUpPage = () => {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, errors, reset, processing } = useForm({
         first_name: '',
         last_name: '',
         email: '',
@@ -22,7 +22,7 @@ const SignUpPage = () => {
         };
     }, []);
 
-    const submit = () => {
+    const handleSubmit = () => {
         // e.preventDefault();
         post(route('user.signup'));
     };
@@ -124,7 +124,8 @@ const SignUpPage = () => {
                                     <button
                                         type="button"
                                         className="bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-xl mt-2"
-                                        onClick={()=>submit()}
+                                        onClick={()=>handleSubmit()}
+                                        disabled={processing}
                                     >
                                         Sign Up
                                     </button>
