@@ -82,7 +82,7 @@ Route::get('/livechat', [FrontController::class,'livechat'])->name('livechat');
 
 Route::get('/aboutus', [FrontController::class,'aboutus'])->name('aboutus');
 Route::get('/search',[FrontController::class,'search'])->name('search');
-Route::get('/search',[FrontController::class,'search'])->name('search');
+Route::get('/suggestion',[FrontController::class,'suggestion'])->name('suggestion');
 
 //Use Auth Routes
 Route::get('/signin',[AuthController::class,'create'])->name('user.login');

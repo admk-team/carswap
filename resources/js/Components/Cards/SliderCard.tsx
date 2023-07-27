@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useForm, router } from '@inertiajs/react';
 
 const SliderCard = ({brands}: any) => {
 
   const [showResults, setShowResults] = useState(false);
   const [location, setlocation] = useState('');
-  const [suggestion, setSuggestion] = useState([
-    'Islamabad',
-    'nigeria',
-  ]);
+  const [wait, setWait] = useState(false);
+  const [suggestion, setSuggestion] = useState([]);
 
   const handleInputChange = () => {
     setShowResults(true);
@@ -30,7 +28,22 @@ const SliderCard = ({brands}: any) => {
 
   const handleSuggestions = (value: any) => {
     setlocation(value)
-    const response = router.get('/', { q: value }, { preserveState: true });
+    if(!wait){
+      setWait(true);
+
+      const response = router.visit('/', {data:{q:location}, preserveState: true,
+        preserveScroll: true,
+        replace: true, onSuccess: (res)=>{
+          const s:any = res.props?.suggestions;
+          setSuggestion(s)
+        } });
+        
+      setTimeout(()=>{
+        setWait(false);
+      },500)
+
+    }
+    console.log(wait)
   };
 
   const { data, setData, errors, get } = useForm({
@@ -83,8 +96,8 @@ const SliderCard = ({brands}: any) => {
           <input id='searchLocation' type="search" placeholder="Search location..." value={location} onChange={(e) => handleSuggestions(e.target.value)} className="relative border border-gray-300 rounded-lg py-2 px-4 w-full shadow-md" onClick={handleInputChange} />
 
           {showResults && (<ul className="absolute top-8 left-0 z-10 w-full mt-2  bg-white rounded-lg shadow-lg ">
-            {suggestion?.map((sitem: any) => (
-              <li key={sitem} className='px-4 py-2 cursor-pointer hover:bg-gray-200' onClick={() => { setData('location', sitem); setlocation(sitem); }}>{sitem}</li>
+            { suggestion?.map((sitem: any, index:any) => (
+              <li key={sitem + index} className='px-4 py-2 cursor-pointer hover:bg-gray-200' onClick={() => { setData('location', sitem); setlocation(sitem); }}>{sitem}</li>
             ))}
           </ul>)}
         </div>

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 
 class FrontController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $brands=Brand::where('status','1')->get();
         $cars=Car::where('status','1')->where('slug','!=',null)->limit(4)->latest()->get();
         $fav = auth()->user()?->wishlist;
@@ -46,6 +46,13 @@ class FrontController extends Controller
                 'is_fav' => $fav&&$fav!=null?($fav->where('id', $car->id)->first() ? true : false):false
             ];
         });
+
+        if($request->q){
+            $query = $request->q;
+            $suggestions=Car::select(['location'])->where('location','LIKE', "%$query%")->groupBy('location')->limit(8)->pluck('location') ?? [];
+            return Inertia::render('Front/Index',['brands'=>$brands,'cars'=>$cars, 'suggestions'=> $suggestions]);
+        }
+
         return Inertia::render('Front/Index',['brands'=>$brands,'cars'=>$cars]);
     }
     public function ViewAllCars(){
@@ -185,4 +192,5 @@ class FrontController extends Controller
         });
         return Inertia::render('Front/AllCars',['brands'=>$brands,'cars'=>$cars]);
     }
+
 }
