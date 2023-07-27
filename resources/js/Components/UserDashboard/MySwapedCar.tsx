@@ -43,8 +43,8 @@ const MySwapedCar = ({swaped, cars}: any) => {
                         <div className='w-80 mx-auto bg-white border m-2'>
                             <img className='w-full h-48 object-cover' src={'/storage' + myCar?.images[0]} alt='Product' />
                             <div className='p-2'>
-                                <h5 className='mb-1 text-2xl font-bold text-gray-900'>{myCar.title}</h5>
-                                <h5 className='text-2xl font-bold dark:text-white text-amber-500'>₦ {myCar.price}</h5>
+                                <h5 className='mb-1 text-2xl font-bold text-gray-900'>{myCar?.title}</h5>
+                                <h5 className='text-2xl font-bold dark:text-white text-amber-500'>₦ {myCar?.price}</h5>
                                 <div className='h-1 bg-gray-500 my-2'></div>
                                 <div className='mt-1'>
                                     <table className='w-full'>
@@ -55,9 +55,9 @@ const MySwapedCar = ({swaped, cars}: any) => {
                                                 <th className='px-2 text-gray-800'>Mileage</th>
                                             </tr>
                                             <tr>
-                                                <th className='px-2 text-sm sm:text-base text-gray-800'>{myCar.condition}</th>
-                                                <th className='px-2 text-sm sm:text-base text-gray-800'>{myCar.engine_capacity} CC</th>
-                                                <th className='px-2 text-sm sm:text-base text-gray-800'>{myCar.mileage} (MI)</th>
+                                                <th className='px-2 text-sm sm:text-base text-gray-800'>{myCar?.condition}</th>
+                                                <th className='px-2 text-sm sm:text-base text-gray-800'>{myCar?.engine_capacity} CC</th>
+                                                <th className='px-2 text-sm sm:text-base text-gray-800'>{myCar?.mileage} (MI)</th>
                                             </tr>
                                         </tbody>
                                     </table>
