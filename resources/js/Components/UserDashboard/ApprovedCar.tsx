@@ -36,10 +36,10 @@ const ApprovedCar = ({approved}: any) => {
                             <div className="flex flex-col justify-between p-2 leading-normal">
                                 <h5 className="mb-1 text-2xl font-bold text-gray-900 ">{carItem?.title}</h5>
                                 <div className="flex flex-wrap">
-                                    <span className="me-2"><strong>Status</strong></span>
-                                    <h6 className="px-2 py-1 text-base font-medium text-center text-white bg-yellow-500  self-end">
-                                        Pending
-                                    </h6>
+                                <div>
+                                        <span className="text-gray-900 me-3"><strong>Status</strong></span>
+                                        <button className="mt-2 px-2 py-1 text-white bg-green-500 ">Approved</button>
+                                    </div>
                                 </div>
                                 <h5 className="text-2xl font-bold dark:text-white text-amber-500">₦{carItem?.price}</h5>
                                 <div className="mt-1">
