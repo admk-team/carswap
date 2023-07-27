@@ -13,7 +13,7 @@ const CarInfohtmlForm = ({ auth, brands, users }: any) => {
     // console.log("auth",auth);
     const { errors } = usePage().props
     const [images, setImages] = useState([]);
-    const { data, setData, post, processing } = useForm({
+    const { data, setData, post, processing, progress } = useForm({
         title: '',
         brand_id: '',
         user_id: '',
@@ -169,6 +169,13 @@ const CarInfohtmlForm = ({ auth, brands, users }: any) => {
                                 </div>
                             </div>
                             <div className="mx-auto max-w-screen-xl w-full h-full mt-6">
+                                <div className='w-full'>
+                                {progress && (
+                                    <progress value={progress.percentage} max="100" className='w-full rounded'>
+                                    {progress.percentage}%
+                                    </progress>
+                                )}
+                                </div>
                                 <div className="bg-white border border-gray-300 p-8 rounded-lg shadow-md">
                                     <h1 className="text-xl font-bold">Upload Image:</h1>
                                     <div className="py-2">
