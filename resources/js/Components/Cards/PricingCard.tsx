@@ -17,14 +17,14 @@ const PricingCard = ({ brands, cars, auth }: any) => {
     const { data, setData, errors, get } = useForm();
 
     const handleSetCar = (id = 0) => {
-        let car = cars.find((item: any) => (item.id === id))
+        let car = cars?.find((item: any) => (item.id === id))
         setCompare(car);
         setShowModal(true);
         setSelectedCarId(id);
     }
 
     const handleSetBook = (id = 0) => {
-        let car = cars.find((item: any) => (item.id === id))
+        let car = cars?.find((item: any) => (item.id === id))
         setInspectionModal(true);
         setShowModal(false);
 
@@ -40,7 +40,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
     };
 
     useEffect(() => {
-        setTotal(cars.length);
+        setTotal(cars?.length);
     }, [cars]);
 
     function formatNumberWithCommas(number:any) {
