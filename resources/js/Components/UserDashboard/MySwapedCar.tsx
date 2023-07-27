@@ -34,7 +34,7 @@ const MySwapedCar = ({swaped, cars}: any) => {
             car.map((swap:any, index:any) =>{
                 console.log('sc :  ', swap)
                 console.log('all c :  ', cars);
-                let myCar = cars.find((mcar:any)=>{
+                let my__usercar = cars.find((mcar:any)=>{
                     return mcar.id === swap?.mycar_id
                 })
                 
@@ -42,10 +42,10 @@ const MySwapedCar = ({swaped, cars}: any) => {
                 <div className='' key={index}>
                     <div className='px-4  mb-2 flex flex-wrap justify-center'>
                         <div className='w-80 mx-auto bg-white border m-2'>
-                            <img className='w-full h-48 object-cover' src={'/storage' + myCar?.images[0]} alt='Product' />
+                            <img className='w-full h-48 object-cover' src={'/storage' + my__usercar?.images[0]} alt='Product' />
                             <div className='p-2'>
-                                <h5 className='mb-1 text-2xl font-bold text-gray-900'>{myCar?.title}</h5>
-                                <h5 className='text-2xl font-bold dark:text-white text-amber-500'>₦ {myCar?.price}</h5>
+                                <h5 className='mb-1 text-2xl font-bold text-gray-900'>{my__usercar?.title}</h5>
+                                <h5 className='text-2xl font-bold dark:text-white text-amber-500'>₦ {my__usercar?.price}</h5>
                                 <div className='h-1 bg-gray-500 my-2'></div>
                                 <div className='mt-1'>
                                     <table className='w-full'>
@@ -56,9 +56,9 @@ const MySwapedCar = ({swaped, cars}: any) => {
                                                 <th className='px-2 text-gray-800'>Mileage</th>
                                             </tr>
                                             <tr>
-                                                <th className='px-2 text-sm sm:text-base text-gray-800'>{myCar?.condition}</th>
-                                                <th className='px-2 text-sm sm:text-base text-gray-800'>{myCar?.engine_capacity} CC</th>
-                                                <th className='px-2 text-sm sm:text-base text-gray-800'>{myCar?.mileage} (MI)</th>
+                                                <th className='px-2 text-sm sm:text-base text-gray-800'>{my__usercar?.condition}</th>
+                                                <th className='px-2 text-sm sm:text-base text-gray-800'>{my__usercar?.engine_capacity} CC</th>
+                                                <th className='px-2 text-sm sm:text-base text-gray-800'>{my__usercar?.mileage} (MI)</th>
                                             </tr>
                                         </tbody>
                                     </table>
