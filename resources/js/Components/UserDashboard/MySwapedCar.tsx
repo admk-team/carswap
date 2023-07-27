@@ -33,11 +33,12 @@ const MySwapedCar = ({swaped, cars}: any) => {
             {car && car.length > 0 ?
             car.map((swap:any, index:any) =>{
                 console.log('sc :  ', swap.car)
+                console.log('all c :  ', cars);
                 let myCar = cars.find((mcar:any)=>{
                     return mcar.id === swap.mycar_id
                 })
                 
-                return (<> {myCar &&
+                return (<> {
                 <div className='' key={index}>
                     <div className='px-4  mb-2 flex flex-wrap justify-center'>
                         <div className='w-80 mx-auto bg-white border m-2'>
