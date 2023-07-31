@@ -31,17 +31,17 @@ const ApprovedCar = ({approved}: any) => {
             {car && car.length > 0?
                 car.map((carItem: any, index) => (
                     <div className='px-12 pt-2 pb-4'>
-                        <div className="flex flex-col  bg-white border-1 md:flex-row md:max-w-xl hover:bg-gray-100 ">
+                      <div className="flex flex-col bg-white border-1 md:flex-row md:max-w-full hover:bg-gray-100">
                             <img className="object-cover md:h-auto md:w-48 " src={'/storage' + carItem?.images[0]} alt="" />
                             <div className="flex flex-col justify-between p-2 leading-normal">
-                                <h5 className="mb-1 text-2xl font-bold text-gray-900 ">{carItem?.title}</h5>
+                                <h5 className="mb-1 text-2xl font-bold text-gray-900 line-clamp-1">{carItem?.title}</h5>
                                 <div className="flex flex-wrap">
                                 <div>
                                         <span className="text-gray-900 me-3"><strong>Status</strong></span>
                                         <button className="mt-2 px-2 py-1 text-white bg-green-500 ">Approved</button>
                                     </div>
                                 </div>
-                                <h5 className="text-2xl font-bold dark:text-white text-amber-500">₦{carItem?.price}</h5>
+                                <h5 className="text-2xl font-bold dark:text-white text-amber-500">₦ {carItem?.price}</h5>
                                 <div className="mt-1">
                                     <table className="w-full">
                                         <tbody>

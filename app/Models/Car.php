@@ -21,4 +21,11 @@ class Car extends Model
     {
         return $this->hasMany(Swap::class, 'car_id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function bookings(){
+        return $this->hasMany(Booking::class);
+    }
 }

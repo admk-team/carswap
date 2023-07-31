@@ -81,27 +81,27 @@ const AboutUsPage = ({auth}: any) => {
                     </div>
 
                 </div>
-                <div className="mx-auto max-w-screen-xl w-full h-full mt-12 ">
-                    <div className="md:container md:mx-auto bg-cover bg-center flex items-center" style={{ backgroundImage: `url(${SecondImage})` }}>
-                        <div className=" mx-auto lg:mx-12 xl:mx-36 text-center">
-                            <h1 className="uppercase text-xl md:text-2xl font-bold text-emerald-500 mt-24">Our COmpany Status</h1>
-                            <div className='grid grid-cols-1 sm:grid-cols-3 mb-24'>
-                                <div className='mt-16'>
-                                    <h2 className="text-3xl  text-emerald-500">500k+</h2>
-                                    <h1 className="uppercase font-extrabold text-3xl text-white mt-3">Cars</h1>
-                                </div>
-                                <div className='mt-16'>
-                                    <h2 className="text-3xl  text-emerald-500">500k+</h2>
-                                    <h1 className="uppercase font-extrabold text-3xl text-white mt-3">Deals</h1>
-                                </div>
-                                <div className='mt-16'>
-                                    <h2 className="text-3xl  text-emerald-500">500k+</h2>
-                                    <h1 className="uppercase font-extrabold text-3xl text-white mt-3">clients annually</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div className="mx-auto max-w-screen-xl w-full h-full mt-12 flex items-center justify-center">
+    <div className="md:container md:mx-auto bg-cover bg-center flex items-center" style={{ backgroundImage: `url(${SecondImage})` }}>
+        <div className="mx-auto lg:mx-12 xl:mx-36 text-center">
+            <h1 className="uppercase text-xl md:text-2xl font-bold text-emerald-500 mt-24 text-center">Our Company Status</h1>
+            <div className='grid grid-cols-1 sm:grid-cols-3 gap-8 mb-24'>
+                <div className='mt-16'>
+                    <h2 className="text-1xl md:text-2xl text-emerald-500">100k+</h2>
+                    <h1 className="uppercase font-extrabold text-2xl md:text-3xl text-white mt-3">Cars</h1>
                 </div>
+                <div className='mt-16'>
+                    <h2 className="text-1xl md:text-2xl text-emerald-500">100k+</h2>
+                    <h1 className="uppercase font-extrabold text-2xl md:text-3xl text-white mt-3">Deals</h1>
+                </div>
+                <div className='mt-16'>
+                    <h2 className="text-1xl md:text-2xl text-emerald-500">100k+</h2>
+                    <h1 className="uppercase font-extrabold text-2xl md:text-3xl text-white mt-3">Clients Annually</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
             </section >
             <Footer auth={auth}/>
