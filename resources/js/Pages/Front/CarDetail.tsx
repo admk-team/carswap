@@ -35,6 +35,7 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 
 export default function CarDetail({ car, auth, similarCars, success, error, user_rating, my_cars }: any) {
+    console.log(car)
     const [checkReview, setCheckReview] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -295,12 +296,24 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                 }
                                             </>
                                             :
-                                            auth && auth.user ?
-                                                <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
-                                                :
-                                                <button className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >
-                                                    <Link href={route('user.login')}> Buy Now </Link>
+                                            <div>
+                                            {auth && auth.user ? (
+                                              car.status === "0" ? (
+                                                // If the user is authenticated and car status is "0", show "Buy Now" button
+                                                <button onClick={handleBookNow} className='bg-gray-950 w-full text-white font-bold py-2 px-4 rounded mt-3'>
+                                                  Buy Now
                                                 </button>
+                                              ) : (
+                                                // If the user is authenticated and car status is not "0", show "Car Already Booked"
+                                                <p className='text-center text-red-500'>Car Already Booked</p>
+                                              )
+                                            ) : (
+                                              // If the user is not authenticated, show "Buy Now" button linking to the login page
+                                              <button className='bg-gray-950 w-full text-white font-bold py-2 px-4 rounded mt-3'>
+                                                <Link href={route('user.login')}>Buy Now</Link>
+                                              </button>
+                                            )}
+                                          </div>
                                     }
                                 </div>
                                 {
