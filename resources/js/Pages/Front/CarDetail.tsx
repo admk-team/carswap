@@ -160,7 +160,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         myCarImage: any,
         myCarPrice: any
     ) => {
-        if(!(selectedCarIds?.length>0)){
+        if (!(selectedCarIds?.length > 0)) {
             alert("Please Select Car First!");
             return 0;
         }
@@ -193,21 +193,21 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     }
 
     const [selectedCarIds, setSelectedCarIds] = useState([]);
-    const handleCheckboxChange = (my_car_id:number) => {
+    const handleCheckboxChange = (my_car_id: number) => {
         if (selectedCarIds.includes(my_car_id)) {
-          setSelectedCarIds(selectedCarIds.filter((id) => id !== my_car_id));
+            setSelectedCarIds(selectedCarIds.filter((id) => id !== my_car_id));
         } else {
-          setSelectedCarIds([...selectedCarIds, my_car_id]);
+            setSelectedCarIds([...selectedCarIds, my_car_id]);
         }
-      };
+    };
     //For car swap
     const { data, setData, post } = useForm({
         Inspection_date: '',
         Inspection_Time: '',
         car_id: car.id || '',
-        my_car_id:selectedCarIds,
+        my_car_id: selectedCarIds,
         price_diff: 0,
-    });console.log('data',data)
+    }); console.log('data', data)
     useEffect(() => {
         setData({ ...data, ...{ 'my_car_id': selectedCarIds } });
     }, [selectedCarIds])
@@ -297,12 +297,19 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                     {
                                         car.type && car.type == 'swap' ?
                                             auth?.user && car.user_id == auth.user.id ?
-                                                <p className='text-red-500'>This car belongs to you. You cannot swap or purchase a car that you have added.</p>
+                                                <p className='text-red-500 '>This car belongs to you. You cannot swap or purchase a car that you have added.</p>
                                                 :
                                                 <>
                                                     {
                                                         car?.swaps ?
-                                                            <p>Already Swapped</p>
+                                                            <div className='flex flex-wrap justify-center items-center gap-3'>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7 text-emerald-600">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                                </svg>
+
+                                                                <p className='text-center text-lg text-emerald-900 font-bold'>You Already Swapped This Vehicle</p>
+                                                            </div>
+
                                                             :
                                                             <>
                                                                 <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Swap Buy Calculator</h2>
@@ -345,7 +352,12 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                     <p className='text-red-500'>This car belongs to you. You cannot swap or purchase a car that you have added.</p>
                                                     :
                                                     car?.bookings ?
-                                                        <p>Already Booked</p>
+                                                        <div className='flex flex-wrap justify-center items-center gap-3'>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7 text-emerald-600">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                            </svg>
+                                                            <p className='text-center text-lg text-emerald-900 font-bold'>You Already Booked This Vehicle</p>
+                                                        </div>
                                                         :
                                                         <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
                                                 :
@@ -381,19 +393,19 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                         auth?.user ?
                                                                             <>
                                                                                 <Slider {...settings}>
-                                                                                {my_cars.map((my_car: any, index: any) => (
-                                                                                    <div key={index} className="relative inline-block">
-                                                                                    <label className="absolute top-2 right-2 z-10">
-                                                                                        <input
-                                                                                        type="checkbox"
-                                                                                        className="form-checkbox h-5 w-5 checked:bg-green-500 bg-green-500 hover:bg-green-500 border-0"
-                                                                                        checked={selectedCarIds.includes(my_car.id)}
-                                                                                        onChange={() => handleCheckboxChange(my_car.id)}
-                                                                                        />
-                                                                                    </label>
-                                                                                    <img src={'/storage' + my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
-                                                                                    </div>
-                                                                                ))}
+                                                                                    {my_cars.map((my_car: any, index: any) => (
+                                                                                        <div key={index} className="relative inline-block">
+                                                                                            <label className="absolute top-2 right-2 z-10">
+                                                                                                <input
+                                                                                                    type="checkbox"
+                                                                                                    className="form-checkbox h-5 w-5 checked:bg-green-500 bg-green-500 hover:bg-green-500 border-0"
+                                                                                                    checked={selectedCarIds.includes(my_car.id)}
+                                                                                                    onChange={() => handleCheckboxChange(my_car.id)}
+                                                                                                />
+                                                                                            </label>
+                                                                                            <img src={'/storage' + my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
+                                                                                        </div>
+                                                                                    ))}
                                                                                 </Slider>
                                                                             </>
                                                                             :
@@ -410,8 +422,8 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                 <button className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3' onClick={() => handleSwapNowClick(car.id, my_cars[selectedCarIndex]?.id, my_cars[selectedCarIndex]?.title, my_cars[selectedCarIndex]?.images, my_cars[selectedCarIndex]?.price)
 
                                                                 }
-                                                                // disabled={!(selectedCarIds?.length>0)}
-                                                                title={!(selectedCarIds?.length>0)?'Please Select Cars':''}
+                                                                    // disabled={!(selectedCarIds?.length>0)}
+                                                                    title={!(selectedCarIds?.length > 0) ? 'Please Select Cars' : ''}
                                                                 >
                                                                     Swap Now
                                                                 </button>
