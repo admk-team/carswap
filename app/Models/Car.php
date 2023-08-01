@@ -11,14 +11,20 @@ class Car extends Model
     public function brand(){
         return $this->belongsTo(Brand::class);
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     public function ratings(){
         return $this->hasMany(Rating::class);
     }
     public function payment(){
         return $this->hasOne(Payment::class);
     }
+    public function bookings(){
+        return $this->hasOne(Booking::class);
+    }
     public function swaps()
     {
-        return $this->hasMany(Swap::class, 'car_id');
+        return $this->hasOne(Swap::class, 'car_id');
     }
 }
