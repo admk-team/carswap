@@ -24,6 +24,10 @@ class Swap extends Model
     public function mycar(){
         return $this->belongsTo(Car::class,'mycar_id');
     }
+    public function mycars(){
+        // return $this->belongsTo(Car::class,'mycar_id');
+        return Car::find(json_decode($this->mycar_id));
+    }
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

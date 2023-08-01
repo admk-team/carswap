@@ -51,6 +51,8 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const [selectedMyCarPrice, setSelectedMyCarPrice] = useState(0);
     const [myCarId, setMyCarId] = useState(0);
     const [galleryImages, setGalleryImages] = useState([]);
+    const [selectedCars, setSelectedCars] = useState<number[]>([]);
+
 
     useEffect(() => {
         if (success) {
@@ -89,6 +91,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const settings = {
         dots: true,
         infinite: true,
+        // centerMode: true,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -147,36 +150,72 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         setImages(tims);
     };
     function formatNumberWithCommas(number: any) {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (typeof number !== "undefined" && number !== null && !isNaN(number)) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        } else {
+            return ""; // Return an empty string if the number is not valid
+        }
     }
 
-    const handleSwapNowClick = (carId: any, myCarId: any, myCarTitle: any, myCarImage: any, myCarPrice: any) => {
+    const handleSwapNowClick = (
+        carId: any,
+        myCarId: any,
+        myCarTitle: any,
+        myCarImage: any,
+        myCarPrice: any
+    ) => {
+        if(!(selectedCarIds?.length>0)){
+            alert("Please Select Car First!");
+            return 0;
+        }
+
         setSelectedCarId(carId);
         setSelectedMyCarId(myCarId);
         setSelectedMyCarTitle(myCarTitle);
         setSelectedMyCarImages(myCarImage);
         setSelectedMyCarPrice(myCarPrice);
+
+        // Toggle car selection
+        if (selectedCars.includes(myCarId)) {
+            setSelectedCars(selectedCars.filter((selectedId) => selectedId !== myCarId));
+        } else {
+            if (selectedCars.length < 2) {
+                setSelectedCars([...selectedCars, myCarId]);
+            } else {
+                // Handle a scenario where the user tries to select more than two cars.
+                // You can show an error message or restrict further selections here.
+            }
+        }
+
         setShowSwapModal(true);
         setMyCarId(myCarId);
-        // setData({...data, ...{'my_car_id':myCarId}});
         calculatePriceDifference();
     };
+
     const handleBookNow = () => {
         setShowBookModal(true);
     }
 
+    const [selectedCarIds, setSelectedCarIds] = useState([]);
+    const handleCheckboxChange = (my_car_id:number) => {
+        if (selectedCarIds.includes(my_car_id)) {
+          setSelectedCarIds(selectedCarIds.filter((id) => id !== my_car_id));
+        } else {
+          setSelectedCarIds([...selectedCarIds, my_car_id]);
+        }
+      };
     //For car swap
     const { data, setData, post } = useForm({
         Inspection_date: '',
         Inspection_Time: '',
         car_id: car.id || '',
-        my_car_id: null,
+        my_car_id:selectedCarIds,
         price_diff: 0,
     });
-
+    console.log('data',data)
     useEffect(() => {
-        setData({ ...data, ...{ 'my_car_id': selectedMyCarId } });
-    }, [selectedMyCarId])
+        setData({ ...data, ...{ 'my_car_id': selectedCarIds } });
+    }, [selectedCarIds])
 
     const handleSwapModalClose = () => {
         setShowSwapModal(false);
@@ -197,9 +236,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
 
     useEffect(() => {
-        console.log(galleryImages);
     }, [galleryImages])
     const swapPriceDifference = selectedMyCarPrice !== null ? carPrice - selectedMyCarPrice : 0;
+
     return (
 
         <div>
@@ -261,57 +300,57 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                 <div className="bg-white rounded-lg shadow-md p-6">
                                     {
                                         car.type && car.type == 'swap' ?
-                                            auth?.user&&car.user_id==auth.user.id?
-                                            <p className='text-red-500'>This car belongs to you. You cannot swap or purchase a car that you have added.</p>
-                                            :
-                                            <>
-                                            {
-                                                car?.swaps?
-                                                <p>Already Swapped</p>
-                                                :
-                                                <>
-                                                    <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Swap Buy Calculator</h2>
-                                                    <hr className='mb-4' />
-                                                    <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow'>
-                                                        <p className='font-bold'>Our Car Price</p>
-                                                        <p>₦ {formatNumberWithCommas(carPrice)}</p>
-                                                    </div>
-                                                    <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
-                                                        <p className='font-bold mt-1'>Your Car Price</p>
-                                                        <p>₦ {formatNumberWithCommas(my_cars ? my_cars[selectedCarIndex]?.price : 0)}</p>
-                                                    </div>
-                                                    <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
-                                                        <p className='font-bold mt-1'>Price Difference</p>
-                                                        <p>₦ {formatNumberWithCommas(priceDifference)}</p>
-                                                    </div>
-                                                    {
-                                                        auth?.user ?
-                                                            <button
-                                                                className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
-                                                                onClick={calculatePriceDifference}
-                                                            >
-                                                                Calculate
-                                                            </button>
-                                                            :
-                                                            <button
-                                                                className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
-                                                            >
-                                                                <Link href={route('user.login')}>
-                                                                    Calculate
-                                                                </Link>
-                                                            </button>
-                                                    }
-                                                </>
-                                            }
-                                        </>
-                                            :
-                                            auth && auth.user ?
-                                                auth?.user&&car.user_id==auth.user.id?
+                                            auth?.user && car.user_id == auth.user.id ?
                                                 <p className='text-red-500'>This car belongs to you. You cannot swap or purchase a car that you have added.</p>
                                                 :
-                                                    car?.bookings?
-                                                        <p>Already Booked</p>
+                                                <>
+                                                    {
+                                                        car?.swaps ?
+                                                            <p>Already Swapped</p>
+                                                            :
+                                                            <>
+                                                                <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Swap Buy Calculator</h2>
+                                                                <hr className='mb-4' />
+                                                                <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow'>
+                                                                    <p className='font-bold'>Our Car Price</p>
+                                                                    <p>₦ {formatNumberWithCommas(carPrice)}</p>
+                                                                </div>
+                                                                <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
+                                                                    <p className='font-bold mt-1'>Your Car Price</p>
+                                                                    <p>₦ {formatNumberWithCommas(my_cars ? my_cars[selectedCarIndex]?.price : 0)}</p>
+                                                                </div>
+                                                                <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow mt-5'>
+                                                                    <p className='font-bold mt-1'>Price Difference</p>
+                                                                    <p>₦ {formatNumberWithCommas(priceDifference)}</p>
+                                                                </div>
+                                                                {
+                                                                    auth?.user ?
+                                                                        <button
+                                                                            className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
+                                                                            onClick={calculatePriceDifference}
+                                                                        >
+                                                                            Calculate
+                                                                        </button>
+                                                                        :
+                                                                        <button
+                                                                            className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'
+                                                                        >
+                                                                            <Link href={route('user.login')}>
+                                                                                Calculate
+                                                                            </Link>
+                                                                        </button>
+                                                                }
+                                                            </>
+                                                    }
+                                                </>
+                                            :
+                                            auth && auth.user ?
+                                                auth?.user && car.user_id == auth.user.id ?
+                                                    <p className='text-red-500'>This car belongs to you. You cannot swap or purchase a car that you have added.</p>
                                                     :
+                                                    car?.bookings ?
+                                                        <p>Already Booked</p>
+                                                        :
                                                         <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
                                                 :
                                                 <button className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >
@@ -321,70 +360,80 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                 </div>
                                 {
                                     car.type && car.type == 'swap' ?
-                                    auth?.user&&car.user_id==auth.user.id?
-                                    ''
-                                        :
-                                        car?.swaps?
+                                        auth?.user && car.user_id == auth.user.id ?
                                             ''
                                             :
-                                            <>
-                                                <div className="bg-white rounded-lg shadow-md p-6 mt-3">
-                                                    <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">You Are Swapping</h2>
-                                                    <hr />
-                                                    <div className="relative p-4 flex">
-                                                        <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 ">
-                                                            <div className="col-span-1 md:col-span-2 lg:col-span-1">
-                                                                <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Our Car</p>
-                                                                <img src={"/storage" + car.images[0]} className="w-full h-4/5 object-contain"></img>
-                                                            </div>
-                                                            <div className="col-span-1 md:col-span-1 lg:col-span-1 flex justify-center items-center">
-                                                                <img src={Transfer} className="w-full h-20 object-contain"></img>
-                                                            </div>
-                                                            <div className="col-span-1 md:col-span-2 lg:col-span-1">
-                                                                <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
-                                                                {
-                                                                    auth?.user ?
-                                                                        <>
-                                                                            <Slider {...settings}>
+                                            car?.swaps ?
+                                                ''
+                                                :
+                                                <>
+                                                    <div className="bg-white rounded-lg shadow-md p-6 mt-3">
+                                                        <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">You Are Swapping</h2>
+                                                        <hr />
+                                                        <div className="relative p-4 flex">
+                                                            <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 ">
+                                                                <div className="col-span-1 md:col-span-2 lg:col-span-1">
+                                                                    <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Our Car</p>
+                                                                    <img src={"/storage" + car.images[0]} className="w-full h-4/5 object-contain"></img>
+                                                                </div>
+                                                                <div className="col-span-1 md:col-span-1 lg:col-span-1 flex justify-center items-center">
+                                                                    <img src={Transfer} className="w-full h-20 object-contain"></img>
+                                                                </div>
+                                                                <div className="col-span-1 md:col-span-2 lg:col-span-1">
+                                                                    <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
+                                                                    {
+                                                                        auth?.user ?
+                                                                            <>
+                                                                                <Slider {...settings}>
                                                                                 {my_cars.map((my_car: any, index: any) => (
-                                                                                    <div key={index} onClick={() => setSelectedCarIndex(index)}> {/* Add onClick handler */}
-                                                                                        <img src={'/storage' + my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
+                                                                                    <div key={index} className="relative inline-block">
+                                                                                    <label className="absolute top-2 right-2 z-10">
+                                                                                        <input
+                                                                                        type="checkbox"
+                                                                                        className="form-checkbox h-5 w-5 checked:bg-green-500 bg-green-500 hover:bg-green-500 border-0"
+                                                                                        checked={selectedCarIds.includes(my_car.id)}
+                                                                                        onChange={() => handleCheckboxChange(my_car.id)}
+                                                                                        />
+                                                                                    </label>
+                                                                                    <img src={'/storage' + my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
                                                                                     </div>
                                                                                 ))}
-                                                                            </Slider>
-                                                                        </>
-                                                                        :
-                                                                        <div>
-                                                                            <h4>Login First to view your cars to swap</h4>
-                                                                        </div>
-                                                                }
+                                                                                </Slider>
+                                                                            </>
+                                                                            :
+                                                                            <div>
+                                                                                <h4>Login First to view your cars to swap</h4>
+                                                                            </div>
+                                                                    }
+                                                                </div>
                                                             </div>
+
                                                         </div>
+                                                        {
+                                                            auth?.user ?
+                                                                <button className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3' onClick={() => handleSwapNowClick(car.id, my_cars[selectedCarIndex]?.id, my_cars[selectedCarIndex]?.title, my_cars[selectedCarIndex]?.images, my_cars[selectedCarIndex]?.price)
 
+                                                                }
+                                                                // disabled={!(selectedCarIds?.length>0)}
+                                                                title={!(selectedCarIds?.length>0)?'Please Select Cars':''}
+                                                                >
+                                                                    Swap Now
+                                                                </button>
+                                                                // <button onClick={() => {
+                                                                //     handleFlutterPayment({
+                                                                //         callback: (response) => {
+                                                                //             console.log(response);
+                                                                //         },
+                                                                //         onClose: () => { },
+                                                                //     });
+                                                                // }} className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'>Swap Now</button>
+                                                                :
+                                                                <button className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'>
+                                                                    <Link href={route('user.login')}>Swap Now</Link>
+                                                                </button>
+                                                        }
                                                     </div>
-                                                    {
-                                                        auth?.user ?
-                                                            <button className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3' onClick={() => handleSwapNowClick(car.id, my_cars[selectedCarIndex]?.id, my_cars[selectedCarIndex]?.title, my_cars[selectedCarIndex]?.images, my_cars[selectedCarIndex]?.price)
-
-                                                            }
-                                                            >
-                                                                Swap Now
-                                                            </button>
-                                                            // <button onClick={() => {
-                                                            //     handleFlutterPayment({
-                                                            //         callback: (response) => {
-                                                            //             console.log(response);
-                                                            //         },
-                                                            //         onClose: () => { },
-                                                            //     });
-                                                            // }} className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'>Swap Now</button>
-                                                            :
-                                                            <button className='bg-emerald-500 hover:bg-emerald-700 w-full text-white font-bold py-2 px-4 rounded mt-3'>
-                                                                <Link href={route('user.login')}>Swap Now</Link>
-                                                            </button>
-                                                    }
-                                                </div>
-                                            </>
+                                                </>
                                         :
                                         ''
                                 }
@@ -586,7 +635,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                                                 </svg> */}
                                                 {
-                                                car.total_rating>0&&
+                                                    car.total_rating > 0 &&
                                                     <>
                                                         <div className="absolute bottom-5 left-1">
                                                             <svg aria-hidden="true" className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -595,7 +644,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#FFA534" viewBox="0 0 24 24" strokeWidth={0} stroke="currentColor" className="w-5 h-5">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
                                                                 </svg>
-                                                                <p className='text-sm'>{car.total_rating?car.total_rating:'0'}</p>
+                                                                <p className='text-sm'>{car.total_rating ? car.total_rating : '0'}</p>
                                                             </span>
                                                         </div>
                                                     </>
