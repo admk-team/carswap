@@ -34,6 +34,18 @@ class RavepayController extends Controller
         $data1 = $request->input('data');
         $data = json_decode($data1 ?? '{}', true);
         $my_car_id = $data["my_car_id"] ?? null;
+        if(!isset($my_car_id) && $my_car_id==null){
+            if(isset($data) && $data!=null){
+                Booking::create([
+                    'car_id' => $data['car_id'],
+                    'user_id' => auth()->user()->id,
+                    'Inspection_date' => $data['Inspection_date'],
+                    'Inspection_Time' => $data['Inspection_Time'],
+                ]);
+            }
+        }
+
+        $my_car_id = json_encode($data["my_car_id"]);
         if(isset($my_car_id) && $my_car_id!=null){
             if(isset($data) && $data!=null){
                 Swap::create([
@@ -42,16 +54,6 @@ class RavepayController extends Controller
                     'Inspection_date' => $data['Inspection_date'],
                     'Inspection_Time' => $data['Inspection_Time'],
                     'price_diff' => $data['price_diff'],
-                ]);
-            }
-        }
-        if(!isset($my_car_id) && $my_car_id==null){
-            if(isset($data) && $data!=null){
-                Booking::create([
-                    'car_id' => $data['car_id'],
-                    'user_id' => auth()->user()->id,
-                    'Inspection_date' => $data['Inspection_date'],
-                    'Inspection_Time' => $data['Inspection_Time'],
                 ]);
             }
         }

@@ -72,7 +72,7 @@ class FrontController extends Controller
             }else if($car->type=='sale'){
                 $type="For Sale";
             }
-            
+
             $totalRating=0;
             if ($car->ratings && count($car->ratings) > 0) {
                 $averageRating = $car->ratings->avg('rating');
@@ -146,7 +146,7 @@ class FrontController extends Controller
         });
         if(auth()->user()){
             $user_rating=Rating::where('user_id',auth()->user()->id)->where('car_id',$car->id)->first();
-            $my_cars=Car::where('user_id',auth()->user()->id)->get();
+            $my_cars=Car::where('user_id',auth()->user()->id)->where('type','swap')->get();
             if($my_cars){
                 $my_cars=$my_cars->map(function($car){
                     $car->images=explode(',',$car->images);
