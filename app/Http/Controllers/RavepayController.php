@@ -44,17 +44,18 @@ class RavepayController extends Controller
                 ]);
             }
         }
-
-        $my_car_id = json_encode($data["my_car_id"]);
+        // $my_car_id = json_encode($data["my_car_id"]);
         if(isset($my_car_id) && $my_car_id!=null){
             if(isset($data) && $data!=null){
-                Swap::create([
-                    'car_id' => $data['car_id'],
-                    'mycar_id' => $my_car_id,
-                    'Inspection_date' => $data['Inspection_date'],
-                    'Inspection_Time' => $data['Inspection_Time'],
-                    'price_diff' => $data['price_diff'],
-                ]);
+                foreach($data["my_car_id"] as $myCarId){
+                    Swap::create([
+                        'car_id' => $data['car_id'],
+                        'mycar_id' => $myCarId,
+                        'Inspection_date' => $data['Inspection_date'],
+                        'Inspection_Time' => $data['Inspection_Time'],
+                        'price_diff' => $data['price_diff'],
+                    ]);
+                }
             }
         }
         return redirect()->back()->with(['message' => 'Payment data stored successfully'], 201);

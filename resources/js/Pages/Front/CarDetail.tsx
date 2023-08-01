@@ -150,7 +150,11 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         setImages(tims);
     };
     function formatNumberWithCommas(number: any) {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (typeof number !== "undefined" && number !== null && !isNaN(number)) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        } else {
+            return ""; // Return an empty string if the number is not valid
+        }
     }
 
     const handleSwapNowClick = (
@@ -207,7 +211,8 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         car_id: car.id || '',
         my_car_id:selectedCarIds,
         price_diff: 0,
-    });console.log('data',data)
+    });
+    console.log('data',data)
     useEffect(() => {
         setData({ ...data, ...{ 'my_car_id': selectedCarIds } });
     }, [selectedCarIds])
@@ -231,7 +236,6 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
 
     useEffect(() => {
-        console.log(galleryImages);
     }, [galleryImages])
     const swapPriceDifference = selectedMyCarPrice !== null ? carPrice - selectedMyCarPrice : 0;
 
