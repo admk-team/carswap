@@ -56,15 +56,28 @@ function Sidebar({ onCollapseChange, style }) {
                     <span>Payments</span>
                 </Link>
             </li>
-            <hr className="sidebar-divider d-none d-md-block" />
+            <hr className="sidebar-divider my-0" />
             <li className={`nav-item ${ route().current("admin.ratings.index") ? "active" : "collapsed" }`} >
                 <Link href={route("admin.ratings.index")} className="nav-link collapsed">
                     <i className="fa fa-star"></i>
                     <span>Ratings</span>
                 </Link>
             </li>
+            <hr className="sidebar-divider my-0" />
+            <li className={`nav-item ${ route().current("admin.inspections.index") ? "active" : "collapsed" }`} >
+                <Link href={route("admin.inspections.index")} className="nav-link collapsed">
+                    <i className="fa fa-sign"></i>
+                    <span>Buy inspection details</span>
+                </Link>
+            </li>
             <hr className="sidebar-divider d-none d-md-block" />
-            
+            <li className={`nav-item ${ route().current("admin.swap_Ins.index") ? "active" : "collapsed" }`} >
+                <Link href={route("admin.swap_Ins.index")} className="nav-link collapsed">
+                    <i className="fa fa-sign"></i>
+                    <span>Swap inspection details</span>
+                </Link>
+            </li>
+            <hr className="sidebar-divider d-none d-md-block" />
         </ul>
     );
 }

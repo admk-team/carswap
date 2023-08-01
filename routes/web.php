@@ -69,7 +69,15 @@ Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(functi
     //Rating(reviews)
     Route::resource('/ratings',RatingeController::class);
     Route::get('/payments',[RatingeController::class,'payment'])->name('payments.index');
-
+       //Rating(reviews)
+    Route::resource('/ratings',RatingeController::class);
+    Route::get('/payments',[RatingeController::class,'payment'])->name('payments.index');
+    //Sale Inspections details
+    Route::get('/inspections',[RatingeController::class,'Inspection'])->name('inspections.index');
+    Route::get('inspections/{id}/{status}',[RatingeController::class,'status'])->name('inspections.status');
+    //Swap Inspection details
+    Route::get('/swap_Ins',[RatingeController::class,'Swap_ins'])->name('swap_Ins.index');
+    Route::get('swap_Ins/{id}/{status}',[RatingeController::class,'statusIns'])->name('swap_Ins.status');
 });
 
 Route::get('/', [FrontController::class,'index'])->name('front.index');

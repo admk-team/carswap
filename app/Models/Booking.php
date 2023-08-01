@@ -14,4 +14,14 @@ class Booking extends Model
         'car_id',
         'user_id'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // Define the relationship with the Car model
+    public function car()
+    {
+        return $this->belongsTo(Car::class);
+    }
 }

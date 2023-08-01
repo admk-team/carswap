@@ -119,7 +119,7 @@ const MyListedCar = ({ cars, success,auth }: any) => {
                                         <button className="mt-2 px-2 py-1 text-white bg-yellow-500">Pending</button>
                                     </div>
                                 }
-                                <h5 className="text-2xl font-bold dark:text-white text-amber-500">₦{carItem?.price}</h5>
+                                <h5 className="text-2xl font-bold dark:text-white text-amber-500">₦ {carItem?.price}</h5>
                                 <div className="mt-1">
                                     <table className="w-full">
                                         <tbody>
