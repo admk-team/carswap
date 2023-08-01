@@ -23,7 +23,12 @@ const UserProfile = ({ auth,cars,pendings,approved,swaped }: any) =>  {
             <div className="flex flex-col items-center mb-4">
               <img src={auth && auth.user && auth.user.image ? '/storage/' + auth.user.image : UserIcon} alt="Profile" className="w-44 h-44 " />
               <h2 className="text-lg text-gray-900 font-medium mt-2">
-                {auth && auth.user ? auth.user.first_name + ' ' + auth.user.last_name : 'N/A'}
+                {
+                  auth?.user.last_name&&auth.user.last_name ? 
+                    auth.user?.first_name + ' ' + auth.user?.last_name
+                  : 
+                    auth.user?.first_name
+                }
               </h2>
               <p className="text-gray-900 mt-1">
                 <b>Email:</b> {auth && auth.user ? auth.user.email : 'N/A'}

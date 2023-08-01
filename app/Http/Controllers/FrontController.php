@@ -14,7 +14,7 @@ class FrontController extends Controller
 {
     public function index(Request $request){
         $brands=Brand::where('status','1')->get();
-        $cars=Car::where('status','1')->where('slug','!=',null)->limit(4)->latest()->get();
+        $cars=Car::with('ratings')->where('status','1')->where('slug','!=',null)->limit(4)->latest()->get();
         $fav = auth()->user()?->wishlist;
         $cars=$cars->map(function($car) use ($fav){
             $images=explode(',',$car->images);
@@ -22,6 +22,12 @@ class FrontController extends Controller
                 $type="For Swap";
             }else if($car->type=='sale'){
                 $type="For Sale";
+            }
+            $totalRating=0;
+            if ($car->ratings && count($car->ratings) > 0) {
+                $averageRating = $car->ratings->avg('rating');
+
+                $totalRating = round($averageRating, 2);
             }
             return [
                 'id'=>$car->id,
@@ -43,7 +49,8 @@ class FrontController extends Controller
                 'transmission' => $car->transmission,
                 'interiorColor' => $car->interior_color,
                 'exteriorColor' => $car->exterior_color,
-                'is_fav' => $fav&&$fav!=null?($fav->where('id', $car->id)->first() ? true : false):false
+                'is_fav' => $fav&&$fav!=null?($fav->where('id', $car->id)->first() ? true : false):false,
+                'total_rating' => $totalRating
             ];
         });
 
@@ -65,6 +72,13 @@ class FrontController extends Controller
             }else if($car->type=='sale'){
                 $type="For Sale";
             }
+            
+            $totalRating=0;
+            if ($car->ratings && count($car->ratings) > 0) {
+                $averageRating = $car->ratings->avg('rating');
+
+                $totalRating = round($averageRating, 2);
+            }
             return [
                 'id'=>$car->id,
                 'title'=>$car->title,
@@ -85,18 +99,50 @@ class FrontController extends Controller
                 'transmission' => $car->transmission,
                 'interiorColor' => $car->interior_color,
                 'exteriorColor' => $car->exterior_color,
+                'total_rating' => $totalRating
             ];
         });
         return Inertia::render('Front/AllCars',['brands'=>$brands,'cars'=>$cars]);
     }
     public function CarDetail($slug){
         $brands=Brand::where('status','1')->get();
-        $car=Car::with('ratings.user')->where('slug',$slug)->first();
+        $car=Car::with('ratings.user','bookings','swaps')->where('slug',$slug)->first();
         $car->images=explode(',',$car->images);
         $similarCars=Car::where('status','1')->limit(4)->latest()->get();
         $similarCars=$similarCars->map(function($car){
-            $car->images=explode(',',$car->images);
-            return $car;
+            $totalRating=0;
+            if ($car->ratings && count($car->ratings) > 0) {
+                $averageRating = $car->ratings->avg('rating');
+                $totalRating = round($averageRating, 2);
+            }
+            if($car->type=='swap'){
+                $type="For Swap";
+            }else if($car->type=='sale'){
+                $type="For Sale";
+            }
+            $images=explode(',',$car->images);
+            return [
+                'id'=>$car->id,
+                'title'=>$car->title,
+                'slug'=>$car->slug,
+                'brand_id'=>$car->brand_id,
+                'description'=>$car->description,
+                'images'=>$images ?? null,
+                'user_id' =>$car->user_id,
+                'condition' => $car->condition,
+                'engine_capacity' => $car->engine_capacity,
+                'mileage' => $car->mileage,
+                'type' => $type ?? '',
+                'trim' => $car->trim,
+                'location' => $car->location,
+                'price' => $car->price,
+                'fuelType' => $car->fuel_type,
+                'model' => $car->model,
+                'transmission' => $car->transmission,
+                'interiorColor' => $car->interior_color,
+                'exteriorColor' => $car->exterior_color,
+                'total_rating' => $totalRating
+            ];
         });
         if(auth()->user()){
             $user_rating=Rating::where('user_id',auth()->user()->id)->where('car_id',$car->id)->first();
