@@ -27,4 +27,9 @@ class Car extends Model
     {
         return $this->hasOne(Swap::class, 'car_id');
     }
+    
+    public function user1()
+    {
+        return $this->belongsTo(User::class, 'user_id'); // 'user_id' is the foreign key in the cars table referencing the id column in the users table
+    }
 }

@@ -1,0 +1,152 @@
+import React, { useState,useEffect } from 'react'
+import Layout from "../Layouts/Layout";
+import { Head, useForm, usePage } from '@inertiajs/react';
+import { Inertia  } from '@inertiajs/inertia';
+
+const Details = ({ auth,payment,car,user}: any) => {
+// console.log('auth',payment);
+  return (
+    <>
+     <Head title="Edit Car" />
+      <div className="container-fluid">
+        <h1 className="h4 mb-2 text-gray-800">User</h1>
+       
+         <div className="card shadow mb-4">
+          <div className="card-body">
+          <div className="table-responsive">
+           <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+                                        <th>Phone No</th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr key={user.id}>
+                                          <td>{user.first_name? user.first_name: 'No user data available'}</td>
+                                          <td>{user.last_name? user.last_name: 'No user data available'}</td>
+                                          <td>{user.email? user.email: 'No user data available'}</td>
+                                          <td>{user.phone_no? user.phone_no: 'No user data available'}</td>
+                                          <td>{user.city? user.city: 'No user data available'}</td>
+                                          <td>{user.state? user.state: 'No user data available'}</td>
+                                          <td>{user.address? user.address: 'No user data available'}</td>                                          
+                                        </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            </div>
+                            </div>
+                            
+                              <h1 className="h4 mb-2 text-gray-800">Car</h1>
+                              <div className="card shadow mb-4">
+                             <div className="card-body">
+                             <div className="table-responsive">
+                             <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Condition</th>
+                                        <th>Engine</th>
+                                        <th>Milage</th>
+                                        <th>Location</th>
+                                        <th>Price</th>
+                                        <th>Fuel Type</th>
+                                        <th>Modal</th>
+                                        <th>Extrior Color</th>
+                                        <th>Interior Color</th>
+                                        <th>Drive</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr key={car.id}>
+                                        <td>{car.title? car.title: 'No user data available'}</td>
+                                        <td>{car.condition? car.condition: 'No user data available'}</td>
+                                        <td>{car.engine_capacity? car.engine_capacity: 'No user data available'}</td>
+                                        <td>{car.mileage? car.mileage: 'No user data available'}</td>
+                                        <td>{car.location? car.location: 'No user data available'}</td>
+                                        <td>{car.price? car.price: 'No user data available'}</td>
+                                        <td>{car.fuel_type? car.fuel_type: 'No user data available'}</td>
+                                        <td>{car.model? car.model: 'No user data available'}</td>
+                                        <td>{car.exterior_color? car.exterior_color: 'No user data available'}</td>
+                                        <td>{car.interior_color? car.interior_color: 'No user data available'}</td>
+                                        <td>{car.drive? car.drive: 'No user data available'}</td>
+                                        <td>{car.description? car.description: 'No user data available'}</td>                                      
+                                        </tr>
+                                  
+                                </tbody>
+                            </table>
+                             </div>
+                            </div>
+                            </div>
+                             <h1 className="h4 mb-2 text-gray-800">Payment</h1>
+                             <div className="card shadow mb-4">
+                             <div className="card-body">
+                             <div className="table-responsive">
+                             <table className="table">
+                                          <thead>
+                                             <tr>
+                                             <th>Amount</th>
+                                            <th>Response Code</th>
+                                            <th>Response Message</th>
+                                            <th>Charge amount</th>
+                                            <th>Transaction Date</th>
+                                            <th>Currency</th>
+                                            <th>Transaction Id</th>
+                                            <th>Status</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                           {payment && Object.keys(payment).length > 0 ? (
+                                             <tr key={payment.id}>
+                                               <td>{payment.amount ? payment.amount : 'No payment data available'}</td>
+                                               <td>
+                                                 {payment.charge_response_code
+                                                   ? payment.charge_response_code
+                                                   : 'No payment data available'}
+                                               </td>
+                                                                                      <td>
+                                                 {payment.charge_response_message
+                                                   ? payment.charge_response_message
+                                                   : 'No payment data available'}
+                                               </td>
+                                               <td>
+                                                 {payment.charged_amount
+                                                   ? payment.charged_amount
+                                                   : 'No payment data available'}
+                                               </td>
+                                               <td>{payment.date ? payment.date : 'No payment data available'}</td>
+                                               <td>
+                                                 {payment.currency ? payment.currency : 'No payment data available'}
+                                               </td>
+                                               <td>
+                                               {payment.transaction_id
+                                                 ? payment.transaction_id
+                                                 : 'No payment data available'}
+                                             </td>
+                                             <td>{payment.status ? payment.status : 'No payment data available'}</td>
+                                           </tr>
+                                         ) : (
+                                           <tr>
+                                              <td >
+                                               <h5 className="text-red-500">Payment has not been done yet.</h5>
+                                             </td>
+                                        </tr>
+                                 )}
+                               </tbody>
+                            </table>
+
+                               </div>
+                               </div>
+                             </div>
+                           </div>
+    </>
+  );
+};
+Details.layout = (page:any) => <Layout children={page} />;
+export default Details;

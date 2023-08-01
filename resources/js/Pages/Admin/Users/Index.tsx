@@ -82,6 +82,9 @@ const Index = ({ auth, users, success, error }: any) => {
                                         <th>Last Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>Address</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -93,6 +96,9 @@ const Index = ({ auth, users, success, error }: any) => {
                                             <td>{user?.last_name}</td>
                                             <td>{user?.email}</td>
                                             <td>{user?.phone_no}</td>
+                                            <td>{user?.city}</td>
+                                            <td>{user?.state}</td>
+                                            <td>{user?.address}</td>
                                             <td>
                                                 <div className="dropdown mb-4">
                                                     <button
