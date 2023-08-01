@@ -277,7 +277,7 @@ function TopNavbar({ onCollapseChange, auth }) {
                        auth?.first_name
                         }
                         </span>
-                         <img src={auth &&  auth.image ? '/storage/' + auth.image : UserIcon} alt="Profile" className="w-8 h-8" />
+                         <img src={auth &&  auth.image ? '/storage/' + auth.image : UserIcon} alt="Profile" className="w-10 h-10 rounded-full" />
                     </a>
                     <div
                         className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
