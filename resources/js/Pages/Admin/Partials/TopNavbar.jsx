@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
-
+import UserIcon from '@/Assets/user-icon.jpg';
 function TopNavbar({ onCollapseChange, auth }) {
-    // console.log(auth);
+    //console.log('auth',auth);
     return (
         <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
             <button
@@ -269,12 +269,15 @@ function TopNavbar({ onCollapseChange, auth }) {
                         aria-expanded="false"
                     >
                         <span className="mr-2 d-none d-lg-inline text-gray-600 small">
-                            Douglas McGee
+                     
+                        {
+                       auth?.last_name&&auth.last_name ? 
+                       auth?.first_name + ' ' + auth?.last_name
+                       : 
+                       auth?.first_name
+                        }
                         </span>
-                        <img
-                            className="img-profile rounded-circle"
-                            src="img/undraw_profile.svg"
-                        />
+                         <img src={auth &&  auth.image ? '/storage/' + auth.image : UserIcon} alt="Profile" className="w-10 h-10 rounded-full" />
                     </a>
                     <div
                         className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -283,12 +286,7 @@ function TopNavbar({ onCollapseChange, auth }) {
                         <a className="dropdown-item" href={route('user-profile')}>
                             <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
-                        </a>
-                        <a className="dropdown-item" href={route('user-profile')} onClick={()=>alert('Under Development')}>
-                            <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Settings
-                        </a>
-                       
+                        </a>  
                         <div className="dropdown-divider"></div>
                         <a
                             className="dropdown-item"

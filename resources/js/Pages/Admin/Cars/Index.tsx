@@ -144,6 +144,7 @@ const Index = ({ auth, cars, success, error }: any) => {
                                                   Action
                                                 </button>
                                                 <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+                                                    <Link className="dropdown-item" href={route('admin.cars.show',car.id)}>Details</Link>
                                                     <Link className="dropdown-item" href={route('admin.cars.edit',car.id)}>Edit</Link>
                                                     <button onClick={()=>deleteHandler(car.id)} className="dropdown-item">Delete</button>
                                                 </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\User;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -103,9 +104,26 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Car $car)
+    public function show($id)
     {
-        //
+        
+        $car = Car::find($id);
+
+        if (!$car) {
+            // Handle not found error
+        }
+    
+        $user = $car->user1; // This will retrieve the associated user data
+        $payment = Payment::where('user_id', $user->id)
+        ->where('car_id', $car->id)
+        ->first(); // Retrieve the payment data
+    
+        return Inertia::render('Admin/Cars/Details', [
+            'car' => $car,
+            'user' => $user, // Pass the user data to the Details component
+            'payment' => $payment,
+        ]);
+        
     }
 
     /**

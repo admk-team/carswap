@@ -5,7 +5,7 @@ import Sidebar from "../Partials/Sidebar";
 import { useForm } from "@inertiajs/inertia-react";
 
 function Layout({children}) {
-    // console.log('props: ', props)
+    // console.log(children.props.auth.user)
     const { post } = useForm();
     
     const [style, setStyle] = useState(
@@ -43,7 +43,7 @@ function Layout({children}) {
 
                 <div id="content-wrapper" className="d-flex flex-column">
                     <div id="content">
-                        <TopNavbar onCollapseChange={changeStyle} auth={''} />
+                        <TopNavbar onCollapseChange={changeStyle} auth={children.props.auth.user} />
 
                         <div className="container-fluid">{children}</div>
                     </div>

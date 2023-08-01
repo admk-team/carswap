@@ -26,4 +26,14 @@ class Payment extends Model
     {
         return $this->belongsTo(User::class);
     }
+    // Getting data for Admin Details
+    public function User2()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function car()
+    {
+        return $this->belongsTo(Car::class, 'car_id');
+    }
 }
