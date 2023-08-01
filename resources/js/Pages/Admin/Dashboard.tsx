@@ -5,7 +5,8 @@ import Brands from "@/Assets/BrandLogos/brand-image.png"
 import ElectricCar from "@/Assets/BrandLogos/electric-car.png"
 import NoOfUsers from "@/Assets/BrandLogos/group.png"
 
-function Dashboard({ auth }: PageProps) {
+function Dashboard({auth,brand,car,user,pending_car}:any) {
+    console.log(user)
     return (
         <div className="container-fluid">
             <div className="d-sm-flex align-items-center justify-content-between mb-4">
@@ -28,7 +29,7 @@ function Dashboard({ auth }: PageProps) {
                                         Brands
                                     </div>
                                     <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                        20
+                                        {brand?brand:'0'}
                                     </div>
                                 </div>
                                 <div className="col-auto">
@@ -48,7 +49,7 @@ function Dashboard({ auth }: PageProps) {
                                         Cars
                                     </div>
                                     <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                        30
+                                        {car?car:'0'}
                                     </div>
                                 </div>
                                 <div className="col-auto">
@@ -71,7 +72,7 @@ function Dashboard({ auth }: PageProps) {
                                     <div className="row no-gutters align-items-center">
                                         <div className="col-auto">
                                             <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                623
+                                                {user?user:'0'}
                                             </div>
                                         </div>
                                         <div className="col">
@@ -101,7 +102,7 @@ function Dashboard({ auth }: PageProps) {
                                         Pending Requests
                                     </div>
                                     <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                        18
+                                        {pending_car?pending_car:'0'}
                                     </div>
                                 </div>
                                 <div className="col-auto">

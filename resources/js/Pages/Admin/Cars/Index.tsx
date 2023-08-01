@@ -78,6 +78,7 @@ const Index = ({ auth, cars, success, error }: any) => {
                             <table className="table table-bordered">
                                 <thead>
                                     <tr>
+                                        <th>User</th>
                                         <th>Title</th>
                                         <th>Brand</th>
                                         <th>Model</th>
@@ -92,6 +93,15 @@ const Index = ({ auth, cars, success, error }: any) => {
                                 <tbody>
                                     {currentItems.map((car: any) => (
                                         <tr key={car.id}>
+                                            <td>
+                                                {
+                                                    car.user.first_name&&car.user.last_name
+                                                    ?
+                                                    car?.user.first_name+' '+car?.user.last_name
+                                                    :
+                                                    car?.user.first_name
+                                                }
+                                            </td>
                                             <td>{car?.title}</td>
                                             <td>{car?.brand.title}</td>
                                             <td>{car?.model}</td>
