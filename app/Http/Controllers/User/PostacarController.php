@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AdminCarEmail;
+use App\Mail\UserPostCarEmail;
 use App\Models\Postacar;
 use App\Models\Brand;
 use App\Models\Car;
@@ -10,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 class PostacarController extends Controller
 {
     /**
@@ -102,6 +105,18 @@ class PostacarController extends Controller
         if($model->save()){
             $model->slug=Str::slug($request->title).'-'.$model->id;
             $model->update();
+            $to = auth()->user()->email;
+            $data=[
+                'first_name'=>$request->first_name,
+                'last_name'=>$request->last_name,
+                'title'=>$request->title,
+                'condition'=>$request->condition,
+                'engine_capacity'=>$request->engine_capacity,
+                'price'=>$request->price,
+                'model'=>$request->model,
+            ];
+            Mail::to($to)->send(new UserPostCarEmail($data));
+            Mail::to('cars@carswap.ng')->send(new AdminCarEmail($data));
             return Inertia::location(route('user.dashboard', ['success' => 'Car added successfully.']));
         }else{
             return Inertia::location(route('user.dashboard', ['error' => 'Failed Car not added.']));
