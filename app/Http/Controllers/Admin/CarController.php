@@ -227,6 +227,7 @@ class CarController extends Controller
         $car=Car::find($id);
         $car->status=$status;
         if ($car->save()) {
+            
             return Inertia::location(route('admin.cars.index', ['success' => 'Status Change successfully.']));
         } else {
             return Inertia::location(route('admin.cars.index', ['success' => 'Failed to change status.']));

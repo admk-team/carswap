@@ -45,6 +45,7 @@ class RavepayController extends Controller
                     'Inspection_date' => $data['Inspection_date'],
                     'Inspection_Time' => $data['Inspection_Time'],
                 ]);
+                
             }
         }
         // $my_car_id = json_encode($data["my_car_id"]);
