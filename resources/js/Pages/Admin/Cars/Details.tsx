@@ -2,7 +2,10 @@ import React, { useState,useEffect } from 'react'
 import Layout from "../Layouts/Layout";
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { Inertia  } from '@inertiajs/inertia';
-
+import UserIcon from '@/Assets/user-icon.jpg';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 const Details = ({ auth,payment,car,user}: any) => {
 // console.log('auth',payment);
   return (
@@ -24,6 +27,7 @@ const Details = ({ auth,payment,car,user}: any) => {
                                         <th>City</th>
                                         <th>State</th>
                                         <th>Address</th>
+                                        <th>User Image</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -34,7 +38,8 @@ const Details = ({ auth,payment,car,user}: any) => {
                                           <td>{user.phone_no? user.phone_no: 'No user data available'}</td>
                                           <td>{user.city? user.city: 'No user data available'}</td>
                                           <td>{user.state? user.state: 'No user data available'}</td>
-                                          <td>{user.address? user.address: 'No user data available'}</td>                                          
+                                          <td>{user.address? user.address: 'No user data available'}</td>
+                                          <td><img src={user &&  user.image ? '/storage/' + user.image : UserIcon} alt="Profile" className="w-10 h-10 rounded-full" /></td>                                         
                                         </tr>
                                 </tbody>
                             </table>
@@ -61,6 +66,7 @@ const Details = ({ auth,payment,car,user}: any) => {
                                         <th>Interior Color</th>
                                         <th>Drive</th>
                                         <th>Description</th>
+                                        <th>Car Images</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,7 +82,8 @@ const Details = ({ auth,payment,car,user}: any) => {
                                         <td>{car.exterior_color? car.exterior_color: 'No user data available'}</td>
                                         <td>{car.interior_color? car.interior_color: 'No user data available'}</td>
                                         <td>{car.drive? car.drive: 'No user data available'}</td>
-                                        <td>{car.description? car.description: 'No user data available'}</td>                                      
+                                        <td>{car.description? car.description: 'No user data available'}</td>
+                                        <td><img src={car &&  car.images ? '/storage/' + car.images[0] : UserIcon} alt="Profile" className="w-10 h-10 " /></td>                                      
                                         </tr>
                                   
                                 </tbody>

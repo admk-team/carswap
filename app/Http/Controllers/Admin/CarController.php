@@ -113,17 +113,19 @@ class CarController extends Controller
             // Handle not found error
         }
     
-        $user = $car->user1; // This will retrieve the associated user data
+        $images = explode(',', $car->images); // Explode the images string into an array
+        $car->images = $images; // Replace the images property with the array of images
+    
+        $user = $car->user1; // Retrieve the associated user data
         $payment = Payment::where('user_id', $user->id)
-        ->where('car_id', $car->id)
-        ->first(); // Retrieve the payment data
+            ->where('car_id', $car->id)
+            ->first(); // Retrieve the payment data
     
         return Inertia::render('Admin/Cars/Details', [
-            'car' => $car,
+            'car' => $car, // Pass the modified car data (with exploded images array) to the Details component
             'user' => $user, // Pass the user data to the Details component
             'payment' => $payment,
-        ]);
-        
+        ]);      
     }
 
     /**

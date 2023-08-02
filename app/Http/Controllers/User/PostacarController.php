@@ -58,17 +58,27 @@ class PostacarController extends Controller
 
         ]);
         $images = '';
-        $arr=[];
+        $arr = [];
+        
         if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $item) {
-                $var = date_create();
-                $time = date_format($var, 'YmdHis');
-                $imageName = $time . '-' . $item->getClientOriginalName();
-                $item->move(public_path('storage/images/cars'), $imageName);
-                array_push($arr, '/images/cars/' . $imageName);
+            $maxImages = 30;
+            $uploadedImagesCount = count($request->file('images'));
+        
+            if ($uploadedImagesCount <= $maxImages) {
+                foreach ($request->file('images') as $item) {
+                    $var = date_create();
+                    $time = date_format($var, 'YmdHis');
+                    $imageName = $time . '-' . $item->getClientOriginalName();
+                    $item->move(public_path('storage/images/cars'), $imageName);
+                    array_push($arr, '/images/cars/' . $imageName);
+                }
+            } else {
+                // Handle the case when the user exceeds the maximum allowed images
+                return response()->json(['message' => 'You can upload a maximum of ' . $maxImages . ' images.'], 400);
             }
         }
-        $images = implode(",", $arr);
+        
+        $images = implode(",", $arr);        
         $model=new Car();
         $model->title=$request->title;
         $model->brand_id= $request->brand_id;
@@ -155,15 +165,27 @@ class PostacarController extends Controller
                 }
             }
             $images = '';
-            $arr=[];
-            foreach ($request->images ?? [] as $item){
-                $var = date_create();
-                $time = date_format($var, 'YmdHis');
-                $imageName = $time . '-' . $item->getClientOriginalName();
-                $item->move(public_path('storage/images/cars'), $imageName);
-                array_push($arr,'/images/cars/'.$imageName);
+            $arr = [];
+            
+            if ($request->hasFile('images')) {
+                $maxImages = 30;
+                $uploadedImagesCount = count($request->file('images'));
+            
+                if ($uploadedImagesCount <= $maxImages) {
+                    foreach ($request->file('images') as $item) {
+                        $var = date_create();
+                        $time = date_format($var, 'YmdHis');
+                        $imageName = $time . '-' . $item->getClientOriginalName();
+                        $item->move(public_path('storage/images/cars'), $imageName);
+                        array_push($arr, '/images/cars/' . $imageName);
+                    }
+                } else {
+                    // Handle the case when the user exceeds the maximum allowed images
+                    return response()->json(['message' => 'You can upload a maximum of ' . $maxImages . ' images.'], 400);
+                }
             }
-            $images = implode(",", $arr);
+            
+            $images = implode(",", $arr);            
             $model->images=$images;
         }
         $model->title=$request->title;
