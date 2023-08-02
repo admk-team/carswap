@@ -65,7 +65,7 @@
     <p>
         <b>Best regards,</b>
     </p>
-    <p>The Carswap.ng Team</p>
+    <p>Carswap.ng</p>
 </div>
 </body>
 </html>
