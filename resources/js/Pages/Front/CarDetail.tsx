@@ -396,19 +396,19 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                         auth?.user ?
                                                                             <>
                                                                                 <Slider {...settings}>
-                                                                                    {my_cars.map((my_car: any, index: any) => (
-                                                                                        <div key={index} className="relative inline-block">
-                                                                                            <label className="absolute top-2 right-2 z-10">
-                                                                                                <input
-                                                                                                    type="checkbox"
-                                                                                                    className="form-checkbox h-5 w-5 checked:bg-green-500 bg-green-500 hover:bg-green-500 border-0"
-                                                                                                    checked={selectedCarIds.includes(my_car.id)}
-                                                                                                    onChange={() => handleCheckboxChange(my_car.id)}
-                                                                                                />
-                                                                                            </label>
-                                                                                            <img src={'/storage' + my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
-                                                                                        </div>
-                                                                                    ))}
+                                                                                {my_cars.map((my_car: any, index: any) => (
+                                                                                    <div key={index} className="relative inline-block">
+                                                                                    <label className="absolute top-2 right-2 z-10">
+                                                                                        <input
+                                                                                        type="checkbox"
+                                                                                        className="form-checkbox h-5 w-5 border-0"
+                                                                                        checked={selectedCarIds.includes(my_car.id)}
+                                                                                        onChange={() => handleCheckboxChange(my_car.id)}
+                                                                                        />
+                                                                                    </label>
+                                                                                    <img src={'/storage' + my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
+                                                                                    </div>
+                                                                                ))}
                                                                                 </Slider>
                                                                             </>
                                                                             :
