@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Mail\UserSwapEmail;
+use App\Mail\EmailToCarPurchaser;
+use App\Mail\EmailToCarSeller;
+use App\Mail\CarSaleEmailToAdmin;
+use App\Mail\CarSwap;
+use App\Mail\SwapEmailToAdmin;
 use App\Models\Booking;
 use App\Models\Car;
 use App\Models\Payment;
@@ -18,6 +23,7 @@ class RavepayController extends Controller
 {
     public function store(Request $request)
     {
+        // return $request;
         $paymentData = $request->input('paymentData');
         $carId = $request->input('carId');
         Payment::create([
@@ -34,10 +40,11 @@ class RavepayController extends Controller
             'tx_ref'=>$paymentData['tx_ref'],
             'car_id'=>$carId ?? null,
         ]);
+        //for buy
         $data1 = $request->input('data');
         $data = json_decode($data1 ?? '{}', true);
         $my_car_id = $data["my_car_id"] ?? null;
-        if(!isset($my_car_id) && $my_car_id==null){
+       
             if(isset($data) && $data!=null){
                 Booking::create([
                     'car_id' => $data['car_id'],
@@ -45,9 +52,30 @@ class RavepayController extends Controller
                     'Inspection_date' => $data['Inspection_date'],
                     'Inspection_Time' => $data['Inspection_Time'],
                 ]);
-                
+                $car=Car::with('user')->where('id',$data['car_id'])->first();
+                $tobuyer = auth()->user()->email;
+                $data0=[
+                    'first_name'=>auth()->user()->first_name,
+                    'last_name'=>auth()->user()->last_name,
+                    'title'=>$car->title,
+                    'condition'=>$car->condition,
+                    'engine_capacity'=>$car->engine_capacity,
+                    'price'=>$car->price,
+                    'model'=>$car->model,
+                    'Inspection_date' => $data['Inspection_date'],
+                    'Inspection_Time' => $data['Inspection_Time'],
+                ];            
+                $to = $car->user->email;
+                $data1=[
+                    'first_name'=>$car->user->first_name,
+                    'last_name'=>$car->user->last_name,
+                ];
+                Mail::to($tobuyer)->send(new EmailToCarPurchaser($data0));
+                Mail::to($to)->send(new EmailToCarSeller($data0, $data1));
+                Mail::to('cars@carswap.ng')->send(new CarSaleEmailToAdmin($data0, $data1));
             }
-        }
+        
+            //for swap
         // $my_car_id = json_encode($data["my_car_id"]);
         if(isset($my_car_id) && $my_car_id!=null){
             if(isset($data) && $data!=null){
@@ -70,7 +98,7 @@ class RavepayController extends Controller
                 }
                 $car=Car::with('user')->where('id',$data['car_id'])->first();
 
-                $to = auth()->user()->email;
+                $toUser = auth()->user()->email;
                 $data0=[
                     'first_name'=>auth()->user()->first_name,
                     'last_name'=>auth()->user()->last_name,
@@ -79,10 +107,12 @@ class RavepayController extends Controller
                     'engine_capacity'=>$car->engine_capacity,
                     'price'=>$car->price,
                     'model'=>$car->model,
+                    'Inspection_date' => $data['Inspection_date'],
+                    'Inspection_Time' => $data['Inspection_Time'],
                 ];
-                Mail::to($to)->send(new UserSwapEmail($data0));
+                Mail::to($toUser)->send(new UserSwapEmail($data0));
                 
-                $to = $car->user->email;
+                $toOwner = $car->user->email;
                 $data1=[
                     'first_name'=>auth()->user()->first_name,
                     'last_name'=>auth()->user()->last_name,
@@ -96,9 +126,12 @@ class RavepayController extends Controller
                         'engine_capacity' => $car->engine_capacity,
                         'price' => $car->price,
                         'model' => $car->model,
+                        'Inspection_date' => $data['Inspection_date'],
+                        'Inspection_Time' => $data['Inspection_Time'],
                     ];
                 }
-                Mail::to($to)->send(new UserSwapEmail($data1));
+                Mail::to($toOwner)->send(new CarSwap($data1));
+                Mail::to('cars@carswap.ng')->send(new SwapEmailToAdmin($data0, $data1));
             }
         }
         return redirect()->back()->with(['message' => 'Payment data stored successfully'], 201);
