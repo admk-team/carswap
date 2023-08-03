@@ -21,6 +21,11 @@ const NavBar = (auth: any) => {
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
+  const [showNotification, setShowNotification] = useState(false);
+
+  const toggleNotification = () => {
+    setShowNotification(!showNotification);
+  };
 
   return (
     <div>
@@ -31,14 +36,69 @@ const NavBar = (auth: any) => {
               <Link href={route('front.index')}>
                 <img className="w-52 h-10 object-contain" src={imagelogo1} alt="Logo" />
               </Link>
+
             </div>
             <div className="hidden md:block">
               <div className="flex items-center space-x-4">
                 <Link href={route('user.postcar')} className=" text-white font-bold">
                   Post a Car
                 </Link>
-                <img className='w-7 h-7' src={bellIcon} alt="" />
+                <img
+                  className="w-7 h-7 cursor-pointer transition-transform transform hover:scale-110"
+                  src={bellIcon}
+                  alt=""
+                  onClick={toggleNotification}
+                />
+                {/* {showNotification && (
+                  <div className="absolute mt-96 w-64  font-sm h-80 bg-white border-1 border-gray-950 z-20">
+                    <div className="flex flex-wrap justify-between bg-gray-200">
+                      <div className="px-3 py-2 rounded-md text-black flex items-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="w-6 h-6 mr-2"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                          />
+                        </svg>
+                        <p className="px-3">Inbox</p>
+                      </div>
 
+                      <div className="px-3 py-2 rounded-md text-black flex items-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="w-6 h-6 cursor-pointer"
+                          onClick={toggleNotification}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </div>
+                    </div>
+                    {
+                      auth && auth.auth.user ?
+                        <div className='justify-center items-center align-center pt-2 flex'>
+                          <p className='text-sm'> No Mail Right Now</p>
+
+                        </div>
+                        :
+                        <div className='mt-2 mx-2'>
+                          <p className='text-sm'> Login First</p>
+
+                        </div>
+                    }
+
+                  </div>
+                )} */}
                 <div className="flex items-center">
                   <a href="https://api.whatsapp.com/send?phone=08120222922" className="flex items-center" target="_blank" rel="noopener noreferrer">
                     <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
@@ -75,6 +135,7 @@ const NavBar = (auth: any) => {
                         </div>
                       </>
                   }
+
 
                   {isOpen && (
                     <div className="absolute mt-1 font-sm bg-white border-1 border-gray-950">

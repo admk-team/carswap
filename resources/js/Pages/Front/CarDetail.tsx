@@ -191,18 +191,17 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         setMyCarId(myCarId);
         calculatePriceDifference();
     };
-
     const handleBookNow = () => {
         setShowBookModal(true);
     }
 
-    const [selectedCarIds, setSelectedCarIds] = useState([]);
+    const [selectedCarIds, setSelectedCarIds] = useState<number[]>([]);
     const handleCheckboxChange = (my_car_id: number) => {
-        if (selectedCarIds.includes(my_car_id)) {
-            setSelectedCarIds(selectedCarIds.filter((id) => id !== my_car_id));
-        } else {
-            setSelectedCarIds([...selectedCarIds, my_car_id]);
-        }
+    if (selectedCarIds.includes(my_car_id)) {
+        setSelectedCarIds(selectedCarIds.filter((id) => id !== my_car_id));
+    } else {
+        setSelectedCarIds([...selectedCarIds, my_car_id]);
+    }
     };
     //For car swap
     const { data, setData, post } = useForm({
