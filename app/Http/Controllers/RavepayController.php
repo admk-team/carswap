@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CarSwap;
 use App\Mail\UserSwapEmail;
 use App\Models\Booking;
 use App\Models\Car;
@@ -70,7 +71,7 @@ class RavepayController extends Controller
                 }
                 $car=Car::with('user')->where('id',$data['car_id'])->first();
 
-                $to = auth()->user()->email;
+                $to_buyer = auth()->user()->email;
                 $data0=[
                     'first_name'=>auth()->user()->first_name,
                     'last_name'=>auth()->user()->last_name,
@@ -80,9 +81,9 @@ class RavepayController extends Controller
                     'price'=>$car->price,
                     'model'=>$car->model,
                 ];
-                Mail::to($to)->send(new UserSwapEmail($data0));
+                Mail::to($to_buyer)->send(new UserSwapEmail($data0));
                 
-                $to = $car->user->email;
+                $to_owner = $car->user->email;
                 $data1=[
                     'first_name'=>auth()->user()->first_name,
                     'last_name'=>auth()->user()->last_name,
@@ -98,7 +99,7 @@ class RavepayController extends Controller
                         'model' => $car->model,
                     ];
                 }
-                Mail::to($to)->send(new UserSwapEmail($data1));
+                Mail::to($to_owner)->send(new CarSwap($data1));
             }
         }
         return redirect()->back()->with(['message' => 'Payment data stored successfully'], 201);
