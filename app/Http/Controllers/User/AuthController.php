@@ -10,12 +10,14 @@ use App\Providers\RouteServiceProvider;
 use Inertia\Response;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Mail\SignupEmail;
+use App\Mail\AdminSignupEmail;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Mail;
 class AuthController extends Controller
 {
     public function create(): Response
@@ -62,8 +64,18 @@ class AuthController extends Controller
             'status' => 1,
             'password' => Hash::make($request->password),
         ]);
+        
 
         event(new Registered($user));
+        $to =$user->email;
+        $data=[
+            'first_name'=>$request->first_name,
+            'last_name'=>$request->last_name,
+            'phone_no' => $request->phone_no,
+           
+        ];
+        Mail::to($to)->send(new SignupEmail($data));
+        Mail::to('cars@carswap.ng')->send(new AdminSignupEmail($data));
 
         Auth::login($user);
 

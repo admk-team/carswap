@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserSwapEmail;
 use App\Models\Booking;
+use App\Models\Car;
 use App\Models\Payment;
 use App\Models\Swap;
 use Illuminate\Http\Request;
@@ -10,6 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
 
 class RavepayController extends Controller
 {
@@ -42,6 +45,7 @@ class RavepayController extends Controller
                     'Inspection_date' => $data['Inspection_date'],
                     'Inspection_Time' => $data['Inspection_Time'],
                 ]);
+                
             }
         }
         // $my_car_id = json_encode($data["my_car_id"]);
@@ -55,7 +59,46 @@ class RavepayController extends Controller
                         'Inspection_Time' => $data['Inspection_Time'],
                         'price_diff' => $data['price_diff'],
                     ]);
+                    $car=Car::find($myCarId);
+                    $data['cars'][] = [
+                        'title' => $car->title,
+                        'condition' => $car->condition,
+                        'engine_capacity' => $car->engine_capacity,
+                        'price' => $car->price,
+                        'model' => $car->model,
+                    ];
                 }
+                $car=Car::with('user')->where('id',$data['car_id'])->first();
+
+                $to = auth()->user()->email;
+                $data0=[
+                    'first_name'=>auth()->user()->first_name,
+                    'last_name'=>auth()->user()->last_name,
+                    'title'=>$car->title,
+                    'condition'=>$car->condition,
+                    'engine_capacity'=>$car->engine_capacity,
+                    'price'=>$car->price,
+                    'model'=>$car->model,
+                ];
+                Mail::to($to)->send(new UserSwapEmail($data0));
+                
+                $to = $car->user->email;
+                $data1=[
+                    'first_name'=>auth()->user()->first_name,
+                    'last_name'=>auth()->user()->last_name,
+                    'cars' => [],
+                ];
+                foreach($data["my_car_id"] as $myCarId){
+                    $car=Car::find($myCarId);
+                    $data1['cars'][] = [
+                        'title' => $car->title,
+                        'condition' => $car->condition,
+                        'engine_capacity' => $car->engine_capacity,
+                        'price' => $car->price,
+                        'model' => $car->model,
+                    ];
+                }
+                Mail::to($to)->send(new UserSwapEmail($data1));
             }
         }
         return redirect()->back()->with(['message' => 'Payment data stored successfully'], 201);
