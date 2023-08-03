@@ -45,7 +45,7 @@ class RavepayController extends Controller
         $data = json_decode($data1 ?? '{}', true);
         $my_car_id = $data["my_car_id"] ?? null;
        
-            if(isset($data) && $data!=null){
+            if(isset($data) && $data!=null && empty($my_car_id) && $my_car_id==null){
                 Booking::create([
                     'car_id' => $data['car_id'],
                     'user_id' => auth()->user()->id,
@@ -110,7 +110,7 @@ class RavepayController extends Controller
                     'Inspection_date' => $data['Inspection_date'],
                     'Inspection_Time' => $data['Inspection_Time'],
                 ];
-                Mail::to($toUser)->send(new UserSwapEmail($data0));
+                // Mail::to($toUser)->send(new UserSwapEmail($data0));
                 
                 $toOwner = $car->user->email;
                 $data1=[

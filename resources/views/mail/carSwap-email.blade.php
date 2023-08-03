@@ -54,7 +54,8 @@
     <p>We hope this message finds you well. We wanted to inform you that a user on Carswap.ng has expressed interest in swapping their car with yours. Here are the details of the user's car:
     </p>
     <p>Here are the details of  swap car</p>
-    @foreach ($data1['cars'] as $car)
+    @foreach ($data['cars'] as $car)
+    <h1>Car #{{ $loop->iteration }}</h1>
         <p>Car : {{ $car['title'] ?? 'N/A' }}</p>
         <p>Model : {{ $car['model'] ?? 'N/A' }}</p>
         <p>Condition : {{ $car['condition'] ?? 'N/A' }}</p>
