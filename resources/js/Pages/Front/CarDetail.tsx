@@ -406,7 +406,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                                     <label className="absolute top-2 right-2 z-10">
                                                                                         <input
                                                                                         type="checkbox"
-                                                                                        className="form-checkbox h-5 w-5 border-0"
+                                                                                        className="form-checkbox h-5 w-5  border-2 border-red-500"
                                                                                         checked={selectedCarIds.includes(my_car.id)}
                                                                                         onChange={() => handleCheckboxChange(my_car.id)}
                                                                                         />
