@@ -99,6 +99,7 @@ class RavepayController extends Controller
                 $car=Car::with('user')->where('id',$data['car_id'])->first();
 
                 $toUser = auth()->user()->email;
+
                 $data0=[
                     'first_name'=>auth()->user()->first_name,
                     'last_name'=>auth()->user()->last_name,
@@ -110,7 +111,8 @@ class RavepayController extends Controller
                     'Inspection_date' => $data['Inspection_date'],
                     'Inspection_Time' => $data['Inspection_Time'],
                 ];
-                // Mail::to($toUser)->send(new UserSwapEmail($data0));
+
+                Mail::to($toUser)->send(new UserSwapEmail($data0));
                 
                 $toOwner = $car->user->email;
                 $data1=[
