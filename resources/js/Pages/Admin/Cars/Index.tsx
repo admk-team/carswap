@@ -112,7 +112,7 @@ const Index = ({ auth, cars, success, error }: any) => {
                                             <div className="dropdown mb-4">
                                               <button
                                                   className={`btn btn-${
-                                                      car && car.status && car.status === 1 ? "success" : "danger"
+                                                      car && car.status && car.status == 1 ? "success" : "danger"
                                                   } dropdown-toggle`}
                                                   type="button"
                                                   id="dropdownMenuButton"
@@ -120,7 +120,7 @@ const Index = ({ auth, cars, success, error }: any) => {
                                                   aria-haspopup="true"
                                                   aria-expanded="false"
                                               >
-                                                  {car && car.status && car.status === 1 ? "Active" : "Deactive"}
+                                                  {car && car.status && car.status == 1 ? "Active" : "Deactive"}
                                               </button>
                                               <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
                                                   <button className="dropdown-item" onClick={() => changeCarStatus(car.id, 1)} >Active</button>
