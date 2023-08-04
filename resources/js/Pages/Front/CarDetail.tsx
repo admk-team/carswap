@@ -357,7 +357,12 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                             :
                                             auth && auth.user ?
                                                 auth?.user && car.user_id == auth.user.id ?
-                                                    <p className='text-red-500'>This car belongs to you. You cannot swap or purchase a car that you have added.</p>
+                                                    <div className='flex  justify-center items-center gap-3 flex-row'>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-10 h-10 text-red-500">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                        </svg>
+                                                        <p className='text-center text-md text-red-500 font-bold'>This car belongs to you. You cannot swap or purchase a car that you have added.</p>
+                                                    </div>
                                                     :
                                                     car?.bookings ?
                                                         <div className='flex flex-wrap justify-center items-center gap-3'>
