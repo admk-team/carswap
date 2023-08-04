@@ -11,6 +11,7 @@ import Mileage from "@/Assets/speed-test.png";
 import Gear from "@/Assets/gear-stick.png";
 import Fuel from "@/Assets/gas-station.png";
 import Color1 from "@/Assets/car-color.png";
+import logoswap from "@/Assets/swaplogo.png";
 import Footer from '../Footer/Footer';
 import { Head, Link } from '@inertiajs/react';
 import Star from '@/Components/Rating/Star';
@@ -494,20 +495,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                     <p>{car.interior_color}</p>
                                 </div>
                             </div>
-                            <hr />
-                            <div>
-                            {car.swaptitle && (
-                            <div className='flex justify-between bg-purple-50 p-4'>
-                                <div className="flex gap-2">
-                                    <img src={Color1} className="w-6 h-6" />
-                                    <p>Interested Swap Car Title</p>
-                                </div>
-                                <div>
-                                    <p>{car.swaptitle}</p>
-                                </div>
-                            </div>
-                                  )}
-                                  </div>
+                          
                         </div>
                         <div className="col-span-12 md:col-span-6 lg:col-span-4">
                             <div className='flex justify-between bg-purple-50 p-4'>
@@ -545,21 +533,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                     <p>{car.condition}</p>
                                 </div>
                             </div>
-                            <hr />
-                            <div>
-                            {car.swaptitle && (
-                            <div className='flex justify-between bg-purple-50 p-4'>
-                                <div className="flex gap-2">
-                                    <img src={Color1} className="w-6 h-6" />
-                                    <p>Interested Swap Car Model</p>
-                                </div>
-                                <div>
-                                    <p>{car.swapmodel}</p>
-                                </div>
-                            </div>
-                             )}
-                          </div>
-                            <hr />
+                         
                         </div>
                         <div className="col-span-12 md:col-span-6 lg:col-span-4">
                             <div className='flex justify-between bg-purple-50 p-4'>
@@ -596,6 +570,27 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                     </div>
                 </div>
 
+                {car.swaptitle && (
+                <div className='p-4'>
+                    <h3 className="font-bold text-gray-900 text-2xl">My Swap car Option:</h3>
+                    
+                    <div className="grid grid-cols-12 gap-4 mt-7">
+                        <div className="col-span-12 md:col-span-6 lg:col-span-4">
+                        
+                            <div className='flex justify-between bg-purple-50 p-4'>
+                                <div className="flex gap-2">
+                                    <img src={logoswap} className="w-16 h-10" />
+                                    <p></p>
+                                </div>
+                                <div>
+                                    <p>{car.swaptitle} {car.swapmodel}</p>
+                                </div>
+                            </div>
+                                
+                            </div>
+                            </div>
+                </div>
+                  )}
                 <div className='p-4'>
                     <h3 className="font-bold text-gray-900 text-2xl">Description:</h3>
                     <p>{car.description}</p>
