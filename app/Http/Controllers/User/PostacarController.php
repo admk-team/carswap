@@ -121,8 +121,8 @@ class PostacarController extends Controller
                 'price'=>$request->price,
                 'model'=>$request->model,
             ];
-            // Mail::to($to)->send(new UserPostCarEmail($data));
-            // Mail::to('cars@carswap.ng')->send(new AdminCarEmail($data));
+            Mail::to($to)->send(new UserPostCarEmail($data));
+            Mail::to('cars@carswap.ng')->send(new AdminCarEmail($data));
             return Inertia::location(route('user.dashboard', ['success' => 'Car added successfully.']));
         }else{
             return Inertia::location(route('user.dashboard', ['error' => 'Failed Car not added.']));
