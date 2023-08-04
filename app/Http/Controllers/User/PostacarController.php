@@ -45,8 +45,6 @@ class PostacarController extends Controller
             'engineCapacity' => 'required',
             'mileage' => 'required',
             'type' => 'required',
-            'swaptitle' => 'required',
-            'swapmodel' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
@@ -59,10 +57,13 @@ class PostacarController extends Controller
             'description' => 'required',
             'images' => 'required|array',
             'images.*' => 'image',
-        ],[
-            'brand_id.required' =>'The brand field is required',
-
-        ]);
+            'swaptitle1' => $request->type == 'swap' ? 'required' : '',
+            'swaptitle2' => $request->type == 'swap' ? 'required' : '',
+        ], [
+            'brand_id.required' => 'The brand field is required',
+            'swaptitle1.required' => 'The first swap title is required',
+            'swaptitle2.required' => 'The second swap title is required',
+        ]);        
         $images = '';
         $arr = [];
         
@@ -98,8 +99,8 @@ class PostacarController extends Controller
         $model->images=$images;
         $model->fuel_Type=$request->fuelType;
         $model->type=$request->type;
-        $model->swaptitle=$request->swaptitle;
-        $model->swapmodel=$request->swapmodel;
+        $model->swaptitle1=$request->swaptitle1;
+        $model->swaptitle2=$request->swaptitle2;
         $model->trim=$request->trim;
         $model->model=$request->model;
         $model->transmission=$request->transmission;
@@ -161,8 +162,8 @@ class PostacarController extends Controller
             'engineCapacity' => 'required',
             'mileage' => 'required',
             'type' => 'required',
-            'swaptitle' => 'required',
-            'swapmodel' => 'required',
+            'swaptitle1' => 'required',
+            'swaptitle2' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
@@ -176,7 +177,8 @@ class PostacarController extends Controller
             'images.*' => 'image',
         ],[
             'brand_id.required' =>'The brand field is required',
-
+            'swaptitle1.required' =>'The field is required',
+            'swaptitle2.required' =>'The field is required',
         ]);
         $model=Car::find($id);
         if($request->hasFile('images')){
@@ -221,8 +223,8 @@ class PostacarController extends Controller
         $model->fuel_Type=$request->fuelType;
         $model->model=$request->model;
         $model->type=$request->type;
-        $model->swaptitle=$request->swaptitle;
-        $model->swapmodel=$request->swapmodel;
+        $model->swaptitle1=$request->swaptitle1;
+        $model->swaptitle2=$request->swaptitle2;
         $model->trim=$request->trim;
         $model->transmission=$request->transmission;
         $model->interior_color=$request->interiorColor;

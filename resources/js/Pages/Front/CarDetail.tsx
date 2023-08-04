@@ -570,7 +570,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                     </div>
                 </div>
 
-                {car.swaptitle && (
+                {car.swaptitle1 && (
                 <div className='p-4'>
                     <h3 className="font-bold text-gray-900 text-2xl">My Swap car Option:</h3>
                     
@@ -583,7 +583,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                     <p>Car 1</p>
                                 </div>
                                 <div>
-                                    <p>{car.swaptitle}</p>
+                                    <p>{car.swaptitle1}</p>
                                 </div>
                             </div>
                                 
@@ -596,7 +596,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                 <p>Car 2</p>
                             </div>
                             <div>
-                                <p>{car.swapmodel}</p>
+                                <p>{car.swaptitle2}</p>
                             </div>
                         </div>
                         <hr />

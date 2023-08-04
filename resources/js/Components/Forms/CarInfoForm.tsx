@@ -13,6 +13,7 @@ const CarInfohtmlForm = ({ auth, brands, users }: any) => {
     // console.log("auth",auth);
     const { errors } = usePage().props
     const [images, setImages] = useState([]);
+    const [carSwapCheck, setCarSwapCheck] = useState(false);
     const { data, setData, post, processing, progress } = useForm({
         title: '',
         brand_id: '',
@@ -21,8 +22,8 @@ const CarInfohtmlForm = ({ auth, brands, users }: any) => {
         engineCapacity: '',
         mileage: '',
         type: '',
-        swaptitle: '',
-        swapmodel: '',
+        swaptitle1: '',
+        swaptitle2: '',
         trim: '',
         location: '',
         price: '',
@@ -46,6 +47,15 @@ const CarInfohtmlForm = ({ auth, brands, users }: any) => {
     function handleSubmit() {
         post(route('user.cars.store'))
     }
+    const handleChange = (event:any) => {
+        setData('type', event.target.value)
+        if(event.target.value=='swap'){
+            setCarSwapCheck(true);
+        }else{
+            setCarSwapCheck(false);
+        }
+    };
+    
     return (
         <>
             <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
@@ -98,7 +108,7 @@ const CarInfohtmlForm = ({ auth, brands, users }: any) => {
                                 </div>
                                 
                                 <div className="relative z-0 w-full mb-6 group">
-                                    <select name="type" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.type} onChange={(e) => setData('type', e.target.value)}>
+                                    <select name="type" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.type} onChange={handleChange}>
                                         <option value="">Select Type</option>
                                         <option value="swap">For Swap</option>
                                         <option value="sale">For Sale</option>
@@ -108,20 +118,26 @@ const CarInfohtmlForm = ({ auth, brands, users }: any) => {
 
                                 </div>
                             </div>
-                            <h3 className="text-lg text-gray-700 mb-4">(For Intersted Swap Car Details )</h3>
-                            <div className="grid md:grid-cols-2 md:gap-x-6">
-                                <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text" name="swaptitle"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0  focus:border-blue-600 peer" placeholder=" " value={data.swaptitle} onChange={(e) => setData('swaptitle', e.target.value)} />
-                                    {errors.swaptitle && <div className='text-red-500'>{errors.swaptitle}</div>}
-                                    <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car Detail 1*</label>
-                                </div>
-                            </div>
-                            <div className="grid md:grid-cols-2 md:gap-x-6">
-                                <div className="relative z-0 w-full mb-6 group">
-                                    <input type="text" name="swapmodel" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0  focus:border-blue-600 peer" placeholder=" " value={data.swapmodel} onChange={(e) => setData('swapmodel', e.target.value)} />
-                                    {errors.swapmodel && <div className='text-red-500'>{errors.swapmodel}</div>}
-                                    <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car Detail 2*</label>
-                                </div>                     
+                            {
+                                carSwapCheck&&(
+                                    <>
+                                        <h3 className="text-xl text-gray-950 font-bold mb-1">For Intersted Swap Car Details</h3>
+                                        <div className="grid md:grid-cols-2 md:gap-x-6 mb-2">
+                                            <div className="relative z-0 w-full mb-6 group">
+                                                <input type="text" name="swaptitle1"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0  focus:border-blue-600 peer" placeholder=" " value={data.swaptitle1} onChange={(e) => setData('swaptitle1', e.target.value)} />
+                                                {errors.swaptitle1 && <div className='text-red-500'>{errors.swaptitle1}</div>}
+                                                <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car Detail 1*</label>
+                                            </div>
+                                            <div className="relative z-0 w-full mb-6 group">
+                                                <input type="text" name="swaptitle2" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0  focus:border-blue-600 peer" placeholder=" " value={data.swaptitle2} onChange={(e) => setData('swaptitle2', e.target.value)} />
+                                                {errors.swaptitle2 && <div className='text-red-500'>{errors.swaptitle2}</div>}
+                                                <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car Detail 2*</label>
+                                            </div> 
+                                        </div>
+                                    </>
+                                )
+                            }
+                            <div className="grid md:grid-cols-2 md:gap-x-6">                    
                                 <div className="relative z-0 w-full mb-6 group">
                                     <input type="text" name="trim" id="floating_company" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0  focus:border-blue-600 peer" placeholder=" " value={data.trim} onChange={(e) => setData('trim', e.target.value)} />
                                     {errors.trim && <div className='text-red-500'>{errors.trim}</div>}

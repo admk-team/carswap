@@ -13,8 +13,8 @@ const Create = ({ auth,brands,users}: any) => {
     engineCapacity: '',
     mileage: '',
     type: '',
-    swaptitle: '',
-    swapmodel: '',
+    swaptitle1: '',
+    swaptitle2: '',
     trim: '',
     location: '',
     price: '',
@@ -114,13 +114,13 @@ const Create = ({ auth,brands,users}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Interested Car Title<span className='text-danger'>*</span></label>
-                <input type="text" name="swaptitle" className="form-control" placeholder="Enter Interested Car Title"  value={data.swaptitle} onChange={(e)=>setData('swaptitle',e.target.value)} />
-                {errors.swaptitle && <div className='text-danger'>{errors.swaptitle}</div>}
+                <input type="text" name="swaptitle1" className="form-control" placeholder="Enter Interested Car Title"  value={data.swaptitle1} onChange={(e)=>setData('swaptitle1',e.target.value)} />
+                {errors.swaptitle1 && <div className='text-danger'>{errors.swaptitle1}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Interested Car Model <span className='text-danger'>*</span></label>
-                <input type="text" name="swapmodel" className="form-control" placeholder="Enter Interested Car Model"  value={data.swapmodel} onChange={(e)=>setData('swapmodel',e.target.value)} />
-                {errors.swapmodel && <div className='text-danger'>{errors.swapmodel}</div>}
+                <input type="text" name="swaptitle2" className="form-control" placeholder="Enter Interested Car Model"  value={data.swaptitle2} onChange={(e)=>setData('swaptitle2',e.target.value)} />
+                {errors.swaptitle2 && <div className='text-danger'>{errors.swaptitle2}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Trim <span className='text-danger'>*</span></label>
