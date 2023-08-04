@@ -499,6 +499,20 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                     <p>{car.interior_color}</p>
                                 </div>
                             </div>
+                            <hr />
+                            <div>
+                            {car.swaptitle && (
+                            <div className='flex justify-between bg-purple-50 p-4'>
+                                <div className="flex gap-2">
+                                    <img src={Color1} className="w-6 h-6" />
+                                    <p>Interested Swap Car Title</p>
+                                </div>
+                                <div>
+                                    <p>{car.swaptitle}</p>
+                                </div>
+                            </div>
+                                  )}
+                                  </div>
                         </div>
                         <div className="col-span-12 md:col-span-6 lg:col-span-4">
                             <div className='flex justify-between bg-purple-50 p-4'>
@@ -536,6 +550,20 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                     <p>{car.condition}</p>
                                 </div>
                             </div>
+                            <hr />
+                            <div>
+                            {car.swaptitle && (
+                            <div className='flex justify-between bg-purple-50 p-4'>
+                                <div className="flex gap-2">
+                                    <img src={Color1} className="w-6 h-6" />
+                                    <p>Interested Swap Car Model</p>
+                                </div>
+                                <div>
+                                    <p>{car.swapmodel}</p>
+                                </div>
+                            </div>
+                             )}
+                          </div>
                             <hr />
                         </div>
                         <div className="col-span-12 md:col-span-6 lg:col-span-4">

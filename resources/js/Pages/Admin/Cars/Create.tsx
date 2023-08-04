@@ -13,6 +13,8 @@ const Create = ({ auth,brands,users}: any) => {
     engineCapacity: '',
     mileage: '',
     type: '',
+    swaptitle: '',
+    swapmodel: '',
     trim: '',
     location: '',
     price: '',
@@ -109,6 +111,16 @@ const Create = ({ auth,brands,users}: any) => {
                 <option value="sale">For Sale</option>
                 </select>
                 {errors.type && <div className='text-danger'>{errors.type}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label">Interested Car Title<span className='text-danger'>*</span></label>
+                <input type="text" name="swaptitle" className="form-control" placeholder="Enter Interested Car Title"  value={data.swaptitle} onChange={(e)=>setData('swaptitle',e.target.value)} />
+                {errors.swaptitle && <div className='text-danger'>{errors.swaptitle}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label">Interested Car Model <span className='text-danger'>*</span></label>
+                <input type="text" name="swapmodel" className="form-control" placeholder="Enter Interested Car Model"  value={data.swapmodel} onChange={(e)=>setData('swapmodel',e.target.value)} />
+                {errors.swapmodel && <div className='text-danger'>{errors.swapmodel}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Trim <span className='text-danger'>*</span></label>

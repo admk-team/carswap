@@ -66,6 +66,8 @@ const Details = ({ auth,payment,car,user}: any) => {
                                         <th>Interior Color</th>
                                         <th>Drive</th>
                                         <th>Description</th>
+                                        <th>Interested Swap Title</th>
+                                        <th>Interested Swap Model</th>
                                         <th>Car Images</th>
                                     </tr>
                                 </thead>
@@ -83,6 +85,8 @@ const Details = ({ auth,payment,car,user}: any) => {
                                         <td>{car.interior_color? car.interior_color: 'No user data available'}</td>
                                         <td>{car.drive? car.drive: 'No user data available'}</td>
                                         <td>{car.description? car.description: 'No user data available'}</td>
+                                        <td>{car.swaptitle? car.swaptitle: 'No user data available'}</td>
+                                        <td>{car.swapmodel? car.swapmodel: 'No user data available'}</td>
                                         <td><img src={car &&  car.images ? '/storage/' + car.images[0] : UserIcon} alt="Profile" className="w-10 h-10 " /></td>                                      
                                         </tr>
                                   

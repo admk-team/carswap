@@ -37,6 +37,7 @@ class PostacarController extends Controller
      */
     public function store(Request $request)
     {
+    
         $request->validate([
             'title' => 'required',
             'brand_id' => 'required',
@@ -44,6 +45,8 @@ class PostacarController extends Controller
             'engineCapacity' => 'required',
             'mileage' => 'required',
             'type' => 'required',
+            'swaptitle' => 'required',
+            'swapmodel' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
@@ -95,6 +98,8 @@ class PostacarController extends Controller
         $model->images=$images;
         $model->fuel_Type=$request->fuelType;
         $model->type=$request->type;
+        $model->swaptitle=$request->swaptitle;
+        $model->swapmodel=$request->swapmodel;
         $model->trim=$request->trim;
         $model->model=$request->model;
         $model->transmission=$request->transmission;
@@ -156,6 +161,8 @@ class PostacarController extends Controller
             'engineCapacity' => 'required',
             'mileage' => 'required',
             'type' => 'required',
+            'swaptitle' => 'required',
+            'swapmodel' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
@@ -214,6 +221,8 @@ class PostacarController extends Controller
         $model->fuel_Type=$request->fuelType;
         $model->model=$request->model;
         $model->type=$request->type;
+        $model->swaptitle=$request->swaptitle;
+        $model->swapmodel=$request->swapmodel;
         $model->trim=$request->trim;
         $model->transmission=$request->transmission;
         $model->interior_color=$request->interiorColor;

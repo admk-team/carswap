@@ -46,6 +46,8 @@ class CarController extends Controller
             'engineCapacity' => 'required',
             'mileage' => 'required',
             'type' => 'required',
+            'swaptitle' => 'required',
+            'swapmodel' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
@@ -81,6 +83,8 @@ class CarController extends Controller
         $model->engine_capacity=$request->engineCapacity;
         $model->mileage=$request->mileage;
         $model->type=$request->type;
+        $model->swaptitle=$request->swaptitle;
+        $model->swapmodel=$request->swapmodel;
         $model->trim=$request->trim;
         $model->location=$request->location;
         $model->price=$request->price;
@@ -148,6 +152,8 @@ class CarController extends Controller
             'engine_capacity' => 'required',
             'mileage' => 'required',
             'type' => 'required',
+            'swaptitle' => 'required',
+            'swapmodel' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
@@ -187,6 +193,8 @@ class CarController extends Controller
         $model->engine_capacity=$request->engine_capacity;
         $model->mileage=$request->mileage;
         $model->type=$request->type;
+        $model->swaptitle=$request->swaptitle;
+        $model->swapmodel=$request->swapmodel;
         $model->trim=$request->trim;
         $model->location=$request->location;
         $model->price=$request->price;
