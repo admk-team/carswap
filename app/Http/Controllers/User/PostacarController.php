@@ -121,8 +121,8 @@ class PostacarController extends Controller
                 'price'=>$request->price,
                 'model'=>$request->model,
             ];
-            Mail::to($to)->send(new UserPostCarEmail($data));
-            Mail::to('cars@carswap.ng')->send(new AdminCarEmail($data));
+            // Mail::to($to)->send(new UserPostCarEmail($data));
+            // Mail::to('cars@carswap.ng')->send(new AdminCarEmail($data));
             return Inertia::location(route('user.dashboard', ['success' => 'Car added successfully.']));
         }else{
             return Inertia::location(route('user.dashboard', ['error' => 'Failed Car not added.']));
@@ -155,15 +155,13 @@ class PostacarController extends Controller
      */
     public function update(Request $request,$id)
     {
-        $request->validate([
+     $request->validate([
             'title' => 'required',
             'brand_id' => 'required',
             'condition' => 'required',
             'engineCapacity' => 'required',
             'mileage' => 'required',
             'type' => 'required',
-            'swaptitle1' => 'required',
-            'swaptitle2' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
@@ -174,12 +172,15 @@ class PostacarController extends Controller
             'interiorColor' => 'required',
             'exteriorColor' => 'required',
             'description' => 'required',
+            'images' => 'required|array',
             'images.*' => 'image',
-        ],[
-            'brand_id.required' =>'The brand field is required',
-            'swaptitle1.required' =>'The field is required',
-            'swaptitle2.required' =>'The field is required',
-        ]);
+            'swaptitle1' => $request->type == 'swap' ? 'required' : '',
+            'swaptitle2' => $request->type == 'swap' ? 'required' : '',
+        ], [
+            'brand_id.required' => 'The brand field is required',
+            'swaptitle1.required' => 'The first swap title is required',
+            'swaptitle2.required' => 'The second swap title is required',
+        ]);        
         $model=Car::find($id);
         if($request->hasFile('images')){
             if ($request->hasFile('images')) {

@@ -41,28 +41,29 @@ class CarController extends Controller
         $request->validate([
             'title' => 'required',
             'brand_id' => 'required',
-            'user_id' => 'required',
             'condition' => 'required',
             'engineCapacity' => 'required',
             'mileage' => 'required',
             'type' => 'required',
-            'swaptitle' => 'required',
-            'swapmodel' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
             'fuelType' => 'required',
             'model' => 'required',
             'transmission' => 'required',
+            'drive' => 'required',
             'interiorColor' => 'required',
             'exteriorColor' => 'required',
             'description' => 'required',
             'images' => 'required|array',
             'images.*' => 'image',
-        ],[
-            'brand_id.required' =>'The brand field is required',
-            'user_id.required' =>'The User field is required',
-        ]);
+            'swaptitle1' => $request->type == 'swap' ? 'required' : '',
+            'swaptitle2' => $request->type == 'swap' ? 'required' : '',
+        ], [
+            'brand_id.required' => 'The brand field is required',
+            'swaptitle1.required' => 'The first swap title is required',
+            'swaptitle2.required' => 'The second swap title is required',
+        ]);        
         $images = '';
         $arr=[];
         if ($request->hasFile('images')) {
@@ -83,8 +84,8 @@ class CarController extends Controller
         $model->engine_capacity=$request->engineCapacity;
         $model->mileage=$request->mileage;
         $model->type=$request->type;
-        $model->swaptitle=$request->swaptitle;
-        $model->swapmodel=$request->swapmodel;
+        $model->swaptitle1=$request->swaptitle1;
+        $model->swaptitle2=$request->swaptitle2;
         $model->trim=$request->trim;
         $model->location=$request->location;
         $model->price=$request->price;
@@ -147,25 +148,29 @@ class CarController extends Controller
         $request->validate([
             'title' => 'required',
             'brand_id' => 'required',
-            'user_id' => 'required',
             'condition' => 'required',
             'engine_capacity' => 'required',
             'mileage' => 'required',
             'type' => 'required',
-            'swaptitle' => 'required',
-            'swapmodel' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
             'fuel_type' => 'required',
             'model' => 'required',
             'transmission' => 'required',
+            'drive' => 'required',
             'interior_color' => 'required',
             'exterior_color' => 'required',
             'description' => 'required',
+            'images' => 'required|array',
             'images.*' => 'image',
-        ]);
-        
+            'swaptitle1' => $request->type == 'swap' ? 'required' : '',
+            'swaptitle2' => $request->type == 'swap' ? 'required' : '',
+        ], [
+            'brand_id.required' => 'The brand field is required',
+            'swaptitle1.required' => 'The first swap title is required',
+            'swaptitle2.required' => 'The second swap title is required',
+        ]);        
         $model=Car::find($id);
         if($request->hasFile('images')){
             if ($request->hasFile('images')) {
@@ -175,32 +180,43 @@ class CarController extends Controller
                 }
             }
             $images = '';
-            $arr=[];
-            foreach ($request->images ?? [] as $item){
-                $var = date_create();
-                $time = date_format($var, 'YmdHis');
-                $imageName = $time . '-' . $item->getClientOriginalName();
-                $item->move(public_path('storage/images/cars'), $imageName);
-                array_push($arr,'/images/cars/'.$imageName);
+            $arr = [];
+            
+            if ($request->hasFile('images')) {
+                $maxImages = 30;
+                $uploadedImagesCount = count($request->file('images'));
+            
+                if ($uploadedImagesCount <= $maxImages) {
+                    foreach ($request->file('images') as $item) {
+                        $var = date_create();
+                        $time = date_format($var, 'YmdHis');
+                        $imageName = $time . '-' . $item->getClientOriginalName();
+                        $item->move(public_path('storage/images/cars'), $imageName);
+                        array_push($arr, '/images/cars/' . $imageName);
+                    }
+                } else {
+                    // Handle the case when the user exceeds the maximum allowed images
+                    return response()->json(['message' => 'You can upload a maximum of ' . $maxImages . ' images.'], 400);
+                }
             }
-            $images = implode(",", $arr);
+            
+            $images = implode(",", $arr);            
             $model->images=$images;
         }
         $model->title=$request->title;
-        $model->brand_id=$request->brand_id;
-        $model->user_id=$request->user_id;
+        $model->brand_id= $request->brand_id;
         $model->condition=$request->condition;
         $model->engine_capacity=$request->engine_capacity;
         $model->mileage=$request->mileage;
-        $model->type=$request->type;
-        $model->swaptitle=$request->swaptitle;
-        $model->swapmodel=$request->swapmodel;
-        $model->trim=$request->trim;
         $model->location=$request->location;
         $model->price=$request->price;
         $model->drive=$request->drive;
         $model->fuel_type=$request->fuel_type;
         $model->model=$request->model;
+        $model->type=$request->type;
+        $model->swaptitle1=$request->swaptitle1;
+        $model->swaptitle2=$request->swaptitle2;
+        $model->trim=$request->trim;
         $model->transmission=$request->transmission;
         $model->interior_color=$request->interior_color;
         $model->exterior_color=$request->exterior_color;

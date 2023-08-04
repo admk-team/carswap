@@ -4,6 +4,7 @@ import { Head, useForm, usePage } from '@inertiajs/react';
 import { Inertia  } from '@inertiajs/inertia';
 
 const Edit = ({ auth,brands,car,users}: any) => {
+  const [carSwapCheck, setCarSwapCheck] = useState(false);
   const { data, errors, setData, post, progress } = useForm({
     title: car.title,
     brand_id: car.brand_id,
@@ -38,6 +39,14 @@ const Edit = ({ auth,brands,car,users}: any) => {
     e.preventDefault();
     post(route('admin.cars.update',car.id))
   }
+  const handleChange = (event:any) => {
+    setData('type', event.target.value)
+    if(event.target.value=='swap'){
+        setCarSwapCheck(true);
+    }else{
+        setCarSwapCheck(false);
+    }
+};
   return (
     <>
      <Head title="Edit Car" />
@@ -104,23 +113,29 @@ const Edit = ({ auth,brands,car,users}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Select Type <span className='text-danger'>*</span></label>
-                <select name="type" id="" className="form-control" onChange={(e)=>setData('type',e.target.value)}>
+                <select name="type" id="" className="form-control"  value={data.type} onChange={handleChange}>
                 <option value="">Select Type</option>
                 <option value="swap" selected={car.type && car.type === 'swap'}>For Swap</option>
                 <option value="sale" selected={car.type && car.type === 'sale'}>For Sale</option>
                 </select>
                 {errors.type && <div className='text-danger'>{errors.type}</div>}
               </div>
+              {
+                                carSwapCheck&&(
+                                    <>
               <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Interested Car Title<span className='text-danger'>*</span></label>
+                <label className="form-label">Interested Car 1<span className='text-danger'>*</span></label>
                 <input type="text" name="swaptitle1" className="form-control" placeholder="Enter Interested Car Title"  value={data.swaptitle1} onChange={(e)=>setData('swaptitle1',e.target.value)} />
                 {errors.swaptitle1 && <div className='text-danger'>{errors.swaptitle1}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Interested Car Model <span className='text-danger'>*</span></label>
+                <label className="form-label">Interested Car 2<span className='text-danger'>*</span></label>
                 <input type="text" name="swaptitle2" className="form-control" placeholder="Enter Interested Car Model"  value={data.swaptitle2} onChange={(e)=>setData('swaptitle2',e.target.value)} />
                 {errors.swaptitle2 && <div className='text-danger'>{errors.swaptitle2}</div>}
               </div>
+              </>
+                                )
+                            }
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Trim <span className='text-danger'>*</span></label>
                 <input type="text" name="trim" className="form-control" placeholder="Enter Trim"  value={data.trim} onChange={(e)=>setData('trim',e.target.value)} />
