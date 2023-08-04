@@ -576,18 +576,31 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                     
                     <div className="grid grid-cols-12 gap-4 mt-7">
                         <div className="col-span-12 md:col-span-6 lg:col-span-4">
-                        
+                        <hr />
                             <div className='flex justify-between bg-purple-50 p-4'>
                                 <div className="flex gap-2">
-                                    <img src={logoswap} className="w-16 h-10" />
-                                    <p></p>
+                                    <img src={logoswap} className="w-6 h-6" />
+                                    <p>Car 1</p>
                                 </div>
                                 <div>
-                                    <p>{car.swaptitle} {car.swapmodel}</p>
+                                    <p>{car.swaptitle}</p>
                                 </div>
                             </div>
                                 
                             </div>
+                            <div className="col-span-12 md:col-span-6 lg:col-span-4">
+                            <hr />
+                        <div className='flex justify-between bg-purple-50 p-4'>
+                            <div className="flex gap-2">
+                                <img src={logoswap} className="w-6 h-6" />
+                                <p>Car 2</p>
+                            </div>
+                            <div>
+                                <p>{car.swapmodel}</p>
+                            </div>
+                        </div>
+                        <hr />
+                        </div>
                             </div>
                 </div>
                   )}
