@@ -14,7 +14,7 @@ class FrontController extends Controller
 {
     public function index(Request $request){
         $brands=Brand::where('status','1')->get();
-        $cars=Car::with('ratings')->where('status','1')->where('slug','!=',null)->limit(4)->latest()->get();
+        $cars=Car::with('ratings')->where('status','1')->where('slug','!=',null)->limit(5)->latest()->get();
         $fav = auth()->user()?->wishlist;
         $cars=$cars->map(function($car) use ($fav){
             $images=explode(',',$car->images);

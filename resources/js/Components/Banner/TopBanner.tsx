@@ -11,13 +11,13 @@ const TopBanner = ({ brands }: any) => {
                     <div className="container flex flex-col lg:flex-row items-center xl:gap-y-12 xl:gap-x-80 lg:gap-x-32 mx-auto max-w-7xl px-4">
                         <div className="lg:w-1/2 mt-5 lg:mb-0">
                             <div className="type-form-container">
-                                <p className='text-emerald-400 ml-2'>Welcome to Carswap</p>
+                                <p className='text-emerald-400 ml-2'>Welcome to Swapxo.com</p>
                                 <h3 className="type-form-item text-white font-medium text-3xl md:text-start text-shadow-sm ml-8">
                                     {/* {currentText} */}
                                     <ul className='list-disc'>
                                         <li> Swap For Better Car</li>
                                         <li>Swap For Cash</li>
-                                        <li>Buy & Sell</li>
+                                        <li>Buy & Sell like a Boss.</li>
                                     </ul>
                                 </h3>
                             </div>
