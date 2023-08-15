@@ -11,7 +11,7 @@ import Image7 from "@/Assets/SliderImages/Slider (7).png"
 
 const Slider = ({ images }: any) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = images?.length > 0 ? images : [Image1, Image2, Image3, Image4, Image5, Image6, Image7];
+  const slides = images?.length > 0 ? images : [Image3,  Image7];
 
   const slideFromRight = (index: number) => {
     return index === currentSlide ? 'translate-x-0' : 'translate-x-full';

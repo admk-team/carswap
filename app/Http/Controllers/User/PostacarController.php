@@ -8,6 +8,7 @@ use App\Mail\UserPostCarEmail;
 use App\Models\Postacar;
 use App\Models\Brand;
 use App\Models\Car;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -29,7 +30,8 @@ class PostacarController extends Controller
     public function create()
     {
         $brands=Brand::where('status',1)->get();
-        return Inertia::render('User/PostCar',['brands'=>$brands]);
+        $categories=Category::get();
+        return Inertia::render('User/PostCar',['brands'=>$brands,'categories'=>$categories]);
     }
 
     /**
@@ -59,6 +61,9 @@ class PostacarController extends Controller
             'images.*' => 'image',
             'swaptitle1' => $request->type == 'swap' ? 'required' : '',
             'swaptitle2' => $request->type == 'swap' ? 'required' : '',
+            'body_type'=>'required',
+            'price_negotiable'=>'required',
+            'custom_paper'=>'required'
         ], [
             'brand_id.required' => 'The brand field is required',
             'swaptitle1.required' => 'The first swap title is required',
@@ -107,6 +112,9 @@ class PostacarController extends Controller
         $model->interior_color=$request->interiorColor;
         $model->exterior_color=$request->exteriorColor;
         $model->description=$request->description;
+        $model->body_type=$request->body_type;
+        $model->price_negotiable=$request->price_negotiable;
+        $model->custom_paper=$request->custom_paper;
         $model->status=0;
         if($model->save()){
             $model->slug=Str::slug($request->title).'-'.$model->id;
@@ -145,9 +153,10 @@ class PostacarController extends Controller
     {
         
         $brands=Brand::where('status',1)->get();
+        $categories=Category::get();
         $car=Car::where('slug',$slug)->first();
         $car->images=explode(",",$car->images);
-        return Inertia::render('User/EditCar',['brands'=>$brands,'car'=>$car]);
+        return Inertia::render('User/EditCar',['brands'=>$brands,'car'=>$car,'categories'=>$categories]);
     }
 
     /**
@@ -176,6 +185,9 @@ class PostacarController extends Controller
             'images.*' => 'image',
             'swaptitle1' => $request->type == 'swap' ? 'required' : '',
             'swaptitle2' => $request->type == 'swap' ? 'required' : '',
+            'body_type'=>'required',
+            'price_negotiable'=>'required',
+            'custom_paper'=>'required'
         ], [
             'brand_id.required' => 'The brand field is required',
             'swaptitle1.required' => 'The first swap title is required',
@@ -231,6 +243,9 @@ class PostacarController extends Controller
         $model->interior_color=$request->interiorColor;
         $model->exterior_color=$request->exteriorColor;
         $model->description=$request->description;
+        $model->body_type=$request->body_type;
+        $model->price_negotiable=$request->price_negotiable;
+        $model->custom_paper=$request->custom_paper;
         if($model->save()){
             $model->slug=Str::slug($request->title).'-'.$model->id;
             $model->update();

@@ -25,8 +25,9 @@ const WhyUs = () => {
                     />
                   </div>
                   <div className='justify-center text-center mt-3 w-full md:w-48'>
-                    <h1 className="font-semibold text-xl">  Save 50% in cash for your next item</h1>
-                    <p className='text-md mt-3'>Set aside 50% of the total cost in cash to save for your upcoming purchase. </p>
+                    <h1 className="font-semibold text-xl">Save 40% in cash for a new car</h1>
+                    {/* <h1 className="font-semibold text-xl">  Save 50% in cash for your next item</h1>
+                    <p className='text-md mt-3'>Set aside 50% of the total cost in cash to save for your upcoming purchase. </p> */}
                   </div>
                 </div>
 
@@ -39,8 +40,9 @@ const WhyUs = () => {
                     />
                   </div>
                   <div className='justify-center text-center mt-3 w-full md:w-44'>
-                    <h1 className="font-semibold text-xl">Get Instant cash for a downgrade.</h1>
-                    <p className='mt-3'>Receive immediate cash by downgrading your item or possession</p>
+                    <h1 className="font-semibold text-xl">Instant cash and Car for a downgrade.</h1>
+                    {/* <h1 className="font-semibold text-xl">Get Instant cash for a downgrade.</h1>
+                    <p className='mt-3'>Receive immediate cash by downgrading your item or possession</p> */}
                   </div>
                 </div>
 
@@ -54,8 +56,9 @@ const WhyUs = () => {
                     />
                   </div>
                   <div className='justify-center text-center mt-3 w-full md:w-44'>
-                    <h1 className="font-semibold text-xl">Save hours trying to sell for a new item.</h1>
-                    <p className='mt-3'>Avoid spending hours attempting to sell your current item in order to afford a new one.</p>
+                    <h1 className="font-semibold text-xl">C.	Sell like a boss, No contact with Strangers.</h1>
+                    {/* <h1 className="font-semibold text-xl">Save hours trying to sell for a new item.</h1>
+                    <p className='mt-3'>Avoid spending hours attempting to sell your current item in order to afford a new one.</p> */}
                   </div>
                 </div>
 
@@ -70,7 +73,8 @@ const WhyUs = () => {
                   </div>
                   <div className='justify-center text-center mt-3 w-full md:w-44'>
                     <h1 className="font-semibold text-xl">Your transaction is 100% secured.</h1>
-                    <p className='mt-3'>Rest assured, your transaction is completely secure and protected.</p>
+                    {/* <h1 className="font-semibold text-xl">Your transaction is 100% secured.</h1>
+                    <p className='mt-3'>Rest assured, your transaction is completely secure and protected.</p> */}
                   </div>
                 </div>
               </div>

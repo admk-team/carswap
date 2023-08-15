@@ -25,8 +25,8 @@ const AfterStep = () => {
                     />
                   </div>
                   <div className='justify-center text-center mt-3 w-full md:w-48'>
-                    <h1 className="font-semibold text-xl">Guaranteed Purchase</h1>
-                    <p className='text-md mt-3'>We guarantee the purchase of your car in the best market price</p>
+                    <h1 className="font-semibold text-xl">Guaranteed Purchase/Sell</h1>
+                    {/* <p className='text-md mt-3'>We guarantee the purchase of your car in the best market price</p> */}
                   </div>
                 </div>
 
@@ -39,8 +39,9 @@ const AfterStep = () => {
                     />
                   </div>
                   <div className='justify-center text-center mt-3 w-full md:w-44'>
-                    <h1 className="font-semibold text-xl">No Costs. <br /> No Obligation</h1>
-                    <p className='mt-3'>Book an online appointment at a date and time of your convenience. An affiliate near you will complete transcation with you in real time.</p>
+                    <h1 className="font-semibold text-xl">Your Privacy <br /> is Secured</h1>
+                    {/* <h1 className="font-semibold text-xl">No Costs. <br /> No Obligation</h1>
+                    <p className='mt-3'>Book an online appointment at a date and time of your convenience. An affiliate near you will complete transcation with you in real time.</p> */}
                   </div>
                 </div>
 
@@ -54,8 +55,9 @@ const AfterStep = () => {
                     />
                   </div>
                   <div className='justify-center text-center mt-3 w-full md:w-44'>
-                    <h1 className="font-semibold text-xl">Quick and Easy</h1>
-                    <p className='mt-3'>No hassle, it is done within minutes.</p>
+                    <h1 className="font-semibold text-xl">Cash in your <br />Bank within minutes</h1>
+                    {/* <h1 className="font-semibold text-xl">Quick and Easy</h1>
+                    <p className='mt-3'>No hassle, it is done within minutes.</p> */}
                   </div>
                 </div>
 
@@ -69,8 +71,9 @@ const AfterStep = () => {
                     />
                   </div>
                   <div className='justify-center text-center mt-3 w-full md:w-44'>
-                    <h1 className="font-semibold text-xl">Fast and Secure</h1>
-                    <p className='mt-3'>Everything is done to save your time. And your identity is confidential</p>
+                    <h1 className="font-semibold text-xl">We are fast and reliable</h1>
+                    {/* <h1 className="font-semibold text-xl">Fast and Secure</h1>
+                    <p className='mt-3'>Everything is done to save your time. And your identity is confidential</p> */}
                   </div>
                 </div>
               </div>

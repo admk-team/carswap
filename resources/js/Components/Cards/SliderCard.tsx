@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useForm, router } from '@inertiajs/react';
 
-const SliderCard = ({brands}: any) => {
+const SliderCard = ({brands,categories}: any) => {
 
   const [showResults, setShowResults] = useState(false);
   const [location, setlocation] = useState('');
@@ -50,7 +50,8 @@ const SliderCard = ({brands}: any) => {
     location: '',
     min: 0,
     max: 0,
-    brand: ''
+    brand: '',
+    category:''
   })
 
   const handlePrice = (min: number, max: number) => {
@@ -102,7 +103,18 @@ const SliderCard = ({brands}: any) => {
           </ul>)}
         </div>
 
-        <h3 className='font-extrabold text-xl mt-4 text-gray-950'>By Price:</h3>
+        <h3 className='font-extrabold text-xl mt-4 text-gray-950'>By Category:</h3>
+        <div className="mb-3 mt-2">
+          {categories?.map((category: any, categoryindex: any) => (
+            <button key={categoryindex} type="button"
+              onClick={() => setData('category', category?.id)}
+              className="border mx-1 mb-3 text-sm focus:bg-emerald-500 font-extrabold bg-white-400 border-gray-900 rounded-lg py-1 px-2 shadow-md mr-1 text-gray-950 ">
+              {category?.title+ '(' +category?.cars_count+ ')'}
+            </button>
+          ))
+          }
+        </div>
+        <h3 className='font-extrabold text-xl mt-1 text-gray-950'>By Price:</h3>
         <div className="mb-3 mt-2">
           {priceGroups?.map((pg: any, pgindex: any) => (
             <button key={pgindex} type="button"
