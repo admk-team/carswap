@@ -15,6 +15,7 @@ interface IndexProps {
     swap_cars: any;
     auth: any;
     sale_cars :any;
+    categories :any;
 }
 
 const Index: React.FC<IndexProps> = ({ brands,swap_cars,auth,sale_cars,categories }) =>{
