@@ -12,29 +12,34 @@ import Featured from '@/Components/HomePage/Featured';
 import WhyUs from '@/Components/HomePage/Whyus';
 interface IndexProps {
     brands: any;
-    cars: any;
+    swap_cars: any;
     auth: any;
+    sale_cars :any;
 }
 
-const Index: React.FC<IndexProps> = ({ brands,cars,auth }) =>{
+const Index: React.FC<IndexProps> = ({ brands,swap_cars,auth,sale_cars,categories }) =>{
   return (
     <>
-    <Head title='Best Deals For You | Home'/>
+    <Head title='Nigeria’s No 1. Carswap place. Buy. Sell. Swap'/>
       <NavBar auth={auth} />
-      <TopBanner brands={brands}/>
+      <TopBanner brands={brands} categories={categories}/>
       <div className="text-3xl text-center w-full mt-12">
         <h1 className='text-gray-950 font-semibold'>Find Suitable Deals You Deserve</h1>
       </div>
-      <PricingCard cars={cars} />
+      <PricingCard cars={swap_cars} />
       <div className="mx-auto flex justify-center max-w-screen-xl w-full h-full mt-12 ">
-        <Link href={route('ViewAllCars')} className="text-white bg-green-500 hover:bg-green-600 focus:outline-none font-medium  text-sm px-6 py-2.5 text-center dark:bg-amber-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-32">View More</Link>
+        <Link href={route('ViewAllCars','swap')} className="text-white bg-green-500 hover:bg-green-600 focus:outline-none font-medium  text-sm px-6 py-2.5 text-center dark:bg-amber-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-32">View More</Link>
       </div>
       {/* <BannerTwo /> */}
       <Steps/>
+      <PricingCard cars={sale_cars} />
+      <div className="mx-auto flex justify-center max-w-screen-xl w-full h-full mt-12 ">
+        <Link href={route('ViewAllCars','sale')} className="text-white bg-green-500 hover:bg-green-600 focus:outline-none font-medium  text-sm px-6 py-2.5 text-center dark:bg-amber-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-32">View More</Link>
+      </div>
       {/* <Reviews /> */}
       <AfterStep/>
       <WhyUs/>
-      <Featured/>
+      {/* <Featured/> */}
       <Footer auth={auth} brands={brands}/>
     </>
   )

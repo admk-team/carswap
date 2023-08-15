@@ -97,7 +97,7 @@ export default function AllCars({ brands, cars,auth }:any) {
     };
     return (
         <div>
-            <Head title='All Cars'/>
+            <Head title='Nigeria’s No 1. Carswap place. Buy. Sell. Swap'/>
             <NavBar2 auth={auth} />
             <div className="mx-auto max-w-screen-xl w-full h-full mt-10 ">
                 <div className="bg-gray-200 p-4">

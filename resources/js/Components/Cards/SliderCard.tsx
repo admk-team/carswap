@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useForm, router } from '@inertiajs/react';
 
-const SliderCard = ({brands}: any) => {
+const SliderCard = ({brands,categories}: any) => {
 
   const [showResults, setShowResults] = useState(false);
   const [location, setlocation] = useState('');
@@ -50,7 +50,8 @@ const SliderCard = ({brands}: any) => {
     location: '',
     min: 0,
     max: 0,
-    brand: ''
+    brand: '',
+    category:''
   })
 
   const handlePrice = (min: number, max: number) => {
@@ -83,27 +84,6 @@ const SliderCard = ({brands}: any) => {
     },
 
   ]
-  const categoryGroups = [
-    {
-      name: 'Car',
-   
-    }, {
-      name: 'Furniture',
-     
-    },
-    {
-      name: 'Electronics',
-    },
-    {
-      name: 'Gadgets',
-      
-    },
-    {
-      name: 'Games',
-     
-    },
-
-  ]
 
   const handleSearch = () => {
     get(route('search'));
@@ -125,11 +105,11 @@ const SliderCard = ({brands}: any) => {
 
         <h3 className='font-extrabold text-xl mt-4 text-gray-950'>By Category:</h3>
         <div className="mb-3 mt-2">
-          {categoryGroups?.map((pg: any, pgindex: any) => (
-            <button key={pgindex} type="button"
-              onClick={() => handlePrice(pg.min, pg.max)}
+          {categories?.map((category: any, categoryindex: any) => (
+            <button key={categoryindex} type="button"
+              onClick={() => setData('category', category?.id)}
               className="border mx-1 mb-3 text-sm focus:bg-emerald-500 font-extrabold bg-white-400 border-gray-900 rounded-lg py-1 px-2 shadow-md mr-1 text-gray-950 ">
-              {pg?.name}
+              {category?.title+ '(' +category?.cars_count+ ')'}
             </button>
           ))
           }
@@ -145,7 +125,7 @@ const SliderCard = ({brands}: any) => {
           ))
           }
         </div>
-        {/* <h3 className='font-extrabold text-xl text-gray-950'>By Brand:</h3>
+        <h3 className='font-extrabold text-xl text-gray-950'>By Brand:</h3>
         <div className="grid grid-cols-6 gap-0 mt-2 h-20 overflow-y-scroll">
           {
             brands?.map((brand: any) => (
@@ -154,7 +134,7 @@ const SliderCard = ({brands}: any) => {
               </button>
             ))
           }
-        </div> */}
+        </div>
         <div className="flex justify-center mt-4">
           <button onClick={() => handleSearch()} className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold w-full py-2 px-4 rounded" type="button">Search</button>
         </div>

@@ -22,7 +22,7 @@ const Steps = () => {
                                     </svg>
                                 </div>
                                 <div className='flex justify-center text-center'>
-                                    <p className="mt-4 font-semibold w-56">Post</p>
+                                    <p className="mt-4 font-semibold w-56">Post your car</p>
                                 </div>
                             </div>
                             <div className="md:flex md:flex-col items-center md:text-center p-4 ">
@@ -48,7 +48,7 @@ const Steps = () => {
                                     />
                                 </div>
                                 <div className='flex justify-center text-center'>
-                                    <p className="mt-4 font-semibold w-48 ">Choose another item
+                                    <p className="mt-4 font-semibold w-48 ">Choose car to swap
                                     </p>
                                 </div>
                             </div>

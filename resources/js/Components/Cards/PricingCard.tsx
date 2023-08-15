@@ -52,7 +52,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
     return (
         <div className="mx-auto max-w-screen-xl w-full h-full mt-8 ">
             <div className="flex">
-                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-4 mt-6 p-4  ">
+                <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-4 mt-6 p-4  ">
                     {cars?.map((car: any, index: any) => (
                         <div
                             key={index}
@@ -61,7 +61,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                             <div className="relative">
                                 <Link href={route('CarDetail', car.slug)}>
                                     <img
-                                        className="w-full h-56 rounded-t-lg object-cover "
+                                        className="w-full h-[150px] rounded-t-lg object-cover "
                                         src={"/storage" + car?.images[0]}
                                         alt="product image"
                                     />
@@ -124,34 +124,46 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     </h5>
                                 </Link>
                                 <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">
-                                    ₦ {formatNumberWithCommas(car.price)}
+                                    Price: ₦ {formatNumberWithCommas(car.price)}
                                 </h5>
                                 <div className="flex items-center"></div>
                                 <hr className="border-t-2 border-black mt-2" />
                                 <div className="mt-4">
+                                    <div className='flex flex-wrap justify-between mt-3'>
+                                        <div className='flex mb-1'>
+                                            <img src={car?.brand?.image?"/storage/" + car?.brand?.image:''} className='w-6 h-6' />
+                                            <p className='mx-2 '>Car Brand : {car?.brand?.title}</p>
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-wrap justify-between mt-3'>
+                                        <div className='flex mb-1'>
+                                            <img src={Engine} className='w-6 h-6' />
+                                            <p className='mx-2 '>Model : {car?.model}</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className='flex flex-wrap justify-between mt-3'>
+                                        <div className='flex mb-1'>
+                                            <img src={Conditon} className='w-6 h-6' />
+                                            <p className='mx-2 '>Conditon : {car?.condition}</p>
+                                        </div>
+
+                                    </div>
                                     <div className='flex flex-wrap justify-between'>
-                                        <div className='flex'>
+                                        <div className='flex mb-1'>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                                             </svg>
-                                            <p className='mx-2 '>{car?.location}</p>
+                                            <p className='mx-2 '>Location : {car?.location}</p>
                                         </div>
 
                                     </div>
                                     <div className='flex flex-wrap justify-between mt-3'>
-                                        <div className='flex flex-wrap'>
+                                        <div className='flex mb-1'>
                                             <img src={Conditon} className='w-6 h-6' />
-                                            <p className='mx-2 '>{car?.condition}</p>
+                                            <p className='mx-2 '>Mileage : {car?.mileage}</p>
                                         </div>
-
-                                    </div>
-                                    <div className='flex flex-wrap justify-between mt-3'>
-                                        <div className='flex flex-wrap'>
-                                            <img src={Engine} className='w-6 h-6' />
-                                            <p className='mx-2 '>{car?.engine_capacity}</p>
-                                        </div>
-
                                     </div>
                                     {/* <table className="w-full">
                                         <tbody>

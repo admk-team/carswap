@@ -3,7 +3,7 @@ import { Head, usePage, useForm } from '@inertiajs/react';
 import ImageGallery from '@/Assets/image-gallery.png';
 import ImagCheck from '@/Assets/check.png';
 
-const  EditCarForm= ({ auth,brands,car}: any) => {
+const  EditCarForm= ({ auth,brands,car,categories}: any) => {
     const { errors } = usePage().props
     const [carSwapCheck, setCarSwapCheck] = useState(false);
     const { data, setData, post, processing } = useForm({
@@ -25,6 +25,9 @@ const  EditCarForm= ({ auth,brands,car}: any) => {
         interiorColor: car.interior_color || '',
         exteriorColor: car.exterior_color || '',
         description: car.description || '',
+        body_type: car.body_type || '',
+        price_negotiable: car.price_negotiable || '',
+        custom_paper: car.custom_paper || '',
         images:null,
         _method:'put'
     });
@@ -46,6 +49,16 @@ const  EditCarForm= ({ auth,brands,car}: any) => {
         }else{
             setCarSwapCheck(false);
         }
+    };
+    
+    const handleBodyTypeChange = (event:any) => {
+        setData('body_type', event.target.value)
+    };
+    const handlePriceNegotiableChange = (event:any) => {
+        setData('price_negotiable', event.target.value)
+    };
+    const handleCustomPaperChange = (event:any) => {
+        setData('custom_paper', event.target.value)
     };
     return (
         <>
@@ -87,6 +100,32 @@ const  EditCarForm= ({ auth,brands,car}: any) => {
                                     {errors.condition && <div className='text-red-500'>{errors.condition}</div>}
                                     <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
 
+                                </div>
+                                <div className="relative z-0 w-full mb-6 group">
+                                    <select name="type" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.body_type} onChange={handleBodyTypeChange}>
+                                        <option value="">Body Type</option>
+                                        {
+                                            categories.map((category: any) => (
+                                                <option value={category.id}>{category.title}</option>
+                                            ))
+                                        }
+                                        {/* <option value="SUV">SUV</option>
+                                        <option value="Sedan">Sedan</option>
+                                        <option value="Hatchback">Hatchback</option>
+                                        <option value="Coupe">Coupe</option>
+                                        <option value="Crossover">Crossover</option>
+                                        <option value="Convertible">Convertible</option>
+                                        <option value="Minivan">Minivan</option>
+                                        <option value="Station">Station</option>
+                                        <option value="Wagon">Wagon</option>
+                                        <option value="Family Car">Family Car</option>
+                                        <option value="Pickup">Pickup</option>
+                                        <option value="Truck">Truck</option>
+                                        <option value="Sport">Sport</option>
+                                        <option value="Vintage Cars">Vintage Cars</option> */}
+                                    </select>
+                                    {errors.body_type && <div className='text-red-500'>{errors.body_type}</div>}
+                                    <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
                                     <input type="text" name="engineCapacity" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.engineCapacity} onChange={(e) => setData('engineCapacity', e.target.value)} />
@@ -179,6 +218,24 @@ const  EditCarForm= ({ auth,brands,car}: any) => {
                                     <input type="text" name="exteriorColor" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.exteriorColor} onChange={(e) => setData('exteriorColor', e.target.value)} />
                                     {errors.exteriorColor && <div className='text-red-500'>{errors.exteriorColor}</div>}
                                     <label htmlFor="Modal" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Exterior Color *</label>
+                                </div>
+                                <div className="relative z-0 w-full mb-6 group">
+                                    <select name="type" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.price_negotiable} onChange={handlePriceNegotiableChange}>
+                                        <option value="">The Price Negotiable</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                    {errors.price_negotiable && <div className='text-red-500'>{errors.price_negotiable}</div>}
+                                    <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                                </div>
+                                <div className="relative z-0 w-full mb-6 group">
+                                    <select name="type" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.custom_paper} onChange={handleCustomPaperChange}>
+                                        <option value="">Custom Paper</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                    {errors.custom_paper && <div className='text-red-500'>{errors.custom_paper}</div>}
+                                    <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
                                     <input type="text" name="location" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.location} onChange={(e) => setData('location', e.target.value)} />

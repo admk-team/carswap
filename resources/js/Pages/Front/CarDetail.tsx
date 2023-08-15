@@ -83,9 +83,15 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     const yourCarPrice = my_cars ? my_cars[selectedCarIndex]?.price : 0;
 
     const calculatePriceDifference = () => {
-        const difference = carPrice - yourCarPrice;
-        setPriceDifference(difference);
-        setData('price_diff', difference);
+        if (!(selectedCarIds?.length > 0)) {
+            alert("Please Select Car First!");
+            return 0;
+        }else{
+            const difference = carPrice - yourCarPrice;
+            setPriceDifference(difference);
+            setData('price_diff', difference);
+        }
+       
     };
 
 
@@ -242,7 +248,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     return (
 
         <div>
-            <Head title={car.title} />
+            <Head title='Nigeria’s No 1. Carswap place. Buy. Sell. Swap' />
             <div>
                 <NavBar2 auth={auth} />
             </div>
@@ -321,7 +327,36 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
                                                             :
                                                             <>
-                                                                <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Swap Buy Calculator</h2>
+                                                            <div className="focus:border-none">
+                                                            <div className="col-span-1 md:col-span-2 lg:col-span-1 items-center focus:border-none">
+                                                                    <p className='text-gray-950 mt-2 text-2xl font-bold mb-2 text-center'>Select to swap</p>
+                                                                    {
+                                                                        auth?.user ?   
+                                                                            <>
+                                                                                <Slider {...settings}>
+                                                                                {my_cars.map((my_car: any, index: any) => (
+                                                                                    <div key={index} className="relative inline-block focus:border-none">
+                                                                                    <label className="absolute top-2 right-2 z-10 left-[50%] mx-[40px]">
+                                                                                        <input
+                                                                                        type="checkbox"
+                                                                                        className="form-checkbox  h-5 w-5  border-2 border-red-500"
+                                                                                        checked={selectedCarIds.includes(my_car.id)}
+                                                                                        onChange={() => handleCheckboxChange(my_car.id)}
+                                                                                        />
+                                                                                    </label>
+                                                                                    <img src={'/storage' + my_car?.images[0]} className="w-full h-24 object-contain" alt={`Car ${index + 1}`} />
+                                                                                    </div>
+                                                                                ))}
+                                                                                </Slider>
+                                                                            </>
+                                                                            :
+                                                                            <div>
+                                                                                <h4>Login First to view your cars to swap</h4>
+                                                                            </div>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                                <h2 className="text-lg font-bold mb-4 text-center text-emerald-900 mt-5">Swap Buy Calculator</h2>
                                                                 <hr className='mb-4' />
                                                                 <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow'>
                                                                     <p className='font-bold'>Our Car Price</p>

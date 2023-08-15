@@ -164,6 +164,8 @@ const NavBar = (auth: any) => {
 
             </div>
             <div className="md:hidden">
+              {
+                auth && auth.auth.user?
               <button
                 className="mobile-menu-button p-2 rounded-md inline-flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 onClick={toggleMenu}
@@ -200,14 +202,44 @@ const NavBar = (auth: any) => {
                   </svg>
                 )}
               </button>
+              :
+              ''
+              }
             </div>
+          </div>
+          <div className='flex md:hidden'>
+            <Link href={route('user.postcar')} className=" block px-3 py-2  text-base font-medium text-white">
+              Post a Car
+            </Link>
+            <img className='block w-7 h-6 ml-2 mt-2' src={bellIcon} alt="" />
+            <div className="flex items-center ml-3">
+              <a href="https://api.whatsapp.com/send?phone=08120222922" className="flex items-center" target="_blank" rel="noopener noreferrer">
+                <img src={watsapImage} className='w-6 h-6 mr-1' alt="" />
+                <span className="text-base font-medium text-white">+2348120222922</span>
+              </a>
+            </div>
+            {
+              auth && auth.auth.user ?
+                ''
+                :
+                <>
+                  <div className='m-3'>
+                    <Link
+                      href={route('user.login')}
+                      className="   text-base font-medium text-white"
+                    >
+                      LogIn
+                    </Link>
+                  </div>
+                </>
+              }
           </div>
         </div>
         {showMenu && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {/* Mobile menu items */}
-              <Link href={route('user.postcar')} className=" block px-3 py-2  text-base font-medium text-white">
+              {/* <Link href={route('user.postcar')} className=" block px-3 py-2  text-base font-medium text-white">
                 Post a Car
               </Link>
               <img className='block w-7 h-7 ml-3' src={bellIcon} alt="" />
@@ -216,7 +248,7 @@ const NavBar = (auth: any) => {
                   <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
                   <span className="text-base font-medium text-white">+2348120222922</span>
                 </a>
-              </div>
+              </div> */}
 
               {
                 auth && auth.auth.user ?
@@ -228,7 +260,7 @@ const NavBar = (auth: any) => {
                   </div>
                   :
                   <>
-                    <div className='m-3'>
+                    {/* <div className='m-3'>
                       <Link
                         href={route('user.login')}
                         className="   text-base font-medium text-white"
@@ -242,7 +274,8 @@ const NavBar = (auth: any) => {
                       >
                         SignUp
                       </Link>
-                    </div>
+                    </div> */}
+                    ''
                   </>
               }
               {subMenu && (

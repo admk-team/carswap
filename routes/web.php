@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CarController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RatingeController;
@@ -55,6 +56,9 @@ Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(functi
     Route::get('/',[AdminDashboardController::class,'index'])->name('dashboard.index');
     Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
 
+    //Category
+    Route::resource('/categories',CategoryController::class);
+
     //Brands
     Route::resource('/brands',BrandController::class);
     Route::get('brands/{id}/{status}',[BrandController::class,'status'])->name('brands.status');
@@ -82,7 +86,7 @@ Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(functi
 
 Route::get('/', [FrontController::class,'index'])->name('front.index');
 Route::get('/car-detail/{slug}', [FrontController::class,'CarDetail'])->name('CarDetail');
-Route::get('/cars/all', [FrontController::class,'ViewAllCars'])->name('ViewAllCars');
+Route::get('/cars/{type}', [FrontController::class,'ViewAllCars'])->name('ViewAllCars');
 Route::get('/contactus', [FrontController::class,'contactus'])->name('contactus');
 Route::get('/wishlist', [FrontController::class,'wishlist'])->name('wishlist');
 Route::get('/partner', [FrontController::class,'partner'])->name('partner');

@@ -29,6 +29,13 @@ function Sidebar({ onCollapseChange, style }) {
                 </Link>
             </li>
             <hr className="sidebar-divider my-0" />
+            <li className={`nav-item ${route().current("categories.index") ? "active" : "collapsed" }`} >
+                <Link className="nav-link" href={route("admin.categories.index")}>
+                    <i className="fas fa-book"></i>
+                    <span>Category</span>
+                </Link>
+            </li>
+            <hr className="sidebar-divider my-0" />
             <li className={`nav-item ${ route().current("admin.brands.index") ? "active" : "collapsed" }`} >
                 <Link href={route("admin.brands.index")} className="nav-link collapsed">
                     <i className="fas fa fa-list"></i>
