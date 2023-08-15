@@ -14,13 +14,47 @@ class FrontController extends Controller
 {
     public function index(Request $request){
         $brands=Brand::where('status','1')->get();
-        $cars=Car::with('ratings')->where('status','1')->where('slug','!=',null)->limit(4)->latest()->get();
+        $swap_cars=Car::with('ratings')->where('status','1')->where('type','swap')->where('slug','!=',null)->limit(4)->latest()->get();
+        $sale_cars=Car::with('ratings')->where('status','1')->where('type','sale')->where('slug','!=',null)->limit(4)->latest()->get();
         $fav = auth()->user()?->wishlist;
-        $cars=$cars->map(function($car) use ($fav){
+        $swap_cars=$swap_cars->map(function($car) use ($fav){
             $images=explode(',',$car->images);
             if($car->type=='swap'){
                 $type="For Swap";
-            }else if($car->type=='sale'){
+            }
+            $totalRating=0;
+            if ($car->ratings && count($car->ratings) > 0) {
+                $averageRating = $car->ratings->avg('rating');
+
+                $totalRating = round($averageRating, 2);
+            }
+            return [
+                'id'=>$car->id,
+                'title'=>$car->title,
+                'slug'=>$car->slug,
+                'brand_id'=>$car->brand_id,
+                'description'=>$car->description,
+                'images'=>$images ?? null,
+                'user_id' =>$car->user_id,
+                'condition' => $car->condition,
+                'engine_capacity' => $car->engine_capacity,
+                'mileage' => $car->mileage,
+                'type' => $type ?? '',
+                'trim' => $car->trim,
+                'location' => $car->location,
+                'price' => $car->price,
+                'fuelType' => $car->fuel_type,
+                'model' => $car->model,
+                'transmission' => $car->transmission,
+                'interiorColor' => $car->interior_color,
+                'exteriorColor' => $car->exterior_color,
+                'is_fav' => $fav&&$fav!=null?($fav->where('id', $car->id)->first() ? true : false):false,
+                'total_rating' => $totalRating
+            ];
+        });
+        $sale_cars=$sale_cars->map(function($car) use ($fav){
+            $images=explode(',',$car->images);
+           if($car->type=='sale'){
                 $type="For Sale";
             }
             $totalRating=0;
@@ -57,10 +91,10 @@ class FrontController extends Controller
         if($request->q){
             $query = $request->q;
             $suggestions=Car::select(['location'])->where('location','LIKE', "%$query%")->groupBy('location')->limit(8)->pluck('location') ?? [];
-            return Inertia::render('Front/Index',['brands'=>$brands,'cars'=>$cars, 'suggestions'=> $suggestions]);
+            return Inertia::render('Front/Index',['brands'=>$brands,'swap_cars'=>$swap_cars, 'sale_cars'=>$sale_cars,'suggestions'=> $suggestions]);
         }
 
-        return Inertia::render('Front/Index',['brands'=>$brands,'cars'=>$cars]);
+        return Inertia::render('Front/Index',['brands'=>$brands,'swap_cars'=>$swap_cars, 'sale_cars'=>$sale_cars,]);
     }
     public function ViewAllCars(){
         $brands=Brand::where('status','1')->get();
