@@ -10,14 +10,14 @@ import Icon2 from "@/Assets/AboutUsIcon2.png"
 import Icon3 from "@/Assets/AboutUsIcon3.png"
 import Icon4 from "@/Assets/AboutUsicon4.png"
 
-const AboutUsPage = ({auth}: any) => {
-   
+const AboutUsPage = ({ auth }: any) => {
+
 
     return (
         <>
             <NavBar auth={auth} />
-            
-            
+
+
             <section className="bg-white">
                 <div className=" hero-section bg-cover bg-center h-96 flex justify-center items-center" style={{ backgroundImage: `url(${AnotherBG})` }}>
                     <div className="hero-content text-center">
@@ -30,22 +30,19 @@ const AboutUsPage = ({auth}: any) => {
                     <div className="flex flex-col justify-center md:flex-row mx-8">
                         <div className="">
                             <div className="bg-white border border-gray-300 rounded-lg shadow-md mt-10 lg:mt-36">
-                                <img src={smallImage} alt=""  />
+                                <img src={smallImage} alt="" />
                             </div>
                         </div>
                         <div className="md:w-2/3 ll-2 lg:pl-28">
 
-                            <h1 className='text-gray-950 text-lg font-extrabold mb-2 mt-4'>Welcome To Carswap.ng</h1>
-                            <p className='text-gray-900 text-lg border-b border-gray-950 pb-4 mb-2'>Carswap.ng is Nigeria's first largest car swap marketplace launched in 2018 and incorporated in Nigeria as Carswap Limited. It promises to make car ownership seamless among users.
-                                <br /><br />
-                                Our mission is to end the tussle of car replacement (selling an existing car to buy a new one), and selling a car to meet financial need. At Carswap.ng, you can use your old to buy a new car by paying the price difference (upgrade), or use your car to get quick cash and a cheaper car (downgrade). You must always have a car to drive!
-                                <br /><br />
-                                Our range of services are designed to ensure privacy of users, anti fraud, and ensure
-                                security of users. No stranger shall contact a user. We are totally responsible for our
-                                users.
-                                <br /><br />
-                                As we continue to expand the online marketplace across Nigeria, we hope to be at your
-                                doorstep soon.
+                            <h1 className='text-gray-950 text-lg font-extrabold mb-2 mt-4'>Welcome To Swapxo.com</h1>
+                            <p className='text-gray-900 text-lg border-b border-gray-950 pb-4 mb-2'>Swapxo.com is Nigeria's best serving marketplace launched in 2023 and incorporated in Nigeria as Swapxo Technology Ventures. It promises to bring succor to hassle of car ownership (selling a car to buy another), and relief to furniture ownership / Choices. Swapxo.com enable savings on electronics / gadgets ownership by allowing owners switch choices within a short time. Users save 50% in cash and time by swapping their items for other choices.
+                                    <br/><br/>
+                                Our mission is to end the tussle of buying and reselling priced items due to or to meet financial need. At Swapxo.com, you can use your old item to buy a new by paying the price difference (upgrade), or use your existing item to get quick cash plus a cheap item (downgrade). You must always have an item!
+                                <br/><br/>
+                                Our range of services are designed to ensure privacy of users, and anti-fraud. We are totally responsible for our users and items on our website.
+                                Thank you and we hope you enjoy your experience with us.
+
                             </p>
 
                             <div className="flex ">
@@ -82,29 +79,29 @@ const AboutUsPage = ({auth}: any) => {
 
                 </div>
                 <div className="mx-auto max-w-screen-xl w-full h-full mt-12 flex items-center justify-center">
-    <div className="md:container md:mx-auto bg-cover bg-center flex items-center" style={{ backgroundImage: `url(${SecondImage})` }}>
-        <div className="mx-auto lg:mx-12 xl:mx-36 text-center">
-            <h1 className="uppercase text-xl md:text-2xl font-bold text-emerald-500 mt-24 text-center">Our Company Status</h1>
-            <div className='grid grid-cols-1 sm:grid-cols-3 gap-8 mb-24'>
-                <div className='mt-16'>
-                    <h2 className="text-1xl md:text-2xl text-emerald-500">100k+</h2>
-                    <h1 className="uppercase font-extrabold text-2xl md:text-3xl text-white mt-3">Cars</h1>
+                    <div className="md:container md:mx-auto bg-cover bg-center flex items-center" style={{ backgroundImage: `url(${SecondImage})` }}>
+                        <div className="mx-auto lg:mx-12 xl:mx-36 text-center">
+                            <h1 className="uppercase text-xl md:text-2xl font-bold text-emerald-500 mt-24 text-center">Our Company Status</h1>
+                            <div className='grid grid-cols-1 sm:grid-cols-3 gap-8 mb-24'>
+                                <div className='mt-16'>
+                                    <h2 className="text-1xl md:text-2xl text-emerald-500">100k+</h2>
+                                    <h1 className="uppercase font-extrabold text-2xl md:text-3xl text-white mt-3">Cars</h1>
+                                </div>
+                                <div className='mt-16'>
+                                    <h2 className="text-1xl md:text-2xl text-emerald-500">100k+</h2>
+                                    <h1 className="uppercase font-extrabold text-2xl md:text-3xl text-white mt-3">Deals</h1>
+                                </div>
+                                <div className='mt-16'>
+                                    <h2 className="text-1xl md:text-2xl text-emerald-500">100k+</h2>
+                                    <h1 className="uppercase font-extrabold text-2xl md:text-3xl text-white mt-3">Clients Annually</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className='mt-16'>
-                    <h2 className="text-1xl md:text-2xl text-emerald-500">100k+</h2>
-                    <h1 className="uppercase font-extrabold text-2xl md:text-3xl text-white mt-3">Deals</h1>
-                </div>
-                <div className='mt-16'>
-                    <h2 className="text-1xl md:text-2xl text-emerald-500">100k+</h2>
-                    <h1 className="uppercase font-extrabold text-2xl md:text-3xl text-white mt-3">Clients Annually</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
             </section >
-            <Footer auth={auth}/>
+            <Footer auth={auth} />
         </>
     )
 }

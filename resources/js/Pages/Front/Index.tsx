@@ -9,6 +9,7 @@ import { Head, Link } from '@inertiajs/react';
 import Steps from '../../Components/HomePage/Steps';
 import AfterStep from '@/Components/HomePage/AfterStep';
 import Featured from '@/Components/HomePage/Featured';
+import WhyUs from '@/Components/HomePage/Whyus';
 interface IndexProps {
     brands: any;
     cars: any;
@@ -22,7 +23,7 @@ const Index: React.FC<IndexProps> = ({ brands,cars,auth }) =>{
       <NavBar auth={auth} />
       <TopBanner brands={brands}/>
       <div className="text-3xl text-center w-full mt-12">
-        <h1 className='text-gray-950 font-semibold'>Finds The Best Deals For You</h1>
+        <h1 className='text-gray-950 font-semibold'>Find Suitable Deals You Deserve</h1>
       </div>
       <PricingCard cars={cars} />
       <div className="mx-auto flex justify-center max-w-screen-xl w-full h-full mt-12 ">
@@ -32,6 +33,7 @@ const Index: React.FC<IndexProps> = ({ brands,cars,auth }) =>{
       <Steps/>
       {/* <Reviews /> */}
       <AfterStep/>
+      <WhyUs/>
       <Featured/>
       <Footer auth={auth} brands={brands}/>
     </>
