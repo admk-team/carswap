@@ -102,7 +102,7 @@ class FrontController extends Controller
     }
     public function ViewAllCars($type){
         $brands=Brand::where('status','1')->get();
-        $cars=Car::where('status','1')->where('slug','!=',null)->where('type',$type)->latest()->get();
+        $cars=Car::with('brand')->where('status','1')->where('slug','!=',null)->where('type',$type)->latest()->get();
         $cars=$cars->map(function($car){
             $images=explode(',',$car->images);
             if($car->type=='swap'){
@@ -122,6 +122,7 @@ class FrontController extends Controller
                 'title'=>$car->title,
                 'slug'=>$car->slug,
                 'brand_id'=>$car->brand_id,
+                'brand'=>$car->brand,
                 'description'=>$car->description,
                 'images'=>$images ?? null,
                 'user_id' =>$car->user_id,
@@ -144,9 +145,9 @@ class FrontController extends Controller
     }
     public function CarDetail($slug){
         $brands=Brand::where('status','1')->get();
-        $car=Car::with('ratings.user','bookings','swaps')->where('slug',$slug)->first();
+        $car=Car::with('ratings.user','bookings','swaps','brand')->where('slug',$slug)->first();
         $car->images=explode(',',$car->images);
-        $similarCars=Car::where('status','1')->limit(4)->latest()->get();
+        $similarCars=Car::where('status','1')->limit(5)->latest()->get();
         $similarCars=$similarCars->map(function($car){
             $totalRating=0;
             if ($car->ratings && count($car->ratings) > 0) {
@@ -164,6 +165,7 @@ class FrontController extends Controller
                 'title'=>$car->title,
                 'slug'=>$car->slug,
                 'brand_id'=>$car->brand_id,
+                'brand'=>$car->brand,
                 'description'=>$car->description,
                 'images'=>$images ?? null,
                 'user_id' =>$car->user_id,
