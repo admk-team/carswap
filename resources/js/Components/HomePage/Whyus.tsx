@@ -56,7 +56,7 @@ const WhyUs = () => {
                     />
                   </div>
                   <div className='justify-center text-center mt-3 w-full md:w-44'>
-                    <h1 className="font-semibold text-xl">C.	Sell like a boss, No contact with Strangers.</h1>
+                    <h1 className="font-semibold text-xl">Sell like a boss, No contact with Strangers.</h1>
                     {/* <h1 className="font-semibold text-xl">Save hours trying to sell for a new item.</h1>
                     <p className='mt-3'>Avoid spending hours attempting to sell your current item in order to afford a new one.</p> */}
                   </div>
