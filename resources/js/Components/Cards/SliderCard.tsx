@@ -102,7 +102,7 @@ const SliderCard = ({brands,categories}: any) => {
             ))}
           </ul>)}
         </div>
-
+          <div className='mt-3 h-40 overflow-y-scroll custom-scrollbar'>    
         <h3 className='font-extrabold text-xl mt-4 text-gray-950'>By Category:</h3>
         <div className="mb-3 mt-2">
           {categories?.map((category: any, categoryindex: any) => (
@@ -126,7 +126,7 @@ const SliderCard = ({brands,categories}: any) => {
           }
         </div>
         <h3 className='font-extrabold text-xl text-gray-950'>By Brand:</h3>
-        <div className="grid grid-cols-6 gap-0 mt-2 h-20 overflow-y-scroll">
+        <div className="grid grid-cols-6 gap-0 mt-2">
           {
             brands?.map((brand: any) => (
               <button key={brand.id} className="border pt-1  pl-1 bg-white-400 focus:bg-emerald-500" onClick={() => setData('brand', brand?.id)}>
@@ -134,6 +134,7 @@ const SliderCard = ({brands,categories}: any) => {
               </button>
             ))
           }
+        </div>
         </div>
         <div className="flex justify-center mt-4">
           <button onClick={() => handleSearch()} className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold w-full py-2 px-4 rounded" type="button">Search</button>
