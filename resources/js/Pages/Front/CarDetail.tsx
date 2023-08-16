@@ -712,194 +712,92 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                             <h3 className="font-bold text-3xl text-green-600">Explore More:</h3>
                             <h3 className="font-bold text-gray-900 text-2xl mt-2">Similar Listings</h3>
                             <div className="flex justify-center">
-                                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 mt-6">
-                                    {similarCars?.map((car: any, index: any) => (
+                            <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-4 mt-6 p-4  ">
+                    {similarCars?.map((car: any, index: any) => (
+                        <div
+                            key={index}
+                            className="w-full bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105"
+                        >
+                            <div className="relative">
+                                <Link href={route('CarDetail', car.slug)}>
+                                    <img
+                                        className="w-full h-[150px] rounded-t-lg object-cover "
+                                        src={"/storage" + car?.images[0]}
+                                        alt="product image"
+                                    />
 
-                                        <div key={index} className="w-full bg-white border border-gray-200  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                                            <div className="relative">
-                                                <Link href={route('CarDetail', car.slug)}>
-                                                    <img className=" w-full h-72 rounded-t-lg object-cover" src={"/storage" + car?.images[0]} alt="product image" />
-                                                </Link>
-                                                <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
-                                                    <p className='font-semibold text-white'>{car?.type}</p>
-                                                </div>
-                                                {/* <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-red-500 absolute top-2 right-2" fill="red" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                                                </svg> */}
-                                                {
-                                                    car.total_rating > 0 &&
-                                                    <>
-                                                        <div className="absolute bottom-5 left-1">
-                                                            <svg aria-hidden="true" className="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            </svg>
-                                                            <span className=" flex justify-center bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#FFA534" viewBox="0 0 24 24" strokeWidth={0} stroke="currentColor" className="w-5 h-5">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-                                                                </svg>
-                                                                <p className='text-sm'>{car.total_rating ? car.total_rating : '0'}</p>
-                                                            </span>
-                                                        </div>
-                                                    </>
-                                                }
-                                            </div>
-                                            <div className="px-2 pb-4">
-                                                <Link href={route('CarDetail', car.slug)}>
-                                                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2">{car?.title}</h5>
-                                                </Link>
-                                                <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">₦ {car?.price}</h5>
-                                                <hr className='border-t-2 border-black mt-2' />
-                                                <div className='flex flex-col'>
-                                                    <div className='flex flex-wrap justify-between mt-3'>
-                                                        <div className='flex flex wrap'>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth
-                                                                ="1.5" stroke="currentColor" className="w-6 h-6">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                                                            </svg>
-                                                            <p className='mx-2 '>{car?.location}</p>
-                                                        </div>
-
-                                                    </div>
-                                                    <div className='flex flex-wrap justify-between mt-3'>
-                                                        <div className='flex flex wrap'>
-                                                            <img src={Conditon} className='w-6 h-6' />
-                                                            <p className='mx-2 '>{car?.condition}</p>
-                                                        </div>
-
-                                                    </div>
-                                                    <div className='flex flex-wrap justify-between mt-3'>
-                                                        <div className='flex flex wrap'>
-                                                            <img src={Engine} className='w-6 h-6' />
-                                                            <p className='mx-2 '>{car?.engine_capacity}</p>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    ))}
-                                    {showSwapModal && selectedCarId && (
-                                        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center z-10">
-
-                                            <div className="flex flex-col  w-full bg-white rounded p-4 max-w-md">
-                                                <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Book Inspection</h2>
-                                                <hr className='mb-2' />
-                                                <div className="pb-12 flex">
-                                                    <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 ">
-                                                        <div className="col-span-1 md:col-span-2 lg:col-span-1">
-                                                            <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
-                                                            <img src={"/storage" + car?.images[0]} className="w-full h-3/5 object-contain"></img>
-                                                            <p className='font-bold'>Price</p>
-                                                            <p>₦ {formatNumberWithCommas(carPrice)}</p>
-                                                            <p className='font-bold'>Price Difference</p>
-                                                            <p className=''>₦ {formatNumberWithCommas(swapPriceDifference)}</p>
-                                                        </div>
-                                                        <div className="col-span-1 md:col-span-1 lg:col-span-1 flex justify-center items-center">
-                                                            <img src={Transfer} className="w-full mt-12 h-14 object-contain"></img>
-                                                        </div>
-                                                        <div className="col-span-1 md:col-span-2 lg:col-span-1">
-                                                            <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Our Car</p>
-                                                            <img src={"/storage" + selectedMyCarImages[0]} alt="My Car" className="w-full h-3/5 object-contain" />
-                                                            <p className='font-bold '>Price</p>
-                                                            <p>₦ {formatNumberWithCommas(selectedMyCarPrice)}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <label htmlFor="swapTime" className='mt-2'>Time:</label>
-                                                <input
-                                                    type="time"
-                                                    id="swapTime"
-                                                    name="Inspection_Time"
-                                                    value={data.Inspection_Time} onChange={(e) => setData('Inspection_Time', e.target.value)}
-                                                />
-
-                                                <label htmlFor="swapDate" className='mt-3'>Date:</label>
-                                                <input
-                                                    type="date"
-                                                    id="swapDate"
-                                                    name="Inspection_date"
-                                                    value={data.Inspection_date} onChange={(e) => setData('Inspection_date', e.target.value)}
-                                                />
-
-                                                <div className="flex justify-end mt-4">
-                                                    <button onClick={() => {
-                                                        handleFlutterPayment({
-                                                            callback: (response: any) => {
-                                                                setPaymentData(response);
-                                                                setTimeout(() => {
-                                                                    paymentResponse(response);
-
-                                                                }, 2000);
-                                                            },
-                                                            onClose: () => { },
-                                                        });
-                                                    }}
-                                                        className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2 '
-                                                    >
-                                                        Book Now
-                                                    </button>
-                                                    <button
-                                                        className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
-                                                        onClick={handleSwapModalClose}
-                                                    >
-                                                        Cancel
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {showBookModal && (
-                                        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center z-10">
-
-                                            <div className="flex flex-col  w-full bg-white rounded p-4 max-w-md">
-                                                <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Book Inspection</h2>
-                                                <hr className='mb-2' />
-                                                <label htmlFor="swapTime" className='mt-2'>Time:</label>
-                                                <input
-                                                    type="time"
-                                                    id="swapTime"
-                                                    name="Inspection_Time"
-                                                    value={data.Inspection_Time} onChange={(e) => setData('Inspection_Time', e.target.value)}
-                                                />
-
-                                                <label htmlFor="swapDate" className='mt-3'>Date:</label>
-                                                <input
-                                                    type="date"
-                                                    id="swapDate"
-                                                    name="Inspection_date"
-                                                    value={data.Inspection_date} onChange={(e) => setData('Inspection_date', e.target.value)}
-                                                />
-                                                <div className="flex justify-end mt-4">
-                                                    <button onClick={() => {
-                                                        handleFlutterPayment({
-                                                            callback: (response: any) => {
-                                                                setPaymentData(response);
-                                                                setTimeout(() => {
-                                                                    paymentResponse(response);
-
-                                                                }, 2000);
-                                                            },
-                                                            onClose: () => { },
-                                                        });
-                                                    }}
-                                                        className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2 '
-                                                    >
-                                                        Book Now
-                                                    </button>
-                                                    <button
-                                                        className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
-                                                        onClick={handleBookModalClose}
-                                                    >
-                                                        Cancel
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    )}
-
+                                </Link>
+                                <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
+                                    <p className='font-semibold text-white'>{car?.type}</p>
                                 </div>
+                                <div className="absolute bottom-5 left-1">
+                                    {
+                                        car.total_rating > 0 &&
+                                        <>
+                                            <span className="flex justify-center bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="#FFA534"
+                                                    viewBox="0 0 24 24"
+                                                    strokeWidth={0}
+                                                    stroke="currentColor"
+                                                    className="w-5 h-5"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+                                                    />
+                                                </svg>
+                                                <p className="text-sm">{car.total_rating ? car.total_rating : '0'}</p>
+                                            </span>
+                                        </>
+                                    }
+                                </div>
+                            </div>
+                            <div className="px-3 pb-4">
+                                <h5 className="text-xl font-bold dark:text-white text-emerald-500 mt-1">
+                                    Price: ₦ {formatNumberWithCommas(car.price)}
+                                </h5>
+                                <Link href={route('CarDetail', car.slug)} className=''>
+                                    <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white mt-1 h-[34px] overflow-hidden">
+                                        {car?.title}
+                                    <span className='mx-2 '>{car?.model}</span>
+                                    </h5>
+                                </Link>
+                                <div className="flex items-center"></div>
+                                <div className="mt-4">
+                                    <div className='flex flex-wrap justify-between mt-3'>
+                                        <div className='flex mb-2 flex-wrap justify-between'>
+                                            <div className='flex'>
+                                                <img src={car?.brand?.image?"/storage/" + car?.brand?.image:''} className='w-6 h-6' />
+                                                <p className='mx-2 '>{car?.brand?.title}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className='flex flex-wrap justify-between'>
+                                        <div className='flex mb-1'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                            </svg>
+                                            <p className='mx-2 '>{car?.location}</p>
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-wrap justify-between mt-3'>
+                                        <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
+                                            <p className='mx-2  text-gray-600'>{car?.condition}</p>
+                                        </div>
+                                        <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
+                                            <p className='mx-2  text-gray-600'>{car?.mileage}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
                             </div>
                         </div>
                         : ''}
