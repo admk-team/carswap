@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Head, usePage, useForm } from '@inertiajs/react';
 import ImageGallery from '@/Assets/image-gallery.png';
 import ImagCheck from '@/Assets/check.png';
@@ -50,6 +50,11 @@ const  EditCarForm= ({ auth,brands,car,categories}: any) => {
             setCarSwapCheck(false);
         }
     };
+    useEffect(()=>{
+        if(car.type=='swap'){
+            setCarSwapCheck(true);
+        }
+    },[])
     
     const handleBodyTypeChange = (event:any) => {
         setData('body_type', event.target.value)
@@ -81,7 +86,7 @@ const  EditCarForm= ({ auth,brands,car,categories}: any) => {
                                         <option value="">Select Brands</option>
                                         {
                                             brands.map((brand: any) => (
-                                                <option value={brand.id}>{brand.title}</option>
+                                                <option value={brand.id} key={brand.id}>{brand.title}</option>
                                             ))
                                         }
 
@@ -106,7 +111,7 @@ const  EditCarForm= ({ auth,brands,car,categories}: any) => {
                                         <option value="">Body Type</option>
                                         {
                                             categories.map((category: any) => (
-                                                <option value={category.id}>{category.title}</option>
+                                                <option value={category.id} key={category.id}>{category.title}</option>
                                             ))
                                         }
                                         {/* <option value="SUV">SUV</option>
@@ -150,23 +155,24 @@ const  EditCarForm= ({ auth,brands,car,categories}: any) => {
                                 </div>
                             </div>
                             {
-                                carSwapCheck&&(
-                                    <>
-                                        <h3 className="text-xl text-gray-950 font-bold mb-1">For Intersted Swap Car Details</h3>
-                                        <div className="grid md:grid-cols-2 md:gap-x-6 mb-2">
-                                            <div className="relative z-0 w-full mb-6 group">
-                                                <input type="text" name="swaptitle1"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0  focus:border-blue-600 peer" placeholder=" " value={data.swaptitle1} onChange={(e) => setData('swaptitle1', e.target.value)} />
-                                                {errors.swaptitle1 && <div className='text-red-500'>{errors.swaptitle1}</div>}
-                                                <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car Detail 1*</label>
+                                
+                                    carSwapCheck&&(
+                                        <>
+                                            <h3 className="text-xl text-gray-950 font-bold mb-4">For Intersted Swap Car Details</h3>
+                                            <div className="grid md:grid-cols-2 md:gap-x-6 mb-2">
+                                                <div className="relative z-0 w-full mb-6 group">
+                                                    <input type="text" name="swaptitle1"  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0  focus:border-blue-600 peer" placeholder=" " value={data.swaptitle1} onChange={(e) => setData('swaptitle1', e.target.value)} />
+                                                    {errors.swaptitle1 && <div className='text-red-500'>{errors.swaptitle1}</div>}
+                                                    <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car Detail 1*</label>
+                                                </div>
+                                                <div className="relative z-0 w-full mb-6 group">
+                                                    <input type="text" name="swaptitle2" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0  focus:border-blue-600 peer" placeholder=" " value={data.swaptitle2} onChange={(e) => setData('swaptitle2', e.target.value)} />
+                                                    {errors.swaptitle2 && <div className='text-red-500'>{errors.swaptitle2}</div>}
+                                                    <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car Detail 2*</label>
+                                                </div> 
                                             </div>
-                                            <div className="relative z-0 w-full mb-6 group">
-                                                <input type="text" name="swaptitle2" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0  focus:border-blue-600 peer" placeholder=" " value={data.swaptitle2} onChange={(e) => setData('swaptitle2', e.target.value)} />
-                                                {errors.swaptitle2 && <div className='text-red-500'>{errors.swaptitle2}</div>}
-                                                <label htmlFor="floating_company" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Car Detail 2*</label>
-                                            </div> 
-                                        </div>
-                                    </>
-                                )
+                                        </>
+                                    )
                             }
                             <div className="grid md:grid-cols-2 md:gap-x-6">                    
                                 <div className="relative z-0 w-full mb-6 group">
