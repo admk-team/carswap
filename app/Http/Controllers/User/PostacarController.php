@@ -181,7 +181,7 @@ class PostacarController extends Controller
             'interiorColor' => 'required',
             'exteriorColor' => 'required',
             'description' => 'required',
-            'images' => 'required|array',
+            'images.*' => 'image',
             'swaptitle1' => $request->type == 'swap' ? 'required' : '',
             'swaptitle2' => $request->type == 'swap' ? 'required' : '',
             'body_type'=>'required',
