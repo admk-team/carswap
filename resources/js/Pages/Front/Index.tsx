@@ -34,7 +34,7 @@ const Index: React.FC<IndexProps> = ({ brands,swap_cars,auth,sale_cars,categorie
       {/* <BannerTwo /> */}
       <Steps/>
       <div className="text-3xl text-center w-full mt-12">
-        <h1 className='text-gray-950 font-semibold'>Car For Swap</h1>
+        <h1 className='text-gray-950 font-semibold'>Car For Sale</h1>
       </div>
       <PricingCard cars={sale_cars} />
       <div className="mx-auto flex justify-center max-w-screen-xl w-full h-full mt-12 ">
