@@ -70,7 +70,29 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                 <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
                                     <p className='font-semibold text-white'>{car?.type}</p>
                                 </div>
+                                {/* <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className={`w-7 h-7 ${selectedCarId === car.id || car.is_fav == true ? 'text-red-500' : 'text-gray-500'
+                                        } absolute top-2 right-2`}
+                                    fill={selectedCarId === car.id || car.is_fav == true ? 'red' : 'white'}
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    onClick={() => handleSetHeart(car.id)}
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                    />
+                                </svg> */}
                                 <div className="absolute bottom-5 left-1">
+                                    {/* <svg
+                                        aria-hidden="true"
+                                        className="w-5 h-5 text-yellow-300"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    ></svg> */}
                                     {
                                         car.total_rating > 0 &&
                                         <>
@@ -96,44 +118,88 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                 </div>
                             </div>
                             <div className="px-3 pb-4">
-                                <h5 className="text-xl font-bold dark:text-white text-emerald-500 mt-1">
-                                    Price: ₦ {formatNumberWithCommas(car.price)}
-                                </h5>
                                 <Link href={route('CarDetail', car.slug)} className=''>
-                                    <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white mt-1 h-[34px] overflow-hidden">
+                                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mt-2 h-[36px] overflow-hidden">
                                         {car?.title}
-                                    <span className='mx-2 '>{car?.model}</span>
                                     </h5>
                                 </Link>
+                                <h5 className="text-2xl font-bold dark:text-white text-emerald-500 mt-1">
+                                    Price: ₦ {formatNumberWithCommas(car.price)}
+                                </h5>
                                 <div className="flex items-center"></div>
+                                <hr className="border-t-2 border-black mt-2" />
                                 <div className="mt-4">
                                     <div className='flex flex-wrap justify-between mt-3'>
-                                        <div className='flex mb-2 flex-wrap justify-between'>
-                                            <div className='flex'>
-                                                <img src={car?.brand?.image?"/storage/" + car?.brand?.image:''} className='w-6 h-6' />
-                                                <p className='mx-2 '>{car?.brand?.title}</p>
-                                            </div>
+                                        <div className='flex mb-1'>
+                                            <img src={car?.brand?.image?"/storage/" + car?.brand?.image:''} className='w-6 h-6' />
+                                            <p className='mx-2 '>Car Brand : {car?.brand?.title}</p>
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-wrap justify-between mt-3'>
+                                        <div className='flex mb-1'>
+                                            <img src={Engine} className='w-6 h-6' />
+                                            <p className='mx-2 '>Model : {car?.model}</p>
                                         </div>
                                     </div>
                                     
+                                    <div className='flex flex-wrap justify-between mt-3'>
+                                        <div className='flex mb-1'>
+                                            <img src={Conditon} className='w-6 h-6' />
+                                            <p className='mx-2 '>Conditon : {car?.condition}</p>
+                                        </div>
+
+                                    </div>
                                     <div className='flex flex-wrap justify-between'>
                                         <div className='flex mb-1'>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                                             </svg>
-                                            <p className='mx-2 '>{car?.location}</p>
+                                            <p className='mx-2 '>Location : {car?.location}</p>
                                         </div>
+
                                     </div>
                                     <div className='flex flex-wrap justify-between mt-3'>
-                                        <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
-                                            <p className='mx-2  text-gray-600'>{car?.condition}</p>
-                                        </div>
-                                        <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
-                                            <p className='mx-2  text-gray-600'>{car?.mileage}</p>
+                                        <div className='flex mb-1'>
+                                            <img src={Conditon} className='w-6 h-6' />
+                                            <p className='mx-2 '>Mileage : {car?.mileage}</p>
                                         </div>
                                     </div>
+                                    {/* <table className="w-full">
+                                        <tbody>
+                                            <tr>
+                                                <th className="px-2 py-1 font-bold-300 text-gray-600">
+                                                    Condition
+                                                </th>
+                                                <th className="px-3 py-1 text-gray-800">Engine</th>
+                                                <th className="px-3 py-1 text-gray-800">Mileage</th>
+                                            </tr>
+                                            <tr>
+                                                <th className="px-2 py-1 text-gray-600">
+                                                    {car?.condition}
+                                                </th>
+                                                <th className="px-3 py-1 text-gray-800">
+                                                    {car.engine_capacity}
+                                                </th>
+                                                <th className="px-3 py-1 text-gray-800">
+                                                    {car?.mileage}
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table> */}
                                 </div>
+
+                                {/* <div className="flex items-center justify-between mt-4">
+                                    <p className="text-white bg-black hover:bg-gray-600 font-medium text-sm px-6 py-2.5 text-center w-34 cursor-pointer">
+                                        Purchase
+                                    </p>
+                                    <button
+                                        className="text-white bg-green-500 hover:bg-green-600 font-medium px-8 py-2.5 text-sm w-34 text-center"
+                                        onClick={() => handleSetCar(car.id)}
+                                    >
+                                        Swap
+                                    </button>
+                                </div> */}
                             </div>
                         </div>
                     ))}
