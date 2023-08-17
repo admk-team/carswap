@@ -70,6 +70,7 @@ Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(functi
     //User
     Route::resource('/users',UserController::class);
     Route::get('users/{id}/{status}',[UserController::class,'status'])->name('users.status');
+    Route::get('users/role/{id}/{role}',[UserController::class,'role'])->name('users.role');
     //Rating(reviews)
     Route::resource('/ratings',RatingeController::class);
     Route::get('/payments',[RatingeController::class,'payment'])->name('payments.index');

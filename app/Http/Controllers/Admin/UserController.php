@@ -140,4 +140,14 @@ class UserController extends Controller
             return Inertia::location(route('admin.users.index', ['success' => 'Failed to change status.']));
         }
     }
+    public function role($id,$role)
+    {
+        $user=User::find($id);
+        $user->role=$role;
+        if ($user->save()) {
+            return Inertia::location(route('admin.users.index', ['success' => 'Role Change successfully.']));
+        } else {
+            return Inertia::location(route('admin.users.index', ['success' => 'Failed to change role.']));
+        }
+    }
 }

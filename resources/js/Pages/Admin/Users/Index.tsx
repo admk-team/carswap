@@ -25,6 +25,9 @@ const Index = ({ auth, users, success, error }: any) => {
     const changeUserStatus = (id: number, status: number) => {
       Inertia.get(route("admin.users.status", { id, status }));
     };
+    const roleHandler = (id: number, role: any) => {
+      Inertia.get(route("admin.users.role", { id, role }));
+    };
     const deleteHandler=((id: number)=>{
         setDeleteId(id);
         setShowModal(true);
@@ -86,6 +89,7 @@ const Index = ({ auth, users, success, error }: any) => {
                                         <th>State</th>
                                         <th>Address</th>
                                         <th>Status</th>
+                                        <th>Roles</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -118,6 +122,19 @@ const Index = ({ auth, users, success, error }: any) => {
                                                         <button className="dropdown-item" onClick={() => changeUserStatus(user.id, 0)}>Deactive</button>
                                                     </div>
                                                 </div>
+                                            </td>
+                                            <td>
+                                              <div className="dropdown mb-4">
+                                                <button className={`btn btn-${user.role&&user.role==1?'warning':'info'} dropdown-toggle`} type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                  {
+                                                    user.role&&user.role==1?'Admin':'User'
+                                                  }
+                                                </button>
+                                                <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+                                                    <button onClick={()=>roleHandler(user.id,1)} className="dropdown-item">Assign Admin Role</button>
+                                                    <button onClick={()=>roleHandler(user.id,0)} className="dropdown-item">Remove Admin Role</button>
+                                                </div>
+                                              </div>
                                             </td>
                                             <td>
                                               <div className="dropdown mb-4">
