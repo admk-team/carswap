@@ -246,6 +246,13 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     }, [galleryImages])
     const swapPriceDifference = selectedMyCarPrice !== null ? carPrice - selectedMyCarPrice : 0;
     
+    const swapDate = new Date(car?.swaps?.Inspection_date);
+    const twentyFourHoursAgo = new Date();
+    twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() + 48);
+    
+    const bookingDate = new Date(car.bookings?.Inspection_date);
+    const bookingTwentyFourHoursAgo = new Date();
+    bookingTwentyFourHoursAgo.setHours(bookingTwentyFourHoursAgo.getHours() + 48);
     return (
 
         <div>
@@ -317,7 +324,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                 :
                                                 <>
                                                     {
-                                                        car?.swaps && new Date(car?.swaps.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
+                                                        
+                                                        swapDate < twentyFourHoursAgo
+                                                        // car?.swaps && new Date(car?.swaps.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
                                                         ?
                                                             <div className='flex flex-wrap justify-center items-center gap-3'>
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7 text-emerald-600">
@@ -401,7 +410,8 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                         <p className='text-center text-md text-red-500 font-bold'>This car belongs to you. You cannot swap or purchase a car that you have added.</p>
                                                     </div>
                                                     :
-                                                    car?.bookings && new Date(car?.bookings?.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
+                                                    bookingDate < bookingTwentyFourHoursAgo
+                                                    // car?.bookings && new Date(car?.bookings?.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
                                                         ?
                                                         <div className='flex flex-wrap justify-center items-center gap-3'>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7 text-emerald-600">
