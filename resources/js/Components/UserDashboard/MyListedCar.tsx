@@ -21,11 +21,16 @@ const MyListedCar = ({ cars, success,auth }: any) => {
         setCurrentPage(pageNumber);
     };
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showSoldModal, setShowSoldModal] = useState(false);
     const [selectedCarSlug, setSelectedCarSlug] = useState('');
 
     const deleteHandler = ((slug: any) => {
         setSelectedCarSlug(slug);
         setShowDeleteModal(true);
+    });
+    const soldHandler = ((slug: any) => {
+        setSelectedCarSlug(slug);
+        setShowSoldModal(true);
     });
     const confirmDeleteHandler = () => {
         if (selectedCarSlug !== null) {
@@ -33,9 +38,19 @@ const MyListedCar = ({ cars, success,auth }: any) => {
         }
         setShowDeleteModal(false);
     };
+    const confirmSoldHandler = () => {
+        if (selectedCarSlug !== null) {
+            get(route("user.deleteCar", selectedCarSlug));
+        }
+        setShowSoldModal(false);
+    };
 
     const handleCloseModal = () => {
         setShowDeleteModal(false);
+        setSelectedCarSlug('');
+    };
+    const handleCloseSoldModal = () => {
+        setShowSoldModal(false);
         setSelectedCarSlug('');
     };
     const config = {
@@ -146,6 +161,12 @@ const MyListedCar = ({ cars, success,auth }: any) => {
                                         >
                                             Delete
                                         </button>
+                                        <button
+                                            className="mx-2 px-2 py-1 text-base font-medium text-center text-white bg-red-600 hover:bg-red-950 self-end"
+                                            onClick={() => soldHandler(carItem.slug)}
+                                        >
+                                            Sold
+                                        </button>
                                         {/* <Link href={route('user.delete', carItem.slug)} className="mx-2 px-2 py-1 text-base font-medium text-center text-white bg-gray-950 hover:bg-green-600 self-end">
                                             Delete
                                         </Link> */}
@@ -160,8 +181,8 @@ const MyListedCar = ({ cars, success,auth }: any) => {
             }
 
             {showDeleteModal && (
-                <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="bg-white w-1/2 p-6 rounded-lg shadow-lg">
+                <div className="fixed inset-0 flex items-center justify-center z-50 bg-[rgba(0,0,0,0.5)]">
+                    <div className="bg-white w-1/4 p-6 rounded-lg shadow-lg">
                         <p className="text-center text-xl font-bold text-gray-900 mb-4">Are you sure you want to delete?</p>
                         <div className="flex justify-center">
                             <button
@@ -173,6 +194,27 @@ const MyListedCar = ({ cars, success,auth }: any) => {
                             <button
                                 className="mx-2 px-4 py-2 text-base font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-lg"
                                 onClick={handleCloseModal}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {showSoldModal && (
+                <div className="fixed inset-0 flex items-center justify-center z-50 bg-[rgba(0,0,0,0.5)]">
+                    <div className="bg-white w-1/4 p-6 rounded-lg shadow-lg">
+                        <p className="text-center text-xl font-bold text-gray-900 mb-4">Have you sold this car?</p>
+                        <div className="flex justify-center">
+                            <button
+                                className="mx-2 px-4 py-2 text-base font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg"
+                                onClick={confirmSoldHandler}
+                            >
+                                Confirm
+                            </button>
+                            <button
+                                className="mx-2 px-4 py-2 text-base font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-lg"
+                                onClick={handleCloseSoldModal}
                             >
                                 Cancel
                             </button>
