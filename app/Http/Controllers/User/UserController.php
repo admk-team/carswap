@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(){
-        $cars = Car::with('payment')->where('user_id', auth()->user()->id)
+        $cars = Car::with('payment')->where('user_id', auth()->user()->id)->where('deleted_at',null)
         ->latest()
         ->get();
 

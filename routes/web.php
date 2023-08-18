@@ -114,7 +114,7 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
     Route::get('/postcar',[PostacarController::class,'create'])->name('postcar');
     Route::get('/edit-car/{slug}',[PostacarController::class,'edit'])->name('editcar');
     Route::any('/update-car/{slug}',[PostacarController::class,'update'])->name('updateCar');
-    Route::get('/delete-car/{slug}',[PostacarController::class,'delete'])->name('deleteCar');
+    Route::get('/delete-car/{slug}',[PostacarController::class,'softDeleteUser'])->name('deleteCar');
 
     // Payment initiation route
     Route::any('/store-payment', [RavepayController::class, 'store'])->name('storePayment');

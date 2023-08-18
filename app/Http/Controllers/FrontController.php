@@ -16,8 +16,8 @@ class FrontController extends Controller
     public function index(Request $request){
         $brands=Brand::where('status','1')->get();
         $categories=Category::withCount('cars')->get();
-        $swap_cars=Car::with('ratings','brand')->where('status','1')->where('type','swap')->where('slug','!=',null)->limit(5)->latest()->get();
-        $sale_cars=Car::with('ratings','brand')->where('status','1')->where('type','sale')->where('slug','!=',null)->limit(5)->latest()->get();
+        $swap_cars=Car::with('ratings','brand')->where('deleted_at',null)->where('status','1')->where('type','swap')->where('slug','!=',null)->limit(5)->latest()->get();
+        $sale_cars=Car::with('ratings','brand')->where('deleted_at',null)->where('status','1')->where('type','sale')->where('slug','!=',null)->limit(5)->latest()->get();
         $fav = auth()->user()?->wishlist;
         $swap_cars=$swap_cars->map(function($car) use ($fav){
             $images=explode(',',$car->images);
@@ -94,7 +94,7 @@ class FrontController extends Controller
 
         if($request->q){
             $query = $request->q;
-            $suggestions=Car::select(['location'])->where('location','LIKE', "%$query%")->groupBy('location')->limit(8)->pluck('location') ?? [];
+            $suggestions=Car::select(['location'])->where('location','LIKE', "%$query%")->where('deleted_at',null)->groupBy('location')->limit(8)->pluck('location') ?? [];
             return Inertia::render('Front/Index',['brands'=>$brands,'swap_cars'=>$swap_cars, 'sale_cars'=>$sale_cars,'suggestions'=> $suggestions,'categories'=>$categories]);
         }
 
@@ -102,7 +102,7 @@ class FrontController extends Controller
     }
     public function ViewAllCars($type){
         $brands=Brand::where('status','1')->get();
-        $cars=Car::with('brand')->where('status','1')->where('slug','!=',null)->where('type',$type)->latest()->get();
+        $cars=Car::with('brand')->where('status','1')->where('deleted_at',null)->where('slug','!=',null)->where('type',$type)->latest()->get();
         $cars=$cars->map(function($car){
             $images=explode(',',$car->images);
             if($car->type=='swap'){
@@ -145,7 +145,7 @@ class FrontController extends Controller
     }
     public function CarDetail($slug){
         $brands=Brand::where('status','1')->get();
-        $car=Car::with('ratings.user','bookings','swaps','brand')->where('slug',$slug)->first();
+        $car=Car::with('ratings.user','bookings','swaps','brand')->where('deleted_at',null)->where('slug',$slug)->first();
         $car->images=explode(',',$car->images);
         $similarCars=Car::where('status','1')->limit(5)->latest()->get();
         $similarCars=$similarCars->map(function($car){
@@ -186,7 +186,7 @@ class FrontController extends Controller
         });
         if(auth()->user()){
             $user_rating=Rating::where('user_id',auth()->user()->id)->where('car_id',$car->id)->first();
-            $my_cars=Car::where('user_id',auth()->user()->id)->where('type','swap')->get();
+            $my_cars=Car::where('user_id',auth()->user()->id)->where('deleted_at',null)->where('type','swap')->get();
             if($my_cars){
                 $my_cars=$my_cars->map(function($car){
                     $car->images=explode(',',$car->images);
@@ -255,7 +255,7 @@ class FrontController extends Controller
         if ($request->model) {
             $query->where('model', $request->model);
         }
-        $cars = $query->with('brand')->get();
+        $cars = $query->with('brand')->where('deleted_at',null)->get();
         $cars=$cars->map(function($car){
             $car->images=explode(',',$car->images);
             return $car;
@@ -264,7 +264,7 @@ class FrontController extends Controller
     }
     public function footerLocation($location){
         $brands=Brand::where('status','1')->get();
-        $cars=Car::where('location','like', '%' . $location . '%')->get();
+        $cars=Car::where('location','like', '%' . $location . '%')->where('deleted_at',null)->get();
         $cars=$cars->map(function($car){
             $car->images=explode(',',$car->images);
             return $car;

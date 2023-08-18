@@ -275,4 +275,13 @@ class PostacarController extends Controller
             return redirect()->back()->withError('error', 'Failed to delete car.');
         }
     }
+    public function softDeleteUser($slug)
+    {
+        $user = Car::where('slug',$slug)->first();
+        if($user->delete()){
+            return redirect()->back()->withSuccess(['success' => 'Car deleted successfully.']);
+        }else{
+            return redirect()->back()->withError('error', 'Failed to delete car.');
+        }
+    }
 }

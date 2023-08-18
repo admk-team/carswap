@@ -185,6 +185,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         // Toggle car selection
         if (selectedCars.includes(myCarId)) {
             setSelectedCars(selectedCars.filter((selectedId) => selectedId !== myCarId));
+            
         } else {
             if (selectedCars.length < 2) {
                 setSelectedCars([...selectedCars, myCarId]);
@@ -193,7 +194,6 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                 // You can show an error message or restrict further selections here.
             }
         }
-
         setShowSwapModal(true);
         setMyCarId(myCarId);
         calculatePriceDifference();
@@ -316,7 +316,8 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                 :
                                                 <>
                                                     {
-                                                        car?.swaps ?
+                                                        car?.swaps && new Date(car?.swaps.created_at).getTime() > new Date().getTime() - 48 * 60 * 60 * 1000
+                                                        ?
                                                             <div className='flex flex-wrap justify-center items-center gap-3'>
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7 text-emerald-600">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -400,15 +401,17 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                         <p className='text-center text-md text-red-500 font-bold'>This car belongs to you. You cannot swap or purchase a car that you have added.</p>
                                                     </div>
                                                     :
-                                                    car?.bookings ?
+                                                    car?.bookings && new Date(car?.bookings?.created_at).getTime() > new Date().getTime() - 48 * 60 * 60 * 1000
+                                                        ?
                                                         <div className='flex flex-wrap justify-center items-center gap-3'>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7 text-emerald-600">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                             </svg>
-                                                            <p className='text-center text-lg text-emerald-900 font-bold'>You Already Booked This Vehicle</p>
+                                                            <p className='text-center text-lg text-emerald-900 font-bold'>INSPECTION ONGOING</p>
                                                         </div>
                                                         :
                                                         <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
+                                                    
                                                 :
                                                 <button className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >
                                                     <Link href={route('user.login')}> Buy Now </Link>
