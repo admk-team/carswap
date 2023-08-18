@@ -410,7 +410,13 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             <p className='text-center text-lg text-emerald-900 font-bold'>INSPECTION ONGOING</p>
                                                         </div>
                                                         :
-                                                        <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
+                                                        <>
+                                                            <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
+                                                            <a className='flex justify-center bg-green-600  w-full text-white font-bold py-2 px-4 rounded mt-3' href='https://api.whatsapp.com/send?phone=08120222922' target='_blank'>
+                                                            <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
+                                                            +2348120222922 
+                                                            </a>
+                                                        </>
                                                     
                                                 :
                                                 <>
