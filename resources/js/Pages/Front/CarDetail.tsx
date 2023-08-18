@@ -36,7 +36,7 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import watsapImage from '@/Assets/whatsapp.png'
 
-export default function CarDetail({ car, auth, similarCars, success, error, user_rating, my_cars }: any) {
+export default function CarDetail({ car, auth, similarCars, success, error, user_rating, my_cars,payment_data }: any) {
     const [checkReview, setCheckReview] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -107,9 +107,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
     };
     const config = {
-        public_key: 'FLWPUBK_TEST-5362dd26662af2fa2bb22c99f29ab2c3-X',
+        public_key: payment_data.public_key?payment_data.public_key:'FLWPUBK-e7cf5d9650bd2e8e4e65358e6248a734-X',
         tx_ref: `${auth?.user?.id}-${Date.now().toString()}`,
-        amount: 100,
+        amount: payment_data.booking_price?payment_data.booking_price:100,
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {

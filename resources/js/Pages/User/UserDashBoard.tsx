@@ -3,32 +3,12 @@ import UserProfile from '@/Components/UserDashboard/UserProfile'
 import React, { useState, useEffect } from "react";
 import { Head } from '@inertiajs/react'
 import Footer from '../Footer/Footer';
-import { useFlutterwave } from 'flutterwave-react-v3';
 import { Inertia } from '@inertiajs/inertia';
 
-const UserDashBoard = ({auth,success,cars,error,pendings,approved,swaped}:any) => {
+const UserDashBoard = ({auth,success,cars,error,pendings,approved,swaped,payment_data}:any) => {
   
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-    const config = {
-      public_key: 'FLWPUBK_TEST-5362dd26662af2fa2bb22c99f29ab2c3-X',
-      tx_ref: `${auth?.user?.id}-${Date.now().toString()}`,
-      amount: 100,
-      currency: 'NGN',
-      payment_options: 'card,mobilemoney,ussd',
-      customer: {
-          email: auth?.user ? auth.user.email : '',
-          phone_number: auth?.user ? auth.user.phone_no : '',
-          name: auth?.user ? auth.user.first_name + ' ' + auth.user.last_name : '',
-      },
-      customizations: {
-          title: 'Car Swap Payment',
-          description: 'Payment for items in cart',
-          logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
-      },
-  };
-
-  const handleFlutterPayment = useFlutterwave(config);
   const [paymentData, setPaymentData] = useState(null)
   useEffect(() => {
     if (paymentData !== null) {
@@ -66,7 +46,7 @@ const UserDashBoard = ({auth,success,cars,error,pendings,approved,swaped}:any) =
           </div>
         )}
 
-        <UserProfile auth={auth} cars={cars} pendings={pendings} approved={approved} swaped={swaped}/>
+        <UserProfile auth={auth} cars={cars} pendings={pendings} approved={approved} swaped={swaped} payment_data={payment_data}/>
       </div>
       <Footer auth={auth}/>
     </>

@@ -4,7 +4,7 @@ import { useFlutterwave } from "flutterwave-react-v3";
 import { link } from "fs";
 import React, { useState, useEffect } from "react";
 
-const MyListedCar = ({ cars, success,auth }: any) => {
+const MyListedCar = ({ cars, success,auth,payment_data }: any) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [carsData, setCarsData] = useState([]);
     const itemsPerPage = 3;
@@ -54,9 +54,9 @@ const MyListedCar = ({ cars, success,auth }: any) => {
         setSelectedCarSlug('');
     };
     const config = {
-        public_key: 'FLWPUBK_TEST-5362dd26662af2fa2bb22c99f29ab2c3-X',
+        public_key: payment_data.public_key?payment_data.public_key:'FLWPUBK-e7cf5d9650bd2e8e4e65358e6248a734-X',
         tx_ref: `${auth?.user?.id}-${Date.now().toString()}`,
-        amount: 100,
+        amount: payment_data.post_car_price?payment_data.post_car_price:100,
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
