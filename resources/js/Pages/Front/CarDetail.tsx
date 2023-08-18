@@ -34,6 +34,7 @@ import CarEngine from "@/Assets/car-engine.png";
 import { Inertia } from '@inertiajs/inertia';
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
+import watsapImage from '@/Assets/whatsapp.png'
 
 export default function CarDetail({ car, auth, similarCars, success, error, user_rating, my_cars }: any) {
     const [checkReview, setCheckReview] = useState(false);
@@ -218,7 +219,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         my_car_id: selectedCarIds,
         price_diff: 0,
     });
-    console.log('data',data)
+    console.log('car',car)
     useEffect(() => {
         setData({ ...data, ...{ 'my_car_id': selectedCarIds } });
     }, [selectedCarIds])
@@ -412,9 +413,15 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                         <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
                                                     
                                                 :
-                                                <button className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >
-                                                    <Link href={route('user.login')}> Buy Now </Link>
-                                                </button>
+                                                <>
+                                                    <button className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >
+                                                        <Link href={route('user.login')}> Buy Now </Link>
+                                                    </button>
+                                                    <a className='flex justify-center bg-green-600  w-full text-white font-bold py-2 px-4 rounded mt-3' href='https://api.whatsapp.com/send?phone=08120222922' target='_blank'>
+                                                        <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
+                                                        +2348120222922 
+                                                    </a>
+                                                </>
                                     }
                                 </div>
                                 {
