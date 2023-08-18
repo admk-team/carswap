@@ -244,7 +244,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     useEffect(() => {
     }, [galleryImages])
     const swapPriceDifference = selectedMyCarPrice !== null ? carPrice - selectedMyCarPrice : 0;
-
+    
     return (
 
         <div>
@@ -316,14 +316,13 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                 :
                                                 <>
                                                     {
-                                                        car?.swaps && new Date(car?.swaps.created_at).getTime() > new Date().getTime() - 48 * 60 * 60 * 1000
+                                                        car?.swaps && new Date(car?.swaps.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
                                                         ?
                                                             <div className='flex flex-wrap justify-center items-center gap-3'>
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7 text-emerald-600">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                                 </svg>
-
-                                                                <p className='text-center text-lg text-emerald-900 font-bold'>You Already Swapped This Vehicle</p>
+                                                                <p className='text-center text-lg text-emerald-900 font-bold'>INSPECTION ONGOING</p>
                                                             </div>
 
                                                             :
@@ -401,7 +400,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                         <p className='text-center text-md text-red-500 font-bold'>This car belongs to you. You cannot swap or purchase a car that you have added.</p>
                                                     </div>
                                                     :
-                                                    car?.bookings && new Date(car?.bookings?.created_at).getTime() > new Date().getTime() - 48 * 60 * 60 * 1000
+                                                    car?.bookings && new Date(car?.bookings?.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
                                                         ?
                                                         <div className='flex flex-wrap justify-center items-center gap-3'>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7 text-emerald-600">
@@ -800,6 +799,125 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                             </div>
                         </div>
                     ))}
+                     {showSwapModal && selectedCarId && (
+                                        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center z-10">
+
+                                            <div className="flex flex-col  w-full bg-white rounded p-4 max-w-md">
+                                                <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Book Inspection</h2>
+                                                <hr className='mb-2' />
+                                                <div className="pb-12 flex">
+                                                    <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 ">
+                                                        <div className="col-span-1 md:col-span-2 lg:col-span-1">
+                                                            <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Your Car</p>
+                                                            <img src={"/storage" + car?.images[0]} className="w-full h-3/5 object-contain"></img>
+                                                            <p className='font-bold'>Price</p>
+                                                            <p>₦ {formatNumberWithCommas(carPrice)}</p>
+                                                            <p className='font-bold'>Price Difference</p>
+                                                            <p className=''>₦ {formatNumberWithCommas(swapPriceDifference)}</p>
+                                                        </div>
+                                                        <div className="col-span-1 md:col-span-1 lg:col-span-1 flex justify-center items-center">
+                                                            <img src={Transfer} className="w-full mt-12 h-14 object-contain"></img>
+                                                        </div>
+                                                        <div className="col-span-1 md:col-span-2 lg:col-span-1">
+                                                            <p className='text-gray-950 mt-2 text-2xl font-bold mb-2'>Our Car</p>
+                                                            <img src={"/storage" + selectedMyCarImages[0]} alt="My Car" className="w-full h-3/5 object-contain" />
+                                                            <p className='font-bold '>Price</p>
+                                                            <p>₦ {formatNumberWithCommas(selectedMyCarPrice)}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <label htmlFor="swapTime" className='mt-2'>Time:</label>
+                                                <input
+                                                    type="time"
+                                                    id="swapTime"
+                                                    name="Inspection_Time"
+                                                    value={data.Inspection_Time} onChange={(e) => setData('Inspection_Time', e.target.value)}
+                                                />
+
+                                                <label htmlFor="swapDate" className='mt-3'>Date:</label>
+                                                <input
+                                                    type="date"
+                                                    id="swapDate"
+                                                    name="Inspection_date"
+                                                    value={data.Inspection_date} onChange={(e) => setData('Inspection_date', e.target.value)}
+                                                />
+
+                                                <div className="flex justify-end mt-4">
+                                                    <button onClick={() => {
+                                                        handleFlutterPayment({
+                                                            callback: (response: any) => {
+                                                                setPaymentData(response);
+                                                                setTimeout(() => {
+                                                                    paymentResponse(response);
+
+                                                                }, 2000);
+                                                            },
+                                                            onClose: () => { },
+                                                        });
+                                                    }}
+                                                        className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2 '
+                                                    >
+                                                        Book Now
+                                                    </button>
+                                                    <button
+                                                        className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
+                                                        onClick={handleSwapModalClose}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {showBookModal && (
+                                        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center z-10">
+
+                                            <div className="flex flex-col  w-full bg-white rounded p-4 max-w-md">
+                                                <h2 className="text-lg font-bold mb-4 text-center text-emerald-900">Book Inspection</h2>
+                                                <hr className='mb-2' />
+                                                <label htmlFor="swapTime" className='mt-2'>Time:</label>
+                                                <input
+                                                    type="time"
+                                                    id="swapTime"
+                                                    name="Inspection_Time"
+                                                    value={data.Inspection_Time} onChange={(e) => setData('Inspection_Time', e.target.value)}
+                                                />
+
+                                                <label htmlFor="swapDate" className='mt-3'>Date:</label>
+                                                <input
+                                                    type="date"
+                                                    id="swapDate"
+                                                    name="Inspection_date"
+                                                    value={data.Inspection_date} onChange={(e) => setData('Inspection_date', e.target.value)}
+                                                />
+                                                <div className="flex justify-end mt-4">
+                                                    <button onClick={() => {
+                                                        handleFlutterPayment({
+                                                            callback: (response: any) => {
+                                                                setPaymentData(response);
+                                                                setTimeout(() => {
+                                                                    paymentResponse(response);
+
+                                                                }, 2000);
+                                                            },
+                                                            onClose: () => { },
+                                                        });
+                                                    }}
+                                                        className='bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2 '
+                                                    >
+                                                        Book Now
+                                                    </button>
+                                                    <button
+                                                        className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
+                                                        onClick={handleBookModalClose}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    )}
                 </div>
                             </div>
                         </div>
