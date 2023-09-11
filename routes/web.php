@@ -155,4 +155,6 @@ Route::name('footer.')->group(function () {
     Route::get('/location/{location}' , [FrontController::class, 'footerLocation'])->name('location');
     Route::get('/brand/{brand}' , [FrontController::class, 'footerBrands'])->name('brands');
 });
+Route::get('/swap-car' , [FrontController::class, 'SwapCar'])->name('SwapCar');
+
 require __DIR__.'/auth.php';

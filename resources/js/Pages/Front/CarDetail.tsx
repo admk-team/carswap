@@ -36,7 +36,7 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import watsapImage from '@/Assets/whatsapp.png'
 
-export default function CarDetail({ car, auth, similarCars, success, error, user_rating, my_cars,payment_data }: any) {
+export default function CarDetail({ car, auth, similarCars, success, error, user_rating, my_cars, payment_data }: any) {
     const [checkReview, setCheckReview] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -87,12 +87,12 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         if (!(selectedCarIds?.length > 0)) {
             alert("Please Select Car First!");
             return 0;
-        }else{
+        } else {
             const difference = carPrice - yourCarPrice;
             setPriceDifference(difference);
             setData('price_diff', difference);
         }
-       
+
     };
 
 
@@ -107,9 +107,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
     };
     const config = {
-        public_key: payment_data.public_key?payment_data.public_key:'FLWPUBK-e7cf5d9650bd2e8e4e65358e6248a734-X',
+        public_key: payment_data.public_key ? payment_data.public_key : 'FLWPUBK-e7cf5d9650bd2e8e4e65358e6248a734-X',
         tx_ref: `${auth?.user?.id}-${Date.now().toString()}`,
-        amount: payment_data.booking_price?payment_data.booking_price:100,
+        amount: payment_data.booking_price ? payment_data.booking_price : 100,
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
@@ -186,7 +186,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         // Toggle car selection
         if (selectedCars.includes(myCarId)) {
             setSelectedCars(selectedCars.filter((selectedId) => selectedId !== myCarId));
-            
+
         } else {
             if (selectedCars.length < 2) {
                 setSelectedCars([...selectedCars, myCarId]);
@@ -205,11 +205,11 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
     const [selectedCarIds, setSelectedCarIds] = useState<number[]>([]);
     const handleCheckboxChange = (my_car_id: number) => {
-    if (selectedCarIds.includes(my_car_id)) {
-        setSelectedCarIds(selectedCarIds.filter((id) => id !== my_car_id));
-    } else {
-        setSelectedCarIds([...selectedCarIds, my_car_id]);
-    }
+        if (selectedCarIds.includes(my_car_id)) {
+            setSelectedCarIds(selectedCarIds.filter((id) => id !== my_car_id));
+        } else {
+            setSelectedCarIds([...selectedCarIds, my_car_id]);
+        }
     };
     //For car swap
     const { data, setData, post } = useForm({
@@ -219,7 +219,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         my_car_id: selectedCarIds,
         price_diff: 0,
     });
-    console.log('car',car)
+    console.log('car', car)
     useEffect(() => {
         setData({ ...data, ...{ 'my_car_id': selectedCarIds } });
     }, [selectedCarIds])
@@ -245,11 +245,11 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     useEffect(() => {
     }, [galleryImages])
     const swapPriceDifference = selectedMyCarPrice !== null ? carPrice - selectedMyCarPrice : 0;
-    
+
     const swapDate = new Date(car?.swaps?.Inspection_date);
     const twentyFourHoursAgo = new Date();
     twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() + 48);
-    
+
     const bookingDate = new Date(car.bookings?.Inspection_date);
     const bookingTwentyFourHoursAgo = new Date();
     bookingTwentyFourHoursAgo.setHours(bookingTwentyFourHoursAgo.getHours() + 48);
@@ -324,10 +324,10 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                 :
                                                 <>
                                                     {
-                                                        
+
                                                         swapDate < twentyFourHoursAgo
-                                                        // car?.swaps && new Date(car?.swaps.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
-                                                        ?
+                                                            // car?.swaps && new Date(car?.swaps.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
+                                                            ?
                                                             <div className='flex flex-wrap justify-center items-center gap-3'>
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7 text-emerald-600">
                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -337,35 +337,35 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
                                                             :
                                                             <>
-                                                            <div className="focus:border-none">
-                                                            <div className="col-span-1 md:col-span-2 lg:col-span-1 items-center focus:border-none">
-                                                                    <p className='text-gray-950 mt-2 text-2xl font-bold mb-2 text-center'>Select to swap</p>
-                                                                    {
-                                                                        auth?.user ?   
-                                                                            <>
-                                                                                <Slider {...settings}>
-                                                                                {my_cars.map((my_car: any, index: any) => (
-                                                                                    <div key={index} className="relative inline-block focus:border-none">
-                                                                                    <label className="absolute top-2 right-2 z-10 left-[50%] mx-[40px]">
-                                                                                        <input
-                                                                                        type="checkbox"
-                                                                                        className="form-checkbox  h-5 w-5  border-2 border-red-500"
-                                                                                        checked={selectedCarIds.includes(my_car.id)}
-                                                                                        onChange={() => handleCheckboxChange(my_car.id)}
-                                                                                        />
-                                                                                    </label>
-                                                                                    <img src={'/storage' + my_car?.images[0]} className="w-full h-24 object-contain" alt={`Car ${index + 1}`} />
-                                                                                    </div>
-                                                                                ))}
-                                                                                </Slider>
-                                                                            </>
-                                                                            :
-                                                                            <div>
-                                                                                <h4>Login First to view your cars to swap</h4>
-                                                                            </div>
-                                                                    }
+                                                                <div className="focus:border-none">
+                                                                    <div className="col-span-1 md:col-span-2 lg:col-span-1 items-center focus:border-none">
+                                                                        <p className='text-gray-950 mt-2 text-2xl font-bold mb-2 text-center'>Select to swap</p>
+                                                                        {
+                                                                            auth?.user ?
+                                                                                <>
+                                                                                    <Slider {...settings}>
+                                                                                        {my_cars.map((my_car: any, index: any) => (
+                                                                                            <div key={index} className="relative inline-block focus:border-none">
+                                                                                                <label className="absolute top-2 right-2 z-10 left-[50%] mx-[40px]">
+                                                                                                    <input
+                                                                                                        type="checkbox"
+                                                                                                        className="form-checkbox  h-5 w-5  border-2 border-red-500"
+                                                                                                        checked={selectedCarIds.includes(my_car.id)}
+                                                                                                        onChange={() => handleCheckboxChange(my_car.id)}
+                                                                                                    />
+                                                                                                </label>
+                                                                                                <img src={'/storage' + my_car?.images[0]} className="w-full h-24 object-contain" alt={`Car ${index + 1}`} />
+                                                                                            </div>
+                                                                                        ))}
+                                                                                    </Slider>
+                                                                                </>
+                                                                                :
+                                                                                <div>
+                                                                                    <h4>Login First to view your cars to swap</h4>
+                                                                                </div>
+                                                                        }
+                                                                    </div>
                                                                 </div>
-                                                            </div>
                                                                 <h2 className="text-lg font-bold mb-4 text-center text-emerald-900 mt-5">Swap Buy Calculator</h2>
                                                                 <hr className='mb-4' />
                                                                 <div className='flex flex-wrap p-3 bg-gray-100 justify-between rounded border shadow'>
@@ -411,7 +411,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                     </div>
                                                     :
                                                     bookingDate < bookingTwentyFourHoursAgo
-                                                    // car?.bookings && new Date(car?.bookings?.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
+                                                        // car?.bookings && new Date(car?.bookings?.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
                                                         ?
                                                         <div className='flex flex-wrap justify-center items-center gap-3'>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7 text-emerald-600">
@@ -423,11 +423,11 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                         <>
                                                             <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
                                                             <a className='flex justify-center bg-green-600  w-full text-white font-bold py-2 px-4 rounded mt-3' href='https://api.whatsapp.com/send?phone=08120222922' target='_blank'>
-                                                            <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
-                                                            +2348120222922 
+                                                                <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
+                                                                +2348120222922
                                                             </a>
                                                         </>
-                                                    
+
                                                 :
                                                 <>
                                                     <button className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >
@@ -435,7 +435,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                     </button>
                                                     <a className='flex justify-center bg-green-600  w-full text-white font-bold py-2 px-4 rounded mt-3' href='https://api.whatsapp.com/send?phone=08120222922' target='_blank'>
                                                         <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
-                                                        +2348120222922 
+                                                        +2348120222922
                                                     </a>
                                                 </>
                                     }
@@ -467,19 +467,19 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                         auth?.user ?
                                                                             <>
                                                                                 <Slider {...settings}>
-                                                                                {my_cars.map((my_car: any, index: any) => (
-                                                                                    <div key={index} className="relative inline-block">
-                                                                                    <label className="absolute top-2 right-2 z-10">
-                                                                                        <input
-                                                                                        type="checkbox"
-                                                                                        className="form-checkbox h-5 w-5  border-2 border-red-500"
-                                                                                        checked={selectedCarIds.includes(my_car.id)}
-                                                                                        onChange={() => handleCheckboxChange(my_car.id)}
-                                                                                        />
-                                                                                    </label>
-                                                                                    <img src={'/storage' + my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
-                                                                                    </div>
-                                                                                ))}
+                                                                                    {my_cars.map((my_car: any, index: any) => (
+                                                                                        <div key={index} className="relative inline-block">
+                                                                                            <label className="absolute top-2 right-2 z-10">
+                                                                                                <input
+                                                                                                    type="checkbox"
+                                                                                                    className="form-checkbox h-5 w-5  border-2 border-red-500"
+                                                                                                    checked={selectedCarIds.includes(my_car.id)}
+                                                                                                    onChange={() => handleCheckboxChange(my_car.id)}
+                                                                                                />
+                                                                                            </label>
+                                                                                            <img src={'/storage' + my_car?.images[0]} className="w-full h-4/5 object-contain" alt={`Car ${index + 1}`} />
+                                                                                        </div>
+                                                                                    ))}
                                                                                 </Slider>
                                                                             </>
                                                                             :
@@ -560,7 +560,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                     <p>{car.interior_color}</p>
                                 </div>
                             </div>
-                          
+
                         </div>
                         <div className="col-span-12 md:col-span-6 lg:col-span-4">
                             <div className='flex justify-between bg-purple-50 p-4'>
@@ -598,7 +598,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                     <p>{car.condition}</p>
                                 </div>
                             </div>
-                         
+
                         </div>
                         <div className="col-span-12 md:col-span-6 lg:col-span-4">
                             <div className='flex justify-between bg-purple-50 p-4'>
@@ -636,39 +636,39 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                 </div>
 
                 {car.swaptitle1 && (
-                <div className='p-4'>
-                    <h3 className="font-bold text-gray-900 text-2xl">My Swap car Option:</h3>
-                    
-                    <div className="grid grid-cols-12 gap-4 mt-7">
-                        <div className="col-span-12 md:col-span-6 lg:col-span-4">
-                        <hr />
-                            <div className='flex justify-between bg-purple-50 p-4'>
-                                <div className="flex gap-2">
-                                    <img src={logoswap} className="w-6 h-6" />
-                                    <p>Car 1</p>
+                    <div className='p-4'>
+                        <h3 className="font-bold text-gray-900 text-2xl">My Swap car Option:</h3>
+
+                        <div className="grid grid-cols-12 gap-4 mt-7">
+                            <div className="col-span-12 md:col-span-6 lg:col-span-4">
+                                <hr />
+                                <div className='flex justify-between bg-purple-50 p-4'>
+                                    <div className="flex gap-2">
+                                        <img src={logoswap} className="w-6 h-6" />
+                                        <p>Car 1</p>
+                                    </div>
+                                    <div>
+                                        <p>{car.swaptitle1}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p>{car.swaptitle1}</p>
-                                </div>
-                            </div>
-                                
+
                             </div>
                             <div className="col-span-12 md:col-span-6 lg:col-span-4">
-                            <hr />
-                        <div className='flex justify-between bg-purple-50 p-4'>
-                            <div className="flex gap-2">
-                                <img src={logoswap} className="w-6 h-6" />
-                                <p>Car 2</p>
-                            </div>
-                            <div>
-                                <p>{car.swaptitle2}</p>
+                                <hr />
+                                <div className='flex justify-between bg-purple-50 p-4'>
+                                    <div className="flex gap-2">
+                                        <img src={logoswap} className="w-6 h-6" />
+                                        <p>Car 2</p>
+                                    </div>
+                                    <div>
+                                        <p>{car.swaptitle2}</p>
+                                    </div>
+                                </div>
+                                <hr />
                             </div>
                         </div>
-                        <hr />
-                        </div>
-                            </div>
-                </div>
-                  )}
+                    </div>
+                )}
                 <div className='p-4'>
                     <h3 className="font-bold text-gray-900 text-2xl">Description:</h3>
                     <p>{car.description}</p>
@@ -737,92 +737,92 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                             <h3 className="font-bold text-3xl text-green-600">Explore More:</h3>
                             <h3 className="font-bold text-gray-900 text-2xl mt-2">Similar Listings</h3>
                             <div className="flex justify-center">
-                            <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-4 mt-6 p-4  ">
-                    {similarCars?.map((car: any, index: any) => (
-                        <div
-                            key={index}
-                            className="w-full bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105"
-                        >
-                            <div className="relative">
-                                <Link href={route('CarDetail', car.slug)}>
-                                    <img
-                                        className="w-full h-[150px] rounded-t-lg object-cover "
-                                        src={"/storage" + car?.images[0]}
-                                        alt="product image"
-                                    />
-
-                                </Link>
-                                <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
-                                    <p className='font-semibold text-white'>{car?.type}</p>
-                                </div>
-                                <div className="absolute bottom-5 left-1">
-                                    {
-                                        car.total_rating > 0 &&
-                                        <>
-                                            <span className="flex justify-center bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="#FFA534"
-                                                    viewBox="0 0 24 24"
-                                                    strokeWidth={0}
-                                                    stroke="currentColor"
-                                                    className="w-5 h-5"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+                                <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-4 mt-6 p-4  ">
+                                    {similarCars?.map((car: any, index: any) => (
+                                        <div
+                                            key={index}
+                                            className="w-full bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105"
+                                        >
+                                            <div className="relative">
+                                                <Link href={route('CarDetail', car.slug)}>
+                                                    <img
+                                                        className="w-full h-[150px] rounded-t-lg object-cover "
+                                                        src={"/storage" + car?.images[0]}
+                                                        alt="product image"
                                                     />
-                                                </svg>
-                                                <p className="text-sm">{car.total_rating ? car.total_rating : '0'}</p>
-                                            </span>
-                                        </>
-                                    }
-                                </div>
-                            </div>
-                            <div className="px-3 pb-4">
-                                <h5 className="text-xl font-bold dark:text-white text-emerald-500 mt-1">
-                                    Price: ₦ {formatNumberWithCommas(car.price)}
-                                </h5>
-                                <Link href={route('CarDetail', car.slug)} className=''>
-                                    <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white mt-1 h-[34px] overflow-hidden">
-                                        {car?.title}
-                                    <span className='mx-2 '>{car?.model}</span>
-                                    </h5>
-                                </Link>
-                                <div className="flex items-center"></div>
-                                <div className="mt-4">
-                                    <div className='flex flex-wrap justify-between mt-3'>
-                                        <div className='flex mb-2 flex-wrap justify-between'>
-                                            <div className='flex'>
-                                                <img src={car?.brand?.image?"/storage/" + car?.brand?.image:''} className='w-6 h-6' />
-                                                <p className='mx-2 '>{car?.brand?.title}</p>
+
+                                                </Link>
+                                                <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
+                                                    <p className='font-semibold text-white'>{car?.type}</p>
+                                                </div>
+                                                <div className="absolute bottom-5 left-1">
+                                                    {
+                                                        car.total_rating > 0 &&
+                                                        <>
+                                                            <span className="flex justify-center bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
+                                                                <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    fill="#FFA534"
+                                                                    viewBox="0 0 24 24"
+                                                                    strokeWidth={0}
+                                                                    stroke="currentColor"
+                                                                    className="w-5 h-5"
+                                                                >
+                                                                    <path
+                                                                        strokeLinecap="round"
+                                                                        strokeLinejoin="round"
+                                                                        d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+                                                                    />
+                                                                </svg>
+                                                                <p className="text-sm">{car.total_rating ? car.total_rating : '0'}</p>
+                                                            </span>
+                                                        </>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div className="px-3 pb-4">
+                                                <h5 className="text-xl font-bold dark:text-white text-emerald-500 mt-1">
+                                                    Price: ₦ {formatNumberWithCommas(car.price)}
+                                                </h5>
+                                                <Link href={route('CarDetail', car.slug)} className=''>
+                                                    <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white mt-1 h-[34px] overflow-hidden">
+                                                        {car?.title}
+                                                        <span className='mx-2 '>{car?.model}</span>
+                                                    </h5>
+                                                </Link>
+                                                <div className="flex items-center"></div>
+                                                <div className="mt-4">
+                                                    <div className='flex flex-wrap justify-between mt-3'>
+                                                        <div className='flex mb-2 flex-wrap justify-between'>
+                                                            <div className='flex'>
+                                                                <img src={car?.brand?.image ? "/storage/" + car?.brand?.image : ''} className='w-6 h-6' />
+                                                                <p className='mx-2 '>{car?.brand?.title}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className='flex flex-wrap justify-between'>
+                                                        <div className='flex mb-1'>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                                            </svg>
+                                                            <p className='mx-2 '>{car?.location}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className='flex flex-wrap justify-between mt-3'>
+                                                        <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
+                                                            <p className='mx-2  text-gray-600'>{car?.condition}</p>
+                                                        </div>
+                                                        <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
+                                                            <p className='mx-2  text-gray-600'>{car?.mileage}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    
-                                    <div className='flex flex-wrap justify-between'>
-                                        <div className='flex mb-1'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                                            </svg>
-                                            <p className='mx-2 '>{car?.location}</p>
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-wrap justify-between mt-3'>
-                                        <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
-                                            <p className='mx-2  text-gray-600'>{car?.condition}</p>
-                                        </div>
-                                        <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
-                                            <p className='mx-2  text-gray-600'>{car?.mileage}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                     {showSwapModal && selectedCarId && (
+                                    ))}
+                                    {showSwapModal && selectedCarId && (
                                         <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center z-10">
 
                                             <div className="flex flex-col  w-full bg-white rounded p-4 max-w-md">
@@ -941,7 +941,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
                                         </div>
                                     )}
-                </div>
+                                </div>
                             </div>
                         </div>
                         : ''}

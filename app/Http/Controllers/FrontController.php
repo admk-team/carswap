@@ -283,5 +283,8 @@ class FrontController extends Controller
         });
         return Inertia::render('Front/AllCars',['brands'=>$brands,'cars'=>$cars]);
     }
+    public function SwapCar(){
+        return Inertia::render('User/SwapCar');
+    }
 
 }
