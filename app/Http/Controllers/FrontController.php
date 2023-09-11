@@ -284,7 +284,9 @@ class FrontController extends Controller
         return Inertia::render('Front/AllCars',['brands'=>$brands,'cars'=>$cars]);
     }
     public function SwapCar(){
-        return Inertia::render('User/SwapCar');
+        $brands=Brand::where('status',1)->get();
+        $categories=Category::get();
+        return Inertia::render('User/SwapCar',['brands'=>$brands,'categories'=>$categories]);
     }
 
 }

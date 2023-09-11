@@ -39,14 +39,16 @@ class PostacarController extends Controller
      */
     public function store(Request $request)
     {
-    
+  
         $request->validate([
+            'lga' => 'required',
+            'street' => 'required',
+            'cylinder' => 'required',
             'title' => 'required',
             'brand_id' => 'required',
             'condition' => 'required',
             'engineCapacity' => 'required',
             'mileage' => 'required',
-            'type' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
@@ -59,15 +61,11 @@ class PostacarController extends Controller
             'description' => 'required',
             'images' => 'required|array',
             'images.*' => 'image',
-            'swaptitle1' => $request->type == 'swap' ? 'required' : '',
-            'swaptitle2' => $request->type == 'swap' ? 'required' : '',
             'body_type'=>'required',
             'price_negotiable'=>'required',
             'custom_paper'=>'required'
         ], [
             'brand_id.required' => 'The brand field is required',
-            'swaptitle1.required' => 'The first swap title is required',
-            'swaptitle2.required' => 'The second swap title is required',
         ]);        
         $images = '';
         $arr = [];
@@ -92,6 +90,9 @@ class PostacarController extends Controller
         
         $images = implode(",", $arr);        
         $model=new Car();
+        $model->lga=$request->lga;
+        $model->street=$request->street;
+        $model->cylinder=$request->cylinder;
         $model->title=$request->title;
         $model->brand_id= $request->brand_id;
         $model->user_id= auth()->user()->id;
@@ -103,7 +104,7 @@ class PostacarController extends Controller
         $model->drive=$request->drive;
         $model->images=$images;
         $model->fuel_Type=$request->fuelType;
-        $model->type=$request->type;
+        $model->type = "sell";
         $model->swaptitle1=$request->swaptitle1;
         $model->swaptitle2=$request->swaptitle2;
         $model->trim=$request->trim;
