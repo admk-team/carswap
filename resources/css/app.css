@@ -49,7 +49,7 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #059669; /* color of the thumb (scrollbar handle) */
+  background-color: #099d6e; /* color of the thumb (scrollbar handle) */
   border-radius: 4px; /* rounded corners for the thumb */
 }
 
