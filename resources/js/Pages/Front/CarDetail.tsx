@@ -339,6 +339,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             <>
                                                                 <div className="focus:border-none">
                                                                     <div className="col-span-1 md:col-span-2 lg:col-span-1 items-center focus:border-none">
+
+                                                                        <p className='text-gray-950 mt-2 text-2xl font-bold mb-2 text-center'>Cash Buy</p>
+                                                                        <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >  Buy Cash  </button>
                                                                         <p className='text-gray-950 mt-2 text-2xl font-bold mb-2 text-center'>Select to swap</p>
                                                                         {
                                                                             auth?.user ?

@@ -95,6 +95,11 @@ const ContactUsPage = ({auth}: any) => {
               SEND NOW
             </button>
           </div>
+     <div className='mt-3 text-center'> 
+For complaints
+Contact CEO. @twitter.com/festusox
+     </div>
+
         </form>
                             </div>
                             <div className="hidden md:block rounded-r-xl overflow-hidden">
