@@ -8,9 +8,16 @@ const Frame = () => {
   return (
     <>
       <div className="w-full h-230 bg-green-500 flex flex-col items-center justify-center p-4 mt-12">
-        <h1 className="text-white text-2xl font-black mt-2">Sell your Car in Simple Steps</h1>
-        <h2 className="text-white text-xl font-bold mb-2">It will take less time</h2>
-        <div className="flex items-center">
+        <h2 className="text-white text-lg text-center font-bold mb-2">Dear Seller / Dealer, ,<br />
+          Welcome to Carswap.ng, your No. 1 cars swap marketplace in Nigeria. You are about to sell a car; please go ahead and fill the form below. Don’t worry when a customer is interested in taking your car for swap. Carswap Limited will pay you complete cash of your car. Allow our approved users visit for swap inspection, your complete cash will be in your bank upon pickup.  You will be charged an inspection fee of N5,000, And no extra cost for a sell. If you are a dealer, you will get N100,000 thank you cash for every 10 cars closed deals on carswap.ng
+          <br />
+          Welcome on board <br/>
+          Carswap Limited Team.
+
+        </h2>
+
+      </div>
+      {/* <div className="flex items-center">
           <div className="mr-4 flex items-center">
             <div className="bg-white rounded-full p-1">
               <img src={ImageElectric} alt="Icon 1" className="w-6 h-6" />
@@ -29,8 +36,8 @@ const Frame = () => {
             </div>
             <span className="text-white text-sm ml-2">Price Tag</span>
           </div>
-        </div>
-      </div>
+        </div> */}
+
     </>
   );
 };
