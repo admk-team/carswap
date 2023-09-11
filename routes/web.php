@@ -139,7 +139,7 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
 
     //Post car
     Route::resource('user/cars',PostacarController::class, ['as'=> 'user']);
-    // Route::get('cars/{id}/{status}',[PostacarController::class,'status'])->name('cars.status');
+     Route::post('cars',[PostacarController::class,'store1'])->name('cars.store1');
     //wishlist
 
 Route::middleware('auth')->group(function () {
