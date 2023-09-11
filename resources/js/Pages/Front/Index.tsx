@@ -10,6 +10,7 @@ import Steps from '../../Components/HomePage/Steps';
 import AfterStep from '@/Components/HomePage/AfterStep';
 import Featured from '@/Components/HomePage/Featured';
 import WhyUs from '@/Components/HomePage/Whyus';
+import Newsletter from './Newsletter';
 interface IndexProps {
     brands: any;
     swap_cars: any;
@@ -41,9 +42,10 @@ const Index: React.FC<IndexProps> = ({ brands,swap_cars,auth,sale_cars,categorie
         <Link href={route('ViewAllCars','sale')} className="text-white bg-green-500 hover:bg-green-600 focus:outline-none font-medium  text-sm px-6 py-2.5 text-center dark:bg-amber-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-32">View More</Link>
       </div>
       {/* <Reviews /> */}
-      <AfterStep/>
-      <WhyUs/>
+      {/* <AfterStep/> */}
+      {/* <WhyUs/> */}
       {/* <Featured/> */}
+      <Newsletter/>
       <Footer auth={auth} brands={brands}/>
     </>
   )

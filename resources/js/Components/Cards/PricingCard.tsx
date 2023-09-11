@@ -8,7 +8,7 @@ import Engine from "@/Assets/car-engine.png";
 
 
 const PricingCard = ({ brands, cars, auth }: any) => {
-
+console.log("cars",cars)
     const [showModal, setShowModal] = useState(false);
     const [inspectionModal, setInspectionModal] = useState(false);
     const [compare, setCompare]: any = useState([])
@@ -52,16 +52,16 @@ const PricingCard = ({ brands, cars, auth }: any) => {
     return (
         <div className="mx-auto max-w-screen-xl w-full h-full mt-8 ">
             <div className="flex">
-                <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-4 mt-6 p-4  ">
+                <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 mb-4 mt-6 p-4  ">
                     {cars?.map((car: any, index: any) => (
                         <div
                             key={index}
-                            className="w-full bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105"
+                            className="w-[374px] mb-3 bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105"
                         >
                             <div className="relative">
                                 <Link href={route('CarDetail', car.slug)}>
                                     <img
-                                        className="w-full h-[150px] rounded-t-lg object-cover "
+                                        className="w-full h-[224px] rounded-t-lg object-cover "
                                         src={"/storage" + car?.images[0]}
                                         alt="product image"
                                     />
@@ -101,8 +101,10 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                 </h5>
                                 <Link href={route('CarDetail', car.slug)} className=''>
                                     <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white mt-1 h-[34px] overflow-hidden">
+                                    <span className='my-2 '>{car?.model}</span>
+                                        <span className='mx-2 '>{car?.brand?.title}</span>
                                         {car?.title}
-                                    <span className='mx-2 '>{car?.model}</span>
+                                    
                                     </h5>
                                 </Link>
                                 <div className="flex items-center"></div>

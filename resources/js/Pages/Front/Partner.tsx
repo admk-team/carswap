@@ -28,8 +28,41 @@ export default function Partner({ auth, success, errors }: any) {
                                     className="w-full px-4 py-3 border border-gray-500 rounded-md bg-transparent placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                                 />
                             </div>
+                            <div className="w-full">
+                                <input
+                                    placeholder="Age"
+                                    className="w-full px-4 py-3 border border-gray-500 rounded-md bg-transparent placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                                />
+                            </div>
+                            <div className="w-full">
+                            <select name="condition" className="w-full px-4 py-3 border border-gray-500 rounded-md bg-transparent placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option value="">Select State</option>
+                                <option value="Abia">Abia</option>
+                                <option value="Anambra ">Anambra </option>
+                                <option value="Adamawa ">Adamawa </option>
+                                <option value="River State">River State </option>
+                                <option value="Abuja">Abuja </option>
+                            </select>
+                            </div>
                         </div>
 
+                        <div className="mb-6">
+                            <input
+                                placeholder="Local government"
+                                type="government"
+                                className="w-full px-4 py-3 border border-gray-500 rounded-md bg-transparent placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                            />
+                        </div>
+                        <div className="mb-6">
+                        <select name="condition" className="w-full px-4 py-3 border border-gray-500 rounded-md bg-transparent placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option value="">Type of partnership </option>
+                                <option value="trader">trader</option>
+                                <option value="inspection-officer">inspection officer </option>
+                                <option value="freelancer ">freelancer </option>
+                                <option value="Mechanic">Mechanic </option>
+                                <option value="Driver">Driver </option>
+                            </select>
+                        </div>
                         <div className="mb-6">
                             <input
                                 placeholder="Enter Email"
@@ -39,17 +72,10 @@ export default function Partner({ auth, success, errors }: any) {
                         </div>
                         <div className="mb-6">
                             <input
-                                placeholder="Telephone number"
+                                placeholder="WhatsApp No"
                                 type="tel"
                                 className="w-full px-4 py-3 border border-gray-500 rounded-md bg-transparent placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             />
-                        </div>
-                        <div className="mb-6">
-                            <input
-                                placeholder="Age"
-                                type="number"
-                                className="w-full px-4 py-3 border border-gray-500 rounded-xl bg-transparent placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                            ></input>
                         </div>
                         <div className="text-center">
                             <button
