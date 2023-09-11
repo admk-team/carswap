@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\PaymentGateway;
 use App\Models\Rating;
 use Illuminate\Support\Facades\Mail;
 
@@ -144,6 +145,7 @@ class FrontController extends Controller
         return Inertia::render('Front/AllCars',['brands'=>$brands,'cars'=>$cars]);
     }
     public function CarDetail($slug){
+        $payment_data=PaymentGateway::first();
         $brands=Brand::where('status','1')->get();
         $car=Car::with('ratings.user','bookings','swaps','brand')->where('deleted_at',null)->where('slug',$slug)->first();
         $car->images=explode(',',$car->images);
@@ -194,7 +196,7 @@ class FrontController extends Controller
                 });
             }
         };
-        return Inertia::render('Front/CarDetail',['brands'=>$brands,'car'=>$car,'similarCars'=>$similarCars,'user_rating'=>$user_rating ?? null,'my_cars'=>$my_cars ?? null]);
+        return Inertia::render('Front/CarDetail',['brands'=>$brands,'car'=>$car,'similarCars'=>$similarCars,'user_rating'=>$user_rating ?? null,'my_cars'=>$my_cars ?? null,'payment_data'=>$payment_data]);
     }
 
     public function contactus(){

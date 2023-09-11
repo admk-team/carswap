@@ -34,8 +34,9 @@ import CarEngine from "@/Assets/car-engine.png";
 import { Inertia } from '@inertiajs/inertia';
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
+import watsapImage from '@/Assets/whatsapp.png'
 
-export default function CarDetail({ car, auth, similarCars, success, error, user_rating, my_cars }: any) {
+export default function CarDetail({ car, auth, similarCars, success, error, user_rating, my_cars,payment_data }: any) {
     const [checkReview, setCheckReview] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -106,9 +107,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
     };
     const config = {
-        public_key: 'FLWPUBK_TEST-5362dd26662af2fa2bb22c99f29ab2c3-X',
+        public_key: payment_data.public_key?payment_data.public_key:'FLWPUBK-e7cf5d9650bd2e8e4e65358e6248a734-X',
         tx_ref: `${auth?.user?.id}-${Date.now().toString()}`,
-        amount: 100,
+        amount: payment_data.booking_price?payment_data.booking_price:100,
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
@@ -218,7 +219,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
         my_car_id: selectedCarIds,
         price_diff: 0,
     });
-    console.log('data',data)
+    console.log('car',car)
     useEffect(() => {
         setData({ ...data, ...{ 'my_car_id': selectedCarIds } });
     }, [selectedCarIds])
@@ -245,6 +246,13 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
     }, [galleryImages])
     const swapPriceDifference = selectedMyCarPrice !== null ? carPrice - selectedMyCarPrice : 0;
     
+    const swapDate = new Date(car?.swaps?.Inspection_date);
+    const twentyFourHoursAgo = new Date();
+    twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() + 48);
+    
+    const bookingDate = new Date(car.bookings?.Inspection_date);
+    const bookingTwentyFourHoursAgo = new Date();
+    bookingTwentyFourHoursAgo.setHours(bookingTwentyFourHoursAgo.getHours() + 48);
     return (
 
         <div>
@@ -316,7 +324,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                 :
                                                 <>
                                                     {
-                                                        car?.swaps && new Date(car?.swaps.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
+                                                        
+                                                        swapDate < twentyFourHoursAgo
+                                                        // car?.swaps && new Date(car?.swaps.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
                                                         ?
                                                             <div className='flex flex-wrap justify-center items-center gap-3'>
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7 text-emerald-600">
@@ -400,7 +410,8 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                         <p className='text-center text-md text-red-500 font-bold'>This car belongs to you. You cannot swap or purchase a car that you have added.</p>
                                                     </div>
                                                     :
-                                                    car?.bookings && new Date(car?.bookings?.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
+                                                    bookingDate < bookingTwentyFourHoursAgo
+                                                    // car?.bookings && new Date(car?.bookings?.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
                                                         ?
                                                         <div className='flex flex-wrap justify-center items-center gap-3'>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7 text-emerald-600">
@@ -409,12 +420,24 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                             <p className='text-center text-lg text-emerald-900 font-bold'>INSPECTION ONGOING</p>
                                                         </div>
                                                         :
-                                                        <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
+                                                        <>
+                                                            <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' > Buy Now </button>
+                                                            <a className='flex justify-center bg-green-600  w-full text-white font-bold py-2 px-4 rounded mt-3' href='https://api.whatsapp.com/send?phone=08120222922' target='_blank'>
+                                                            <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
+                                                            +2348120222922 
+                                                            </a>
+                                                        </>
                                                     
                                                 :
-                                                <button className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >
-                                                    <Link href={route('user.login')}> Buy Now </Link>
-                                                </button>
+                                                <>
+                                                    <button className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >
+                                                        <Link href={route('user.login')}> Buy Now </Link>
+                                                    </button>
+                                                    <a className='flex justify-center bg-green-600  w-full text-white font-bold py-2 px-4 rounded mt-3' href='https://api.whatsapp.com/send?phone=08120222922' target='_blank'>
+                                                        <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
+                                                        +2348120222922 
+                                                    </a>
+                                                </>
                                     }
                                 </div>
                                 {

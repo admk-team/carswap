@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\PaymentGateway;
 use App\Models\Swap;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(){
+        $payment_data=PaymentGateway::first();
         $cars = Car::with('payment')->where('user_id', auth()->user()->id)->where('deleted_at',null)
         ->latest()
         ->get();
@@ -56,7 +58,7 @@ class UserController extends Controller
 
     //     return $item1;
     // });
-        return Inertia::render('User/UserDashBoard', ['cars' => $data,'pendings'=>$pendingsdata,'approved'=>$approved,'swaped'=>$swaped,'success'=>request()->success,'error'=>request()->error]);
+        return Inertia::render('User/UserDashBoard', ['cars' => $data,'pendings'=>$pendingsdata,'approved'=>$approved,'swaped'=>$swaped,'success'=>request()->success,'error'=>request()->error,'payment_data'=>$payment_data]);
     }
 
     public function EditProfile(){

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PaymentGatewayController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RatingeController;
 use App\Http\Controllers\ProfileController;
@@ -83,6 +84,10 @@ Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(functi
     //Swap Inspection details
     Route::get('/swap_Ins',[RatingeController::class,'Swap_ins'])->name('swap_Ins.index');
     Route::get('swap_Ins/{id}/{status}',[RatingeController::class,'statusIns'])->name('swap_Ins.status');
+    
+    //Paymentgatway
+    Route::get('/paymentGateway',[PaymentGatewayController::class,'index'])->name('paymentGateway.index');
+    Route::post('/paymentGateway/store',[PaymentGatewayController::class,'store'])->name('paymentGateway.store');
 });
 
 Route::get('/', [FrontController::class,'index'])->name('front.index');

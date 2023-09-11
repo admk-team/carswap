@@ -109,7 +109,7 @@ const Create = ({ auth,brands,users}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Price <span className='text-danger'>*</span></label>
-                <input type="text" name="price" className="form-control" placeholder="Price"  value={data.price} onChange={(e)=>setData('price',e.target.value)} />
+                <input type="number" name="price" className="form-control" placeholder="Price"  value={data.price} onChange={(e)=>setData('price',e.target.value)} />
                 {errors.price && <div className='text-danger'>{errors.price}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
