@@ -95,11 +95,11 @@ const MyListedCar = ({ cars, success,auth,payment_data }: any) => {
                     <div className="px-4 pt-2 pb-3" key={index}>
                         <div className="flex flex-col bg-white border-1 md:flex-row md:max-w-full hover:bg-gray-100">
                         <div className="relative h-150 ">
-  <img className="h-150 object-cover md:h-auto md:w-48" src={'/storage' + carItem?.images[0]} alt="" />
-  <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
-    <p className='font-semibold text-black text-white'>{carItem?.type}</p>
-  </div>
-</div>
+                         <img className="h-150 object-cover md:h-auto md:w-48" src={'/storage' + carItem?.images[0]} alt="" />
+                         <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
+                          <p className='font-semibold text-black text-white'>{carItem?.type}</p>
+                           </div>
+                          </div>
 
 
                             <div className="flex flex-col justify-between p-2 leading-normal">
