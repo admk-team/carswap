@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PaymentGatewayController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RatingeController;
+use App\Http\Controllers\ForSwapController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\PostacarController;
 use Illuminate\Foundation\Application;
@@ -129,6 +130,8 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
 
     //swap
     Route::post('user/swap', [SwapController::class, 'store'])->name('swap.store');
+     //Post car for swap
+     Route::resource('/swap',ForSwapController::class);
 });
 
     //contactus mail function call
@@ -137,9 +140,11 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
     Route::get('/payment/callback', [RavepayController::class, 'handleCallback'])->name('callback');
     Route::any('/test', [RavepayController::class, 'test']);
 
-    //Post car
+    //Post car for sale
     Route::resource('user/cars',PostacarController::class, ['as'=> 'user']);
-     Route::post('cars',[PostacarController::class,'store1'])->name('cars.store1');
+    
+     //Post car for swap
+     Route::resource('swap',ForSwapController::class);
     //wishlist
 
 Route::middleware('auth')->group(function () {
@@ -155,6 +160,6 @@ Route::name('footer.')->group(function () {
     Route::get('/location/{location}' , [FrontController::class, 'footerLocation'])->name('location');
     Route::get('/brand/{brand}' , [FrontController::class, 'footerBrands'])->name('brands');
 });
-Route::get('/swap-car' , [FrontController::class, 'SwapCar'])->name('SwapCar');
+
 
 require __DIR__.'/auth.php';

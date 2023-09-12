@@ -23,12 +23,11 @@ function SwapCar({ auth, brands, categories }: any) {
         engineCapacity: '',
         mileage: '',
         type: '',
-        swaptitle1: '',
-        swaptitle2: '',
         trim: '',
         price: '',
         fuelType: '',
         model: '',
+        year: '',
         transmission: '',
         drive: '',
         interiorColor: '',
@@ -53,6 +52,7 @@ function SwapCar({ auth, brands, categories }: any) {
         condition2: '',
         interiorColor2: '',
         milage2: '',
+
         images: []
     });
 
@@ -64,7 +64,7 @@ function SwapCar({ auth, brands, categories }: any) {
     };
 
     function handleSubmit() {
-        post(route('cars.store1'))
+        post(route('swap.store'))
     }
     const handleChange = (event:any) => {
         setData('type', event.target.value)
@@ -178,7 +178,6 @@ function SwapCar({ auth, brands, categories }: any) {
                                     {errors.model && <div className='text-red-500'>{errors.model}</div>}
                                     <label htmlFor="address" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Modal *</label>
                                 </div>
-                       
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-x-6">
                     <div className="relative z-0 w-full mb-6 group">
@@ -225,6 +224,7 @@ function SwapCar({ auth, brands, categories }: any) {
                                 
                             </select>
                             <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                            {errors.porpose && <div className='text-red-500'>{errors.porpose}</div>}
                         </div>
                         <div className="relative z-0 w-full mb-6 group">
                             <select name="body_type" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"  value={data.body_type} onChange={(e) => setData('body_type', e.target.value)}>
@@ -238,33 +238,32 @@ function SwapCar({ auth, brands, categories }: any) {
                         </div>
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-x-6">                    
-                    <div className="relative z-0 w-full mb-6 group">
-                            <select name="trim" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.trim} onChange={(e) => setData('trim', e.target.value)}>
-                                <option value="">Owner* </option>
-                                <option value="Direct owner">Direct owner </option>
-                                <option value="Agent">Agent </option>                                
+                        <div className="relative z-0 w-full mb-6 group">
+                            <select name="fuelType" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.fuelType} onChange={(e) => setData('fuelType', e.target.value)}>
+                                <option value="">Fuel Type* </option>
+                                <option value="Petrol">Petrol </option>
+                                <option value="Diesel ">Diesel </option>
+                                <option value="Hi-octane">Hi-octane </option>                                
                             </select>
                             <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
-                            {errors.trim && <div className='text-red-500'>{errors.trim}</div>}
+                            {errors.fuelType && <div className='text-red-500'>{errors.fuelType}</div>}
+
                         </div>
                         <div className="relative z-0 w-full mb-6 group">
-                            <select name="condition" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
-                                <option value="">Fuel Type* </option>
-                                <option value="Nigerian Used">Petrol </option>
-                                <option value="Foreign Used">Diesel </option>
-                                <option value="Foreign Used">Hi-octane </option>                                
-                            </select>
-                            <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
-                        </div>
+                            <input type="text" name="year" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.year} onChange={(e) => setData('year', e.target.value)} />
+                            <label htmlFor="first_name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Year *</label>
+                            {errors.year && <div className='text-red-500'>{errors.year}</div>}
+                            </div>
                     </div>
                     <div className="grid md:grid-cols-2 md:gap-x-6">                    
                         <div className="relative z-0 w-full mb-6 group">
-                            <select name="condition" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                            <select name="drive" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.drive} onChange={(e) => setData('drive', e.target.value)}>
                                 <option value="">Drive Type* </option>
-                                <option value="Nigerian Used">Right Hand </option>
-                                <option value="Foreign Used">Left Hand </option>                                
+                                <option value="Right Hand">Right Hand </option>
+                                <option value="Left Hand ">Left Hand </option>                                
                             </select>
                             <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                            {errors.drive && <div className='text-red-500'>{errors.drive}</div>}
                         </div>
                         <div className="relative z-0 w-full mb-6 group">
                             <select name="trim" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.trim} onChange={(e) => setData('trim', e.target.value)}>
@@ -279,16 +278,17 @@ function SwapCar({ auth, brands, categories }: any) {
                     <div className="grid md:grid-cols-2 md:gap-x-6">                    
                       
                         <div className="relative z-0 w-full mb-6 group">
-                            <select name="condition" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
-                                <option value="">Transmission Type* </option>
-                                <option value="Nigerian Used">Automatic </option>
-                                <option value="Foreign Used">Manual </option>                               
+                            <select name="transmission" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.transmission} onChange={(e) => setData('transmission', e.target.value)}>
+                                <option value="">Transmission Type * </option>
+                                <option value="Automatic">Automatic </option>
+                                <option value="Manual">Manual </option>                               
                             </select>
                             <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                            {errors.transmission && <div className='text-red-500'>{errors.transmission}</div>}
                         </div>
                         <div className="relative z-0 w-full mb-6 group">
-                                    <select name="type" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.custom_paper} onChange={handleCustomPaperChange}>
-                                        <option value="">Custom Paper</option>
+                                    <select name="custom_paper" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.custom_paper} onChange={handleCustomPaperChange}>
+                                        <option value="">Custom Paper *</option>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
                                     </select>
@@ -321,8 +321,7 @@ function SwapCar({ auth, brands, categories }: any) {
                                     {errors.cylinder && <div className='text-red-500'>{errors.cylinder}</div>}
                                 </div>
                     </div>
-                    <div className="grid md:grid-cols-2 md:gap-x-6">
-                                          
+                    <div className="grid md:grid-cols-2 md:gap-x-6">                  
                     <div className="relative z-0 w-full mb-6 group">
                             <select name="fixedengine" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"  value={data.fixedengine} onChange={(e) => setData('fixedengine', e.target.value)}>
                                 <option value="">Fixed Engine* </option>
@@ -339,8 +338,15 @@ function SwapCar({ auth, brands, categories }: any) {
                                 <option value="No">No</option>                                
                             </select>
                             <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                            {errors.fixedtrans && <div className='text-red-500'>{errors.fixedtrans}</div>}
                         </div>
-                        {errors.fixedtrans && <div className='text-red-500'>{errors.fixedtrans}</div>}
+                        <div className="relative z-0 w-full mb-6 group">
+                                    <input type="text" name="description" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.description} onChange={(e) => setData('description', e.target.value)} />
+
+                                    <label htmlFor="cylinder" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Description *</label>
+                                    {errors.description && <div className='text-red-500'>{errors.description}</div>}
+                                </div>
+                             
                     </div>
                     <h1 className="text-xl text-gray-950 font-bold">Two Cars of my swap options:</h1>
                     <div className="grid md:grid-cols-2 md:gap-x-6">

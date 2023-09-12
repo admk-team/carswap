@@ -63,9 +63,11 @@ class PostacarController extends Controller
             'images.*' => 'image',
             'body_type'=>'required',
             'price_negotiable'=>'required',
-            'custom_paper'=>'required'
+            'custom_paper'=>'required',
+            'year'=>'required'
         ], [
             'brand_id.required' => 'The brand field is required',
+            'trim.required' => 'The Owner field is required',
         ]);        
         $images = '';
         $arr = [];
@@ -104,7 +106,7 @@ class PostacarController extends Controller
         $model->drive=$request->drive;
         $model->images=$images;
         $model->fuel_Type=$request->fuelType;
-        $model->type = "sell";
+        $model->type = "sale";
         $model->swaptitle1=$request->swaptitle1;
         $model->swaptitle2=$request->swaptitle2;
         $model->trim=$request->trim;
@@ -116,6 +118,7 @@ class PostacarController extends Controller
         $model->body_type=$request->body_type;
         $model->price_negotiable=$request->price_negotiable;
         $model->custom_paper=$request->custom_paper;
+        $model->year=$request->year;
         $model->status=0;
         if($model->save()){
             $model->slug=Str::slug($request->title).'-'.$model->id;
@@ -144,118 +147,7 @@ class PostacarController extends Controller
      */
     public function show(Request $request)
     {
-        return $request;
-        // $request->validate([
-        //     'lga' => 'required',
-        //     'street' => 'required',
-        //     'cylinder' => 'required',
-        //     'title' => 'required',
-        //     'brand_id' => 'required',
-        //     'condition' => 'required',
-        //     'engineCapacity' => 'required',
-        //     'mileage' => 'required',
-        //     'trim' => 'required',
-        //     'location' => 'required',
-        //     'price' => 'required',
-        //     'fuelType' => 'required',
-        //     'model' => 'required',
-        //     'transmission' => 'required',
-        //     'drive' => 'required',
-        //     'interiorColor' => 'required',
-        //     'exteriorColor' => 'required',
-        //     'description' => 'required',
-        //     'images' => 'required|array',
-        //     'images.*' => 'image',
-        //     'body_type'=>'required',
-        //     'price_negotiable'=>'required',
-        //     'custom_paper'=>'required'
-        // ], [
-        //     'brand_id.required' => 'The brand field is required',
-        // ]);        
-        $images = '';
-        $arr = [];
-        
-        if ($request->hasFile('images')) {
-            $maxImages = 30;
-            $uploadedImagesCount = count($request->file('images'));
-        
-            if ($uploadedImagesCount <= $maxImages) {
-                foreach ($request->file('images') as $item) {
-                    $var = date_create();
-                    $time = date_format($var, 'YmdHis');
-                    $imageName = $time . '-' . $item->getClientOriginalName();
-                    $item->move(public_path('storage/images/cars'), $imageName);
-                    array_push($arr, '/images/cars/' . $imageName);
-                }
-            } else {
-                // Handle the case when the user exceeds the maximum allowed images
-                return response()->json(['message' => 'You can upload a maximum of ' . $maxImages . ' images.'], 400);
-            }
-        }
-        
-        $images = implode(",", $arr);        
-        $model=new Car();
-        $model->lga=$request->lga;
-        $model->street=$request->street;
-        $model->cylinder=$request->cylinder;
-        $model->title=$request->title;
-        $model->brand_id= $request->brand_id;
-        $model->user_id= auth()->user()->id;
-        $model->condition=$request->condition;
-        $model->engine_capacity=$request->engineCapacity;
-        $model->mileage=$request->mileage;
-        $model->location=$request->location;
-        $model->price=$request->price;
-        $model->drive=$request->drive;
-        $model->images=$images;
-        $model->fuel_Type=$request->fuelType;
-        $model->type = "swap";
-        $model->swaptitle1=$request->swaptitle1;
-        $model->swaptitle2=$request->swaptitle2;
-        $model->trim=$request->trim;
-        $model->model=$request->model;
-        $model->transmission=$request->transmission;
-        $model->interior_color=$request->interiorColor;
-        $model->exterior_color=$request->exteriorColor;
-        $model->description=$request->description;
-        $model->body_type=$request->body_type;
-        $model->price_negotiable=$request->price_negotiable;
-        $model->custom_paper=$request->custom_paper;
-        $model->purpose=$request->purpose;
-        $model->fixedengine=$request->fixedengine;
-        $model->fixedtrans=$request->fixedtrans;
-        $model->title1=$request->title1;
-        $model->model1=$request->model1;
-        $model->year1=$request->year1;
-        $model->condition1=$request->condition1;
-        $model->interiorColor1=$request->interiorColor1;
-        $model->milage1=$request->milage1;
-        $model->title2=$request->title2;
-        $model->model2=$request->model2;
-        $model->year2=$request->year2;
-        $model->condition2=$request->condition2;
-        $model->interiorColor2=$request->interiorColor2;
-        $model->milage2=$request->milage2;
-        $model->status=0;
-        if($model->save()){
-            $model->slug=Str::slug($request->title).'-'.$model->id;
-            $model->update();
-            $to = auth()->user()->email;
-            $data=[
-                'first_name'=>$request->first_name,
-                'last_name'=>$request->last_name,
-                'title'=>$request->title,
-                'condition'=>$request->condition,
-                'engine_capacity'=>$request->engine_capacity,
-                'price'=>$request->price,
-                'model'=>$request->model,
-            ];
-            Mail::to($to)->send(new UserPostCarEmail($data));
-            Mail::to('cars@carswap.ng')->send(new AdminCarEmail($data));
-            return Inertia::location(route('user.dashboard', ['success' => 'Car added successfully.']));
-        }else{
-            return Inertia::location(route('user.dashboard', ['error' => 'Failed Car not added.']));
-        }
+       //
     }
 
     /**
@@ -276,13 +168,15 @@ class PostacarController extends Controller
      */
     public function update(Request $request,$id)
     {
-     $request->validate([
+        $rules = [
+            'lga' => 'required',
+            'street' => 'required',
+            'cylinder' => 'required',
             'title' => 'required',
             'brand_id' => 'required',
             'condition' => 'required',
             'engineCapacity' => 'required',
             'mileage' => 'required',
-            'type' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
@@ -294,16 +188,71 @@ class PostacarController extends Controller
             'exteriorColor' => 'required',
             'description' => 'required',
             'images.*' => 'image',
-            'swaptitle1' => $request->type == 'swap' ? 'required' : '',
-            'swaptitle2' => $request->type == 'swap' ? 'required' : '',
             'body_type'=>'required',
             'price_negotiable'=>'required',
-            'custom_paper'=>'required'
-        ], [
+            'custom_paper'=>'required',
+            'year'=>'required'
+        ];
+        
+        $messages = [
             'brand_id.required' => 'The brand field is required',
-            'swaptitle1.required' => 'The first swap title is required',
-            'swaptitle2.required' => 'The second swap title is required',
-        ]);        
+            'trim.required' => 'The Owner field is required',
+        ];
+        
+        // Conditionally add more rules based on the 'type' field
+        if ($request->input('type') === 'swap') {
+            // Additional validation rules for 'sale' type
+            $rules += [
+                'lga' => 'required',
+                'street' => 'required',
+                'cylinder' => 'required',
+                'title' => 'required',
+                'brand_id' => 'required',
+                'condition' => 'required',
+                'engineCapacity' => 'required',
+                'mileage' => 'required',
+                'trim' => 'required',
+                'location' => 'required',
+                'price' => 'required',
+                'fuelType' => 'required',
+                'model' => 'required',
+                'year'=>'required',
+                'transmission' => 'required',
+                'drive' => 'required',
+                'interiorColor' => 'required',
+                'exteriorColor' => 'required',
+                'description' => 'required',
+                'images.*' => 'image',
+                'body_type'=>'required',
+                'price_negotiable'=>'required',
+                'custom_paper'=>'required',
+                'porpose'=>'required',
+                'fixedengine'=>'required',
+                'fixedtrans'=>'required',
+                'title1'=>'required',
+                'model1'=>'required',
+                'year1'=>'required',
+                'condition1'=>'required',
+                'interiorColor1'=>'required',
+                'milage1'=>'required',
+                'title2'=>'required',
+                'model2'=>'required',
+                'year2'=>'required',
+                'condition2'=>'required',
+                'interiorColor2'=>'required',
+                'milage2'=>'required',
+            ];
+            $messages = [
+                'brand_id.required' => 'The brand field is required',
+                'trim.required' => 'The Owner field is required',
+            ];
+        } else {
+            // Additional validation rules for other types (if needed)
+            // For example, if you have rules specific to other types, add them here
+        }
+        
+        $request->validate($rules, $messages);
+            
         $model=Car::find($id);
         if($request->hasFile('images')){
             if ($request->hasFile('images')) {
@@ -357,6 +306,21 @@ class PostacarController extends Controller
         $model->body_type=$request->body_type;
         $model->price_negotiable=$request->price_negotiable;
         $model->custom_paper=$request->custom_paper;
+        $model->porpose=$request->porpose;
+        $model->fixedengine=$request->fixedengine;
+        $model->fixedtrans=$request->fixedtrans;
+        $model->title1=$request->title1;
+        $model->model1=$request->model1;
+        $model->year1=$request->year1;
+        $model->condition1=$request->condition1;
+        $model->interiorColor1=$request->interiorColor1;
+        $model->milage1=$request->milage1;
+        $model->title2=$request->title2;
+        $model->model2=$request->model2;
+        $model->year2=$request->year2;
+        $model->condition2=$request->condition2;
+        $model->interiorColor2=$request->interiorColor2;
+        $model->milage2=$request->milage2;
         if($model->save()){
             $model->slug=Str::slug($request->title).'-'.$model->id;
             $model->update();
@@ -394,121 +358,6 @@ class PostacarController extends Controller
             return redirect()->back()->withSuccess(['success' => 'Car deleted successfully.']);
         }else{
             return redirect()->back()->withError('error', 'Failed to delete car.');
-        }
-    }
-    public function store1(Request $request)
-    {
-      
-        // $request->validate([
-        //     'lga' => 'required',
-        //     'street' => 'required',
-        //     'cylinder' => 'required',
-        //     'title' => 'required',
-        //     'brand_id' => 'required',
-        //     'condition' => 'required',
-        //     'engineCapacity' => 'required',
-        //     'mileage' => 'required',
-        //     'trim' => 'required',
-        //     'location' => 'required',
-        //     'price' => 'required',
-        //     'fuelType' => 'required',
-        //     'model' => 'required',
-        //     'transmission' => 'required',
-        //     'drive' => 'required',
-        //     'interiorColor' => 'required',
-        //     'exteriorColor' => 'required',
-        //     'description' => 'required',
-        //     'images' => 'required|array',
-        //     'images.*' => 'image',
-        //     'body_type'=>'required',
-        //     'price_negotiable'=>'required',
-        //     'custom_paper'=>'required'
-        // ], [
-        //     'brand_id.required' => 'The brand field is required',
-        // ]);        
-        $images = '';
-        $arr = [];
-        
-        if ($request->hasFile('images')) {
-            $maxImages = 30;
-            $uploadedImagesCount = count($request->file('images'));
-        
-            if ($uploadedImagesCount <= $maxImages) {
-                foreach ($request->file('images') as $item) {
-                    $var = date_create();
-                    $time = date_format($var, 'YmdHis');
-                    $imageName = $time . '-' . $item->getClientOriginalName();
-                    $item->move(public_path('storage/images/cars'), $imageName);
-                    array_push($arr, '/images/cars/' . $imageName);
-                }
-            } else {
-                // Handle the case when the user exceeds the maximum allowed images
-                return response()->json(['message' => 'You can upload a maximum of ' . $maxImages . ' images.'], 400);
-            }
-        }
-        
-        $images = implode(",", $arr);        
-        $model=new Car();
-        $model->lga=$request->lga;
-        $model->street=$request->street;
-        $model->cylinder=$request->cylinder;
-        $model->title=$request->title;
-        $model->brand_id= $request->brand_id;
-        $model->user_id= auth()->user()->id;
-        $model->condition=$request->condition;
-        $model->engine_capacity=$request->engineCapacity;
-        $model->mileage=$request->mileage;
-        $model->location=$request->location;
-        $model->price=$request->price;
-        $model->drive=$request->drive;
-        $model->images=$images;
-        $model->fuel_Type=$request->fuelType;
-        $model->type = "swap";
-        $model->swaptitle1=$request->swaptitle1;
-        $model->swaptitle2=$request->swaptitle2;
-        $model->trim=$request->trim;
-        $model->model=$request->model;
-        $model->transmission=$request->transmission;
-        $model->interior_color=$request->interiorColor;
-        $model->exterior_color=$request->exteriorColor;
-        $model->description=$request->description;
-        $model->body_type=$request->body_type;
-        $model->price_negotiable=$request->price_negotiable;
-        $model->custom_paper=$request->custom_paper;
-        $model->porpose=$request->porpose;
-        $model->fixedengine=$request->fixedengine;
-        $model->fixedtrans=$request->fixedtrans;
-        $model->title1=$request->title1;
-        $model->model1=$request->model1;
-        $model->year1=$request->year1;
-        $model->condition1=$request->condition1;
-        $model->interiorColor1=$request->interiorColor1;
-        $model->milage1=$request->milage1;
-        $model->title2=$request->title2;
-        $model->model2=$request->model2;
-        $model->year2=$request->year2;
-        $model->condition2=$request->condition2;
-        $model->interiorColor2=$request->interiorColor2;
-        $model->milage2=$request->milage2;
-        $model->status=0;
-        if($model->save()){
-            $model->slug=Str::slug($request->title).'-'.$model->id;
-            $model->update();
-            $to = auth()->user()->email;
-            $data=[
-                'first_name'=>$request->first_name,
-                'last_name'=>$request->last_name,
-                'title'=>$request->title,
-                'condition'=>$request->condition,
-                'engine_capacity'=>$request->engine_capacity,
-                'price'=>$request->price,
-                'model'=>$request->model,
-            ];
-            Mail::to($to)->send(new UserPostCarEmail($data));
-            Mail::to('cars@carswap.ng')->send(new AdminCarEmail($data));
-            return Inertia::location(route('user.dashboard', ['success' => 'Car added successfully.']));
-        }else{
-            return Inertia::location(route('user.dashboard', ['error' => 'Failed Car not added.']));
         }
     }
 

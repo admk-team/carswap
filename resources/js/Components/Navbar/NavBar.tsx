@@ -40,9 +40,10 @@ const NavBar = (auth: any) => {
             </div>
             <div className="hidden md:block">
               <div className="flex items-center space-x-4">
-                <Link href={route('SwapCar')} className=" text-white font-bold">
+                <Link href={route('user.swap.index')} className=" text-white font-bold">
                   Swap a Car
                 </Link>
+                <span className=" text-white font-bold">|</span>
                 <Link href={route('user.postcar')} className=" text-white font-bold">
                   Sell a Car
                 </Link>
