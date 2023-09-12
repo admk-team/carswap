@@ -19,8 +19,15 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars=Car::with('brand','payment','user')->latest()->get();
-        return Inertia::render('Admin/Cars/Index',['cars'=>$cars, 'success'=>request()->get('success')]);
+        $cars = Car::where('type', 'sale')
+        ->with('brand', 'payment', 'user')
+        ->latest()
+        ->get();
+    
+    return Inertia::render('Admin/CarsForSale/Index', [
+        'cars' => $cars,
+        'success' => request()->get('success'),
+    ]);
     }
 
     /**
@@ -30,7 +37,7 @@ class CarController extends Controller
     {
         $brands=Brand::get();
         $users=User::get();
-        return Inertia::render('Admin/Cars/Create',['brands'=>$brands,'users'=>$users]);
+        return Inertia::render('Admin/CarsForSale/Create',['brands'=>$brands,'users'=>$users]);
     }
 
     /**
@@ -39,6 +46,9 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'lga' => 'required',
+            'street' => 'required',
+            'cylinder' => 'required',
             'title' => 'required',
             'brand_id' => 'required',
             'condition' => 'required',
@@ -57,12 +67,13 @@ class CarController extends Controller
             'description' => 'required',
             'images' => 'required|array',
             'images.*' => 'image',
-            'swaptitle1' => $request->type == 'swap' ? 'required' : '',
-            'swaptitle2' => $request->type == 'swap' ? 'required' : '',
+            'body_type'=>'required',
+            'price_negotiable'=>'required',
+            'custom_paper'=>'required',
+            'year'=>'required'
+           
         ], [
             'brand_id.required' => 'The brand field is required',
-            'swaptitle1.required' => 'The first swap title is required',
-            'swaptitle2.required' => 'The second swap title is required',
         ]);        
         $images = '';
         $arr=[];
@@ -83,9 +94,7 @@ class CarController extends Controller
         $model->condition=$request->condition;
         $model->engine_capacity=$request->engineCapacity;
         $model->mileage=$request->mileage;
-        $model->type=$request->type;
-        $model->swaptitle1=$request->swaptitle1;
-        $model->swaptitle2=$request->swaptitle2;
+        $model->type = "sale";
         $model->trim=$request->trim;
         $model->location=$request->location;
         $model->price=$request->price;
@@ -97,6 +106,13 @@ class CarController extends Controller
         $model->interior_color=$request->interiorColor;
         $model->exterior_color=$request->exteriorColor;
         $model->description=$request->description;
+        $model->lga=$request->lga;
+        $model->street=$request->street;
+        $model->cylinder=$request->cylinder;
+        $model->body_type=$request->body_type;
+        $model->price_negotiable=$request->price_negotiable;
+        $model->custom_paper=$request->custom_paper;
+        $model->year=$request->year;
         if($model->save()){
             $model->slug=Str::slug($request->title).'-'.$model->id;
             $model->update();
@@ -126,7 +142,7 @@ class CarController extends Controller
             ->where('car_id', $car->id)
             ->first(); // Retrieve the payment data
     
-        return Inertia::render('Admin/Cars/Details', [
+        return Inertia::render('Admin/CarsForSale/Details', [
             'car' => $car, // Pass the modified car data (with exploded images array) to the Details component
             'user' => $user, // Pass the user data to the Details component
             'payment' => $payment,
@@ -141,7 +157,7 @@ class CarController extends Controller
         $brands=Brand::get();
         $users=User::get();
         $car=Car::find($id);
-        return Inertia::render('Admin/Cars/Edit',['brands'=>$brands,'car'=>$car,'users'=>$users]);
+        return Inertia::render('Admin/CarsForSale/Edit',['brands'=>$brands,'car'=>$car,'users'=>$users]);
     }
     public function update($id,Request $request)
     {

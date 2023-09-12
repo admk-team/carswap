@@ -107,8 +107,6 @@ class PostacarController extends Controller
         $model->images=$images;
         $model->fuel_Type=$request->fuelType;
         $model->type = "sale";
-        $model->swaptitle1=$request->swaptitle1;
-        $model->swaptitle2=$request->swaptitle2;
         $model->trim=$request->trim;
         $model->model=$request->model;
         $model->transmission=$request->transmission;

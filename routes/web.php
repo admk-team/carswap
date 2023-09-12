@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CarController;
+use App\Http\Controllers\Admin\CarsForSwapController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PaymentGatewayController;
@@ -65,10 +66,12 @@ Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(functi
     Route::resource('/brands',BrandController::class);
     Route::get('brands/{id}/{status}',[BrandController::class,'status'])->name('brands.status');
 
-    //Cars
+    //Cars for sale
     Route::resource('/cars',CarController::class);
     Route::get('cars/{id}/{status}',[CarController::class,'status'])->name('cars.status');
-
+     //Cars for Swap
+    Route::resource('/swap',CarsForSwapController::class);
+    Route::get('swap/{id}/{status}',[CarsForSwapController::class,'status'])->name('cars.status');
     //User
     Route::resource('/users',UserController::class);
     Route::get('users/{id}/{status}',[UserController::class,'status'])->name('users.status');
