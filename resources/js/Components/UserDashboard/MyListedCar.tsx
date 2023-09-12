@@ -4,7 +4,7 @@ import { useFlutterwave } from "flutterwave-react-v3";
 import { link } from "fs";
 import React, { useState, useEffect } from "react";
 
-const MyListedCar = ({ cars, success,auth,payment_data }: any) => {
+const MyListedCar = ({ cars, success, auth, payment_data }: any) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [carsData, setCarsData] = useState([]);
     const itemsPerPage = 3;
@@ -54,9 +54,9 @@ const MyListedCar = ({ cars, success,auth,payment_data }: any) => {
         setSelectedCarSlug('');
     };
     const config = {
-        public_key: payment_data.public_key?payment_data.public_key:'FLWPUBK-e7cf5d9650bd2e8e4e65358e6248a734-X',
+        public_key: payment_data.public_key ? payment_data.public_key : 'FLWPUBK-e7cf5d9650bd2e8e4e65358e6248a734-X',
         tx_ref: `${auth?.user?.id}-${Date.now().toString()}`,
-        amount: payment_data.post_car_price?payment_data.post_car_price:100,
+        amount: payment_data.post_car_price ? payment_data.post_car_price : 100,
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
@@ -94,41 +94,39 @@ const MyListedCar = ({ cars, success,auth,payment_data }: any) => {
                 car.map((carItem: any, index) => (
                     <div className="px-4 pt-2 pb-3" key={index}>
                         <div className="flex flex-col bg-white border-1 md:flex-row md:max-w-full hover:bg-gray-100">
-                        <div className="relative h-150 ">
-  <img className="h-150 object-cover md:h-auto md:w-48" src={'/storage' + carItem?.images[0]} alt="" />
-  <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
-    <p className='font-semibold text-black text-white'>{carItem?.type}</p>
-  </div>
-</div>
-
-
+                            <div className="relative h-150 ">
+                                <img className="h-[250px] object-cover  md:w-[15rem]" src={'/storage' + carItem?.images[0]} alt="" />
+                                <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
+                                    <p className='font-semibold text-black text-white'>{carItem?.type}</p>
+                                </div>
+                            </div>
                             <div className="flex flex-col justify-between p-2 leading-normal">
                                 <h5 className="mb-1 text-2xl font-bold text-gray-900">{carItem?.title}</h5>
                                 {
-                                    carItem?.payment?
-                                    <div className="flex gap-2">
-                                        <span className="text-gray-900 me-3"><strong>Payment Status</strong></span>
-                                        <button className="px-2 py-1 text-white bg-green-500 rounded">Paid</button>
-                                    </div>
-                                    :
-                                    <div className="flex gap-2">
-                                        <span className="text-red-700 me-3"><strong>Make payment </strong></span>
-                                        <button className="px-2 py-1 text-white bg-yellow-500 "
-                                            onClick={() => {
-                                                handleFlutterPayment({
-                                                    callback: (response: any) => {
-                                                        setPaymentData(response);
-                                                        setCarId(carItem.id);
-                                                        setTimeout(() => {
-                                                            paymentResponse();
+                                    carItem?.payment ?
+                                        <div className="flex gap-2">
+                                            <span className="text-gray-900 me-3"><strong>Payment Status</strong></span>
+                                            <button className="px-2 py-1 text-white bg-green-500 rounded">Paid</button>
+                                        </div>
+                                        :
+                                        <div className="flex gap-2">
+                                            <span className="text-red-700 me-3"><strong>Make payment </strong></span>
+                                            <button className="px-2 py-1 text-white bg-yellow-500 "
+                                                onClick={() => {
+                                                    handleFlutterPayment({
+                                                        callback: (response: any) => {
+                                                            setPaymentData(response);
+                                                            setCarId(carItem.id);
+                                                            setTimeout(() => {
+                                                                paymentResponse();
 
-                                                        }, 3000);
-                                                    },
-                                                    onClose: () => { },
-                                                });
-                                            }}
-                                        >Make Payment</button>
-                                    </div>
+                                                            }, 3000);
+                                                        },
+                                                        onClose: () => { },
+                                                    });
+                                                }}
+                                            >Make Payment</button>
+                                        </div>
                                 }
                                 {carItem?.status && carItem.status == "1" ?
                                     <div>

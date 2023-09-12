@@ -68,7 +68,7 @@ console.log("carsswap",cars)
 
                                 </Link>
                                 <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
-                                    <p className='font-semibold text-white'>{car?.type}</p>
+                                    <p className='font-semibold text-white'>{car?.type == 'swap'}</p>
                                 </div>
                                 <div className="absolute bottom-5 left-1">
                                     {
@@ -108,7 +108,14 @@ console.log("carsswap",cars)
                                     </h5>
                                 </Link>
                                 <div className="flex items-center"></div>
-                                <div className="mt-4">
+                                <div className="mt-2">
+                                    <div className='flex flex-wrap justify-between mt-3'>
+                                        <div className='flex mb-2 flex-wrap justify-between'>
+                                            <div className='flex bg-emerald-500'>
+                                                <p className='mx-2 text-white'>{car?.cylinder} <span className='ml-1'>- Cylinder</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className='flex flex-wrap justify-between mt-3'>
                                         <div className='flex mb-2 flex-wrap justify-between'>
                                             <div className='flex'>

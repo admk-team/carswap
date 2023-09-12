@@ -36,6 +36,7 @@ class FrontController extends Controller
                 'title'=>$car->title,
                 'slug'=>$car->slug,
                 'brand_id'=>$car->brand_id,
+                'cylinder'=>$car->cylinder,
                 'brand'=>$car->brand,
                 'description'=>$car->description,
                 'images'=>$images ?? null,
