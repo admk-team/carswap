@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Image1 from '@/Assets/hero-section.png';
-import Image2 from '@/Assets/hero-section.png';
+import Image1 from '@/Assets/hero-section.jpg';
+import Image2 from '@/Assets/hero-section2.jpg';
 import SliderCard from '@/Components/Cards/SliderCard';
 
 const BannerSlider = () => {

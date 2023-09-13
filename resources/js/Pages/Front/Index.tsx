@@ -12,7 +12,7 @@ import Featured from '@/Components/HomePage/Featured';
 import WhyUs from '@/Components/HomePage/Whyus';
 import Newsletter from './Newsletter';
 import SliderCard from '@/Components/Cards/SliderCard';
-import BannerThree from '@/Components/Banner/Bannerthree';
+import {BannerThree} from '@/Components/Banner/BannerThree';
 interface IndexProps {
     brands: any;
     swap_cars: any;

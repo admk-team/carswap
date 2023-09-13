@@ -34,4 +34,4 @@ const BannerThree = ({ brands, categories }: any) => {
     );
 };
 
-export default BannerThree;
+export {BannerThree};
