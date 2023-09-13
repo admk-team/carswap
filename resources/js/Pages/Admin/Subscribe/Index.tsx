@@ -31,7 +31,7 @@ const Index = ({ auth, payments, success, error }: any) => {
     return (
         <>
      
-        <Head title="Partners | List"/>
+        <Head title="Subscriber | List"/>
             <div className="container-fluid">
                 {successMessage && (
                     <div className="alert alert-success alert-dismissible fade show" role="alert">
@@ -45,7 +45,7 @@ const Index = ({ auth, payments, success, error }: any) => {
                         <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 )}
-                <h1 className="h3 mb-2 text-gray-800">Partners Request</h1>
+                <h1 className="h3 mb-2 text-gray-800">Subscriber</h1>
                 <div className="card shadow mb-4">
                     {/* <div className="card-header py-3 d-flex justify-content-between">
                         <h6 className="m-0 font-weight-bold text-primary">
