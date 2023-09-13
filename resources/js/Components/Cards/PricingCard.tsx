@@ -8,7 +8,7 @@ import Engine from "@/Assets/car-engine.png";
 
 
 const PricingCard = ({ brands, cars, auth }: any) => {
-console.log("carsswap",cars)
+    console.log("carsswap", cars)
     const [showModal, setShowModal] = useState(false);
     const [inspectionModal, setInspectionModal] = useState(false);
     const [compare, setCompare]: any = useState([])
@@ -52,11 +52,11 @@ console.log("carsswap",cars)
     return (
         <div className="mx-auto max-w-screen-xl w-full h-full mt-8 ">
             <div className="flex">
-                <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 mb-4 mt-6 p-4  ">
+                <div className="lg:container mx-auto grid  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-4 mt-6 p-4  ">
                     {cars?.map((car: any, index: any) => (
                         <div
                             key={index}
-                            className="w-[374px] mb-3 bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105"
+                            className="lg:w-[320px] md:w-[350px] sm:w-[200px] mb-3 bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105 md:me-[10px]"
                         >
                             <div className="relative">
                                 <Link href={route('CarDetail', car.slug)}>
@@ -67,9 +67,28 @@ console.log("carsswap",cars)
                                     />
 
                                 </Link>
-                                <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
-                                    <p className='font-semibold text-white'>{car?.type == 'swap'}</p>
-                                </div>
+                                <>
+                                    {car?.type === 'For Swap' ? (
+                                         <Link href={route('CarDetail', car.slug)}>
+                                        <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl cursor-pointer'>
+                                            <p className='font-semibold text-black text-white flex gap-2 items-center justify-center align-center'>
+                                                <span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" />
+                                                    </svg>
+                                                </span>
+                                                <span>Calculate Loan</span>
+                                                <span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                                    </svg>
+                                                </span>
+                                            </p>
+                                        </div>
+                                        </Link>
+                                    ) : null}
+                                </>
+
                                 <div className="absolute bottom-5 left-1">
                                     {
                                         car.total_rating > 0 &&
@@ -101,16 +120,17 @@ console.log("carsswap",cars)
                                 </h5>
                                 <Link href={route('CarDetail', car.slug)} className=''>
                                     <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white mt-1 h-[34px] overflow-hidden">
-                                    <span className='my-2 '>{car?.model}</span>
+                                        <span className='my-2 '>{car?.model}</span>
                                         <span className='mx-2 '>{car?.brand?.title}</span>
                                         {car?.title}
-                                    
+
                                     </h5>
                                 </Link>
                                 <div className="flex items-center"></div>
                                 <div className="mt-2">
                                     <div className='flex flex-wrap justify-between mt-3'>
                                         <div className='flex mb-2 flex-wrap justify-between'>
+                                            
                                             <div className='flex bg-emerald-500'>
                                                 <p className='mx-2 text-white'>{car?.cylinder} <span className='ml-1'>- Cylinder</span></p>
                                             </div>
@@ -119,12 +139,12 @@ console.log("carsswap",cars)
                                     <div className='flex flex-wrap justify-between mt-3'>
                                         <div className='flex mb-2 flex-wrap justify-between'>
                                             <div className='flex'>
-                                                <img src={car?.brand?.image?"/storage/" + car?.brand?.image:''} className='w-6 h-6' />
+                                                <img src={car?.brand?.image ? "/storage/" + car?.brand?.image : ''} className='w-6 h-6' />
                                                 <p className='mx-2 '>{car?.brand?.title}</p>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div className='flex flex-wrap justify-between'>
                                         <div className='flex mb-1'>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -139,7 +159,18 @@ console.log("carsswap",cars)
                                             <p className='mx-2  text-gray-600'>{car?.condition}</p>
                                         </div>
                                         <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
-                                            <p className='mx-2  text-gray-600'>{car?.mileage}</p>
+                                            <p className='mx-2  text-gray-600'>{car?.mileage} miles</p>
+                                        </div>
+                                    </div>
+
+                                    <div className='flex flex-wrap justify-between mt-3'>
+                                        <div className='flex mb-1 rounded-[4px]'>
+                                            <Link href={route('CarDetail', car.slug)}><p className='mx-4  text-gray-900 font-bold cursor-pointer'>Swap</p></Link>
+                                        </div>
+                                        <div className='flex mb-1  rounded-[4px]'>
+                                        <Link href={route('CarDetail', car.slug)}>
+                                            <p className='mx-4  text-emerald-600 font-bold cursor-pointer'>Buy Cash </p>
+                                        </Link>
                                         </div>
                                     </div>
                                 </div>

@@ -11,6 +11,8 @@ import AfterStep from '@/Components/HomePage/AfterStep';
 import Featured from '@/Components/HomePage/Featured';
 import WhyUs from '@/Components/HomePage/Whyus';
 import Newsletter from './Newsletter';
+import SliderCard from '@/Components/Cards/SliderCard';
+import BannerThree from '@/Components/Banner/Bannerthree';
 interface IndexProps {
     brands: any;
     swap_cars: any;
@@ -25,6 +27,11 @@ const Index: React.FC<IndexProps> = ({ brands,swap_cars,auth,sale_cars,categorie
     <Head title='Nigeria’s No 1. Carswap place. Buy. Sell. Swap'/>
       <NavBar auth={auth} />
       <TopBanner brands={brands} categories={categories}/>
+      <div className="text-3xl text-center w-full mt-12">
+        <h1 className='text-gray-950 font-semibold'>Find Your Ideal Car</h1>
+        <SliderCard brands={brands} categories={categories}/>
+      </div>
+      <BannerThree/>
       <div className="text-3xl text-center w-full mt-12">
         <h1 className='text-gray-950 font-semibold'>Cars for Swap</h1>
       </div>
