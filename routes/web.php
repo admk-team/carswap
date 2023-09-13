@@ -15,8 +15,10 @@ use App\Http\Controllers\User\PostacarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RavepayController;
+use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\SwapController;
 use App\Http\Controllers\User\UserController as FrontUserController;
@@ -71,7 +73,7 @@ Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(functi
     Route::get('cars/{id}/{status}',[CarController::class,'status'])->name('cars.status');
      //Cars for Swap
     Route::resource('/swap',CarsForSwapController::class);
-    Route::get('swap/{id}/{status}',[CarsForSwapController::class,'status'])->name('cars.status');
+    Route::get('swap/{id}/{status}',[CarsForSwapController::class,'status'])->name('swap.status');
     //User
     Route::resource('/users',UserController::class);
     Route::get('users/{id}/{status}',[UserController::class,'status'])->name('users.status');
@@ -92,6 +94,11 @@ Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(functi
     //Paymentgatway
     Route::get('/paymentGateway',[PaymentGatewayController::class,'index'])->name('paymentGateway.index');
     Route::post('/paymentGateway/store',[PaymentGatewayController::class,'store'])->name('paymentGateway.store');
+
+    //For Partners request
+    Route::get('/partners',[RatingeController::class,'partners'])->name('partners.index');
+     //For Subscribe details
+     Route::get('/subscribe',[RatingeController::class,'subscribe'])->name('subscribe.index');
 });
 
 Route::get('/', [FrontController::class,'index'])->name('front.index');
@@ -148,7 +155,7 @@ Route::middleware(['auth', 'verified'])->prefix('/user')->name('user.')->group(f
     
      //Post car for swap
      Route::resource('swap',ForSwapController::class);
-    //wishlist
+ 
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -163,6 +170,12 @@ Route::name('footer.')->group(function () {
     Route::get('/location/{location}' , [FrontController::class, 'footerLocation'])->name('location');
     Route::get('/brand/{brand}' , [FrontController::class, 'footerBrands'])->name('brands');
 });
+   //Partners
+   Route::resource('partners',PartnerController::class);
+   Route::any('/partners/store', [PartnerController::class,'store'])->name('partners.store');
+     //Subscribe
+     Route::any('/subcribe/store', [SubscribeController::class,'store'])->name('subcribe.store');
+   
 
 
 require __DIR__.'/auth.php';

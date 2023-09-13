@@ -7,7 +7,9 @@ use App\Models\Rating;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Car;
+use App\Models\Partner;
 use App\Models\Payment;
+use App\Models\Subscribe;
 use App\Models\Swap;
 use App\Models\User;
 
@@ -21,7 +23,6 @@ class RatingeController extends Controller
     public function index()
     {
         $ratings = Rating::with('user', 'car')->latest()->get();
-
         return Inertia::render('Admin/Ratings/Index', ['ratings' => $ratings, 'success' => request()->get('success')]);
     }
     public function payment()
@@ -41,6 +42,17 @@ class RatingeController extends Controller
         //return $bookings;
         return Inertia::render('Admin/Booking/Swap_Details', ['bookings' => $bookings]);
     }
+    public function partners()
+    {
+        $payments = Partner::latest()->get();
+        return Inertia::render('Admin/PartnersReq/Index', ['payments' => $payments]);
+    }
+    public function subscribe()
+    {
+        $payments = Subscribe::latest()->get();
+        return Inertia::render('Admin/Subscribe/Index', ['payments' => $payments]);
+    }
+
 
 
     /**

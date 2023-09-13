@@ -14,26 +14,40 @@ const Create = ({ auth,brands,users}: any) => {
     brand_id: '',
     user_id: '',
     condition: '',
-    engineCapacity: '',
+    engine_capacity: '',
     mileage: '',
     type: '',
     trim: '',
     price: '',
-    fuelType: '',
+    fuel_type: '',
     model: '',
     transmission: '',
     drive: '',
-    interiorColor: '',
-    exteriorColor: '',
+    interior_color: '',
+    exterior_color: '',
     description: '',
     body_type:'',
     price_negotiable:'',
     custom_paper:'',
     cylinder: '',
     year: '',
+    porpose: '',
+    fixedengine: '',
+    fixedtrans: '',
+    title1: '',
+    model1: '',
+    year1: '',
+    condition1: '',
+    interiorColor1: '',
+    milage1: '',
+    title2: '',
+    model2: '',
+    year2: '',
+    condition2: '',
+    interiorColor2: '',
+    milage2: '',
     images: []
   });
-
 
   const handleImageChange = (e:any) => {
     if (e.target.files) {
@@ -61,7 +75,7 @@ const Create = ({ auth,brands,users}: any) => {
         <h1 className="h3 mb-2 text-gray-800">Car</h1>
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Post Car</h6>
+            <h6 className="m-0 font-weight-bold text-primary">Post Car For Swap</h6>
           </div>
           <div className="card-body">
           <form className="row g-3" method='post' onSubmit={handleSubmit} encType='multipart/form-data'>
@@ -148,11 +162,6 @@ const Create = ({ auth,brands,users}: any) => {
                 {errors.title && <div className='text-danger'>{errors.title}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Title <span className='text-danger'>*</span></label>
-                <input type="text" name="title" className="form-control" placeholder="Enter Title"  value={data.title} onChange={(e)=>setData('title',e.target.value)} />
-                {errors.title && <div className='text-danger'>{errors.title}</div>}
-              </div>
-              <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Condition <span className='text-danger'>*</span></label>
                 <select name="condition" id="" className="form-control" onChange={(e)=>setData('condition',e.target.value)}>
                   <option value="">Select Condition</option>
@@ -163,8 +172,8 @@ const Create = ({ auth,brands,users}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Engine Capacity <span className='text-danger'>*</span></label>
-                <input type="text" name="engine_capacity" className="form-control" placeholder="Engine Capacity"  value={data.engineCapacity} onChange={(e)=>setData('engineCapacity',e.target.value)} />
-                {errors.engineCapacity && <div className='text-danger'>{errors.engineCapacity}</div>}
+                <input type="text" name="engine_capacity" className="form-control" placeholder="Engine Capacity"  value={data.engine_capacity} onChange={(e)=>setData('engine_capacity',e.target.value)} />
+                {errors.engine_capacity && <div className='text-danger'>{errors.engine_capacity}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Mileage <span className='text-danger'>*</span></label>
@@ -173,31 +182,26 @@ const Create = ({ auth,brands,users}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Price <span className='text-danger'>*</span></label>
-                <input type="number" name="price" className="form-control" placeholder="Price"  value={data.price} onChange={(e)=>setData('price',e.target.value)} />
+                <input type="text" name="price" className="form-control" placeholder="Price"  value={data.price} onChange={(e)=>setData('price',e.target.value)} />
                 {errors.price && <div className='text-danger'>{errors.price}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Select Type <span className='text-danger'>*</span></label>
-                <select name="type" id="" className="form-control"  value={data.type} onChange={handleChange}>
-                <option value="">Select Type</option>
-                <option value="swap">For Swap</option>
-                <option value="sale">For Sale</option>
+                <label className="form-label">Owner <span className='text-danger'>*</span></label>
+                <select name="trim" id="" className="form-control" onChange={(e)=>setData('trim',e.target.value)}>
+                <option value="">Owner* </option>
+                <option value="Direct owner">Direct owner </option>
+                <option value="Agent">Agent </option>
                 </select>
-                {errors.type && <div className='text-danger'>{errors.type}</div>}
-              </div>
-              <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Trim <span className='text-danger'>*</span></label>
-                <input type="text" name="trim" className="form-control" placeholder="Enter Trim"  value={data.trim} onChange={(e)=>setData('trim',e.target.value)} />
                 {errors.trim && <div className='text-danger'>{errors.trim}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Fuel Type <span className='text-danger'>*</span></label>
-                <select name="fuel_type" id="" className="form-control" onChange={(e)=>setData('fuelType',e.target.value)}>
+                <select name="fuel_type" id="" className="form-control" onChange={(e)=>setData('fuel_type',e.target.value)}>
                   <option value="">Select Fuel Type</option>
                   <option value="Desiel">Desiel</option>
                   <option value="Petrol">Petrol</option>
                 </select>
-                {errors.fuelType && <div className='text-danger'>{errors.fuelType}</div>}
+                {errors.fuel_type && <div className='text-danger'>{errors.fuel_type}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Model <span className='text-danger'>*</span></label>
@@ -210,23 +214,32 @@ const Create = ({ auth,brands,users}: any) => {
                 {errors.transmission && <div className='text-danger'>{errors.transmission}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Drive / (KM) </label>
-                <input type="text" name="drive" className="form-control" placeholder="Drive"  value={data.drive} onChange={(e)=>setData('drive',e.target.value)} />
+                <label className="form-label">Drive Type <span className='text-danger'>*</span></label>
+                <select name="drive" id="" className="form-control" value={data.drive} onChange={(e) => setData('drive', e.target.value)}>
+                                <option value="">Drive Type* </option>
+                                <option value="Right Hand">Right Hand </option>
+                                <option value="Left Hand">Left Hand </option>   
                 {errors.drive && <div className='text-danger'>{errors.drive}</div>}
+                </select>
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Interior Color <span className='text-danger'>*</span></label>
-                <input type="text" name="interior_color" className="form-control" placeholder="Interior Color"  value={data.interiorColor} onChange={(e)=>setData('interiorColor',e.target.value)} />
-                {errors.interiorColor && <div className='text-danger'>{errors.interiorColor}</div>}
+                <input type="text" name="interior_color" className="form-control" placeholder="Interior Color"  value={data.interior_color} onChange={(e)=>setData('interior_color',e.target.value)} />
+                {errors.interior_color && <div className='text-danger'>{errors.interior_color}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Exterior Color <span className='text-danger'>*</span></label>
-                <input type="text" name="exterior_color" className="form-control" placeholder="Exterior Color"  value={data.exteriorColor} onChange={(e)=>setData('exteriorColor',e.target.value)} />
-                {errors.exteriorColor && <div className='text-danger'>{errors.exteriorColor}</div>}
+                <input type="text" name="exterior_color" className="form-control" placeholder="Exterior Color"  value={data.exterior_color} onChange={(e)=>setData('exterior_color',e.target.value)} />
+                {errors.exterior_color && <div className='text-danger'>{errors.exterior_color}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Body Type <span className='text-danger'>*</span></label>
-                <input type="text" name="body_type" className="form-control" placeholder="Body Type"  value={data.body_type} onChange={(e)=>setData('body_type',e.target.value)} />
+                <select name="body_type" id="" className="form-control" value={data.body_type} onChange={(e) => setData('body_type', e.target.value)}>
+                                <option value="">Body Type* </option>
+                                <option value="First Body">First Body </option>
+                                <option value="Repainted">Repainted </option>
+                                <option value="Painted">Painted </option> 
+                </select>
                 {errors.body_type && <div className='text-danger'>{errors.body_type}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
@@ -258,6 +271,35 @@ const Create = ({ auth,brands,users}: any) => {
                 {errors.year && <div className='text-danger'>{errors.year}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label">Purpose <span className='text-danger'>*</span></label>
+                <select name="porpose" id="" className="form-control" value={data.porpose} onChange={(e) => setData('porpose', e.target.value)}>
+                                <option value="">Purpose of Swap* </option>
+                                <option value="Nigerian Used">Upgrade for Better </option>
+                                <option value="Foreign Used">Downgrade for cash </option>
+                                <option value="Foreign Used">Car Model  </option>
+                                <option value="Foreign Used">Change my Make </option>
+                </select>
+                {errors.porpose && <div className='text-danger'>{errors.porpose}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label">Fixed Engine <span className='text-danger'>*</span></label>
+                <select name="fixedengine" id="" className="form-control" value={data.fixedengine} onChange={(e) => setData('fixedengine', e.target.value)}>
+                                <option value="">Fixed Engine* </option>
+                                <option value="yes">Yes</option>
+                                <option value="No">No</option>                                
+                            </select>
+                {errors.fixedengine && <div className='text-danger'>{errors.fixedengine}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label">Fixed Transmission <span className='text-danger'>*</span></label>
+                <select name="porpose" id="" className="form-control"  value={data.fixedtrans} onChange={(e) => setData('fixedtrans', e.target.value)}>
+                                <option value="">Fixed Transmission* </option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>                                
+                            </select>
+                {errors.fixedtrans && <div className='text-danger'>{errors.fixedtrans}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Images <span className='text-danger'>*</span></label>
                 <input type="file" className="form-control" name="images" onChange={handleImageChange} multiple/>
                 {errors.images && <div className='text-danger'>{errors.images}</div>}
@@ -267,6 +309,80 @@ const Create = ({ auth,brands,users}: any) => {
                 <textarea name="description" className="form-control" value={data.description} placeholder="Enter Description" onChange={(e)=>setData('description',e.target.value)}/>
                 {errors.description && <div className='text-danger'>{errors.description}</div>}
               </div>
+             {/* Options For Interested car */}
+             <h2 className="h4 mb-2 text-gray-800">My Swap car Option:</h2>
+             <p className="h6 mb-2 text-gray-800">Car 1:</p>
+             <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label"> Choose Make<span className='text-danger'>*</span></label>
+                <input type="text" name="title1" className="form-control" placeholder="Choose Make"  value={data.title1} onChange={(e) => setData('title1', e.target.value)} />
+                {errors.title1 && <div className='text-danger'>{errors.title1}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label"> Model<span className='text-danger'>*</span></label>
+                <input type="text" name="model1" className="form-control" placeholder="Model"  value={data.model1} onChange={(e) => setData('model1', e.target.value)} />
+                {errors.model1 && <div className='text-danger'>{errors.model1}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label"> Year<span className='text-danger'>*</span></label>
+                <input type="text" name="year1" className="form-control" placeholder="Year"  value={data.year1} onChange={(e) => setData('year1', e.target.value)} />
+                {errors.year1 && <div className='text-danger'>{errors.year1}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label"> Interior Color<span className='text-danger'>*</span></label>
+                <input type="text" name="interiorColor1" className="form-control" placeholder="Interior Color"  value={data.interiorColor1} onChange={(e) => setData('interiorColor1', e.target.value)} />
+                {errors.interiorColor1 && <div className='text-danger'>{errors.interiorColor1}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label">Condition <span className='text-danger'>*</span></label>
+                <select name="condition1" id="" className="form-control" value={data.condition1} onChange={(e)=>setData('condition1',e.target.value)}>
+                  <option value="">Select Condition</option>
+                  <option value="Brand New">Brand New</option>
+                  <option value="Used">Used</option>
+                </select>
+                {errors.condition1 && <div className='text-danger'>{errors.condition1}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label"> Mileage Max<span className='text-danger'>*</span></label>
+                <input type="text" name="milage1" className="form-control" placeholder="Mileage Max"  value={data.milage1} onChange={(e) => setData('milage1', e.target.value)} />
+                {errors.milage1 && <div className='text-danger'>{errors.milage1}</div>}
+              </div>
+
+              <p className="h6 mb-2 text-gray-800">Car 2:</p>
+             <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label"> Choose Make<span className='text-danger'>*</span></label>
+                <input type="text" name="title2" className="form-control" placeholder="Choose Make"  value={data.title2} onChange={(e) => setData('title2', e.target.value)} />
+                {errors.title2 && <div className='text-danger'>{errors.title2}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label"> Model<span className='text-danger'>*</span></label>
+                <input type="text" name="model2" className="form-control" placeholder="Model"  value={data.model2} onChange={(e) => setData('model2', e.target.value)} />
+                {errors.model2 && <div className='text-danger'>{errors.model2}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label"> Year<span className='text-danger'>*</span></label>
+                <input type="text" name="year2" className="form-control" placeholder="Year"  value={data.year2} onChange={(e) => setData('year2', e.target.value)} />
+                {errors.year2 && <div className='text-danger'>{errors.year2}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label"> Interior Color<span className='text-danger'>*</span></label>
+                <input type="text" name="interiorColor2" className="form-control" placeholder="Interior Color"  value={data.interiorColor2} onChange={(e) => setData('interiorColor2', e.target.value)} />
+                {errors.interiorColor2 && <div className='text-danger'>{errors.interiorColor2}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label">Condition <span className='text-danger'>*</span></label>
+                <select name="condition2" id="" className="form-control" value={data.condition2} onChange={(e)=>setData('condition2',e.target.value)}>
+                  <option value="">Select Condition</option>
+                  <option value="Brand New">Brand New</option>
+                  <option value="Used">Used</option>
+                </select>
+                {errors.condition2 && <div className='text-danger'>{errors.condition2}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label"> Mileage Max<span className='text-danger'>*</span></label>
+                <input type="text" name="milage2" className="form-control" placeholder=" Mileage Max"  value={data.milage2} onChange={(e) => setData('milage2', e.target.value)} />
+                {errors.milage2 && <div className='text-danger'>{errors.milage2}</div>}
+              </div>
+            
               <div className="col-12">
                 <button type="submit" className="btn btn-primary">Add</button>
               </div>

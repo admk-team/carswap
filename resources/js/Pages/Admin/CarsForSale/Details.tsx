@@ -54,39 +54,49 @@ const Details = ({ auth,payment,car,user}: any) => {
                              <table className="table">
                                 <thead>
                                     <tr>
+                                        <th>Location</th>
+                                        <th>Street</th>
+                                        <th>L.G.A</th>
                                         <th>Title</th>
                                         <th>Condition</th>
                                         <th>Engine</th>
                                         <th>Milage</th>
-                                        <th>Location</th>
                                         <th>Price</th>
                                         <th>Fuel Type</th>
                                         <th>Modal</th>
+                                        <th>Transmission</th>
                                         <th>Extrior Color</th>
                                         <th>Interior Color</th>
                                         <th>Drive</th>
+                                        <th>Body Type</th>
+                                        <th>Price Negotiable</th>
+                                        <th>Custom Paper</th>
+                                        <th>Year</th>
                                         <th>Description</th>
-                                        <th>Interested Car 1</th>
-                                        <th>Interested Car 2</th>
                                         <th>Car Images</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                         <tr key={car.id}>
+                                        <td>{car.location? car.location: 'No data available'}</td>
+                                        <td>{car.street? car.street: 'No data available'}</td>
+                                        <td>{car.lga? car.lga: 'No data available'}</td>
                                         <td>{car.title? car.title: 'No data available'}</td>
                                         <td>{car.condition? car.condition: 'No data available'}</td>
                                         <td>{car.engine_capacity? car.engine_capacity: 'No data available'}</td>
                                         <td>{car.mileage? car.mileage: 'No data available'}</td>
-                                        <td>{car.location? car.location: 'No data available'}</td>
                                         <td>{car.price? car.price: 'No data available'}</td>
                                         <td>{car.fuel_type? car.fuel_type: 'No data available'}</td>
                                         <td>{car.model? car.model: 'No data available'}</td>
+                                        <td>{car.transmission? car.transmission: 'No data available'}</td>
                                         <td>{car.exterior_color? car.exterior_color: 'No data available'}</td>
                                         <td>{car.interior_color? car.interior_color: 'No data available'}</td>
                                         <td>{car.drive? car.drive: 'No data available'}</td>
+                                        <td>{car.body_type? car.body_type: 'No data available'}</td>
+                                        <td>{car.price_negotiable? car.price_negotiable: 'No data available'}</td>
+                                        <td>{car.custom_paper? car.custom_paper: 'No data available'}</td>
+                                        <td>{car.year? car.year: 'No data available'}</td>
                                         <td>{car.description? car.description: 'No data available'}</td>
-                                        <td>{car.swaptitle1? car.swaptitle1: 'No data available'}</td>
-                                        <td>{car.swaptitle2? car.swaptitle2: 'No data available'}</td>
                                         <td><img src={car &&  car.images ? '/storage/' + car.images[0] : UserIcon} alt="Profile" className="w-10 h-10 " /></td>                                      
                                         </tr>
                                   

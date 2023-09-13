@@ -23,7 +23,7 @@ const Index = ({ auth, cars, success, error }: any) => {
       setCurrentPage(pageNumber);
     };
     const changeCarStatus = (id: number, status: number) => {
-      Inertia.get(route("admin.cars.status", { id, status }));
+      Inertia.get(route("admin.swap.status", { id, status }));
     };
     const deleteHandler=((id: number)=>{
         setDeleteId(id);
@@ -31,7 +31,7 @@ const Index = ({ auth, cars, success, error }: any) => {
     });
     const confirmDeleteHandler = () => {
         if (deleteId !== null) {
-          Inertia.delete(route("admin.cars.destroy", deleteId));
+          Inertia.delete(route("admin.swap.destroy", deleteId));
         }
         setShowModal(false);
     };
@@ -67,7 +67,7 @@ const Index = ({ auth, cars, success, error }: any) => {
                             Car List{" "}
                         </h6>
                         <Link
-                            href={route("admin.cars.create")}
+                            href={route("admin.swap.create")}
                             className="btn btn-primary"
                         >
                             Add Car
@@ -144,8 +144,8 @@ const Index = ({ auth, cars, success, error }: any) => {
                                                   Action
                                                 </button>
                                                 <div className="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                                                    <Link className="dropdown-item" href={route('admin.cars.show',car.id)}>Details</Link>
-                                                    <Link className="dropdown-item" href={route('admin.cars.edit',car.id)}>Edit</Link>
+                                                    <Link className="dropdown-item" href={route('admin.swap.show',car.id)}>Details</Link>
+                                                    <Link className="dropdown-item" href={route('admin.swap.edit',car.id)}>Edit</Link>
                                                     <button onClick={()=>deleteHandler(car.id)} className="dropdown-item">Delete</button>
                                                 </div>
                                               </div>

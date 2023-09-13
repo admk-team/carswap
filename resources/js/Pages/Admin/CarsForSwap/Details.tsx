@@ -54,39 +54,55 @@ const Details = ({ auth,payment,car,user}: any) => {
                              <table className="table">
                                 <thead>
                                     <tr>
+                                        <th>Location</th>
+                                        <th>Street</th>
+                                        <th>L.G.A</th>
                                         <th>Title</th>
                                         <th>Condition</th>
                                         <th>Engine</th>
                                         <th>Milage</th>
-                                        <th>Location</th>
                                         <th>Price</th>
                                         <th>Fuel Type</th>
                                         <th>Modal</th>
+                                        <th>Transmission</th>
                                         <th>Extrior Color</th>
                                         <th>Interior Color</th>
                                         <th>Drive</th>
+                                        <th>Body Type</th>
+                                        <th>Price Negotiable</th>
+                                        <th>Custom Paper</th>
+                                        <th>Year</th>
+                                        <th>Purpose of Swap</th>
+                                        <th>Fixed Engine</th>
+                                        <th>Fixed Transmission</th>
                                         <th>Description</th>
-                                        <th>Interested Car 1</th>
-                                        <th>Interested Car 2</th>
                                         <th>Car Images</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                         <tr key={car.id}>
+                                        <td>{car.location? car.location: 'No data available'}</td>
+                                        <td>{car.street? car.street: 'No data available'}</td>
+                                        <td>{car.lga? car.lga: 'No data available'}</td>
                                         <td>{car.title? car.title: 'No data available'}</td>
                                         <td>{car.condition? car.condition: 'No data available'}</td>
                                         <td>{car.engine_capacity? car.engine_capacity: 'No data available'}</td>
                                         <td>{car.mileage? car.mileage: 'No data available'}</td>
-                                        <td>{car.location? car.location: 'No data available'}</td>
                                         <td>{car.price? car.price: 'No data available'}</td>
                                         <td>{car.fuel_type? car.fuel_type: 'No data available'}</td>
                                         <td>{car.model? car.model: 'No data available'}</td>
+                                        <td>{car.transmission? car.transmission: 'No data available'}</td>
                                         <td>{car.exterior_color? car.exterior_color: 'No data available'}</td>
                                         <td>{car.interior_color? car.interior_color: 'No data available'}</td>
                                         <td>{car.drive? car.drive: 'No data available'}</td>
+                                        <td>{car.body_type? car.body_type: 'No data available'}</td>
+                                        <td>{car.price_negotiable? car.price_negotiable: 'No data available'}</td>
+                                        <td>{car.custom_paper? car.custom_paper: 'No data available'}</td>
+                                        <td>{car.year? car.year: 'No data available'}</td>
+                                        <td>{car.porpose? car.porpose: 'No data available'}</td>
+                                        <td>{car.fixedengine? car.fixedengine: 'No data available'}</td>
+                                        <td>{car.fixedtrans? car.fixedtrans: 'No data available'}</td>
                                         <td>{car.description? car.description: 'No data available'}</td>
-                                        <td>{car.swaptitle1? car.swaptitle1: 'No data available'}</td>
-                                        <td>{car.swaptitle2? car.swaptitle2: 'No data available'}</td>
                                         <td><img src={car &&  car.images ? '/storage/' + car.images[0] : UserIcon} alt="Profile" className="w-10 h-10 " /></td>                                      
                                         </tr>
                                   
@@ -95,6 +111,48 @@ const Details = ({ auth,payment,car,user}: any) => {
                              </div>
                             </div>
                             </div>
+                            <h1 className="h6 mb-2 text-gray-800">My Swap car Option:</h1>
+                             <div className="card shadow mb-4">
+                             <div className="card-body">
+                             <div className="table-responsive">
+                             <table className="table">
+                                          <thead>
+                                             <tr>
+                                             <th>No#</th>
+                                            <th>Choose Make</th>
+                                            <th>Model</th>
+                                            <th>Year</th>
+                                            <th>Condition</th>
+                                            <th>interior Color</th>
+                                            <th>Milage Max</th>
+                                          
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                          <tr key={car.id}>
+                                            <td>Car 1</td>
+                                        <td>{car.title1? car.title1: 'No data available'}</td>
+                                        <td>{car.model1? car.model1: 'No data available'}</td>
+                                        <td>{car.year1? car.year1: 'No data available'}</td>
+                                        <td>{car.condition1? car.condition1: 'No data available'}</td>
+                                        <td>{car.interiorColor1? car.interiorColor1: 'No data available'}</td>
+                                        <td>{car.milage1? car.milage1: 'No data available'}</td>                                     
+                                        </tr>
+                                        <tr key={car.id}>
+                                            <td>Car 2</td>
+                                        <td>{car.title2? car.title2: 'No data available'}</td>
+                                        <td>{car.model2? car.model2: 'No data available'}</td>
+                                        <td>{car.year2? car.year2: 'No data available'}</td>
+                                        <td>{car.condition2? car.condition2: 'No data available'}</td>
+                                        <td>{car.interiorColor2? car.interiorColor2: 'No data available'}</td> 
+                                        <td>{car.milage2? car.milage2: 'No data available'}</td>                                     
+                                        </tr>
+                               </tbody>
+                            </table>
+
+                               </div>
+                               </div>
+                             </div>
                              <h1 className="h4 mb-2 text-gray-800">Payment</h1>
                              <div className="card shadow mb-4">
                              <div className="card-body">

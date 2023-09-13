@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import Layout from "../Layouts/Layout";
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { Inertia  } from '@inertiajs/inertia';
-
+import UserIcon from '@/Assets/user-icon.jpg';
 const Edit = ({ auth,brands,car,users}: any) => {
   const [carSwapCheck, setCarSwapCheck] = useState(false);
   const { data, errors, setData, post, progress } = useForm({
@@ -30,8 +30,8 @@ const Edit = ({ auth,brands,car,users}: any) => {
     custom_paper:car.custom_paper,
     cylinder: car.cylinder,
     year: car.year,
-    images: null,
-    _method: 'put',
+    images:car.images ||  '',
+        _method: 'put',
   });
 
   const [images, setImages] = useState(null);
@@ -67,10 +67,10 @@ const Edit = ({ auth,brands,car,users}: any) => {
             )}
           </div>
           <div className="card-body">
-            <form className="row g-3" method='post' onSubmit={handleSubmit} encType='multipart/form-data'>
-            <div className="col-12 col-md-6 col-lg-3">
+          <form className="row g-3" method='post' onSubmit={handleSubmit} encType='multipart/form-data'>
+              <div className="col-12 col-md-6 col-lg-3">
               <label className="form-label">Location<span className='text-danger'>*</span></label>
-                <select name="location" id="" className="form-control" value={data.location} onChange={(e)=>setData('location',e.target.value)}>
+                <select name="location" id="" className="form-control" onChange={(e)=>setData('location',e.target.value)}>
         <option value="">Select State</option>
         <option value="Abia">Abia</option>
         <option value="Abuja">Abuja</option>
@@ -112,17 +112,12 @@ const Edit = ({ auth,brands,car,users}: any) => {
     {errors.location && <div className='text-danger'>{errors.location}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Title <span className='text-danger'>*</span></label>
-                <input type="text" name="title" className="form-control" placeholder="Enter Title"  value={data.title} onChange={(e)=>setData('title',e.target.value)} />
-                {errors.title && <div className='text-danger'>{errors.title}</div>}
-              </div>
-              <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">User <span className='text-danger'>*</span></label>
                 <select name="user_id" id="" className="form-control" onChange={(e)=>setData('user_id',e.target.value)}>
                   <option value="">Select User</option>
                   {
                     users.map((user:any)=>(
-                      <option selected={car.user_id && car.user_id === user.id}  value={user?.id} key={user.id}>{user?.first_name}</option>
+                      <option value={user?.id} key={user.id}>{user?.first_name}</option>
                     ))
                   }
                 </select>
@@ -134,7 +129,7 @@ const Edit = ({ auth,brands,car,users}: any) => {
                   <option value="">Select Brand</option>
                   {
                     brands.map((brand:any)=>(
-                      <option selected={car.brand_id && car.brand_id === brand.id}  value={brand?.id} key={brand.id}>{brand?.title}</option>
+                      <option value={brand?.id} key={brand.id}>{brand?.title}</option>
                     ))
                   }
                 </select>
@@ -147,17 +142,22 @@ const Edit = ({ auth,brands,car,users}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">L.G.A <span className='text-danger'>*</span></label>
-                <input type="text" name="lga" className="form-control" placeholder="Enter LGA"  value={data.lga} onChange={(e)=>setData('lga',e.target.value)} />
+                <input type="text" name="lga" className="form-control" placeholder="Enter L.G.A "  value={data.lga} onChange={(e)=>setData('lga',e.target.value)} />
                 {errors.lga && <div className='text-danger'>{errors.lga}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label">Title <span className='text-danger'>*</span></label>
+                <input type="text" name="title" className="form-control" placeholder="Enter Title"  value={data.title} onChange={(e)=>setData('title',e.target.value)} />
+                {errors.title && <div className='text-danger'>{errors.title}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Condition <span className='text-danger'>*</span></label>
                 <select name="condition" id="" className="form-control" onChange={(e)=>setData('condition',e.target.value)}>
                   <option value="">Select Condition</option>
-                  <option value="Brand New" selected={car.condition && car.condition === 'Brand New'}>Brand New</option>
-                  <option value="Used" selected={car.condition && car.condition === 'Used'}>Used</option>
+                  <option value="Brand New">Brand New</option>
+                  <option value="Used">Used</option>
                 </select>
-                {errors.brand_id && <div className='text-danger'>{errors.brand_id}</div>}
+                {errors.condition && <div className='text-danger'>{errors.condition}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Engine Capacity <span className='text-danger'>*</span></label>
@@ -170,30 +170,25 @@ const Edit = ({ auth,brands,car,users}: any) => {
                 {errors.mileage && <div className='text-danger'>{errors.mileage}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Select Type <span className='text-danger'>*</span></label>
-                <select name="type" id="" className="form-control"  value={data.type} onChange={handleChange}>
-                <option value="">Select Type</option>
-                <option value="swap" selected={car.type && car.type === 'swap'}>For Swap</option>
-                <option value="sale" selected={car.type && car.type === 'sale'}>For Sale</option>
-                </select>
-                {errors.type && <div className='text-danger'>{errors.type}</div>}
-              </div>
-              <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Trim <span className='text-danger'>*</span></label>
-                <input type="text" name="trim" className="form-control" placeholder="Enter Trim"  value={data.trim} onChange={(e)=>setData('trim',e.target.value)} />
-                {errors.trim && <div className='text-danger'>{errors.trim}</div>}
-              </div>
-              <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Price <span className='text-danger'>*</span></label>
-                <input type="number" name="price" className="form-control" placeholder="Price"  value={data.price} onChange={(e)=>setData('price',e.target.value)} />
+                <input type="text" name="price" className="form-control" placeholder="Price"  value={data.price} onChange={(e)=>setData('price',e.target.value)} />
                 {errors.price && <div className='text-danger'>{errors.price}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
+                <label className="form-label">Owner <span className='text-danger'>*</span></label>
+                <select name="trim" id="" className="form-control" onChange={(e)=>setData('trim',e.target.value)}>
+                <option value="">Owner* </option>
+                <option value="Direct owner">Direct owner </option>
+                <option value="Agent">Agent </option>
+                </select>
+                {errors.trim && <div className='text-danger'>{errors.trim}</div>}
+              </div>
+              <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Fuel Type <span className='text-danger'>*</span></label>
-                <select name="fuel_type" id="" className="form-control" onChange={(e)=>setData('fuel_type',e.target.value)}>
+                <select name="fuel_type" id="" className="form-control"  value={data.fuel_type} onChange={(e)=>setData('fuel_type',e.target.value)}>
                   <option value="">Select Fuel Type</option>
-                  <option value="Desiel" selected={car.fuel_type && car.fuel_type === 'Desiel'}>Desiel</option>
-                  <option value="Petrol" selected={car.fuel_type && car.fuel_type === 'Petrol'}>Petrol</option>
+                  <option value="Desiel">Desiel</option>
+                  <option value="Petrol">Petrol</option>
                 </select>
                 {errors.fuel_type && <div className='text-danger'>{errors.fuel_type}</div>}
               </div>
@@ -208,9 +203,13 @@ const Edit = ({ auth,brands,car,users}: any) => {
                 {errors.transmission && <div className='text-danger'>{errors.transmission}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Drive / (KM) </label>
-                <input type="text" name="drive" className="form-control" placeholder="Drive"  value={data.drive} onChange={(e)=>setData('drive',e.target.value)} />
+                <label className="form-label">Drive Type <span className='text-danger'>*</span></label>
+                <select name="drive" id="" className="form-control" value={data.drive} onChange={(e) => setData('drive', e.target.value)}>
+                                <option value="">Drive Type* </option>
+                                <option value="Right Hand">Right Hand </option>
+                                <option value="Left Hand">Left Hand </option>   
                 {errors.drive && <div className='text-danger'>{errors.drive}</div>}
+                </select>
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Interior Color <span className='text-danger'>*</span></label>
@@ -224,13 +223,18 @@ const Edit = ({ auth,brands,car,users}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Body Type <span className='text-danger'>*</span></label>
-                <input type="text" name="body_type" className="form-control" placeholder="Body Type"  value={data.body_type} onChange={(e)=>setData('body_type',e.target.value)} />
+                <select name="body_type" id="" className="form-control" value={data.body_type} onChange={(e) => setData('body_type', e.target.value)}>
+                                <option value="">Body Type* </option>
+                                <option value="First Body">First Body </option>
+                                <option value="Repainted">Repainted </option>
+                                <option value="Painted">Painted </option> 
+                </select>
                 {errors.body_type && <div className='text-danger'>{errors.body_type}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Price Negoiable <span className='text-danger'>*</span></label>
-                <select name="price_negotiable" id="" className="form-control"value={data.price_negotiable}  onChange={(e)=>setData('price_negotiable',e.target.value)}>
-                  <option value="">Select Fuel Type</option>
+                <select name="price_negotiable" id="" className="form-control"  value={data.price_negotiable}onChange={(e)=>setData('price_negotiable',e.target.value)}>
+                  <option value="">Select Type</option>
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
                 </select>
@@ -238,8 +242,8 @@ const Edit = ({ auth,brands,car,users}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Custom Paper <span className='text-danger'>*</span></label>
-                <select name="custom_paper" id="" className="form-control" value={data.custom_paper} onChange={(e)=>setData('custom_paper',e.target.value)}>
-                  <option value="">Select Fuel Type</option>
+                <select name="custom_paper" id="" className="form-control"  value={data.custom_paper}onChange={(e)=>setData('custom_paper',e.target.value)}>
+                  <option value="">Select Type</option>
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
                 </select>
@@ -255,17 +259,33 @@ const Edit = ({ auth,brands,car,users}: any) => {
                 <input type="text" name="cylinder" className="form-control" placeholder="Year"  value={data.year} onChange={(e)=>setData('year',e.target.value)} />
                 {errors.year && <div className='text-danger'>{errors.year}</div>}
               </div>
-              <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Images <span className='text-danger'>*</span></label>
-                <input type="file" className="form-control" name="images" onChange={handleImageChange} multiple/>
-                {errors.images && <div className='text-danger'>{errors.images}</div>}
-              </div>
+              <div className="col-md-6">
+              <div className="mb-3"> {/* Add a container with margin-bottom */}
+                                           <img
+                                               src={"/storage" + data.images}
+                                               alt=""
+                                               className="img-thumbnail"
+                                               style={{
+                                                   width: "100px",
+                                                   height: "100px",
+                                               }}
+                                           />
+                                       </div>
+                                       <input
+                                           type="file"
+                                           name="images"
+                                           className="form-control"
+                                           id=""
+                                           onChange={handleImageChange}
+                                       />
+                                   </div>
               <div className="col-md-12">
                 <label className="form-label">Description <span className='text-danger'>*</span></label>
                 <textarea name="description" className="form-control" value={data.description} placeholder="Enter Description" onChange={(e)=>setData('description',e.target.value)}/>
+                {errors.description && <div className='text-danger'>{errors.description}</div>}
               </div>
               <div className="col-12">
-                <button type="submit" className="btn btn-primary">Update</button>
+                <button type="submit" className="btn btn-primary">Add</button>
               </div>
             </form>
           </div>
