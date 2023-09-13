@@ -56,7 +56,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                     {cars?.map((car: any, index: any) => (
                         <div
                             key={index}
-                            className="lg:w-[320px] md:w-[350px] sm:w-[200px] mb-3 bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105 md:me-[10px]"
+                            className="lg:w-[320px] xl:w-[375px] md:w-[320px] sm:w-[200px] mb-3 bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105 md:me-[2px]"
                         >
                             <div className="relative">
                                 <Link href={route('CarDetail', car.slug)}>
