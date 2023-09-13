@@ -71,7 +71,7 @@ Route::prefix('admin')->name('admin.')->middleware(['admin.auth'])->group(functi
     Route::get('cars/{id}/{status}',[CarController::class,'status'])->name('cars.status');
      //Cars for Swap
     Route::resource('/swap',CarsForSwapController::class);
-    Route::get('swap/{id}/{status}',[CarsForSwapController::class,'status'])->name('cars.status');
+    Route::get('swap/{id}/{status}',[CarsForSwapController::class,'status'])->name('swap.status');
     //User
     Route::resource('/users',UserController::class);
     Route::get('users/{id}/{status}',[UserController::class,'status'])->name('users.status');
