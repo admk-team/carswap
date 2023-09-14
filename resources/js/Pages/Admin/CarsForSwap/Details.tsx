@@ -68,6 +68,7 @@ const Details = ({ auth,payment,car,user}: any) => {
                                         <th>Extrior Color</th>
                                         <th>Interior Color</th>
                                         <th>Drive</th>
+                                        <th>Cylinder</th>
                                         <th>Body Type</th>
                                         <th>Price Negotiable</th>
                                         <th>Custom Paper</th>
@@ -95,6 +96,7 @@ const Details = ({ auth,payment,car,user}: any) => {
                                         <td>{car.exterior_color? car.exterior_color: 'No data available'}</td>
                                         <td>{car.interior_color? car.interior_color: 'No data available'}</td>
                                         <td>{car.drive? car.drive: 'No data available'}</td>
+                                        <td>{car.cylinder? car.cylinder: 'No data available'}</td>
                                         <td>{car.body_type? car.body_type: 'No data available'}</td>
                                         <td>{car.price_negotiable? car.price_negotiable: 'No data available'}</td>
                                         <td>{car.custom_paper? car.custom_paper: 'No data available'}</td>
