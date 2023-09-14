@@ -33,6 +33,10 @@ class PartnerController extends Controller
             'email' => 'required|email|unique:partners,email',
             'whatsapp_number' => 'required|unique:partners,whatsapp_number',
             // Add other validation rules for your fields
+        ], [
+            'email.unique' => 'The email address is already in use.',
+            'whatsapp_number.unique' => 'The WhatsApp number is already in use.',
+            // Add custom messages for other validation rules if needed
         ]);
     
         $model = new Partner();

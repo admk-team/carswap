@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Layout from "../Layouts/Layout";
 import { Inertia } from "@inertiajs/inertia";
 import { Head, Link } from "@inertiajs/react";
-import Modal from "@/Components/Modal";
 
 const Index = ({ auth, payments, success, error }: any) => {
     const [currentPage, setCurrentPage] = useState(1);

@@ -59,7 +59,7 @@ export default function Partner({ auth, success, errors }: any) {
               </div>
               <div className="w-full">
                 <input
-                  type="text"
+                  type="number"
                   name="age"
                   placeholder="Age"
                   value={data.age}
@@ -123,11 +123,11 @@ export default function Partner({ auth, success, errors }: any) {
                 required
                 className="w-full px-4 py-3 border border-gray-500 rounded-md bg-transparent placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
-              {errors.email && <div className='text-danger'>{errors.email[0]}</div>}
+               {errors.email && <div className='text-danger'>{errors.email}</div>}
             </div>
             <div className="mb-6">
               <input
-                type="tel"
+                type="number"
                 name="whatsapp_number"
                 placeholder="WhatsApp No"
                 value={data.whatsapp_number}
@@ -135,7 +135,7 @@ export default function Partner({ auth, success, errors }: any) {
                 required
                 className="w-full px-4 py-3 border border-gray-500 rounded-md bg-transparent placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
-              {errors.whatsapp_number && <div className='text-danger'>{errors.whatsapp_number[0]}</div>}
+             {errors.whatsapp_number && <div className='text-danger'>{errors.whatsapp_number}</div>}
             </div>
             <div className="text-center">
               <button

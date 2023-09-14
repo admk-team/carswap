@@ -1,7 +1,7 @@
 import { useForm } from '@inertiajs/inertia-react';
 import React from 'react'
 
-function Newsletter( ) {
+function Newsletter( {errors }: any) {
     const {data, setData,post} = useForm({
         email: '',
     
@@ -32,7 +32,6 @@ function Newsletter( ) {
         
         <div className="w-full">
             <div className="flex flex-col sm:flex-row gap-3 w-full">
-      
                 <input  placeholder="Enter your email" className="w-full sm:w-2/4 h-12 p-3 text-gray-900 border border-solid border-gray-300 rounded-lg shadow"
                   type="email"
                   name="email"
@@ -40,8 +39,8 @@ function Newsletter( ) {
                   onChange={handleInputChange}
                   required/>
                 <button type="submit" className="w-full sm:w-1/4 h-12 text-white bg-emerald-600 rounded-lg shadow  duration-300 ease-in-out hover:bg-purple-700">Subscribe</button>
-            
             </div>
+            {errors.email && <div className='text-danger'>{errors.email}</div>}
             </div>
     
         </div>

@@ -30,8 +30,11 @@ class SubscribeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => 'required|',
+            'email' => 'required|email|unique:partners,email',
             // Add other validation rules for your fields
+        ], [
+            'email.unique' => 'The email address is already in use.',
+            // Add custom messages for other validation rules if needed
         ]);
         $model = new Subscribe();
         $model->email = $request->email;
