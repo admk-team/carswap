@@ -125,8 +125,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                         {car?.title}
 
                                     </h5>
-                                </Link>
-                                <div className="flex items-center"></div>
+                                </Link>                                
                                 <div className="mt-2">
                                     <div className='flex flex-wrap justify-between mt-3'>
                                         <div className='flex mb-2 flex-wrap justify-between'>
