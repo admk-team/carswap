@@ -6,6 +6,7 @@ import Slider from '../Slider/Slider';
 const TopBanner = ({ brands, categories }: any) => {
     return (
         <>
+            <div className="mx-auto w-full max-w-screen-xl">
             <div className='-ml-[50px] sm:ml-0' style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
             <div className="top-0 w-full md:min-h-[36rem] h-[14rem]">
                     <div className="container flex flex-col lg:flex-row items-center xl:gap-y-12 xl:gap-x-80 lg:gap-x-32 mx-auto max-w-7xl px-4">
@@ -24,6 +25,7 @@ const TopBanner = ({ brands, categories }: any) => {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </>
     );

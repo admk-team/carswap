@@ -5,11 +5,12 @@ import Slider from '../Slider/Slider';
 
 const BannerThree = ({ brands, categories }: any) => {
     return (
-        <>
+        <>  
+        <div className="mx-auto w-full max-w-screen-xl">
             <div className='' style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }}>
-                <div className="top-0 w-full min-h-[14rem] mt-3 md:bg-white md:bg-opacity-50 xl:bg-white xl:bg-opacity-10">
+                <div className="top-0 w-full min-h-[14rem] mt-3 md:bg-white md:bg-opacity-50 xl:bg-gray-50 xl:bg-opacity-40">
                     <div className="container flex flex-col lg:flex-row items-center xl:gap-y-12 xl:gap-x-80 lg:gap-x-32 mx-auto max-w-7xl px-4">
-                        <div className="lg:w-[60%]  xl:w-[90%] mt-5 lg:mb-0">
+                        <div className="lg:w-[60%]  xl:w-[95%] mt-5 lg:mb-0">
 
                         </div>
                         <div className="ml-80 mt-10 xl:ml-10 xl:my-48 hidden md:block"  >
@@ -30,6 +31,7 @@ const BannerThree = ({ brands, categories }: any) => {
                     </div>
                 </div>
             </div>
+        </div>    
         </>
     );
 };
