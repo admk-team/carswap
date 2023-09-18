@@ -8,7 +8,7 @@ const TopBanner = ({ brands, categories }: any) => {
         <>
             <div className="mx-auto w-full max-w-screen-xl">
             <div className='-ml-[110px] sm:ml-0' style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundRepeat:'no-repeat' }}>
-            <div className="top-0 w-full h-[20rem]">
+            <div className="top-0 w-full h-[27rem]">
                     <div className="container flex flex-col lg:flex-row items-center xl:gap-y-12 xl:gap-x-80 lg:gap-x-32 mx-auto max-w-7xl px-4">
                         {/* <div className="lg:w-1/2 mt-5 lg:mb-0">
                              
