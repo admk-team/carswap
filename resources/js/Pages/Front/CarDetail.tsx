@@ -585,7 +585,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                     <p>Year</p>
                                 </div>
                                 <div>
-                                <p>{car.year}</p>
+                                    <p>{car.year}</p>
                                 </div>
                             </div>
                             <hr />
@@ -666,13 +666,13 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                 </div>
                                 <hr />
                                 <div className='flex justify-between bg-purple-50 p-4'>
-                                <div className="flex gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
-                                    </svg>
+                                    <div className="flex gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                                        </svg>
 
-                                    <p>Year</p>
-                                </div>
+                                        <p>Year</p>
+                                    </div>
                                     <div>
                                         <p>{car.year1}</p>
                                     </div>
@@ -731,13 +731,13 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                 </div>
                                 <hr />
                                 <div className='flex justify-between bg-purple-50 p-4'>
-                                <div className="flex gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
-                                    </svg>
+                                    <div className="flex gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+                                        </svg>
 
-                                    <p>Year</p>
-                                </div>
+                                        <p>Year</p>
+                                    </div>
                                     <div>
                                         <p>{car.year2}</p>
                                     </div>
@@ -844,7 +844,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                             <h3 className="font-bold text-3xl text-green-600">Explore More:</h3>
                             <h3 className="font-bold text-gray-900 text-2xl mt-2">Similar Listings</h3>
                             <div className="flex justify-center">
-                                <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-4 mt-6 p-4  ">
+                                <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 p-4  ">
                                     {similarCars?.map((car: any, index: any) => (
                                         <div
                                             key={index}
@@ -853,15 +853,31 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                             <div className="relative">
                                                 <Link href={route('CarDetail', car.slug)}>
                                                     <img
-                                                        className="w-full h-[150px] rounded-t-lg object-cover "
+                                                        className="w-full h-[224px] rounded-t-lg object-cover "
                                                         src={"/storage" + car?.images[0]}
                                                         alt="product image"
                                                     />
 
                                                 </Link>
-                                                <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl'>
-                                                    <p className='font-semibold text-white'>{car?.type}</p>
-                                                </div>
+                                                {car?.type === 'For Swap' ? (
+                                                    <Link href={route('CarDetail', car.slug)}>
+                                                        <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl cursor-pointer'>
+                                                            <p className='font-semibold text-black text-white flex gap-2 items-center justify-center align-center'>
+                                                                <span>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" />
+                                                                    </svg>
+                                                                </span>
+                                                                <span>Swap Calculator</span>
+                                                                <span>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                                                    </svg>
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                    </Link>
+                                                ) : null}
                                                 <div className="absolute bottom-5 left-1">
                                                     {
                                                         car.total_rating > 0 &&
@@ -897,7 +913,11 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                         <span className='mx-2 '>{car?.model}</span>
                                                     </h5>
                                                 </Link>
-                                                <div className="flex items-center"></div>
+                                                <div className='flex mb-2 flex-wrap justify-between'>
+                                                    <div className='flex bg-emerald-500'>
+                                                        <p className='mx-2 text-white'>{car?.cylinder} <span className='ml-1'>- Cylinder</span></p>
+                                                    </div>
+                                                </div>
                                                 <div className="mt-4">
                                                     <div className='flex flex-wrap justify-between mt-3'>
                                                         <div className='flex mb-2 flex-wrap justify-between'>

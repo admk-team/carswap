@@ -17,7 +17,7 @@ class FrontController extends Controller
     public function index(Request $request){
         $brands=Brand::where('status','1')->get();
         $categories=Category::withCount('cars')->get();
-        $swap_cars=Car::with('ratings','brand')->where('deleted_at',null)->where('status','1')->where('type','swap')->where('slug','!=',null)->limit(5)->latest()->get();
+        $swap_cars=Car::with('ratings','brand')->where('deleted_at',null)->where('status','1')->where('slug','!=',null)->limit(5)->latest()->get();
         $sale_cars=Car::with('ratings','brand')->where('deleted_at',null)->where('status','1')->where('type','sale')->where('slug','!=',null)->limit(5)->latest()->get();
         $fav = auth()->user()?->wishlist;
         $swap_cars=$swap_cars->map(function($car) use ($fav){
@@ -73,6 +73,7 @@ class FrontController extends Controller
                 'title'=>$car->title,
                 'slug'=>$car->slug,
                 'brand_id'=>$car->brand_id,
+                'cylinder'=>$car->cylinder,
                 'brand'=>$car->brand,
                 'description'=>$car->description,
                 'images'=>$images ?? null,
@@ -124,6 +125,7 @@ class FrontController extends Controller
                 'title'=>$car->title,
                 'slug'=>$car->slug,
                 'brand_id'=>$car->brand_id,
+                'cylinder'=>$car->cylinder,
                 'brand'=>$car->brand,
                 'description'=>$car->description,
                 'images'=>$images ?? null,
@@ -168,6 +170,7 @@ class FrontController extends Controller
                 'title'=>$car->title,
                 'slug'=>$car->slug,
                 'brand_id'=>$car->brand_id,
+                'cylinder'=>$car->cylinder,
                 'brand'=>$car->brand,
                 'description'=>$car->description,
                 'images'=>$images ?? null,
