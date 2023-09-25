@@ -54,7 +54,7 @@ class CarController extends Controller
             'condition' => 'required',
             'engine_capacity' => 'required',
             'mileage' => 'required',
-            'type' => 'required',
+            // 'type' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',

@@ -13,6 +13,8 @@ import WhyUs from '@/Components/HomePage/Whyus';
 import Newsletter from './Newsletter';
 import SliderCard from '@/Components/Cards/SliderCard';
 import {BannerThree} from '@/Components/Banner/BannerThree';
+import backgroundImage from "@/Assets/SliderImages/banner.png";
+
 interface IndexProps {
     brands: any;
     swap_cars: any;
@@ -28,8 +30,11 @@ const Index: React.FC<IndexProps> = ({ brands,swap_cars,auth,sale_cars,categorie
       <NavBar auth={auth} />
       <TopBanner brands={brands} categories={categories}/>
       <div className="text-3xl text-center w-full mt-12">
-        <h1 className='text-gray-950 font-semibold'>Find Your Ideal Car</h1>
-        <SliderCard brands={brands} categories={categories}/>
+        {/* <h1 className='text-gray-950 font-semibold'>Find Your Ideal Car</h1> */}
+        <div className="mx-auto w-full max-w-screen-xl">
+          <img src={backgroundImage} className='w-full mt-[140px] lg:mt-0'/>                  
+        </div>
+        {/* <SliderCard brands={brands} categories={categories}/> */}
       </div>
       {/* <BannerThree/> */}
       <div className="text-3xl text-center w-full mt-12">
