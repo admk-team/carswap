@@ -21,7 +21,7 @@ const Footer = (auth: any) => {
                             </div>
                             <div className='flex mt-1'>
                                 <img src={PhoneIcon} alt="" className='w-5 h-5 mr-3 mt-1' />
-                                <p className='text-white '>08120222922</p>
+                                <p className='text-white '>+234 08120222922</p>
                             </div>
                             <div className="flex mt-5 space-x-6  md:mt-4">
                                 <a href="https://www.facebook.com/CarSwap.Ng/" className="text-white hover:text-gray-300 dark:hover:text-white mt-4">

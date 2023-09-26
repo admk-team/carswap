@@ -45,9 +45,9 @@ const NavBar2 = (auth: any) => {
                 <img className='w-7 h-7' src={bellIcon} alt="" />
 
                 <div className="flex items-center text-white bg-gray-900 p-2">
-                  <a href="https://api.whatsapp.com/send?phone=08120222922" className="flex items-center" target="_blank" rel="noopener noreferrer">
+                  <a href="https://api.whatsapp.com/send?phone=23408120222922" className="flex items-center" target="_blank" rel="noopener noreferrer">
                     <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
-                    <span className="text-white text-sm">+2348120222922</span>
+                    <span className="text-white text-sm">+234 8120222922</span>
                   </a>
                 </div>
                 <div className=" bg-emerald-500 hover:bg-emerald-600">
