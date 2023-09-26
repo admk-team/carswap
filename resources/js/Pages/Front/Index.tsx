@@ -37,7 +37,7 @@ const Index: React.FC<IndexProps> = ({ brands,swap_cars,auth,sale_cars,categorie
         {/* <SliderCard brands={brands} categories={categories}/> */}
       </div>
       {/* <BannerThree/> */}
-      <div className="text-3xl text-center w-full mt-12 mt-[142px] ">
+      <div className="text-3xl text-center w-full mt-[140px] sm:mt-0">
         <h1 className='text-gray-950 font-semibold'>Swap or Buy best car deals in Nigeria</h1>
       </div>
       <PricingCard cars={swap_cars} />
