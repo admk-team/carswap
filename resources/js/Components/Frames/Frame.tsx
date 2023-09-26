@@ -8,8 +8,8 @@ const Frame = () => {
   return (
     <>
       <div className="w-full h-230 bg-green-500 flex flex-col items-center justify-center p-4 mt-12">
-        <h2 className="text-white text-lg text-center font-bold mb-2">Dear Seller / Dealer, ,<br />
-          Welcome to Carswap.ng, your No. 1 cars swap marketplace in Nigeria. You are about to sell a car; please go ahead and fill the form below. Don’t worry when a customer is interested in taking your car for swap. Carswap Limited will pay you complete cash of your car. Allow our approved users visit for swap inspection, your complete cash will be in your bank upon pickup.  You will be charged an inspection fee of N5,000, And no extra cost for a sell. If you are a dealer, you will get N100,000 thank you cash for every 10 cars closed deals on carswap.ng
+        <h2 className="text-white text-lg text-center font-bold mb-2">Dear Seller / Dealer,<br />
+        Welcome to Carswap.ng, your No. 1 cars swap marketplace in Nigeria. You are about to sell a car; please go ahead and fill the form below. Don’t worry when a customer is interested in taking your car for swap. Carswap Limited will pay you complete cash of your car. You will be charged an inspection fee of N5,000, And no extra cost for a sell. If you are a dealer, you will get N100,000 thank you cash for every 10 cars closed deals on carswap.ng. A after your first 10 cars deal, you will be placed on our VIP dealer list which qualifies you to free car transactions on carswap.ng with other benefits which will be announced to you directly.
           <br />
           Welcome on board <br/>
           Carswap Limited Team.
