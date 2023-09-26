@@ -52,12 +52,12 @@ const PricingCard = ({ brands, cars, auth }: any) => {
     return (
         <div className="mx-auto max-w-screen-xl w-full h-full mt-8 ">
             <div className="flex">
-                <div className="lg:container mx-auto grid  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-4 mt-6 p-4  ">
+            <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mb-4 mt-6 p-4">
                     {cars?.map((car: any, index: any) => (
                         <div
-                            key={index}
-                            className="lg:w-[320px] xl:w-[375px] md:w-[320px] sm:w-[200px] mb-3 bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105 md:me-[2px]"
-                        >
+                        key={index}
+                        className="lg:w-[250px] xl:w-[275px] md:w-[220px] sm:w-[200px] bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105 md:me-[2px] sm:mt-2"
+                      >
                             <div className="relative">
                                 <Link href={route('CarDetail', car.slug)}>
                                     <img
