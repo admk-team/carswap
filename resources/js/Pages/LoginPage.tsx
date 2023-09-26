@@ -80,7 +80,7 @@ const LoginPage = ({ status, canResetPassword }: { status?: string, canResetPass
                                         Login Now
                                     </button>
                                     <p className='mt-2'><Link href={route('user.register')} className='text-center underline'>Register new user?</Link></p>
-                                    <p className="text xl text-center text-gray-900 mt-3"><b className='font-bold'>Login</b> with Others</p>
+                                    {/* <p className="text xl text-center text-gray-900 mt-3"><b className='font-bold'>Login</b> with Others</p>
                                     <div className="flex items-center justify-center mt-3">
                                         <img src={GoogImage} alt="" className="w-6 h-6" />
                                         <a href="#" className="text xl text-gray-900 ml-1">Login with <b className='font-bold'>Google</b></a>
@@ -88,7 +88,7 @@ const LoginPage = ({ status, canResetPassword }: { status?: string, canResetPass
                                     <div className="flex items-center justify-center mt-3">
                                         <img src={FacImage} alt="" className="w-6 h-6" />
                                         <a href="#" className="text xl text-gray-900 ml-1">Login with <b className='font-bold'>Facebook</b></a>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </form>
                         </div>
