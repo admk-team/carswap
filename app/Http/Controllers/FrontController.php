@@ -17,7 +17,7 @@ class FrontController extends Controller
     public function index(Request $request){
         $brands=Brand::where('status','1')->get();
         $categories=Category::withCount('cars')->get();
-        $swap_cars=Car::with('ratings','brand')->where('deleted_at',null)->where('status','1')->where('slug','!=',null)->limit(5)->latest()->get();
+        $swap_cars=Car::with('ratings','brand')->where('deleted_at',null)->where('status','1')->where('slug','!=',null)->limit(4)->latest()->get();
         $sale_cars=Car::with('ratings','brand')->where('deleted_at',null)->where('status','1')->where('type','sale')->where('slug','!=',null)->limit(5)->latest()->get();
         $fav = auth()->user()?->wishlist;
         $swap_cars=$swap_cars->map(function($car) use ($fav){
@@ -105,7 +105,7 @@ class FrontController extends Controller
     }
     public function ViewAllCars($type){
         $brands=Brand::where('status','1')->get();
-        $cars=Car::with('brand')->where('status','1')->where('deleted_at',null)->where('slug','!=',null)->where('type',$type)->latest()->get();
+        $cars=Car::with('brand')->where('status','1')->where('deleted_at',null)->where('slug','!=',null)->latest()->get();
         $cars=$cars->map(function($car){
             $images=explode(',',$car->images);
             if($car->type=='swap'){

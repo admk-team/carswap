@@ -50,9 +50,9 @@ const PricingCard = ({ brands, cars, auth }: any) => {
 
 
     return (
-        <div className="mx-auto max-w-screen-xl w-full h-full mt-8 ">
+        <div className="mx-auto max-w-screen-xl w-full h-full mt-3 ">
             <div className="flex">
-            <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mb-4 mt-6 p-4">
+            <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mb-4  p-4">
                     {cars?.map((car: any, index: any) => (
                         <div
                         key={index}
@@ -115,19 +115,19 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                 </div>
                             </div>
                             <div className="px-3 pb-4">
-                                <h5 className="text-xl font-bold dark:text-white text-emerald-500 mt-1">
+                                <h5 className="text-xl font-bold dark:text-white text-emerald-500 ">
                                     Price: ₦ {formatNumberWithCommas(car.price)}
                                 </h5>
                                 <Link href={route('CarDetail', car.slug)} className=''>
-                                    <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white mt-1 h-[34px] overflow-hidden">
+                                    <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white  h-[34px] overflow-hidden">
                                         <span className='my-2 '>{car?.model}</span>
                                         <span className='mx-2 '>{car?.brand?.title}</span>
                                         {car?.title}
 
                                     </h5>
                                 </Link>                                
-                                <div className="mt-2">
-                                    <div className='flex flex-wrap justify-between mt-3'>
+                                <div className="mt-1">
+                                    <div className='flex flex-wrap justify-between'>
                                         <div className='flex mb-2 flex-wrap justify-between'>
                                             
                                             <div className='flex bg-emerald-500'>
@@ -135,7 +135,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className='flex flex-wrap justify-between mt-3'>
+                                    <div className='flex flex-wrap justify-between mt-1'>
                                         <div className='flex mb-2 flex-wrap justify-between'>
                                             <div className='flex'>
                                                 <img src={car?.brand?.image ? "/storage/" + car?.brand?.image : ''} className='w-6 h-6' />
@@ -145,7 +145,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     </div>
 
                                     <div className='flex flex-wrap justify-between'>
-                                        <div className='flex mb-1'>
+                                        <div className='flex'>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
@@ -153,7 +153,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                             <p className='mx-2 '>{car?.location}</p>
                                         </div>
                                     </div>
-                                    <div className='flex flex-wrap justify-between mt-3'>
+                                    <div className='flex flex-wrap justify-between mt-1'>
                                         <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
                                             <p className='mx-2  text-gray-600'>{car?.condition}</p>
                                         </div>
@@ -162,7 +162,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                         </div>
                                     </div>
 
-                                    <div className='flex flex-wrap justify-between mt-3'>
+                                    <div className='flex flex-wrap justify-between mt-1'>
                                         <div className='flex mb-1 rounded-[4px]'>
                                             <Link href={route('CarDetail', car.slug)}><p className='mx-4  text-gray-900 font-bold cursor-pointer'>Swap</p></Link>
                                         </div>

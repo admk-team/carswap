@@ -32,13 +32,13 @@ const Index: React.FC<IndexProps> = ({ brands,swap_cars,auth,sale_cars,categorie
       <TopBanner brands={brands} categories={categories}/>
       <div className="text-3xl text-center w-full mt-12">
         {/* <h1 className='text-gray-950 font-semibold'>Find Your Ideal Car</h1> */}
-        <div className="mx-auto w-full max-w-screen-xl">
+        {/* <div className="mx-auto w-full max-w-screen-xl">
           <img src={backgroundImage} className='w-full mt-[140px] lg:mt-0'/>                  
-        </div>
+        </div> */}
         {/* <SliderCard brands={brands} categories={categories}/> */}
       </div>
       {/* <BannerThree/> */}
-      <div className="text-3xl text-center w-full mt-12">
+      <div className="text-3xl text-center w-full mt-[140px] sm:mt-0">
         <h1 className='text-gray-950 font-semibold'>Swap or Buy best car deals in Nigeria</h1>
       </div>
       <PricingCard cars={swap_cars} />
