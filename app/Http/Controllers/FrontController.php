@@ -98,10 +98,10 @@ class FrontController extends Controller
         if($request->q){
             $query = $request->q;
             $suggestions=Car::select(['location'])->where('location','LIKE', "%$query%")->where('deleted_at',null)->groupBy('location')->limit(8)->pluck('location') ?? [];
-            return Inertia::render('Front/Index',['brands'=>$brands,'swap_cars'=>$swap_cars, 'sale_cars'=>$sale_cars,'suggestions'=> $suggestions,'categories'=>$categories]);
+            return Inertia::render('Front/Index',['brands'=>$brands,'swap_cars'=>$swap_cars, 'sale_cars'=>$sale_cars,'suggestions'=> $suggestions,'categories'=>$categories,'success'=>request()->success ?? '']);
         }
 
-        return Inertia::render('Front/Index',['brands'=>$brands,'swap_cars'=>$swap_cars, 'sale_cars'=>$sale_cars,'categories'=>$categories]);
+        return Inertia::render('Front/Index',['brands'=>$brands,'swap_cars'=>$swap_cars, 'sale_cars'=>$sale_cars,'categories'=>$categories,'success'=>request()->success ?? '']);
     }
     public function ViewAllCars($type){
         $brands=Brand::where('status','1')->get();
