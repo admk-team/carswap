@@ -73,6 +73,11 @@
   .image__responsive{
     height: 90px;
   }
+  .swap__car{
+    margin: 0;
+    padding: 0;
+    right: 0;
+  }
 }
 @media (max-width: 320px) {
   .responsive{
@@ -89,5 +94,10 @@
   }
   .image__responsive{
     height: 90px;
+  }
+  .swap__car{
+    margin: 0;
+    padding: 0;
+    right: 0;
   }
 }
