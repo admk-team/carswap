@@ -57,5 +57,37 @@
   background-color: #f0f0f0; /* color of the track (background behind the thumb) */
   border-radius: 4px; /* rounded corners for the track */
 }
-
-
+@media (max-width: 768px) {
+  .responsive{
+    font-size: 13px;
+  }
+  .responsive1{
+    display: flex;
+  }
+  .condition__wrap{
+    flex-wrap: nowrap;
+  }
+  .condition__wrap1{
+    margin: 0;
+  }
+  .image__responsive{
+    height: 90px;
+  }
+}
+@media (max-width: 320px) {
+  .responsive{
+    font-size: 11px;
+  }
+  .responsive1{
+    display: flex;
+  }
+  .condition__wrap{
+    flex-wrap: nowrap;
+  }
+  .condition__wrap1{
+    margin: 0;
+  }
+  .image__responsive{
+    height: 90px;
+  }
+}

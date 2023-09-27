@@ -52,7 +52,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
     return (
         <div className="mx-auto max-w-screen-xl w-full h-full mt-3 ">
             <div className="flex">
-            <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mb-4  p-4">
+            <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mb-4  p-4">
                     {cars?.map((car: any, index: any) => (
                         <div
                         key={index}
@@ -61,7 +61,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                             <div className="relative">
                                 <Link href={route('CarDetail', car.slug)}>
                                     <img
-                                        className="w-full h-[224px] rounded-t-lg object-cover "
+                                        className="w-full h-[144px] rounded-t-lg object-cover image__responsive"
                                         src={"/storage" + car?.images[0]}
                                         alt="product image"
                                     />
@@ -115,11 +115,11 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                 </div>
                             </div>
                             <div className="px-3 pb-4">
-                                <h5 className="text-xl font-bold dark:text-white text-emerald-500 ">
+                                <h5 className="text-xl font-bold dark:text-white text-emerald-500  responsive">
                                     Price: ₦ {formatNumberWithCommas(car.price)}
                                 </h5>
                                 <Link href={route('CarDetail', car.slug)} className=''>
-                                    <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white  h-[34px] overflow-hidden">
+                                    <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white  h-[34px] overflow-hidden responsive">
                                         <span className='my-2 '>{car?.model}</span>
                                         <span className='mx-2 '>{car?.brand?.title}</span>
                                         {car?.title}
@@ -131,44 +131,45 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                         <div className='flex mb-2 flex-wrap justify-between'>
                                             
                                             <div className='flex bg-emerald-500'>
-                                                <p className='mx-2 text-white'>{car?.cylinder} <span className='ml-1'>- Cylinder</span></p>
+                                                <p className='mx-2 text-white responsive responsive1'>{car?.cylinder} <span className='ml-1 responsive'>- Cylinder</span></p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className='flex flex-wrap justify-between mt-1'>
+                                    <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
                                         <div className='flex mb-2 flex-wrap justify-between'>
                                             <div className='flex'>
                                                 <img src={car?.brand?.image ? "/storage/" + car?.brand?.image : ''} className='w-6 h-6' />
-                                                <p className='mx-2 '>{car?.brand?.title}</p>
+                                                <p className='mx-2 responsive '>{car?.brand?.title}</p>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div className='flex flex-wrap justify-between'>
                                         <div className='flex'>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                                             </svg>
-                                            <p className='mx-2 '>{car?.location}</p>
+                                            <p className='mx-2 responsive '>{car?.location}</p>
                                         </div>
                                     </div>
-                                    <div className='flex flex-wrap justify-between mt-1'>
+{/* 
+                                    <div className='flex flex-wrap justify-between'>
+                                        
+                                    </div> */}
+                                    <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
                                         <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
-                                            <p className='mx-2  text-gray-600'>{car?.condition}</p>
+                                            <p className='mx-2  text-gray-600 responsive'>{car?.condition}</p>
                                         </div>
                                         <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
-                                            <p className='mx-2  text-gray-600'>{car?.mileage} miles</p>
+                                            <p className='mx-2  text-gray-600 responsive'>{car?.mileage} miles</p>
                                         </div>
                                     </div>
 
-                                    <div className='flex flex-wrap justify-between mt-1'>
-                                        <div className='flex mb-1 rounded-[4px]'>
-                                            <Link href={route('CarDetail', car.slug)}><p className='mx-4  text-gray-900 font-bold cursor-pointer'>Swap</p></Link>
+                                    <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
+                                        <div className='flex  rounded-[4px]'>
+                                            <Link href={route('CarDetail', car.slug)}><p className='mx-4  text-gray-900 font-bold cursor-pointer condition__wrap1'>Swap</p></Link>
                                         </div>
-                                        <div className='flex mb-1  rounded-[4px]'>
+                                        <div className='flex   rounded-[4px]'>
                                         <Link href={route('CarDetail', car.slug)}>
-                                            <p className='mx-4  text-emerald-600 font-bold cursor-pointer'>Buy Cash </p>
+                                            <p className='mx-4  text-emerald-600 font-bold cursor-pointer condition__wrap1'>Buy Cash </p>
                                         </Link>
                                         </div>
                                     </div>
