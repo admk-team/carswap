@@ -40,7 +40,7 @@ class SubscribeController extends Controller
         $model->email = $request->email;
         if ($model->save()) {
             // Successfully saved
-            return Inertia::render('Front/Newsletter');
+            return Inertia::location(route('front.index', ['success' => 'Subscried to Newsletter Successfully.']));
         }        
          else {
             // Failed to save
