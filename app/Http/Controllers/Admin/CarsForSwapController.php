@@ -54,7 +54,6 @@ class CarsForSwapController extends Controller
             'condition' => 'required',
             'engine_capacity' => 'required',
             'mileage' => 'required',
-            'type' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
@@ -204,7 +203,6 @@ class CarsForSwapController extends Controller
             'condition' => 'required',
             'engine_capacity' => 'required',
             'mileage' => 'required',
-            'type' => 'required',
             'trim' => 'required',
             'location' => 'required',
             'price' => 'required',
@@ -321,17 +319,23 @@ class CarsForSwapController extends Controller
      */
     public function destroy($id)
     { 
-        $car = Car::find($id);
-        if ($car) {
-            // if ($car->image) {
-            //     Storage::disk('public')->delete($car->image);
-            // }
-            $car->delete();
-            return Inertia::location(route('admin.swap.index', ['success' => 'Car deleted successfully.']));
-        } else {
-            return redirect()->back()->with('error', 'Car not found.');
+        $data = Car::findOrFail($id);
+        if($data){
+        if($data->images){
+            $images = explode(",", $data->images);
+            foreach($images as $img){
+                if($img){
+                    Storage::disk('public')->delete($img);
+                }
+            }
+        }
+        if($data->destroy($data->id)){
+            return redirect()->back()->with(['success' => 'Car deleted successfully.']);
+        }else{
+            return redirect()->back()->with('error', 'Failed to delete car.');
         }
     }
+}
     public function status($id,$status)
     {
         $car=Car::find($id);

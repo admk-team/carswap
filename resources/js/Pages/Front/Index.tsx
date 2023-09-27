@@ -21,9 +21,10 @@ interface IndexProps {
     auth: any;
     sale_cars :any;
     categories :any;
+    errors:any;
 }
 
-const Index: React.FC<IndexProps> = ({ brands,swap_cars,auth,sale_cars,categories }) =>{
+const Index: React.FC<IndexProps> = ({ brands,swap_cars,auth,sale_cars,categories ,errors }) =>{
   return (
     <>
     <Head title='Nigeria’s No 1. Carswap place. Buy. Sell. Swap'/>
@@ -57,7 +58,7 @@ const Index: React.FC<IndexProps> = ({ brands,swap_cars,auth,sale_cars,categorie
       {/* <AfterStep/> */}
       {/* <WhyUs/> */}
       {/* <Featured/> */}
-      <Newsletter/>
+      <Newsletter errors={errors}/>
       <Footer auth={auth} brands={brands}/>
     </>
   )

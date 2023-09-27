@@ -177,12 +177,12 @@ const Create = ({ auth,brands,users}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Mileage <span className='text-danger'>*</span></label>
-                <input type="text" name="mileage" className="form-control" placeholder="Mileage"  value={data.mileage} onChange={(e)=>setData('mileage',e.target.value)} />
+                <input type="number" name="mileage" className="form-control" placeholder="Mileage"  value={data.mileage} onChange={(e)=>setData('mileage',e.target.value)} />
                 {errors.mileage && <div className='text-danger'>{errors.mileage}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Price <span className='text-danger'>*</span></label>
-                <input type="text" name="price" className="form-control" placeholder="Price"  value={data.price} onChange={(e)=>setData('price',e.target.value)} />
+                <input type="number" name="price" className="form-control" placeholder="Price"  value={data.price} onChange={(e)=>setData('price',e.target.value)} />
                 {errors.price && <div className='text-danger'>{errors.price}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
@@ -262,12 +262,12 @@ const Create = ({ auth,brands,users}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Cylinder <span className='text-danger'>*</span></label>
-                <input type="text" name="cylinder" className="form-control" placeholder="Cylinder"  value={data.cylinder} onChange={(e)=>setData('cylinder',e.target.value)} />
+                <input type="number" name="cylinder" className="form-control" placeholder="Cylinder"  value={data.cylinder} onChange={(e)=>setData('cylinder',e.target.value)} />
                 {errors.cylinder && <div className='text-danger'>{errors.cylinder}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Year <span className='text-danger'>*</span></label>
-                <input type="text" name="cylinder" className="form-control" placeholder="Year"  value={data.year} onChange={(e)=>setData('year',e.target.value)} />
+                <input type="number" name="year" className="form-control" placeholder="Year"  value={data.year} onChange={(e)=>setData('year',e.target.value)} />
                 {errors.year && <div className='text-danger'>{errors.year}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
@@ -343,7 +343,7 @@ const Create = ({ auth,brands,users}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label"> Mileage Max<span className='text-danger'>*</span></label>
-                <input type="text" name="milage1" className="form-control" placeholder="Mileage Max"  value={data.milage1} onChange={(e) => setData('milage1', e.target.value)} />
+                <input type="number" name="milage1" className="form-control" placeholder="Mileage Max"  value={data.milage1} onChange={(e) => setData('milage1', e.target.value)} />
                 {errors.milage1 && <div className='text-danger'>{errors.milage1}</div>}
               </div>
 
@@ -379,7 +379,7 @@ const Create = ({ auth,brands,users}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label"> Mileage Max<span className='text-danger'>*</span></label>
-                <input type="text" name="milage2" className="form-control" placeholder=" Mileage Max"  value={data.milage2} onChange={(e) => setData('milage2', e.target.value)} />
+                <input type="number" name="milage2" className="form-control" placeholder=" Mileage Max"  value={data.milage2} onChange={(e) => setData('milage2', e.target.value)} />
                 {errors.milage2 && <div className='text-danger'>{errors.milage2}</div>}
               </div>
             

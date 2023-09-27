@@ -81,7 +81,7 @@ const Index = ({ auth, payments, success, error }: any) => {
                                             <td>{payment?.state}</td>
                                             <td>{payment?.local_government}</td>
                                             <td>{payment?.age}</td>
-                                            <td>{payment?.local_government}</td>
+                                            <td>{payment?.type_of_partnership}</td>
                                             <td>{payment?.whatsapp_number}</td>
                                         </tr>
                                     ))}

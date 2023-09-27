@@ -59,7 +59,7 @@ export default function Partner({ auth, success, errors }: any) {
               </div>
               <div className="w-full">
                 <input
-                  type="text"
+                  type="number"
                   name="age"
                   placeholder="Age"
                   value={data.age}
@@ -77,11 +77,41 @@ export default function Partner({ auth, success, errors }: any) {
                   className="w-full px-4 py-3 border border-gray-500 rounded-md bg-transparent placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 >
                   <option value="">Select State</option>
-                  <option value="Abia">Abia</option>
-                  <option value="Anambra">Anambra</option>
-                  <option value="Adamawa">Adamawa</option>
-                  <option value="River State">River State</option>
                   <option value="Abuja">Abuja</option>
+                  <option value="Adamawa">Adamawa</option>
+                 <option value="Akwa Ibom">Akwa Ibom</option>
+        <option value="Anambra">Anambra</option>
+        <option value="Bauchi">Bauchi</option>
+        <option value="Bayelsa">Bayelsa</option>
+        <option value="Benue">Benue</option>
+        <option value="Borno">Borno</option>
+        <option value="Cross River">Cross River</option>
+        <option value="Delta">Delta</option>
+        <option value="Ebonyi">Ebonyi</option>
+        <option value="Edo">Edo</option>
+        <option value="Ekiti">Ekiti</option>
+        <option value="Enugu">Enugu</option>
+        <option value="Gombe">Gombe</option>
+        <option value="Imo">Imo</option>
+        <option value="Jigawa">Jigawa</option>
+        <option value="Kaduna">Kaduna</option>
+        <option value="Kano">Kano</option>
+        <option value="Katsina">Katsina</option>
+        <option value="Kebbi">Kebbi</option>
+        <option value="Kogi">Kogi</option>
+        <option value="Kwara">Kwara</option>
+        <option value="Lagos">Lagos</option>
+        <option value="Niger">Niger</option>
+        <option value="Ogun">Ogun</option>
+        <option value="Ondo">Ondo</option>
+        <option value="Osun">Osun</option>
+        <option value="Oyo">Oyo</option>
+        <option value="Plateau">Plateau</option>
+        <option value="Rivers">Rivers</option>
+        <option value="Sokoto">Sokoto</option>
+        <option value="Taraba">Taraba</option>
+        <option value="Yobe">Yobe</option>
+        <option value="Zamfara">Zamfara</option>
                 </select>
               </div>
             </div>
@@ -123,11 +153,11 @@ export default function Partner({ auth, success, errors }: any) {
                 required
                 className="w-full px-4 py-3 border border-gray-500 rounded-md bg-transparent placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
-              {errors.email && <div className='text-danger'>{errors.email[0]}</div>}
+               {errors.email && <div className='text-danger'>{errors.email}</div>}
             </div>
             <div className="mb-6">
               <input
-                type="tel"
+                type="number"
                 name="whatsapp_number"
                 placeholder="WhatsApp No"
                 value={data.whatsapp_number}
@@ -135,7 +165,7 @@ export default function Partner({ auth, success, errors }: any) {
                 required
                 className="w-full px-4 py-3 border border-gray-500 rounded-md bg-transparent placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
-              {errors.whatsapp_number && <div className='text-danger'>{errors.whatsapp_number[0]}</div>}
+             {errors.whatsapp_number && <div className='text-danger'>{errors.whatsapp_number}</div>}
             </div>
             <div className="text-center">
               <button
