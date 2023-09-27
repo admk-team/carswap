@@ -30,7 +30,7 @@ class SubscribeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|unique:partners,email',
+            'email' => 'required|email|unique:subscribes,email',
             // Add other validation rules for your fields
         ], [
             'email.unique' => 'The email address is already in use.',
@@ -40,11 +40,12 @@ class SubscribeController extends Controller
         $model->email = $request->email;
         if ($model->save()) {
             // Successfully saved
-            return back();
-        } else {
+            return Inertia::location(route('front.index', ['success' => 'Subscried to Newsletter Successfully.']));
+        }        
+         else {
             // Failed to save
             return Inertia::location(route('', [
-                'error' => 'Failed to add Partner!',
+                'error' => 'Failed to add Subscribe!',
                 'input' => $request->all(), // Send back the input data for displaying in the form
             ]));
         }

@@ -1,7 +1,9 @@
 import { useForm } from '@inertiajs/inertia-react';
-import React from 'react'
+import React, { useState } from 'react'
+import { useLocation } from 'react-router-dom';
 
-function Newsletter( {errors }: any) {
+function Newsletter( {errors,success}: any) {
+    const [isSuccess , setIsSuccess]=useState(success);
     const {data, setData,post} = useForm({
         email: '',
     
@@ -21,6 +23,21 @@ function Newsletter( {errors }: any) {
         // For example:
         // const response = await axios.post('/api/your-endpoint', formData);
     };
+
+
+
+    if(errors.email == 'The email address is already in use.'){
+      const errorElement = document.querySelector('.requiredEmail');
+      if (errorElement) {
+        errorElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    if(isSuccess == 'Subscried to Newsletter Successfully.'){
+      const successElement = document.querySelector('.requiredEmail');
+      if(successElement){
+        successElement.scrollIntoView({behavior:'smooth'});
+      }
+    }
   return (
     <form method='post' onSubmit={handleSubmit} >
     <div className="w-full p-5">
@@ -30,7 +47,7 @@ function Newsletter( {errors }: any) {
             <div className="text-lg">get the latest information,updates and more </div>
         </div>
         
-        <div className="w-full">
+        <div className="w-full requiredEmail">
             <div className="flex flex-col sm:flex-row gap-3 w-full">
                 <input  placeholder="Enter your email" className="w-full sm:w-2/4 h-12 p-3 text-gray-900 border border-solid border-gray-300 rounded-lg shadow"
                   type="email"
@@ -40,8 +57,13 @@ function Newsletter( {errors }: any) {
                   required/>
                 <button type="submit" className="w-full sm:w-1/4 h-12 text-white bg-emerald-600 rounded-lg shadow  duration-300 ease-in-out hover:bg-purple-700">Subscribe</button>
             </div>
-            {errors.email && <div className='text-danger'>{errors.email}</div>}
-            </div>
+            {errors.email && <div className="text-red-500">{errors.email}</div>}
+            {isSuccess?
+            <div className="text-green-500">{isSuccess}</div>
+          :''}
+
+
+        </div>
     
         </div>
     </div>
