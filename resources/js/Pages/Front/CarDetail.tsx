@@ -432,9 +432,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
                                                 :
                                                 <>
-                                                    <button className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >
+                                                    {/* <button className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >
                                                         <Link href={route('user.login')}> Buy Now </Link>
-                                                    </button>
+                                                    </button> */}
                                                     <a className='flex justify-center bg-green-600  w-full text-white font-bold py-2 px-4 rounded mt-3' href='https://api.whatsapp.com/send?phone=08120222922' target='_blank'>
                                                         <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
                                                         +2348120222922
@@ -524,7 +524,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                         ''
                                 }
                                 <div className="bg-white rounded-lg shadow-md p-6 mt-2">
-                                    {/* <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-6' >  Buy Cash  </button> */}
+                                    <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-6' >  Buy Cash  </button>
                                     <p className='text-gray-950 mt-2 text-xl font-bold mb-2 text-left'>We deliver when you pay cash.</p>
                                     <button onClick={() => window.location.href = 'mailto:cars@carswap.ng'} className='bg-gray-950 w-full text-white font-bold py-2 px-4 rounded mt-3'>
                                         Make Inquiry
