@@ -107,9 +107,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
     };
     const config = {
-        public_key: payment_data.public_key ? payment_data.public_key : 'FLWPUBK-e7cf5d9650bd2e8e4e65358e6248a734-X',
+        public_key: payment_data?.public_key ? payment_data.public_key : 'FLWPUBK-e7cf5d9650bd2e8e4e65358e6248a734-X',
         tx_ref: `${auth?.user?.id}-${Date.now().toString()}`,
-        amount: payment_data.booking_price ? payment_data.booking_price : 100,
+        amount: payment_data?.booking_price ? payment_data.booking_price : 100,
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
@@ -340,7 +340,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                 <div className="focus:border-none">
                                                                     <div className="col-span-1 md:col-span-2 lg:col-span-1 items-center focus:border-none">
 
-                                                                       
+
                                                                         <p className='text-gray-950 mt-2 text-2xl font-bold mb-2 text-center'>Select to swap</p>
                                                                         {
                                                                             auth?.user ?
@@ -432,9 +432,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
                                                 :
                                                 <>
-                                                    <button className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >
+                                                    {/* <button className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3' >
                                                         <Link href={route('user.login')}> Buy Now </Link>
-                                                    </button>
+                                                    </button> */}
                                                     <a className='flex justify-center bg-green-600  w-full text-white font-bold py-2 px-4 rounded mt-3' href='https://api.whatsapp.com/send?phone=08120222922' target='_blank'>
                                                         <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
                                                         +2348120222922
@@ -516,21 +516,21 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                     <Link href={route('user.login')}>Swap Now</Link>
                                                                 </button>
                                                         }
-                                                       
-                                                                      
+
+
                                                     </div>
                                                 </>
                                         :
                                         ''
                                 }
                                 <div className="bg-white rounded-lg shadow-md p-6 mt-2">
-                                  <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-6' >  Buy Cash  </button>
-                                                                        <p className='text-gray-950 mt-2 text-xl font-bold mb-2 text-left'>We deliver when you pay cash.</p>
-                                                                        <button onClick={() => window.location.href = 'mailto:cars@carswap.ng'} className='bg-gray-950 w-full text-white font-bold py-2 px-4 rounded mt-3'>
-                                                                         Make Inquiry
-                                                                        </button>
+                                    <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-6' >  Buy Cash  </button>
+                                    <p className='text-gray-950 mt-2 text-xl font-bold mb-2 text-left'>We deliver when you pay cash.</p>
+                                    <button onClick={() => window.location.href = 'mailto:cars@carswap.ng'} className='bg-gray-950 w-full text-white font-bold py-2 px-4 rounded mt-3'>
+                                        Make Inquiry
+                                    </button>
 
-                                                                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>

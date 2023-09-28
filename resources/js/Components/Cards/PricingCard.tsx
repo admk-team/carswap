@@ -119,14 +119,14 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     Price: ₦ {formatNumberWithCommas(car.price)}
                                 </h5>
                                 <Link href={route('CarDetail', car.slug)} className=''>
-                                    <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white  h-[34px] overflow-hidden responsive">
+                                    {/* <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white  h-[34px] overflow-hidden responsive">
                                         <span className='my-2 '>{car?.model}</span>
                                         <span className='mx-2 '>{car?.brand?.title}</span>
                                         {car?.title}
 
-                                    </h5>
+                                    </h5> */}
                                 </Link>                                
-                                <div className="mt-1">
+                                <div className="mt-2">
                                     <div className='flex flex-wrap justify-between'>
                                         <div className='flex mb-2 flex-wrap justify-between'>
                                             
@@ -139,7 +139,8 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                         <div className='flex mb-2 flex-wrap justify-between'>
                                             <div className='flex'>
                                                 <img src={car?.brand?.image ? "/storage/" + car?.brand?.image : ''} className='w-6 h-6' />
-                                                <p className='mx-2 responsive '>{car?.brand?.title}</p>
+                                                <p className='mx-2 responsive '>{car?.brand?.title}<span className='my-2 ml-1'>{car?.model}</span></p>
+                                                
                                             </div>
                                         </div>
                                         <div className='flex'>
