@@ -340,7 +340,7 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                 <div className="focus:border-none">
                                                                     <div className="col-span-1 md:col-span-2 lg:col-span-1 items-center focus:border-none">
 
-                                                                       
+
                                                                         <p className='text-gray-950 mt-2 text-2xl font-bold mb-2 text-center'>Select to swap</p>
                                                                         {
                                                                             auth?.user ?
@@ -516,21 +516,21 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
                                                                     <Link href={route('user.login')}>Swap Now</Link>
                                                                 </button>
                                                         }
-                                                       
-                                                                      
+
+
                                                     </div>
                                                 </>
                                         :
                                         ''
                                 }
                                 <div className="bg-white rounded-lg shadow-md p-6 mt-2">
-                                  <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-6' >  Buy Cash  </button>
-                                                                        <p className='text-gray-950 mt-2 text-xl font-bold mb-2 text-left'>We deliver when you pay cash.</p>
-                                                                        <button onClick={() => window.location.href = 'mailto:cars@carswap.ng'} className='bg-gray-950 w-full text-white font-bold py-2 px-4 rounded mt-3'>
-                                                                         Make Inquiry
-                                                                        </button>
+                                    {/* <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-6' >  Buy Cash  </button> */}
+                                    <p className='text-gray-950 mt-2 text-xl font-bold mb-2 text-left'>We deliver when you pay cash.</p>
+                                    <button onClick={() => window.location.href = 'mailto:cars@carswap.ng'} className='bg-gray-950 w-full text-white font-bold py-2 px-4 rounded mt-3'>
+                                        Make Inquiry
+                                    </button>
 
-                                                                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>
