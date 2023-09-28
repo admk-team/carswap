@@ -107,9 +107,9 @@ export default function CarDetail({ car, auth, similarCars, success, error, user
 
     };
     const config = {
-        public_key: payment_data.public_key ? payment_data.public_key : 'FLWPUBK-e7cf5d9650bd2e8e4e65358e6248a734-X',
+        public_key: payment_data?.public_key ? payment_data.public_key : 'FLWPUBK-e7cf5d9650bd2e8e4e65358e6248a734-X',
         tx_ref: `${auth?.user?.id}-${Date.now().toString()}`,
-        amount: payment_data.booking_price ? payment_data.booking_price : 100,
+        amount: payment_data?.booking_price ? payment_data.booking_price : 100,
         currency: 'NGN',
         payment_options: 'card,mobilemoney,ussd',
         customer: {
