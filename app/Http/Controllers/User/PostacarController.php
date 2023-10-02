@@ -50,6 +50,7 @@ class PostacarController extends Controller
             'engineCapacity' => 'required',
             'mileage' => 'required',
             'trim' => 'required',
+            'type' => 'required',
             'location' => 'required',
             'price' => 'required',
             'fuelType' => 'required',
@@ -61,10 +62,42 @@ class PostacarController extends Controller
             'description' => 'required',
             'images' => 'required|array',
             'images.*' => 'image',
-            'body_type'=>'required',
-            'price_negotiable'=>'required',
-            'custom_paper'=>'required',
-            'year'=>'required'
+            'body_type' => 'required',
+            'price_negotiable' => 'required',
+            'custom_paper' => 'required',
+            'year' => 'required',
+            'no_owner' => 'required',
+            'categories_id' => 'required',
+            'feature' => 'required',
+            'distress' => $request->input('type') == 'sale' ? 'required' : '',
+            'title1' => $request->input('type') == 'swap' ? 'required' : '',
+            'model1' => $request->input('type') == 'swap' ? 'required' : '',
+          'year1' => $request->input('type') == 'swap' ? 'required' : '',
+        'condition1' => $request->input('type') == 'swap' ? 'required' : '',
+        'interiorColor1' => $request->input('type') == 'swap' ? 'required' : '',
+        'milage1' => $request->input('type') == 'swap' ? 'required' : '',
+        'brand1' => $request->input('type') == 'swap' ? 'required' : '',
+        'fuelType1' => $request->input('type') == 'swap' ? 'required' : '',
+        'transmission1' => $request->input('type') == 'swap' ? 'required' : '',
+        'exteriorColor1' => $request->input('type') == 'swap' ? 'required' : '',
+        'price1' => $request->input('type') == 'swap' ? 'required' : '',
+        'cylinder1' => $request->input('type') == 'swap' ? 'required' : '',
+        'custom_paper1' => $request->input('type') == 'swap' ? 'required' : '',
+        'feature1' => $request->input('type') == 'swap' ? 'required' : '',
+        'title2' => $request->input('type') == 'swap' ? 'required' : '',
+        'model2' => $request->input('type') == 'swap' ? 'required' : '',
+        'year2' => $request->input('type') == 'swap' ? 'required' : '',
+        'condition2' => $request->input('type') == 'swap' ? 'required' : '',
+        'interiorColor2' => $request->input('type') == 'swap' ? 'required' : '',
+        'milage2' => $request->input('type') == 'swap' ? 'required' : '',
+        'brand2' => $request->input('type') == 'swap' ? 'required' : '',
+        'fuelType2' => $request->input('type') == 'swap' ? 'required' : '',
+        'transmission2' => $request->input('type') == 'swap' ? 'required' : '',
+        'exteriorColor2' => $request->input('type') == 'swap' ? 'required' : '',
+        'price2' => $request->input('type') == 'swap' ? 'required' : '',
+        'cylinder2' => $request->input('type') == 'swap' ? 'required' : '',
+        'custom_paper2' => $request->input('type') == 'swap' ? 'required' : '',
+        'feature2' => $request->input('type') == 'swap' ? 'required' : '',
         ], [
             'brand_id.required' => 'The brand field is required',
             'trim.required' => 'The Owner field is required',
@@ -106,7 +139,7 @@ class PostacarController extends Controller
         $model->drive=$request->drive;
         $model->images=$images;
         $model->fuel_Type=$request->fuelType;
-        $model->type = "sale";
+        $model->type = $request->type;
         $model->trim=$request->trim;
         $model->model=$request->model;
         $model->transmission=$request->transmission;
@@ -117,6 +150,41 @@ class PostacarController extends Controller
         $model->price_negotiable=$request->price_negotiable;
         $model->custom_paper=$request->custom_paper;
         $model->year=$request->year;
+        $model->title1=$request->title1;
+        $model->model1=$request->model1;
+        $model->year1=$request->year1;
+        $model->condition1=$request->condition1;
+        $model->interiorColor1=$request->interiorColor1;
+        $model->milage1=$request->milage1;
+        //new feilds swap1
+        $model->brand1=$request->brand1;
+        $model->fuelType1=$request->fuelType1;
+        $model->transmission1=$request->transmission1;
+        $model->exteriorColor1=$request->exteriorColor1;
+        $model->price1=$request->price1;
+        $model->cylinder1=$request->cylinder1;
+        $model->custom_paper1=$request->custom_paper1;
+        $model->feature1=$request->feature1;
+       //new feilds swap2
+        $model->title2=$request->title2;
+        $model->model2=$request->model2;
+        $model->year2=$request->year2;
+        $model->condition2=$request->condition2;
+        $model->interiorColor2=$request->interiorColor2;
+        $model->milage2=$request->milage2;
+        $model->brand2 = $request->brand2;
+        $model->fuelType2 = $request->fuelType2;
+        $model->transmission2 = $request->transmission2;
+        $model->exteriorColor2 = $request->exteriorColor2;
+        $model->price2 = $request->price2;
+        $model->cylinder2 = $request->cylinder2;
+        $model->custom_paper2 = $request->custom_paper2;
+        $model->feature2=$request->feature2;
+        //new fileds
+        $model->no_owner = $request->no_owner;
+        $model->categories_id = $request->categories_id;
+        $model->feature = $request->feature;
+        $model->distress = $request->distress;
         $model->status=0;
         if($model->save()){
             $model->slug=Str::slug($request->title).'-'.$model->id;
@@ -167,40 +235,7 @@ class PostacarController extends Controller
     public function update(Request $request,$id)
     {
         $rules = [
-            'lga' => 'required',
-            'street' => 'required',
-            'cylinder' => 'required',
-            'title' => 'required',
-            'brand_id' => 'required',
-            'condition' => 'required',
-            'engineCapacity' => 'required',
-            'mileage' => 'required',
-            'trim' => 'required',
-            'location' => 'required',
-            'price' => 'required',
-            'fuelType' => 'required',
-            'model' => 'required',
-            'transmission' => 'required',
-            'drive' => 'required',
-            'interiorColor' => 'required',
-            'exteriorColor' => 'required',
-            'description' => 'required',
-            'images.*' => 'image',
-            'body_type'=>'required',
-            'price_negotiable'=>'required',
-            'custom_paper'=>'required',
-            'year'=>'required'
-        ];
-        
-        $messages = [
-            'brand_id.required' => 'The brand field is required',
-            'trim.required' => 'The Owner field is required',
-        ];
-        
-        // Conditionally add more rules based on the 'type' field
-        if ($request->input('type') === 'swap') {
-            // Additional validation rules for 'sale' type
-            $rules += [
+         
                 'lga' => 'required',
                 'street' => 'required',
                 'cylinder' => 'required',
@@ -210,45 +245,62 @@ class PostacarController extends Controller
                 'engineCapacity' => 'required',
                 'mileage' => 'required',
                 'trim' => 'required',
+                'type' => 'required',
                 'location' => 'required',
                 'price' => 'required',
                 'fuelType' => 'required',
                 'model' => 'required',
-                'year'=>'required',
                 'transmission' => 'required',
                 'drive' => 'required',
                 'interiorColor' => 'required',
                 'exteriorColor' => 'required',
                 'description' => 'required',
+                'images' => 'required|array',
                 'images.*' => 'image',
-                'body_type'=>'required',
-                'price_negotiable'=>'required',
-                'custom_paper'=>'required',
-                'porpose'=>'required',
-                'fixedengine'=>'required',
-                'fixedtrans'=>'required',
-                'title1'=>'required',
-                'model1'=>'required',
-                'year1'=>'required',
-                'condition1'=>'required',
-                'interiorColor1'=>'required',
-                'milage1'=>'required',
-                'title2'=>'required',
-                'model2'=>'required',
-                'year2'=>'required',
-                'condition2'=>'required',
-                'interiorColor2'=>'required',
-                'milage2'=>'required',
-            ];
-            $messages = [
-                'brand_id.required' => 'The brand field is required',
-                'trim.required' => 'The Owner field is required',
-            ];
-        } else {
-            // Additional validation rules for other types (if needed)
-            // For example, if you have rules specific to other types, add them here
-        }
+                'body_type' => 'required',
+                'price_negotiable' => 'required',
+                'custom_paper' => 'required',
+                'year' => 'required',
+                'no_owner' => 'required',
+                'categories_id' => 'required',
+                'feature' => 'required',
+                'distress' => $request->input('type') == 'sale' ? 'required' : '',
+                'title1' => $request->input('type') == 'swap' ? 'required' : '',
+                'model1' => $request->input('type') == 'swap' ? 'required' : '',
+              'year1' => $request->input('type') == 'swap' ? 'required' : '',
+            'condition1' => $request->input('type') == 'swap' ? 'required' : '',
+            'interiorColor1' => $request->input('type') == 'swap' ? 'required' : '',
+            'milage1' => $request->input('type') == 'swap' ? 'required' : '',
+            'brand1' => $request->input('type') == 'swap' ? 'required' : '',
+            'fuelType1' => $request->input('type') == 'swap' ? 'required' : '',
+            'transmission1' => $request->input('type') == 'swap' ? 'required' : '',
+            'exteriorColor1' => $request->input('type') == 'swap' ? 'required' : '',
+            'price1' => $request->input('type') == 'swap' ? 'required' : '',
+            'cylinder1' => $request->input('type') == 'swap' ? 'required' : '',
+            'custom_paper1' => $request->input('type') == 'swap' ? 'required' : '',
+            'feature1' => $request->input('type') == 'swap' ? 'required' : '',
+            'title2' => $request->input('type') == 'swap' ? 'required' : '',
+            'model2' => $request->input('type') == 'swap' ? 'required' : '',
+            'year2' => $request->input('type') == 'swap' ? 'required' : '',
+            'condition2' => $request->input('type') == 'swap' ? 'required' : '',
+            'interiorColor2' => $request->input('type') == 'swap' ? 'required' : '',
+            'milage2' => $request->input('type') == 'swap' ? 'required' : '',
+            'brand2' => $request->input('type') == 'swap' ? 'required' : '',
+            'fuelType2' => $request->input('type') == 'swap' ? 'required' : '',
+            'transmission2' => $request->input('type') == 'swap' ? 'required' : '',
+            'exteriorColor2' => $request->input('type') == 'swap' ? 'required' : '',
+            'price2' => $request->input('type') == 'swap' ? 'required' : '',
+            'cylinder2' => $request->input('type') == 'swap' ? 'required' : '',
+            'custom_paper2' => $request->input('type') == 'swap' ? 'required' : '',
+            'feature2' => $request->input('type') == 'swap' ? 'required' : '', 
+            'images.*' => 'image',        
+        ];
         
+        $messages = [
+            'brand_id.required' => 'The brand field is required',
+            'trim.required' => 'The Owner field is required',
+        ];
+         
         $request->validate($rules, $messages);
             
         $model=Car::find($id);
@@ -283,20 +335,23 @@ class PostacarController extends Controller
             $images = implode(",", $arr);            
             $model->images=$images;
         }
+        $model->lga=$request->lga;
+        $model->street=$request->street;
+        $model->cylinder=$request->cylinder;
         $model->title=$request->title;
         $model->brand_id= $request->brand_id;
+        $model->user_id= auth()->user()->id;
         $model->condition=$request->condition;
         $model->engine_capacity=$request->engineCapacity;
         $model->mileage=$request->mileage;
         $model->location=$request->location;
         $model->price=$request->price;
         $model->drive=$request->drive;
+        $model->images=$images;
         $model->fuel_Type=$request->fuelType;
-        $model->model=$request->model;
-        $model->type=$request->type;
-        $model->swaptitle1=$request->swaptitle1;
-        $model->swaptitle2=$request->swaptitle2;
+        $model->type = $request->type;
         $model->trim=$request->trim;
+        $model->model=$request->model;
         $model->transmission=$request->transmission;
         $model->interior_color=$request->interiorColor;
         $model->exterior_color=$request->exteriorColor;
@@ -304,21 +359,42 @@ class PostacarController extends Controller
         $model->body_type=$request->body_type;
         $model->price_negotiable=$request->price_negotiable;
         $model->custom_paper=$request->custom_paper;
-        $model->porpose=$request->porpose;
-        $model->fixedengine=$request->fixedengine;
-        $model->fixedtrans=$request->fixedtrans;
+        $model->year=$request->year;
         $model->title1=$request->title1;
         $model->model1=$request->model1;
         $model->year1=$request->year1;
         $model->condition1=$request->condition1;
         $model->interiorColor1=$request->interiorColor1;
         $model->milage1=$request->milage1;
+        //new feilds swap1
+        $model->brand1=$request->brand1;
+        $model->fuelType1=$request->fuelType1;
+        $model->transmission1=$request->transmission1;
+        $model->exteriorColor1=$request->exteriorColor1;
+        $model->price1=$request->price1;
+        $model->cylinder1=$request->cylinder1;
+        $model->custom_paper1=$request->custom_paper1;
+        $model->feature1=$request->feature1;
+       //new feilds swap2
         $model->title2=$request->title2;
         $model->model2=$request->model2;
         $model->year2=$request->year2;
         $model->condition2=$request->condition2;
         $model->interiorColor2=$request->interiorColor2;
         $model->milage2=$request->milage2;
+        $model->brand2 = $request->brand2;
+        $model->fuelType2 = $request->fuelType2;
+        $model->transmission2 = $request->transmission2;
+        $model->exteriorColor2 = $request->exteriorColor2;
+        $model->price2 = $request->price2;
+        $model->cylinder2 = $request->cylinder2;
+        $model->custom_paper2 = $request->custom_paper2;
+        $model->feature2=$request->feature2;
+        //new fileds
+        $model->no_owner = $request->no_owner;
+        $model->categories_id = $request->categories_id;
+        $model->feature = $request->feature;
+        $model->distress = $request->distress;
         if($model->save()){
             $model->slug=Str::slug($request->title).'-'.$model->id;
             $model->update();
