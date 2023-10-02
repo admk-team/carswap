@@ -55,7 +55,7 @@ function Newsletter( {errors,success}: any) {
                   value={data.email}
                   onChange={handleInputChange}
                   required/>
-                <button type="submit" className="w-full sm:w-1/4 h-12 text-white bg-emerald-600 rounded-lg shadow  duration-300 ease-in-out hover:bg-purple-700">Subscribe</button>
+                <button type="submit" className="w-full sm:w-1/4 h-12 text-white bg-emerald-600 rounded-lg shadow  duration-300 ease-in-out hover:bg-[#081546]">Subscribe</button>
             </div>
             {errors.email && <div className="text-red-500">{errors.email}</div>}
             {isSuccess?

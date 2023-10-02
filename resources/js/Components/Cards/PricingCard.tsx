@@ -159,11 +159,11 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                         
                                     </div> */}
                                     <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
-                                        <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
-                                            <p className='mx-2  text-gray-600 responsive'>{car?.condition}</p>
+                                        <div className='flex mb-1  rounded-[4px]'>
+                                            <p className='mx-2  text-sm text-gray-600 responsive'>Conditon : {car?.condition}</p>
                                         </div>
                                         <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
-                                            <p className='mx-2  text-gray-600 responsive'>{car?.mileage} miles</p>
+                                            <p className='mx-2   text-sm text-gray-600 responsive'>{car?.mileage} miles</p>
                                         </div>
                                     </div>
 

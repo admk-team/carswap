@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import imagelogo1 from '@/Assets/nav2.png'
+import imagelogo1 from '@/Assets/navlogo.svg'
 import watsapImage from '@/Assets/whatsapp.png'
 import bellIcon from "@/Assets/bell.png"
 import { Link } from '@inertiajs/react';
@@ -30,7 +30,7 @@ const NavBar2 = (auth: any) => {
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
               <Link href={route('front.index')}>
-                <img className="w-52 h-9 object-contain" src={imagelogo1} alt="Logo" />
+                <img className="w-52 h-16 object-contain" src={imagelogo1} alt="Logo" />
               </Link>
             </div>
             <div className="hidden md:block">
