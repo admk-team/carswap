@@ -52,12 +52,12 @@ const PricingCard = ({ brands, cars, auth }: any) => {
     return (
         <div className="mx-auto max-w-screen-xl w-full h-full mt-3 ">
             <div className="flex">
-            <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mb-4  p-4">
+                <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mb-4  p-4">
                     {cars?.map((car: any, index: any) => (
                         <div
-                        key={index}
-                        className="lg:w-[250px] xl:w-[275px] md:w-[220px] sm:w-[200px] bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105 md:me-[2px] sm:mt-2"
-                      >
+                            key={index}
+                            className="lg:w-[250px] xl:w-[275px] md:w-[220px] sm:w-[200px] bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105 md:me-[2px] sm:mt-2"
+                        >
                             <div className="relative">
                                 <Link href={route('CarDetail', car.slug)}>
                                     <img
@@ -68,8 +68,8 @@ const PricingCard = ({ brands, cars, auth }: any) => {
 
                                 </Link>
                                 <>
-                                    {car?.type === 'For Swap' ? (
-                                         <Link href={route('CarDetail', car.slug)}>
+
+                                    <Link href={route('CarDetail', car.slug)}>
                                         <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl cursor-pointer responsive responsive1 swap__car'>
                                             <p className='font-semibold text-black text-white flex gap-2 items-center justify-center align-center responsive responsive1'>
                                                 <span>
@@ -85,8 +85,8 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                                 </span>
                                             </p>
                                         </div>
-                                        </Link>
-                                    ) : null}
+                                    </Link>
+
                                 </>
 
                                 <div className="absolute bottom-5 left-1">
@@ -125,22 +125,25 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                         {car?.title}
 
                                     </h5> */}
-                                </Link>                                
+                                </Link>
                                 <div className="mt-2">
                                     <div className='flex flex-wrap justify-between'>
-                                        <div className='flex mb-2 flex-wrap justify-between'>
-                                            
+                                        <div className='flex mb-2 flex-wrap justify-between gap-8'>
                                             <div className='flex bg-emerald-500'>
                                                 <p className='mx-2 text-white responsive responsive1'>{car?.cylinder} <span className='ml-1 responsive'>- Cylinder</span></p>
                                             </div>
+                                            <div className='flex '>
+                                                <p>Year : {car?.model}</p>
+                                            </div>
                                         </div>
+
                                     </div>
                                     <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
                                         <div className='flex mb-2 flex-wrap justify-between'>
                                             <div className='flex'>
                                                 <img src={car?.brand?.image ? "/storage/" + car?.brand?.image : ''} className='w-6 h-6' />
-                                                <p className='mx-2 responsive '>{car?.brand?.title}<span className='my-2 ml-1'>{car?.model}</span></p>
-                                                
+                                                <p className='mx-2 responsive '>{car?.brand?.title}<span className='my-2 ml-1'>{car?.title}</span></p>
+
                                             </div>
                                         </div>
                                         <div className='flex'>
@@ -151,7 +154,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                             <p className='mx-2 responsive '>{car?.location}</p>
                                         </div>
                                     </div>
-{/* 
+                                    {/* 
                                     <div className='flex flex-wrap justify-between'>
                                         
                                     </div> */}
@@ -169,9 +172,9 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                             <Link href={route('CarDetail', car.slug)}><p className='mx-4  text-gray-900 font-bold cursor-pointer condition__wrap1'>Swap</p></Link>
                                         </div>
                                         <div className='flex   rounded-[4px]'>
-                                        <Link href={route('CarDetail', car.slug)}>
-                                            <p className='mx-4  text-emerald-600 font-bold cursor-pointer condition__wrap1'>Buy Cash </p>
-                                        </Link>
+                                            <Link href={route('CarDetail', car.slug)}>
+                                                <p className='mx-4  text-emerald-600 font-bold cursor-pointer condition__wrap1'>Buy Cash </p>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

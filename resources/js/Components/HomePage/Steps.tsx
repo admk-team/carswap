@@ -8,7 +8,7 @@ const Steps = () => {
     return (
         <>
             <div className="mx-auto max-w-screen-xl w-full h-full mt-12 ">
-                <div className="text-center font-bold md:text-center text-lg md:text-xl lg:text-3xl">
+                <div className="text-center font-bold md:text-center text-lg md:text-3xl lg:text-3xl">
                     <h1 className="text-gray-950">
                         4 Simple Steps To Swap A Car
                     </h1>
@@ -19,13 +19,13 @@ const Steps = () => {
                         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
                             <div className="flex flex-col items-center text-center p-4">
                                 <div className="flex justify-center">
-                                    <h1 className="text-emerald-500 text-7xl md:text-9xl font-bold -mr-1">
+                                    <h1 className="text-emerald-500 text-7xl md:text-7xl font-bold -mr-1">
                                         1
                                     </h1>
                                     <img
                                         src={PostCar}
                                         alt=""
-                                        className="w-10 h-10 md:w-20 md:h-20 mt-6 md:mt-10"
+                                        className="w-10 h-10 md:w-15 md:h-15 mt-6 md:mt-6"
                                     />
                                 </div>
                                 <div className="flex flex-col items-center justify-center text-center mt-2 md:mt-0">
@@ -37,13 +37,13 @@ const Steps = () => {
 
                             <div className="flex flex-col items-center text-center p-4">
                                 <div className="flex justify-center">
-                                    <h1 className="text-emerald-500 text-7xl md:text-9xl font-bold -mr-0">
+                                    <h1 className="text-emerald-500 text-7xl md:text-7xl font-bold -mr-0">
                                         2
                                     </h1>
                                     <img
                                         src={Calender}
                                         alt="Image 2"
-                                        className="w-10 h-10 md:w-20 md:h-20 mt-6 md:mt-10"
+                                        className="w-10 h-10 md:w-15 md:h-15 mt-6 md:mt-6"
                                     />
                                 </div>
                                 <div className="flex flex-col items-center justify-center text-center mt-2 md:mt-0">
@@ -55,13 +55,13 @@ const Steps = () => {
 
                             <div className="flex flex-col items-center text-center p-4">
                                 <div className="flex justify-center">
-                                    <h1 className="text-emerald-500 text-7xl md:text-9xl font-bold -mr-0">
+                                    <h1 className="text-emerald-500 text-7xl md:text-7xl font-bold -mr-0">
                                         3
                                     </h1>
                                     <img
                                         src={Swap}
                                         alt="Image 3"
-                                        className="w-10 h-10 md:w-20 md:h-20 mt-6 md:mt-10"
+                                        className="w-10 h-10 md:w-15 md:h-15 mt-6 md:mt-6"
                                     />
                                 </div>
                                 <div className="flex flex-col items-center justify-center text-center mt-2 md:mt-0">
@@ -73,13 +73,13 @@ const Steps = () => {
 
                             <div className="flex flex-col items-center text-center p-4">
                                 <div className="flex justify-center">
-                                    <h1 className="text-emerald-500 text-7xl md:text-9xl font-bold -mr-0">
+                                    <h1 className="text-emerald-500 text-7xl md:text-7xl font-bold -mr-0">
                                         4
                                     </h1>
                                     <img
                                         src={Delivery}
                                         alt="Image 4"
-                                        className="w-10 h-10 md:w-20 md:h-20 mt-6 md:mt-10"
+                                        className="w-10 h-10 md:w-15 md:h-15 mt-6 md:mt-6"
                                     />
                                 </div>
                                 <div className="flex flex-col items-center justify-center text-center mt-2 md:mt-0">
