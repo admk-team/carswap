@@ -130,6 +130,14 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     <div className='flex flex-wrap justify-between'>
                                         <div className='flex mb-2 flex-wrap justify-between'>
                                             
+                                            <div className='flex'>
+                                                <p className='mx-1 text-dark responsive responsive1'>Spec: {car?.feature}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-wrap justify-between'>
+                                        <div className='flex mb-2 flex-wrap justify-between'>
+                                            
                                             <div className='flex bg-emerald-500'>
                                                 <p className='mx-2 text-white responsive responsive1'>{car?.cylinder} <span className='ml-1 responsive'>- Cylinder</span></p>
                                             </div>
