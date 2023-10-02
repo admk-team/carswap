@@ -73,6 +73,9 @@ const CarInfohtmlForm = ({ auth, brands, users,categories }: any) => {
         cylinder2:'',
         custom_paper2:'',
         feature2:'',
+        porpose: '',
+        fixedengine: '',
+        fixedtrans: '',
         images: []
     });
 
@@ -429,6 +432,42 @@ const CarInfohtmlForm = ({ auth, brands, users,categories }: any) => {
                         {
                                 carSwapCheck&&(
                                     <>
+                                     <div className="grid md:grid-cols-2 md:gap-x-6">
+                                     <div className="relative z-0 w-full mb-6 group">
+                            <select name="porpose" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"  value={data.porpose} onChange={(e) => setData('porpose', e.target.value)}>
+                                <option value="">Purpose of Swap* </option>
+                                <option value="Nigerian Used">Upgrade for Better </option>
+                                <option value="Foreign Used">Downgrade for cash </option>
+                                <option value="Foreign Used">Car Model  </option>
+                                <option value="Foreign Used">Change my Make </option>
+                                
+                            </select>
+                            <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                            {errors.porpose && <div className='text-red-500'>{errors.porpose}</div>}
+                        </div>
+                        <div className="relative z-0 w-full mb-6 group">
+                            <select name="fixedengine" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"  value={data.fixedengine} onChange={(e) => setData('fixedengine', e.target.value)}>
+                                <option value="">Fixed Engine* </option>
+                                <option value="yes">Yes</option>
+                                <option value="No">No</option>                                
+                            </select>
+                            <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                            {errors.fixedengine && <div className='text-red-500'>{errors.fixedengine}</div>}
+                        </div>
+                                     <div className="relative z-0 w-full mb-6 group">
+                            <select name="condition" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"  value={data.fixedtrans} onChange={(e) => setData('fixedtrans', e.target.value)}>
+                                <option value="">Fixed Transmission* </option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>                                
+                            </select>
+                            <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                            {errors.fixedtrans && <div className='text-red-500'>{errors.fixedtrans}</div>}
+                        </div>
+
+
+
+
+                                     </div>
                                          <h1 className="text-xl text-gray-950 font-bold">Two Cars of my swap options:</h1>
                     <div className="grid md:grid-cols-2 md:gap-x-6">
                         <div className='mt-2 '>

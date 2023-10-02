@@ -98,6 +98,10 @@ class PostacarController extends Controller
         'cylinder2' => $request->input('type') == 'swap' ? 'required' : '',
         'custom_paper2' => $request->input('type') == 'swap' ? 'required' : '',
         'feature2' => $request->input('type') == 'swap' ? 'required' : '',
+
+        'porpose' => $request->input('type') == 'swap' ? 'required' : '',
+        'fixedengine' => $request->input('type') == 'swap' ? 'required' : '',
+        'fixedtrans' => $request->input('type') == 'swap' ? 'required' : '',
         ], [
             'brand_id.required' => 'The brand field is required',
             'trim.required' => 'The Owner field is required',
@@ -138,7 +142,7 @@ class PostacarController extends Controller
         $model->price=$request->price;
         $model->drive=$request->drive;
         $model->images=$images;
-        $model->fuel_Type=$request->fuelType;
+        $model->fuel_type=$request->fuelType;
         $model->type = $request->type;
         $model->trim=$request->trim;
         $model->model=$request->model;
@@ -156,6 +160,9 @@ class PostacarController extends Controller
         $model->condition1=$request->condition1;
         $model->interiorColor1=$request->interiorColor1;
         $model->milage1=$request->milage1;
+        $model->porpose=$request->porpose;
+        $model->fixedengine=$request->fixedengine;
+        $model->fixedtrans=$request->fixedtrans;
         //new feilds swap1
         $model->brand1=$request->brand1;
         $model->fuelType1=$request->fuelType1;
@@ -255,7 +262,6 @@ class PostacarController extends Controller
                 'interiorColor' => 'required',
                 'exteriorColor' => 'required',
                 'description' => 'required',
-                'images' => 'required|array',
                 'images.*' => 'image',
                 'body_type' => 'required',
                 'price_negotiable' => 'required',
@@ -293,7 +299,9 @@ class PostacarController extends Controller
             'cylinder2' => $request->input('type') == 'swap' ? 'required' : '',
             'custom_paper2' => $request->input('type') == 'swap' ? 'required' : '',
             'feature2' => $request->input('type') == 'swap' ? 'required' : '', 
-            'images.*' => 'image',        
+            'porpose' => $request->input('type') == 'swap' ? 'required' : '',
+            'fixedengine' => $request->input('type') == 'swap' ? 'required' : '',
+            'fixedtrans' => $request->input('type') == 'swap' ? 'required' : '',       
         ];
         
         $messages = [
@@ -304,37 +312,37 @@ class PostacarController extends Controller
         $request->validate($rules, $messages);
             
         $model=Car::find($id);
-        if($request->hasFile('images')){
-            if ($request->hasFile('images')) {
-                $existingImages = explode(',', $model->images);
-                foreach ($existingImages as $existingImage) {
-                    Storage::disk('public')->delete($existingImage);
-                }
-            }
-            $images = '';
-            $arr = [];
-            
-            if ($request->hasFile('images')) {
-                $maxImages = 30;
-                $uploadedImagesCount = count($request->file('images'));
-            
-                if ($uploadedImagesCount <= $maxImages) {
-                    foreach ($request->file('images') as $item) {
-                        $var = date_create();
-                        $time = date_format($var, 'YmdHis');
-                        $imageName = $time . '-' . $item->getClientOriginalName();
-                        $item->move(public_path('storage/images/cars'), $imageName);
-                        array_push($arr, '/images/cars/' . $imageName);
-                    }
-                } else {
-                    // Handle the case when the user exceeds the maximum allowed images
-                    return response()->json(['message' => 'You can upload a maximum of ' . $maxImages . ' images.'], 400);
-                }
-            }
-            
-            $images = implode(",", $arr);            
-            $model->images=$images;
-        }
+            // Initialize $images with the existing images
+  $images = $model->images;
+  
+  if ($request->hasFile('images')) {
+      // Delete existing images (if any)
+      $existingImages = explode(',', $model->images);
+      foreach ($existingImages as $existingImage) {
+          Storage::disk('public')->delete($existingImage);
+      }
+      
+      $arr = [];
+      $maxImages = 30;
+      $uploadedImagesCount = count($request->file('images'));
+      
+      if ($uploadedImagesCount <= $maxImages) {
+          foreach ($request->file('images') as $item) {
+              $var = date_create();
+              $time = date_format($var, 'YmdHis');
+              $imageName = $time . '-' . $item->getClientOriginalName();
+              $item->move(public_path('storage/images/cars'), $imageName);
+              array_push($arr, '/images/cars/' . $imageName);
+          }
+          // After successfully uploading and processing the new images
+          $images = implode(",", $arr);
+      } else {
+          // Handle the case when the user exceeds the maximum allowed images
+          return response()->json(['message' => 'You can upload a maximum of ' . $maxImages . ' images.'], 400);
+      }
+  }
+  
+  $model->images = $images; // Update the model's images property
         $model->lga=$request->lga;
         $model->street=$request->street;
         $model->cylinder=$request->cylinder;
@@ -347,8 +355,7 @@ class PostacarController extends Controller
         $model->location=$request->location;
         $model->price=$request->price;
         $model->drive=$request->drive;
-        $model->images=$images;
-        $model->fuel_Type=$request->fuelType;
+        $model->fuel_type=$request->fuelType;
         $model->type = $request->type;
         $model->trim=$request->trim;
         $model->model=$request->model;
@@ -366,6 +373,9 @@ class PostacarController extends Controller
         $model->condition1=$request->condition1;
         $model->interiorColor1=$request->interiorColor1;
         $model->milage1=$request->milage1;
+        $model->porpose=$request->porpose;
+        $model->fixedengine=$request->fixedengine;
+        $model->fixedtrans=$request->fixedtrans;
         //new feilds swap1
         $model->brand1=$request->brand1;
         $model->fuelType1=$request->fuelType1;

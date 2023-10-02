@@ -15,17 +15,17 @@ const  EditCarForm= ({ auth,brands,car,categories}: any) => {
         brand_id: car.brand_id || '',
         user_id: car.user_id || '',
         condition: car.condition || '',
-        engineCapacity: car.engineCapacity || '',
+        engineCapacity: car.engine_capacity || '',
         mileage: car.mileage || '',
         type: car.type || '',
         trim: car.trim || '',
         price: car.price || '',
-        fuelType: car.fuelType || '',
+        fuelType: car.fuel_type || '',
         model: car.model || '',
         transmission: car.transmission || '',
         drive: car.drive || '',
-        interiorColor: car.interiorColor || '',
-        exteriorColor: car.exteriorColor || '',
+        interiorColor: car.interior_color || '',
+        exteriorColor: car.exterior_color || '',
         description: car.description || '',
         body_type: car.body_type || '',
         price_negotiable: car.price_negotiable || '',
@@ -64,6 +64,10 @@ const  EditCarForm= ({ auth,brands,car,categories}: any) => {
         cylinder2: car.cylinder2 || '',
         custom_paper2: car.custom_paper2 || '',
         feature2: car.feature2 || '', 
+        porpose: car.porpose || '',
+        fixedengine: car.fixedengine || '',
+        fixedtrans: car.fixedtrans || '',
+
       images:null,
         _method:'put'
     });
@@ -239,9 +243,9 @@ const  EditCarForm= ({ auth,brands,car,categories}: any) => {
                                 <div className="relative z-0 w-full mb-6 group">
                             <select name="feature" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.feature} onChange={(e) => setData('feature', e.target.value)}>
                                 <option value="">Special features* </option>
-                                <option value="Thumb start">Thumb start </option>
-                                <option value="Keyless entry"> Keyless entry </option>
-                                <option value="GPS">GPS </option>                              
+                                <option value="Automatic">Thumb start </option>
+                                <option value="Manual"> Keyless entry </option>
+                                <option value="Auxiliary">GPS </option>                               
                             </select>
                             <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
                             {errors.feature && <div className='text-red-500'>{errors.feature}</div>}
@@ -309,7 +313,7 @@ const  EditCarForm= ({ auth,brands,car,categories}: any) => {
                             {errors.price && <div className='text-red-500'>{errors.price}</div>}
                         </div>
                                 <div className="relative z-0 w-full mb-6 group">
-                                    <select name="Usedca" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.fuelType} onChange={(e) => setData('fuelType', e.target.value)}>
+                                    <select name="fuelType" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.fuelType} onChange={(e) => setData('fuelType', e.target.value)}>
                                         <option value="option0">Select Fuel Type</option>
                                         <option value="LNG">LNG</option>
                                         <option value="Gas">Gas</option>
@@ -431,6 +435,42 @@ const  EditCarForm= ({ auth,brands,car,categories}: any) => {
                         {
                                 carSwapCheck&&(
                                     <>
+                                     <div className="grid md:grid-cols-2 md:gap-x-6">
+                                     <div className="relative z-0 w-full mb-6 group">
+                            <select name="porpose" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"  value={data.porpose} onChange={(e) => setData('porpose', e.target.value)}>
+                                <option value="">Purpose of Swap* </option>
+                                <option value="Nigerian Used">Upgrade for Better </option>
+                                <option value="Foreign Used">Downgrade for cash </option>
+                                <option value="Foreign Used">Car Model  </option>
+                                <option value="Foreign Used">Change my Make </option>
+                                
+                            </select>
+                            <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                            {errors.porpose && <div className='text-red-500'>{errors.porpose}</div>}
+                        </div>
+                        <div className="relative z-0 w-full mb-6 group">
+                            <select name="fixedengine" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"  value={data.fixedengine} onChange={(e) => setData('fixedengine', e.target.value)}>
+                                <option value="">Fixed Engine* </option>
+                                <option value="yes">Yes</option>
+                                <option value="No">No</option>                                
+                            </select>
+                            <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                            {errors.fixedengine && <div className='text-red-500'>{errors.fixedengine}</div>}
+                        </div>
+                                     <div className="relative z-0 w-full mb-6 group">
+                            <select name="condition" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"  value={data.fixedtrans} onChange={(e) => setData('fixedtrans', e.target.value)}>
+                                <option value="">Fixed Transmission* </option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>                                
+                            </select>
+                            <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
+                            {errors.fixedtrans && <div className='text-red-500'>{errors.fixedtrans}</div>}
+                        </div>
+
+
+
+
+                                     </div>
                                          <h1 className="text-xl text-gray-950 font-bold">Two Cars of my swap options:</h1>
                     <div className="grid md:grid-cols-2 md:gap-x-6">
                         <div className='mt-2 '>
@@ -543,7 +583,7 @@ const  EditCarForm= ({ auth,brands,car,categories}: any) => {
                                 <option value="">Special features* </option>
                                 <option value="Thumb start">Thumb start </option>
                                 <option value="Keyless entry"> Keyless entry </option>
-                                <option value="GPS">GPS </option>                             
+                                <option value="GPS">GPS </option>                               
                             </select>
                             <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
                             {errors.feature1 && <div className='text-red-500'>{errors.feature1}</div>}
@@ -658,9 +698,9 @@ const  EditCarForm= ({ auth,brands,car,categories}: any) => {
                                 <div className="relative z-0 w-full mb-6 group">
                             <select name="feature2" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.feature2} onChange={(e) => setData('feature2', e.target.value)}>
                                 <option value="">Special features* </option>
-                                <option value="Thumb start">Thumb start </option>
-                                <option value="Keyless entry"> Keyless entry </option>
-                                <option value="GPS">GPS </option>                               
+                                <option value="Automatic">Thumb start </option>
+                                <option value="Manual"> Keyless entry </option>
+                                <option value="Auxiliary">GPS </option>                               
                             </select>
                             <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
                             {errors.feature2 && <div className='text-red-500'>{errors.feature2}</div>}
