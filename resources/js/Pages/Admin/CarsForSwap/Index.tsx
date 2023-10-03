@@ -59,7 +59,7 @@ const Index = ({ auth, cars, success, error }: any) => {
                         <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 )}
-                <h1 className="h3 mb-2 text-gray-800">Cars For Swap</h1>
+                <h1 className="h3 mb-2 text-gray-800">Posted Cars</h1>
                 <div className="card shadow mb-4">
                     <div className="card-header py-3 d-flex justify-content-between">
                         <h6 className="m-0 font-weight-bold text-primary">

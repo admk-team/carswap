@@ -110,7 +110,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
         <h1 className="h3 mb-2 text-gray-800">Car</h1>
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Post Car For Swap</h6>
+            <h6 className="m-0 font-weight-bold text-primary">Edit Car</h6>
           </div>
           <div className="card-body">
           <form className="row g-3" method='post' onSubmit={handleSubmit} encType='multipart/form-data'>
