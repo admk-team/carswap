@@ -40,6 +40,7 @@ import feature from "@/Assets/features.png";
 import cylinder from "@/Assets/cylinder.jpg";
 import price from "@/Assets/price11.png";
 import location from "@/Assets/location.png";
+import Custom from "@/Assets/custome-removebg-preview.png";
 export default function CarDetail({
     car,
     auth,
@@ -848,13 +849,13 @@ export default function CarDetail({
                                 <div className="flex justify-between bg-purple-50 p-4">
                                     <div className="flex gap-2">
                                         <img
-                                            src={feature}
+                                            src={location}
                                             className="w-6 h-6"
                                         />
-                                        <p>Special Feature</p>
+                                        <p>Location</p>
                                     </div>
                                     <div>
-                                        <p>{car?.feature}</p>
+                                        <p>{car.location} {car.state} {car.lga}</p>
                                     </div>
                                 </div>
                         </div>
@@ -961,20 +962,40 @@ export default function CarDetail({
                                 </div>
                             </div>
                             <hr />
+                            <div className="flex justify-between bg-purple-50 p-4">
+                                <div className="flex gap-2">
+                                    <img src={Custom} className="w-6 h-6" />
+                                    <p>Custom Paper</p>
+                                </div>
+                                <div>
+                                    <p>{car.custom_paper}</p>
+                                </div>
+                            </div>                          
+                            <hr />
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div className="p-4">
+                    <h3 className="font-bold text-gray-900 text-2xl">
+                        Special Features:
+                    </h3>
+                    <div className="grid grid-cols-12 gap-4 mt-7">
+                        <div className="col-span-12 md:col-span-6 lg:col-span-4"> 
+                            <hr />
                                 <div className="flex justify-between bg-purple-50 p-4">
                                     <div className="flex gap-2">
                                         <img
-                                            src={location}
+                                            src={feature}
                                             className="w-6 h-6"
                                         />
-                                        <p>Location</p>
+                                        <p>Special Feature</p>
                                     </div>
                                     <div>
-                                        <p>{car.location} {car.state} {car.lga}</p>
+                                        <p>{car?.feature}</p>
                                     </div>
                                 </div>
-                            <hr />
-                            
                         </div>
                     </div>
                 </div>
@@ -1143,6 +1164,16 @@ export default function CarDetail({
                                         <p>{car.price1}</p>
                                     </div>
                                 </div>
+                                <hr />
+                            <div className="flex justify-between bg-purple-50 p-4">
+                                <div className="flex gap-2">
+                                    <img src={Custom} className="w-6 h-6" />
+                                    <p>Custom Paper</p>
+                                </div>
+                                <div>
+                                    <p>{car.custom_paper1}</p>
+                                </div>
+                            </div>
                             </div>
                             <div className="col-span-12 md:col-span-6 lg:col-span-4">
                                 <hr />
@@ -1301,6 +1332,16 @@ export default function CarDetail({
                                         <p>{car.price2}</p>
                                     </div>
                                 </div>
+                                <hr />
+                            <div className="flex justify-between bg-purple-50 p-4">
+                                <div className="flex gap-2">
+                                    <img src={Custom} className="w-6 h-6" />
+                                    <p>Custom Paper</p>
+                                </div>
+                                <div>
+                                    <p>{car.custom_paper2}</p>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
