@@ -43,17 +43,17 @@ function Sidebar({ onCollapseChange, style }) {
                 </Link>
             </li>
             <hr className="sidebar-divider my-0" />
-            <li className={`nav-item ${ route().current("admin.cars.index") ? "active" : "collapsed" }`} >
+            {/* <li className={`nav-item ${ route().current("admin.cars.index") ? "active" : "collapsed" }`} >
                 <Link href={route("admin.cars.index")} className="nav-link collapsed">
                     <i className="fa fa-car"></i>
                     <span>Cars For Sale</span>
                 </Link>
-            </li>
+            </li> */}
             <hr className="sidebar-divider my-0" />
             <li className={`nav-item ${ route().current("admin.swap.index") ? "active" : "collapsed" }`} >
                 <Link href={route("admin.swap.index")} className="nav-link collapsed">
                     <i className="fa fa-car"></i>
-                    <span>Cars For Swap</span>
+                    <span>Post a Car</span>
                 </Link>
             </li>
             <hr className="sidebar-divider my-0" />

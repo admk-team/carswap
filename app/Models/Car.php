@@ -34,6 +34,9 @@ class Car extends Model
     {
         return $this->belongsTo(User::class, 'user_id'); // 'user_id' is the foreign key in the cars table referencing the id column in the users table
     }
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
     // public function getImagesAttribute($value){
     //     return url("storage/" .$value);
     // }

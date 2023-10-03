@@ -35,12 +35,12 @@ const NavBar2 = (auth: any) => {
             </div>
             <div className="hidden md:block">
               <div className="flex items-center space-x-4">
-                <Link href={route('user.swap.index')} className=" font-gray-900 font-extrabold cursor-pointer hover:text-gray-950">
+                {/* <Link href={route('user.swap.index')} className=" font-gray-900 font-extrabold cursor-pointer hover:text-gray-950">
                   Swap a Car
                 </Link>
-                <span className="  font-gray-900 font-extrabold cursor-pointer hover:text-gray-950">|</span>
+                <span className="  font-gray-900 font-extrabold cursor-pointer hover:text-gray-950">|</span> */}
                 <Link href={route('user.postcar')} className=" font-gray-900 font-extrabold cursor-pointer hover:text-gray-950">
-                  Sell a Car
+                Post a Car
                 </Link>
                 <img className='w-7 h-7' src={bellIcon} alt="" />
 
