@@ -10,5 +10,10 @@ class Category extends Model
     use HasFactory;
     public function cars(){
         return $this->hasMany(Car::class,'body_type');
+        
+    }
+    public function car()
+    {
+        return $this->hasMany(Car::class, 'categories_id');
     }
 }
