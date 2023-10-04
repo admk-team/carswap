@@ -50,7 +50,7 @@ const Create = ({ auth,brands,users,categories}: any) => {
     //new feilds 
     no_owner: '',
     categories_id: '',
-    feature: '',
+    feature: [] as string[],
     distress: '',
     brand1:'',
     fuelType1:'',
@@ -59,7 +59,7 @@ const Create = ({ auth,brands,users,categories}: any) => {
     price1:'',
     cylinder1:'',
     custom_paper1:'',
-    feature1:'',
+    feature1: [] as string[],
     brand2:'',
     fuelType2:'',
     transmission2:'',
@@ -67,7 +67,7 @@ const Create = ({ auth,brands,users,categories}: any) => {
     price2:'',
     cylinder2:'',
     custom_paper2:'',
-    feature2:'',
+    feature2: [] as string[],
     images: []
   });
 
@@ -94,6 +94,42 @@ const Create = ({ auth,brands,users,categories}: any) => {
     }else{
         setCarSaleCheck(false);
     }
+};
+const handleCheckboxChange = (value: string) => {
+  const updatedFeature = [...data.feature];
+
+  const index = updatedFeature.indexOf(value);
+  if (index !== -1) {
+    updatedFeature.splice(index, 1);
+  } else {
+    updatedFeature.push(value);
+  }
+
+  setData({ ...data, feature: updatedFeature });
+};
+const handleCheckboxFeature1 = (value: string) => {
+  const updatedFeature1 = [...data.feature1];
+
+  const index = updatedFeature1.indexOf(value);
+  if (index !== -1) {
+    updatedFeature1.splice(index, 1);
+  } else {
+    updatedFeature1.push(value);
+  }
+
+  setData({ ...data, feature1: updatedFeature1 });
+};
+const handleCheckboxFeature2 = (value: string) => {
+  const updatedFeature2 = [...data.feature2];
+
+  const index = updatedFeature2.indexOf(value);
+  if (index !== -1) {
+    updatedFeature2.splice(index, 1);
+  } else {
+    updatedFeature2.push(value);
+  }
+
+  setData({ ...data, feature2: updatedFeature2 });
 };
   return (
     <>
@@ -233,14 +269,25 @@ const Create = ({ auth,brands,users,categories}: any) => {
 
               </div>
           <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Special Feature <span className='text-danger'>*</span></label>
-                <select name="feature" id="" className="form-control" onChange={(e)=>setData('feature',e.target.value)}>
-                                <option value=""> Feature</option>
-                                <option value="Thumb start">Thumb start </option>
-                                <option value="Keyless entry "> Keyless entry </option>
-                                <option value="GPS">GPS </option>
-                                </select>
-                {errors.feature && <div className='text-danger'>{errors.feature}</div>}
+          <div className="flex flex-col">
+                                <label htmlFor="feature" className="mb-1 text-sm text-gray-700 dark:text-white">Special features*</label>
+                                <div className="flex space-x-4">
+                                 <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                                <input type="checkbox" name="feature" checked={data.feature.includes('Thumb start')} onChange={() => handleCheckboxChange('Thumb start')} className="mr-2" />
+                                Thumb start
+                               </label>
+                               <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                               <input type="checkbox" name="feature" checked={data.feature.includes('Keyless entry')} onChange={() => handleCheckboxChange('Keyless entry')} className="mr-2" />
+                              Keyless entry
+                             </label>
+                            <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                              <input type="checkbox" name="feature" checked={data.feature.includes('GPS')} onChange={() => handleCheckboxChange('GPS')} className="mr-2" />
+                              GPS
+                            </label>
+                            </div>
+
+                            </div>
+                              {errors.feature && <div className='text-red-500'>{errors.feature}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Title <span className='text-danger'>*</span></label>
@@ -537,14 +584,25 @@ const Create = ({ auth,brands,users,categories}: any) => {
                 {errors.custom_paper1 && <div className='text-danger'>{errors.custom_paper1}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Special Feature <span className='text-danger'>*</span></label>
-                <select name="feature1" id="" className="form-control" onChange={(e)=>setData('feature1',e.target.value)}>
-                                <option value=""> Feature</option>
-                                <option value="Automatic">Thumb start </option>
-                                <option value="Manual"> Keyless entry </option>
-                                <option value="Auxiliary">GPS </option>
-                                </select>
-                {errors.feature1 && <div className='text-danger'>{errors.feature1}</div>}
+              <div className="flex flex-col">
+                                <label htmlFor="feature1" className="mb-1 text-sm text-gray-700 dark:text-white">Special features*</label>
+                                <div className="flex space-x-4">
+                                 <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                                <input type="checkbox" name="feature1" checked={data.feature1.includes('Thumb start')} onChange={() => handleCheckboxFeature1('Thumb start')} className="mr-2" />
+                                Thumb start
+                               </label>
+                               <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                               <input type="checkbox" name="feature1" checked={data.feature1.includes('Keyless entry')} onChange={() => handleCheckboxFeature1('Keyless entry')} className="mr-2" />
+                              Keyless entry
+                             </label>
+                            <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                              <input type="checkbox" name="feature1" checked={data.feature1.includes('GPS')} onChange={() => handleCheckboxFeature1('GPS')} className="mr-2" />
+                              GPS
+                            </label>
+                            </div>
+
+                            </div>
+                              {errors.feature1 && <div className='text-red-500'>{errors.feature1}</div>}
               </div>
 
               <p className="h6 mb-2 text-gray-800">Car 2:</p>
@@ -654,16 +712,25 @@ const Create = ({ auth,brands,users,categories}: any) => {
 </div>
 
 <div className="col-12 col-md-6 col-lg-3">
-  <label className="form-label">Special Feature <span className='text-danger'>*</span></label>
-  <select name="feature2" id="" className="form-control" onChange={(e)=>setData('feature2',e.target.value)}>
-    <option value=""> Feature</option>
-    <option value="Automatic">Thumb start </option>
-    <option value="Manual"> Keyless entry </option>
-    <option value="Auxiliary">GPS </option>
-  </select>
-  {errors.feature2 && <div className='text-danger'>{errors.feature2}</div>}
+<div className="flex flex-col">
+    <label htmlFor="feature2" className="mb-1 text-sm text-gray-700 dark:text-white">Special features*</label>
+    <div className="flex space-x-4">
+      <label className="mb-1 text-sm text-gray-700 dark:text-white">
+        <input type="checkbox" name="feature2" checked={data.feature2.includes('Thumb start')} onChange={() => handleCheckboxFeature2('Thumb start')} className="mr-2" />
+        Thumb start
+      </label>
+      <label className="mb-1 text-sm text-gray-700 dark:text-white">
+        <input type="checkbox" name="feature2" checked={data.feature2.includes('Keyless entry')} onChange={() => handleCheckboxFeature2('Keyless entry')} className="mr-2" />
+        Keyless entry
+      </label>
+      <label className="mb-1 text-sm text-gray-700 dark:text-white">
+        <input type="checkbox" name="feature2" checked={data.feature2.includes('GPS')} onChange={() => handleCheckboxFeature2('GPS')} className="mr-2" />
+        GPS
+      </label>
+    </div>
+  </div>
+  {errors.feature2 && <div className='text-red-500'>{errors.feature2}</div>}
 </div>
-
               </> )
                             }
             

@@ -1447,13 +1447,14 @@ export default function CarDetail({
                         <h3 className="font-bold text-gray-900 text-2xl mt-2">
                             Similar Listings
                         </h3>
-                        <div className="flex justify-center">
-                            <div className="lg:container mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 p-4  ">
+                        <div className="mx-auto max-w-screen-xl w-full h-full mt-3 ">
+                       
+                         <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mb-4  p-4">
                                 {similarCars?.map((car: any, index: any) => (
                                     <div
                                         key={index}
-                                        className="w-full bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105"
-                                    >
+                                        className="lg:w-[250px] xl:w-[275px] md:w-[220px] sm:w-[200px] bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105 md:me-[2px] sm:mt-2"
+                                        >
                                         <div className="relative">
                                             <Link
                                                 href={route(
@@ -1462,7 +1463,7 @@ export default function CarDetail({
                                                 )}
                                             >
                                                 <img
-                                                    className="w-full h-[224px] rounded-t-lg object-cover "
+                                                     className="w-full h-[144px] rounded-t-lg object-cover image__responsive"
                                                     src={
                                                         "/storage" +
                                                         car?.images[0]
@@ -1470,7 +1471,7 @@ export default function CarDetail({
                                                     alt="product image"
                                                 />
                                             </Link>
-                                            {car?.type === "For Swap" ? (
+                                            {/* {car?.type === "For Swap" ? ( */}
                                                 <Link
                                                     href={route(
                                                         "CarDetail",
@@ -1517,7 +1518,7 @@ export default function CarDetail({
                                                         </p>
                                                     </div>
                                                 </Link>
-                                            ) : null}
+                                            {/* ) : null} */}
                                             <div className="absolute bottom-5 left-1">
                                                 {car.total_rating > 0 && (
                                                     <>
@@ -1560,12 +1561,18 @@ export default function CarDetail({
                                                 )}
                                                 className=""
                                             >
-                                                <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white mt-1 h-[34px] overflow-hidden">
-                                                    {car?.title}
-                                                    <span className="mx-2 ">
-                                                        {car?.model}
-                                                    </span>
-                                                </h5>
+                                                <div className="flex"> <span className="mr-2">Spec: </span> 
+                                                {car.feature
+                                                    .split(" ")
+                                                    .slice(0, 3)
+                                                    .join(" ")}
+                                                {car.feature.split(" ")
+                                                    .length > 3 && (
+                                                    <p className="mx-1 text-dark responsive responsive1">
+                                                        ..
+                                                    </p>
+                                                )}
+                                                </div>
                                             </Link>
                                             <div className="flex mb-2 flex-wrap justify-between">
                                                 <div className="flex bg-emerald-500">
@@ -1576,6 +1583,9 @@ export default function CarDetail({
                                                         </span>
                                                     </p>
                                                 </div>
+                                                <div className=' mr-6'>
+                                                <p >Year : {car?.year}</p>
+                                            </div>
                                             </div>
                                             <div className="mt-4">
                                                 <div className="flex flex-wrap justify-between mt-3">
@@ -1601,9 +1611,7 @@ export default function CarDetail({
                                                             </p>
                                                         </div>
                                                     </div>
-                                                </div>
-
-                                                <div className="flex flex-wrap justify-between">
+                                                    <div className="flex flex-wrap justify-between">
                                                     <div className="flex mb-1">
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -1629,18 +1637,36 @@ export default function CarDetail({
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <div className="flex flex-wrap justify-between mt-3">
-                                                    <div className="flex mb-1 bg-gray-100 rounded-[4px]">
-                                                        <p className="mx-2  text-gray-600">
-                                                            {car?.condition}
-                                                        </p>
-                                                    </div>
-                                                    <div className="flex mb-1 bg-gray-100 rounded-[4px]">
-                                                        <p className="mx-2  text-gray-600">
-                                                            {car?.mileage}
-                                                        </p>
-                                                    </div>
                                                 </div>
+
+                                               
+                                                <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
+                                        <div className='flex mb-1  rounded-[4px]'>
+                                            <p className='mx-2  text-sm text-gray-600 responsive'>Conditon : {car?.condition}</p>
+                                        </div>
+                                        <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
+                                            <p className='mx-2   text-sm text-gray-600 responsive'>{car?.mileage} miles</p>
+                                        </div>
+                                        </div>
+                                        <div className="flex flex-wrap justify-between mt-1 condition__wrap">
+                                        <div className="flex  rounded-[4px]">
+                                            <Link
+                                                href={route(
+                                                    "CarDetail",
+                                                    car.slug
+                                                )}
+                                            >
+                                                <p className="mx-4  text-gray-900 font-bold cursor-pointer condition__wrap1">
+                                                    Swap
+                                                </p>
+                                            </Link>
+                                        </div>
+                                        <div className='flex   rounded-[4px]'>
+                                            <Link href={route('CarDetail', car.slug)}>
+                                                <p className='mx-4  text-emerald-600 font-bold cursor-pointer condition__wrap1'>Buy Cash </p>
+                                            </Link>
+                                        </div>
+                                    </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1874,6 +1900,7 @@ export default function CarDetail({
                                 )}
                             </div>
                         </div>
+                       
                     </div>
                 ) : (
                     ""

@@ -168,7 +168,12 @@ class CarsForSwapController extends Controller
          //new fileds
          $model->no_owner = $request->no_owner;
          $model->categories_id = $request->categories_id;
-         $model->feature = $request->feature;
+         if (is_array($request->feature)) {
+            $model->feature = implode(',', $request->feature);
+        } else {
+            // Handle the case where $request->feature is a string
+            $model->feature = $request->feature;
+        }
         $model->distress = $request->distress;
          //new feilds swap1
         $model->brand1=$request->brand1;
@@ -178,7 +183,12 @@ class CarsForSwapController extends Controller
         $model->price1=$request->price1;
         $model->cylinder1=$request->cylinder1;
         $model->custom_paper1=$request->custom_paper1;
-        $model->feature1=$request->feature1;
+        if (is_array($request->feature1)) {
+            $model->feature1 = implode(',', $request->feature1);
+        } else {
+            // Handle the case where $request->feature is a string
+            $model->feature1 = $request->feature1;
+        }
         //new feilds swap2
         $model->brand2 = $request->brand2;
         $model->fuelType2 = $request->fuelType2;
@@ -187,7 +197,12 @@ class CarsForSwapController extends Controller
         $model->price2 = $request->price2;
         $model->cylinder2 = $request->cylinder2;
         $model->custom_paper2 = $request->custom_paper2;
-        $model->feature2=$request->feature2;
+        if (is_array($request->feature2)) {
+            $model->feature2 = implode(',', $request->feature2);
+        } else {
+            // Handle the case where $request->feature is a string
+            $model->feature2 = $request->feature2;
+        }
         if($model->save()){
             $model->slug=Str::slug($request->title).'-'.$model->id;
             $model->update();
@@ -394,7 +409,12 @@ class CarsForSwapController extends Controller
    //new fileds
    $model->no_owner = $request->no_owner;
    $model->categories_id = $request->categories_id;
-   $model->feature = $request->feature;
+   if (is_array($request->feature)) {
+    $model->feature = implode(',', $request->feature);
+} else {
+    // Handle the case where $request->feature is a string
+    $model->feature = $request->feature;
+}
   $model->distress = $request->distress;
    //new feilds swap1
   $model->brand1=$request->brand1;
@@ -404,7 +424,12 @@ class CarsForSwapController extends Controller
   $model->price1=$request->price1;
   $model->cylinder1=$request->cylinder1;
   $model->custom_paper1=$request->custom_paper1;
-  $model->feature1=$request->feature1;
+  if (is_array($request->feature1)) {
+    $model->feature1 = implode(',', $request->feature1);
+} else {
+    // Handle the case where $request->feature is a string
+    $model->feature1 = $request->feature1;
+}
   //new feilds swap2
   $model->brand2 = $request->brand2;
   $model->fuelType2 = $request->fuelType2;
@@ -413,7 +438,12 @@ class CarsForSwapController extends Controller
   $model->price2 = $request->price2;
   $model->cylinder2 = $request->cylinder2;
   $model->custom_paper2 = $request->custom_paper2;
-  $model->feature2=$request->feature2;
+  if (is_array($request->feature2)) {
+    $model->feature2 = implode(',', $request->feature2);
+} else {
+    // Handle the case where $request->feature is a string
+    $model->feature2 = $request->feature2;
+}
           if($model->save()){
               $model->slug=Str::slug($request->title).'-'.$model->id;
               $model->update();
