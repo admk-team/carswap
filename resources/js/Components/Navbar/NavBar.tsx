@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import imagelogo1 from '@/Assets/headerlogo.png'
+import imagelogo1 from '@/Assets/navlogo.svg'
 import watsapImage from '@/Assets/whatsapp.png'
 import bellIcon from "@/Assets/bell.png"
 import { Link } from '@inertiajs/react';
-import backgroundImage from '@/Assets/navbarbg.png';
+import backgroundImage from '@/Assets/navbarbg.jpg';
 
 const NavBar = (auth: any) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -29,23 +29,24 @@ const NavBar = (auth: any) => {
 
   return (
     <div>
-      <nav className="bg-gray-800" style={{ backgroundImage: `url(${backgroundImage})` }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <nav className="w-full h-full" style={{ backgroundImage: `url(${backgroundImage})` , backgroundSize:'cover' }}>
+        <div className='bg-gray-100 bg-opacity-50'>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  ">
+          <div className="flex items-center justify-between h-16 ">
             <div className="flex-shrink-0">
               <Link href={route('front.index')}>
-                <img className="w-52 h-10 object-contain" src={imagelogo1} alt="Logo" />
+                <img className="w-56 h-20 object-contain " src={imagelogo1} alt="Logo" />
               </Link>
 
             </div>
             <div className="hidden md:block">
               <div className="flex items-center space-x-4">
-                {/* <Link href={route('user.swap.index')} className=" text-white font-bold">
+                {/* <Link href={route('user.swap.index')} className=" text-dark font-bold">
                   Swap a Car
-                </Link>
-                <span className=" text-white font-bold">|</span> */}
-                <Link href={route('user.postcar')} className=" text-white font-bold">
-                 Post a Car
+                </Link> */}
+                {/* <span className=" text-white font-bold">|</span> */}
+                <Link href={route('user.postcar')} className=" text-dark font-bold">
+                  Post a Car
                 </Link>
                 <img
                   className="w-7 h-7 cursor-pointer transition-transform transform hover:scale-110"
@@ -106,7 +107,7 @@ const NavBar = (auth: any) => {
                 <div className="flex items-center">
                   <a href="https://api.whatsapp.com/send?phone=002348120222922" className="flex items-center" target="_blank" rel="noopener noreferrer">
                     <img src={watsapImage} className='w-6 h-6 mr-1 ' alt="" />
-                    <span className="text-white text-sm">+234 8120222922</span>
+                    <span className="text-dark text-sm">+234 8120222922</span>
                   </a>
                 </div>
 
@@ -169,45 +170,45 @@ const NavBar = (auth: any) => {
             </div>
             <div className="md:hidden">
               {
-                auth && auth.auth.user?
-              <button
-                className="mobile-menu-button p-2 rounded-md inline-flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                onClick={toggleMenu}
-              >
-                {showMenu ? (
-                  <svg
-                    className="block h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+                auth && auth.auth.user ?
+                  <button
+                    className="mobile-menu-button p-2 rounded-md inline-flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                    onClick={toggleMenu}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    className="block h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  </svg>
-                )}
-              </button>
-              :
-              ''
+                    {showMenu ? (
+                      <svg
+                        className="block h-6 w-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        className="block h-6 w-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 6h16M4 12h16M4 18h16"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                  :
+                  ''
               }
             </div>
           </div>
@@ -236,8 +237,9 @@ const NavBar = (auth: any) => {
                     </Link>
                   </div>
                 </>
-              }
+            }
           </div>
+        </div>
         </div>
         {showMenu && (
           <div className="md:hidden">

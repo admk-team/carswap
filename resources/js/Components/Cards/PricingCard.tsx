@@ -62,49 +62,25 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     />
                                 </Link>
                                 <>
-                                    {car?.type === "For Swap" ? (
-                                        <Link
-                                            href={route("CarDetail", car.slug)}
-                                        >
-                                            <div className="absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl cursor-pointer responsive responsive1 swap__car">
-                                                <p className="font-semibold text-black text-white flex gap-2 items-center justify-center align-center responsive responsive1">
-                                                    <span>
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            strokeWidth="1.5"
-                                                            stroke="currentColor"
-                                                            className="w-5 h-5"
-                                                        >
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z"
-                                                            />
-                                                        </svg>
-                                                    </span>
-                                                    <span>Swap Calculator</span>
-                                                    <span>
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            strokeWidth="1.5"
-                                                            stroke="currentColor"
-                                                            className="w-5 h-5"
-                                                        >
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                                                            />
-                                                        </svg>
-                                                    </span>
-                                                </p>
-                                            </div>
-                                        </Link>
-                                    ) : null}
+
+                                    <Link href={route('CarDetail', car.slug)}>
+                                        <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl cursor-pointer responsive responsive1 swap__car'>
+                                            <p className='font-semibold text-black text-white flex gap-2 items-center justify-center align-center responsive responsive1'>
+                                                <span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" />
+                                                    </svg>
+                                                </span>
+                                                <span>Swap Calculator</span>
+                                                <span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                                    </svg>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </Link>
+
                                 </>
 
                                 <div className="absolute bottom-5 left-1">
@@ -177,26 +153,18 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                                     </span>
                                                 </p>
                                             </div>
+                                            <div className='flex '>
+                                                <p>Year : {car?.model}</p>
+                                            </div>
                                         </div>
+
                                     </div>
-                                    <div className="flex flex-wrap justify-between mt-1 condition__wrap">
-                                        <div className="flex mb-2 flex-wrap justify-between">
-                                            <div className="flex">
-                                                <img
-                                                    src={
-                                                        car?.brand?.image
-                                                            ? "/storage/" +
-                                                              car?.brand?.image
-                                                            : ""
-                                                    }
-                                                    className="w-6 h-6"
-                                                />
-                                                <p className="mx-2 responsive ">
-                                                    {car?.brand?.title}
-                                                    <span className="my-2 ml-1">
-                                                        {car?.model}
-                                                    </span>
-                                                </p>
+                                    <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
+                                        <div className='flex mb-2 flex-wrap justify-between'>
+                                            <div className='flex'>
+                                                <img src={car?.brand?.image ? "/storage/" + car?.brand?.image : ''} className='w-6 h-6' />
+                                                <p className='mx-2 responsive '>{car?.brand?.title}<span className='my-2 ml-1'>{car?.title}</span></p>
+
                                             </div>
                                         </div>
                                         <div className="flex">
@@ -228,16 +196,12 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     <div className='flex flex-wrap justify-between'>
                                         
                                     </div> */}
-                                    <div className="flex flex-wrap justify-between mt-1 condition__wrap">
-                                        <div className="flex mb-1 bg-gray-100 rounded-[4px]">
-                                            <p className="mx-2  text-gray-600 responsive">
-                                                {car?.condition}
-                                            </p>
+                                    <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
+                                        <div className='flex mb-1  rounded-[4px]'>
+                                            <p className='mx-2  text-sm text-gray-600 responsive'>Conditon : {car?.condition}</p>
                                         </div>
-                                        <div className="flex mb-1 bg-gray-100 rounded-[4px]">
-                                            <p className="mx-2  text-gray-600 responsive">
-                                                {car?.mileage} miles
-                                            </p>
+                                        <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
+                                            <p className='mx-2   text-sm text-gray-600 responsive'>{car?.mileage} miles</p>
                                         </div>
                                     </div>
 
@@ -254,16 +218,9 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                                 </p>
                                             </Link>
                                         </div>
-                                        <div className="flex   rounded-[4px]">
-                                            <Link
-                                                href={route(
-                                                    "CarDetail",
-                                                    car.slug
-                                                )}
-                                            >
-                                                <p className="mx-4  text-emerald-600 font-bold cursor-pointer condition__wrap1">
-                                                    Buy Cash{" "}
-                                                </p>
+                                        <div className='flex   rounded-[4px]'>
+                                            <Link href={route('CarDetail', car.slug)}>
+                                                <p className='mx-4  text-emerald-600 font-bold cursor-pointer condition__wrap1'>Buy Cash </p>
                                             </Link>
                                         </div>
                                     </div>
