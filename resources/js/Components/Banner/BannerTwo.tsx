@@ -1,5 +1,6 @@
 import React from 'react'
-import ImageBanerTwo from '@/Assets/BannerTwo.jpg';
+import ImageBanerTwo from '@/Assets/Imagge5.jpg';
+import { Link } from '@inertiajs/react';
 
 const BannerTwo = () => {
     const BannerTwo = {
@@ -9,13 +10,18 @@ const BannerTwo = () => {
 
     return (
         <>
-            <div className="md:container md:mx-auto bg-cover bg-center h-96 flex items-center mt-28  " style={BannerTwo}>
-                <div className="container mx-auto text-center">
-                    <p className=' uppercase text-2xl font-bold text-yellow-600'>We are since 1970</p>
-                    <h1 className="text-5xl font-bold text-white">Welcome to Our Website</h1>
-                <p className="mt-4 text-lg font-bold text-white">Discover amazing things and explore the world of possibilities.</p>
-                <button type="button" className="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-400 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-lg px-6 mt-6 mr-3 py-3 mr-2 mb-2 dark:focus:ring-yellow-900">View Inventory</button>
-                <button type="button" className="focus:outline-none text-black bg-white hover:bg-yellow-100 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-lg px-6 mt-6 ml-3 py-3  mb-2 dark:focus:ring-yellow-900">Swap Your Car</button>
+            <div className="mx-auto max-w-screen-xl w-full h-full mt-12 ">
+                <div className="md:container md:mx-auto bg-cover bg-center h-96 flex items-center  " style={BannerTwo}>
+                    <div className="container mx-auto text-center">
+                        <p className="uppercase text-xl md:text-2xl font-bold text-emerald-500">We are since 2006</p>
+                        <h1 className="text-2xl md:text-3xl font-bold text-white mt-2 md:mt-3">BUY. SELL. and SWAP Your Swap Quickly.</h1>
+                        <h1 className="text-2xl md:text-3xl font-bold text-white ">Best Prices, Confidential, and Seamless.</h1>
+                        <p className="mt-2 md:mt-3 text-base md:text-lg font-bold text-white">We favor creating fair and straightforward pricing Structures.</p>
+                        <p className="text-base md:text-lg font-bold text-white">Select your next effective strategy and begin right away.</p>
+
+                        <Link href={route('ViewAllCars')} type="button" className="px-4 py-2.5 text-base font-medium text-center text-white bg-emerald-500 hover:bg-emerald-600 mr-3 mt-4">View Car</Link>
+                        <Link href={route('user.postcar')} type="button" className="px-4 py-2.5 text-base font-medium text-center text-white bg-emerald-500 hover:bg-emerald-600 ml-3 mt-4">Sell Your Car</Link>
+                    </div>
                 </div>
             </div>
         </>
@@ -23,3 +29,4 @@ const BannerTwo = () => {
 }
 
 export default BannerTwo
+

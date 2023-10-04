@@ -1,0 +1,20 @@
+.btn-primary{
+  color: #fff!important;
+  background-color: #4e73df!important;
+  border-color: #4e73df!important;
+}
+.btn-success{
+  color: #fff!important;
+  background-color: #169b6b!important;
+  border-color: #149063!important;
+}
+.btn-secondary{
+  color: #fff!important;
+  background-color: #6b6d7d!important;
+  border-color: #656776!important;
+}
+.btn-danger{
+  color: #fff!important;
+  background-color: #9b1616!important;
+  border-color: #9b1616!important;
+}
