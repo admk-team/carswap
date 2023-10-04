@@ -352,7 +352,7 @@ export default function CarDetail({
                         <div className="col-span-12 md:col-span-6">
                             <div className="flex flex-col mx-3 h-5/6">
                                 <div className="bg-white rounded-lg shadow-md p-6">
-                                    {car.type && car.type == "swap" ? (
+                                    {car.type || car.type == "swap" ? (
                                         auth?.user &&
                                         car.user_id == auth.user.id ? (
                                             <div className="flex  justify-center items-center gap-3 flex-row">
@@ -626,7 +626,7 @@ export default function CarDetail({
                                         </>
                                     )}
                                 </div>
-                                {car.type && car.type == "swap" ? (
+                                {car.type || car.type == "swap" ? (
                                     auth?.user &&
                                     car.user_id == auth.user.id ? (
                                         ""
@@ -778,18 +778,39 @@ export default function CarDetail({
                                                     </button>
                                                 )}
                                             </div>
-                                        </>
-                                    )
-                                ) : (
-                                    ""
-                                )}
-                                <div className="bg-white rounded-lg shadow-md p-6 mt-2">
+                                            <div className="bg-white rounded-lg shadow-md p-6 mt-2">
+                                <button
+                                                    onClick={handleBookNow}
+                                                    className="bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3"
+                                                >
+                                                    {" "}
+                                                    Buy Now{" "}
+                                                </button>
+                                                <a
+                                                    className="flex justify-center bg-green-600  w-full text-white font-bold py-2 px-4 rounded mt-3"
+                                                    href="https://api.whatsapp.com/send?phone=08120222922"
+                                                    target="_blank"
+                                                >
+                                                    <img
+                                                        src={watsapImage}
+                                                        className="w-6 h-6 mr-1 "
+                                                        alt=""
+                                                    />
+                                                    +2348120222922
+                                                </a>
+                                            
                                     {/* <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-6' >  Buy Cash  </button> */}
                                     <p className='text-gray-950 mt-2 text-xl font-bold mb-2 text-left'>We deliver when you pay cash.</p>
                                     <button onClick={() => window.location.href = 'mailto:cars@carswap.ng'} className='bg-gray-950 w-full text-white font-bold py-2 px-4 rounded mt-3'>
                                         Make Inquiry
                                     </button>
                                 </div>
+                                        </>
+                                    )
+                                ) : (
+                                    ""
+                                )}
+                              
                             </div>
                         </div>
                     </div>
