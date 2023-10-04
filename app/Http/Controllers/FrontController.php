@@ -55,7 +55,8 @@ class FrontController extends Controller
                 'interiorColor' => $car->interior_color,
                 'exteriorColor' => $car->exterior_color,
                 'is_fav' => $fav&&$fav!=null?($fav->where('id', $car->id)->first() ? true : false):false,
-                'total_rating' => $totalRating
+                'total_rating' => $totalRating,
+                'year' => $car->year,
             ];
         });
         $sale_cars=$sale_cars->map(function($car) use ($fav){
@@ -110,11 +111,11 @@ class FrontController extends Controller
         $cars=Car::with('brand')->where('status','1')->where('deleted_at',null)->where('slug','!=',null)->latest()->get();
         $cars=$cars->map(function($car){
             $images=explode(',',$car->images);
-            if($car->type=='swap'){
-                $type="For Swap";
-            }else if($car->type=='sale'){
-                $type="For Sale";
-            }
+            // if($car->type=='swap'){
+            //     $type="For Swap";
+            // }else if($car->type=='sale'){
+            //     $type="For Sale";
+            // }
 
             $totalRating=0;
             if ($car->ratings && count($car->ratings) > 0) {
@@ -142,6 +143,7 @@ class FrontController extends Controller
                 'price' => $car->price,
                 'fuelType' => $car->fuel_type,
                 'model' => $car->model,
+                'year' => $car->year,
                 'transmission' => $car->transmission,
                 'interiorColor' => $car->interior_color,
                 'exteriorColor' => $car->exterior_color,
@@ -187,6 +189,7 @@ class FrontController extends Controller
                 'price' => $car->price,
                 'fuelType' => $car->fuel_type,
                 'feature' =>$car->feature,
+                'year' =>$car->year,
                 'model' => $car->model,
                 'transmission' => $car->transmission,
                 'interiorColor' => $car->interior_color,

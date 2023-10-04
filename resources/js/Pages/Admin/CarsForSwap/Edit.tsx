@@ -55,11 +55,11 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
      price1: car.price1 || '',
      cylinder1: car.cylinder1 || '',
      custom_paper1: car.custom_paper1 || '',
-     feature1: car.feature1 || '',
+     feature1:  [] as string[],
    
      no_owner: car.no_owner || '',
      categories_id: car.categories_id || '',
-     feature: car.feature || '',
+     feature: [] as string[],
      distress: car.distress || '',
      brand2: car.brand2 || '',
      fuelType2: car.fuelType2 || '',
@@ -68,7 +68,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
      price2: car.price2 || '',
      cylinder2: car.cylinder2 || '',
      custom_paper2: car.custom_paper2 || '',
-     feature2: car.feature2 || '', 
+     feature2: [] as string[],  
     images:car.images ||  '',
         _method: 'put',
   });
@@ -103,6 +103,42 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
       setCarSwapCheck(false); // Set carSwapCheck to false for 'sale'
     }
   }, [car.type]);
+  const handleCheckboxChange = (value: string) => {
+    const updatedFeature = [...data.feature];
+
+    const index = updatedFeature.indexOf(value);
+    if (index !== -1) {
+      updatedFeature.splice(index, 1);
+    } else {
+      updatedFeature.push(value);
+    }
+
+    setData({ ...data, feature: updatedFeature });
+  };
+  const handleCheckboxFeature1 = (value: string) => {
+    const updatedFeature1 = [...data.feature1];
+
+    const index = updatedFeature1.indexOf(value);
+    if (index !== -1) {
+      updatedFeature1.splice(index, 1);
+    } else {
+      updatedFeature1.push(value);
+    }
+
+    setData({ ...data, feature1: updatedFeature1 });
+  };
+  const handleCheckboxFeature2 = (value: string) => {
+    const updatedFeature2 = [...data.feature2];
+  
+    const index = updatedFeature2.indexOf(value);
+    if (index !== -1) {
+      updatedFeature2.splice(index, 1);
+    } else {
+      updatedFeature2.push(value);
+    }
+  
+    setData({ ...data, feature2: updatedFeature2 });
+  };
   return (
     <>
      <Head title="Edit Car" />
@@ -110,7 +146,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
         <h1 className="h3 mb-2 text-gray-800">Car</h1>
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Edit Car</h6>
+            <h6 className="m-0 font-weight-bold text-primary">Purpose of Post Swap | Sale</h6>
           </div>
           <div className="card-body">
           <form className="row g-3" method='post' onSubmit={handleSubmit} encType='multipart/form-data'>
@@ -174,7 +210,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Brand <span className='text-danger'>*</span></label>
-                <select name="brand_id" id="" className="form-control" value={data.brand_id} onChange={(e)=>setData('brand_id',e.target.value)}>
+                <select name="brand_id" id="" className="form-control" onChange={(e)=>setData('brand_id',e.target.value)}>
                   <option value="">Select Brand</option>
                   {
                     brands.map((brand:any)=>(
@@ -190,7 +226,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
              
               <div className="col-12 col-md-6 col-lg-4">
                 <label className="form-label">User <span className='text-danger'>*</span></label>
-                <select name="user_id" id="" className="form-control"value={data.user_id}  onChange={(e)=>setData('user_id',e.target.value)}>
+                <select name="user_id" id="" className="form-control" onChange={(e)=>setData('user_id',e.target.value)}>
                   <option value="">Select User</option>
                   {
                     users.map((user:any)=>(
@@ -198,11 +234,11 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
                     ))
                   }
                 </select>
-                {errors.user_id && <div className='text-danger'>{errors.user_id}</div>}
+                {errors.brand_id && <div className='text-danger'>{errors.brand_id}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-4">
                 <label className="form-label">Owner <span className='text-danger'>*</span></label>
-                <select name="trim" id="" className="form-control" value={data.trim} onChange={(e)=>setData('trim',e.target.value)}>
+                <select name="trim" id="" className="form-control" onChange={(e)=>setData('trim',e.target.value)}>
                 <option value="">Owner* </option>
                 <option value="Direct owner">Direct owner </option>
                 <option value="Agent">Agent </option>
@@ -212,7 +248,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-4">
                 <label className="form-label">How many owners before now*<span className='text-danger'>*</span></label>
-                <select name="no_owner" id="" className="form-control"  value={data.no_owner}onChange={(e)=>setData('no_owner',e.target.value)}>
+                <select name="no_owner" id="" className="form-control" onChange={(e)=>setData('no_owner',e.target.value)}>
                                 <option value="None">None</option>
                                 <option value="1">1 </option>
                                 <option value="2">2 </option>
@@ -227,7 +263,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
           </div>
           <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Category<span className='text-danger'>*</span></label>
-                <select name="categories_id" id="" className="form-control"  value={data.categories_id}onChange={(e)=>setData('categories_id',e.target.value)}>
+                <select name="categories_id" id="" className="form-control" onChange={(e)=>setData('categories_id',e.target.value)}>
                 <option value="">Category</option>
                 {
                   
@@ -240,15 +276,26 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
                                     {errors.categories_id && <div className='text-red-500'>{errors.categories_id}</div>}
 
               </div>
-          <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Special Feature <span className='text-danger'>*</span></label>
-                <select name="feature" id="" className="form-control" value={data.feature}onChange={(e)=>setData('feature',e.target.value)}>
-                                <option value=""> Feature</option>
-                                <option value="Thumb start">Thumb start </option>
-                                <option value="Keyless entry "> Keyless entry </option>
-                                <option value="GPS">GPS </option>
-                                </select>
-                {errors.feature && <div className='text-danger'>{errors.feature}</div>}
+                                  <div className="col-12 col-md-6 col-lg-3">
+                                <div className="flex flex-col">
+                                <label htmlFor="feature" className="mb-1 text-sm text-gray-700 dark:text-white">Special features*</label>
+                                <div className="flex space-x-4">
+                                 <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                                <input type="checkbox" name="feature" checked={data.feature.includes('Thumb start')} onChange={() => handleCheckboxChange('Thumb start')} className="mr-2" />
+                                Thumb start
+                               </label>
+                               <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                               <input type="checkbox" name="feature" checked={data.feature.includes('Keyless entry')} onChange={() => handleCheckboxChange('Keyless entry')} className="mr-2" />
+                              Keyless entry
+                             </label>
+                            <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                              <input type="checkbox" name="feature" checked={data.feature.includes('GPS')} onChange={() => handleCheckboxChange('GPS')} className="mr-2" />
+                              GPS
+                            </label>
+                            </div>
+
+                            </div>
+                              {errors.feature && <div className='text-red-500'>{errors.feature}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Title <span className='text-danger'>*</span></label>
@@ -282,7 +329,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
              
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Fuel Type <span className='text-danger'>*</span></label>
-                <select name="fuel_type" id="" className="form-control" value={data.fuel_type} onChange={(e)=>setData('fuel_type',e.target.value)}>
+                <select name="fuel_type" id="" className="form-control" onChange={(e)=>setData('fuel_type',e.target.value)}>
                   <option value="">Select Fuel Type</option>
                   <option value="Desiel">Desiel</option>
                   <option value="Petrol">Petrol</option>
@@ -336,7 +383,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Price Negoiable <span className='text-danger'>*</span></label>
-                <select name="price_negotiable" id="" className="form-control"  value={data.price_negotiable} onChange={(e)=>setData('price_negotiable',e.target.value)}>
+                <select name="price_negotiable" id="" className="form-control" onChange={(e)=>setData('price_negotiable',e.target.value)}>
                   <option value="">Select Fuel Type</option>
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
@@ -345,7 +392,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Custom Paper <span className='text-danger'>*</span></label>
-                <select name="custom_paper" id="" className="form-control"  value={data.custom_paper} onChange={(e)=>setData('custom_paper',e.target.value)}>
+                <select name="custom_paper" id="" className="form-control" onChange={(e)=>setData('custom_paper',e.target.value)}>
                   <option value="">Select Fuel Type</option>
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
@@ -354,7 +401,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
               <label className="form-label">Cylinder<span className='text-danger'>*</span></label>
-                <select name="cylinder" id="" className="form-control" value={data.cylinder} onChange={(e)=>setData('cylinder',e.target.value)}>
+                <select name="cylinder" id="" className="form-control" onChange={(e)=>setData('cylinder',e.target.value)}>
                 <option value="">Cylinder* </option>
                                 <option value="None">None</option>
                                 <option value="3">3 </option>
@@ -482,7 +529,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
                 {/* New Feilds */}
                 <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Brand <span className='text-danger'>*</span></label>
-                <select name="brand1" id="" className="form-control" value={data.brand1}onChange={(e)=>setData('brand1',e.target.value)}>
+                <select name="brand1" id="" className="form-control" onChange={(e)=>setData('brand1',e.target.value)}>
                   <option value="">Select Brand</option>
                   {
                     brands.map((brand:any)=>(
@@ -494,7 +541,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
               </div>
                 <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Fuel Type <span className='text-danger'>*</span></label>
-                <select name="fuelType1" id="" className="form-control"  value={data.fuelType1} onChange={(e)=>setData('fuelType1',e.target.value)}>
+                <select name="fuelType1" id="" className="form-control" onChange={(e)=>setData('fuelType1',e.target.value)}>
                   <option value="">Select Fuel Type</option>
                   <option value="Desiel">Desiel</option>
                   <option value="Petrol">Petrol</option>
@@ -503,7 +550,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
               <label className="form-label">Transmission <span className='text-danger'>*</span></label>
-                <select name="transmission1" id="" className="form-control"value={data.transmission1} onChange={(e) => setData('transmission1', e.target.value)}>
+                <select name="transmission1" id="" className="form-control"value={data.transmission} onChange={(e) => setData('transmission1', e.target.value)}>
                                 <option value="">Transmission Type* </option>
                                 <option value="Automatic">Automatic </option>
                                 <option value="Manual">Manual </option>
@@ -524,7 +571,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
               <label className="form-label">Cylinder<span className='text-danger'>*</span></label>
-                <select name="cylinder1" id="" className="form-control" value={data.cylinder1} onChange={(e)=>setData('cylinder1',e.target.value)}>
+                <select name="cylinder1" id="" className="form-control" onChange={(e)=>setData('cylinder1',e.target.value)}>
                 <option value="">Cylinder* </option>
                                 <option value="None">None</option>
                                 <option value="3">3 </option>
@@ -537,7 +584,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
               </div>
               <div className="col-12 col-md-6 col-lg-3">
                 <label className="form-label">Custom Paper <span className='text-danger'>*</span></label>
-                <select name="custom_paper1" id="" className="form-control"  value={data.custom_paper1}  onChange={(e)=>setData('custom_paper1',e.target.value)}>
+                <select name="custom_paper1" id="" className="form-control" onChange={(e)=>setData('custom_paper1',e.target.value)}>
                   <option value="">Select Fuel Type</option>
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
@@ -545,14 +592,25 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
                 {errors.custom_paper1 && <div className='text-danger'>{errors.custom_paper1}</div>}
               </div>
               <div className="col-12 col-md-6 col-lg-3">
-                <label className="form-label">Special Feature <span className='text-danger'>*</span></label>
-                <select name="feature1" id="" className="form-control" value={data.feature1} onChange={(e)=>setData('feature1',e.target.value)}>
-                                <option value=""> Feature</option>
-                                <option value="Automatic">Thumb start </option>
-                                <option value="Manual"> Keyless entry </option>
-                                <option value="Auxiliary">GPS </option>
-                                </select>
-                {errors.feature1 && <div className='text-danger'>{errors.feature1}</div>}
+              <div className="flex flex-col">
+                                <label htmlFor="feature1" className="mb-1 text-sm text-gray-700 dark:text-white">Special features*</label>
+                                <div className="flex space-x-4">
+                                 <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                                <input type="checkbox" name="feature1" checked={data.feature1.includes('Thumb start')} onChange={() => handleCheckboxFeature1('Thumb start')} className="mr-2" />
+                                Thumb start
+                               </label>
+                               <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                               <input type="checkbox" name="feature1" checked={data.feature1.includes('Keyless entry')} onChange={() => handleCheckboxFeature1('Keyless entry')} className="mr-2" />
+                              Keyless entry
+                             </label>
+                            <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                              <input type="checkbox" name="feature1" checked={data.feature1.includes('GPS')} onChange={() => handleCheckboxFeature1('GPS')} className="mr-2" />
+                              GPS
+                            </label>
+                            </div>
+
+                            </div>
+                              {errors.feature1 && <div className='text-red-500'>{errors.feature1}</div>}
               </div>
 
               <p className="h6 mb-2 text-gray-800">Car 2:</p>
@@ -593,7 +651,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
                {/* New Feilds */}
                <div className="col-12 col-md-6 col-lg-3">
   <label className="form-label">Brand <span className='text-danger'>*</span></label>
-  <select name="brand2" id="" className="form-control"  value={data.brand2} onChange={(e)=>setData('brand2',e.target.value)}>
+  <select name="brand2" id="" className="form-control" onChange={(e)=>setData('brand2',e.target.value)}>
     <option value="">Select Brand</option>
     {
       brands.map((brand:any)=>(
@@ -606,7 +664,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
 
 <div className="col-12 col-md-6 col-lg-3">
   <label className="form-label">Fuel Type <span className='text-danger'>*</span></label>
-  <select name="fuelType2" id="" className="form-control"  value={data.fuelType2} onChange={(e)=>setData('fuelType2',e.target.value)}>
+  <select name="fuelType2" id="" className="form-control" onChange={(e)=>setData('fuelType2',e.target.value)}>
     <option value="">Select Fuel Type</option>
     <option value="Desiel">Desiel</option>
     <option value="Petrol">Petrol</option>
@@ -639,7 +697,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
 
 <div className="col-12 col-md-6 col-lg-3">
   <label className="form-label">Cylinder<span className='text-danger'>*</span></label>
-  <select name="cylinder2" id="" className="form-control"  value={data.cylinder2} onChange={(e)=>setData('cylinder2',e.target.value)}>
+  <select name="cylinder2" id="" className="form-control" onChange={(e)=>setData('cylinder2',e.target.value)}>
     <option value="">Cylinder* </option>
     <option value="None">None</option>
     <option value="3">3 </option>
@@ -653,7 +711,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
 
 <div className="col-12 col-md-6 col-lg-3">
   <label className="form-label">Custom Paper <span className='text-danger'>*</span></label>
-  <select name="custom_paper2" id="" className="form-control"  value={data.custom_paper2} onChange={(e)=>setData('custom_paper2',e.target.value)}>
+  <select name="custom_paper2" id="" className="form-control" onChange={(e)=>setData('custom_paper2',e.target.value)}>
     <option value="">Select Fuel Type</option>
     <option value="Yes">Yes</option>
     <option value="No">No</option>
@@ -662,16 +720,25 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
 </div>
 
 <div className="col-12 col-md-6 col-lg-3">
-  <label className="form-label">Special Feature <span className='text-danger'>*</span></label>
-  <select name="feature2" id="" className="form-control"  value={data.feature2} onChange={(e)=>setData('feature2',e.target.value)}>
-    <option value=""> Feature</option>
-    <option value="Automatic">Thumb start </option>
-    <option value="Manual"> Keyless entry </option>
-    <option value="Auxiliary">GPS </option>
-  </select>
-  {errors.feature2 && <div className='text-danger'>{errors.feature2}</div>}
+<div className="flex flex-col">
+    <label htmlFor="feature2" className="mb-1 text-sm text-gray-700 dark:text-white">Special features*</label>
+    <div className="flex space-x-4">
+      <label className="mb-1 text-sm text-gray-700 dark:text-white">
+        <input type="checkbox" name="feature2" checked={data.feature2.includes('Thumb start')} onChange={() => handleCheckboxFeature2('Thumb start')} className="mr-2" />
+        Thumb start
+      </label>
+      <label className="mb-1 text-sm text-gray-700 dark:text-white">
+        <input type="checkbox" name="feature2" checked={data.feature2.includes('Keyless entry')} onChange={() => handleCheckboxFeature2('Keyless entry')} className="mr-2" />
+        Keyless entry
+      </label>
+      <label className="mb-1 text-sm text-gray-700 dark:text-white">
+        <input type="checkbox" name="feature2" checked={data.feature2.includes('GPS')} onChange={() => handleCheckboxFeature2('GPS')} className="mr-2" />
+        GPS
+      </label>
+    </div>
+  </div>
+  {errors.feature2 && <div className='text-red-500'>{errors.feature2}</div>}
 </div>
-
               </> )
                             }
             

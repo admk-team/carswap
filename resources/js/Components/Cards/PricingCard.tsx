@@ -153,11 +153,11 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                                     </span>
                                                 </p>
                                             </div>
-                                            <div className='flex '>
-                                                <p>Year : {car?.model}</p>
-                                            </div>
+                                           
                                         </div>
-
+                                        <div className=' mr-6'>
+                                                <p >Year : {car?.year}</p>
+                                            </div>
                                     </div>
                                     <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
                                         <div className='flex mb-2 flex-wrap justify-between'>
