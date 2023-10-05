@@ -33,7 +33,7 @@ const TopBanner = ({ brands, categories }: any) => {
                             </h3>
                         </div> */}
                         <div className="mt-4">
-                        <SliderCardBackup />
+                        <SliderCardBackup brands={brands} categories={categories} />
 
                         </div>
                         </div>

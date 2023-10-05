@@ -1564,10 +1564,10 @@ export default function CarDetail({
                                                 <div className="flex"> <span className="mr-2">Spec: </span> 
                                                 {car.feature
                                                     .split(" ")
-                                                    .slice(0, 3)
+                                                    .slice(0, 2)
                                                     .join(" ")}
                                                 {car.feature.split(" ")
-                                                    .length > 3 && (
+                                                    .length > 2 && (
                                                     <p className="mx-1 text-dark responsive responsive1">
                                                         ..
                                                     </p>
@@ -1583,7 +1583,7 @@ export default function CarDetail({
                                                         </span>
                                                     </p>
                                                 </div>
-                                                <div className=' mr-6'>
+                                                <div className=' mr-2'>
                                                 <p >Year : {car?.year}</p>
                                             </div>
                                             </div>
@@ -1601,9 +1601,9 @@ export default function CarDetail({
                                                                               ?.image
                                                                         : ""
                                                                 }
-                                                                className="w-6 h-6"
+                                                                className="w-5 h-5"
                                                             />
-                                                            <p className="mx-2 ">
+                                                            <p className="mx-2 text-sm ">
                                                                 {
                                                                     car?.brand
                                                                         ?.title
@@ -1619,7 +1619,7 @@ export default function CarDetail({
                                                             viewBox="0 0 24 24"
                                                             strokeWidth="1.5"
                                                             stroke="currentColor"
-                                                            className="w-6 h-6"
+                                                            className="w-5 h-5"
                                                         >
                                                             <path
                                                                 strokeLinecap="round"
@@ -1632,7 +1632,7 @@ export default function CarDetail({
                                                                 d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                                                             />
                                                         </svg>
-                                                        <p className="mx-2 ">
+                                                        <p className="mx-1 text-sm ">
                                                             {car?.location}
                                                         </p>
                                                     </div>
@@ -1641,11 +1641,11 @@ export default function CarDetail({
 
                                                
                                                 <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
-                                        <div className='flex mb-1  rounded-[4px]'>
-                                            <p className='mx-2  text-sm text-gray-600 responsive'>Conditon : {car?.condition}</p>
+                                        <div className='flex mb-1  rounded-[3px]'>
+                                            <p className='mx-1 text-12px  text-xs text-gray-600 responsive'>Conditon : {car?.condition}</p>
                                         </div>
                                         <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
-                                            <p className='mx-2   text-sm text-gray-600 responsive'>{car?.mileage} miles</p>
+                                            <p className='mx-1  text-12px text-xs text-gray-600 responsive'>{car?.mileage} miles</p>
                                         </div>
                                         </div>
                                         <div className="flex flex-wrap justify-between mt-1 condition__wrap">

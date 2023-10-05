@@ -132,12 +132,12 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                             <div className="flex"> <span className="mr-2">Spec: </span> 
                                                 {car?.feature
                                                     .split(" ")
-                                                    .slice(0, 3)
+                                                    .slice(0, 2)
                                                     .join(" ")}
                                                 {car?.feature.split(" ")
-                                                    .length > 3 && (
+                                                    .length > 2 && (
                                                     <p className="mx-1 text-dark responsive responsive1">
-                                                        ..
+                                                        ...
                                                     </p>
                                                 )}
                                             </div>
@@ -155,15 +155,15 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                             </div>
                                            
                                         </div>
-                                        <div className=' mr-6'>
+                                        <div className=' mr-2'>
                                                 <p >Year : {car?.year}</p>
                                             </div>
                                     </div>
                                     <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
-                                        <div className='flex mb-2 flex-wrap justify-between'>
+                                        <div className='flex mb-1 flex-wrap justify-between'>
                                             <div className='flex'>
-                                                <img src={car?.brand?.image ? "/storage/" + car?.brand?.image : ''} className='w-6 h-6' />
-                                                <p className='mx-2 responsive '>{car?.brand?.title}<span className='my-2 ml-1'>{car?.title}</span></p>
+                                                <img src={car?.brand?.image ? "/storage/" + car?.brand?.image : ''} className='w-5 h-5' />
+                                                <p className='mx-1 responsive text-sm'>{car?.brand?.title}<span className='my-1 ml-1'>{car?.title}</span></p>
 
                                             </div>
                                         </div>
@@ -174,7 +174,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                                 viewBox="0 0 24 24"
                                                 strokeWidth="1.5"
                                                 stroke="currentColor"
-                                                className="w-6 h-6"
+                                                className="w-5 h-5"
                                             >
                                                 <path
                                                     strokeLinecap="round"
@@ -187,7 +187,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                                                 />
                                             </svg>
-                                            <p className="mx-2 responsive ">
+                                            <p className="mx-1 responsive  text-sm ">
                                                 {car?.location}
                                             </p>
                                         </div>
@@ -198,10 +198,10 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     </div> */}
                                     <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
                                         <div className='flex mb-1  rounded-[4px]'>
-                                            <p className='mx-2  text-sm text-gray-600 responsive'>Conditon : {car?.condition}</p>
+                                            <p className='mx-2  text-xs text-gray-600 responsive'>Conditon : {car?.condition}</p>
                                         </div>
                                         <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
-                                            <p className='mx-2   text-sm text-gray-600 responsive'>{car?.mileage} miles</p>
+                                            <p className='mx-2  text-xs text-gray-600 responsive'>{car?.mileage} miles</p>
                                         </div>
                                     </div>
 
