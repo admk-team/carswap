@@ -784,9 +784,9 @@ export default function CarDetail({
                                                     className="bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3"
                                                 >
                                                     {" "}
-                                                    Buy Now{" "}
+                                                    Buy Cash{" "}
                                                 </button>
-                                                <a
+                                                {/* <a
                                                     className="flex justify-center bg-green-600  w-full text-white font-bold py-2 px-4 rounded mt-3"
                                                     href="https://api.whatsapp.com/send?phone=08120222922"
                                                     target="_blank"
@@ -797,7 +797,7 @@ export default function CarDetail({
                                                         alt=""
                                                     />
                                                     +2348120222922
-                                                </a>
+                                                </a> */}
                                             
                                     {/* <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-6' >  Buy Cash  </button> */}
                                     <p className='text-gray-950 mt-2 text-xl font-bold mb-2 text-left'>We deliver when you pay cash.</p>
