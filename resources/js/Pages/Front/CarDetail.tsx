@@ -999,8 +999,6 @@ export default function CarDetail({
                                 </div>
                                 <div className="flex flex-col items-start">
                                     <p>{car?.feature}</p>
-                                    <p>{car?.feature}</p>
-                                    <p>{car?.feature}</p>
                                 </div>
                             </div>
                         </div>
