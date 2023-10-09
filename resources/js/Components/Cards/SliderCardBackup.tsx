@@ -109,7 +109,7 @@ const SliderCard = ({brands,categories}: any) => {
             <button key={categoryindex} type="button"
               onClick={() => setData('category', category?.id)}
               className="border mx-1 mb-3 text-sm focus:bg-emerald-500 font-extrabold bg-white-400 border-gray-900 rounded-lg py-1 px-2 shadow-md mr-1 text-gray-950 ">
-              {category?.title+ '(' +category?.cars_count+ ')'}
+              {category?.title+ '(' +category?.car_count+ ')'}
             </button>
           ))
           }
