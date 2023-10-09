@@ -16,7 +16,7 @@ class FrontController extends Controller
 {
     public function index(Request $request){
         $brands=Brand::where('status','1')->get();
-        $categories=Category::withCount('cars')->get();
+        $categories=Category::withCount('car')->get();
         $swap_cars=Car::with('ratings','brand')->where('deleted_at',null)->where('status','1')->where('slug','!=',null)->limit(4)->latest()->get();
         $sale_cars=Car::with('ratings','brand')->where('deleted_at',null)->where('status','1')->where('type','sale')->where('slug','!=',null)->limit(5)->latest()->get();
         $fav = auth()->user()?->wishlist;
