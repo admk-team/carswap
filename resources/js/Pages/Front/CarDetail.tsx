@@ -261,7 +261,7 @@ export default function CarDetail({
         );
     }, [car]);
 
-    useEffect(() => {}, [galleryImages]);
+    useEffect(() => { }, [galleryImages]);
     const swapPriceDifference =
         selectedMyCarPrice !== null ? carPrice - selectedMyCarPrice : 0;
 
@@ -354,7 +354,7 @@ export default function CarDetail({
                                 <div className="bg-white rounded-lg shadow-md p-6">
                                     {car.type || car.type == "swap" ? (
                                         auth?.user &&
-                                        car.user_id == auth.user.id ? (
+                                            car.user_id == auth.user.id ? (
                                             <div className="flex  justify-center items-center gap-3 flex-row">
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -379,7 +379,7 @@ export default function CarDetail({
                                         ) : (
                                             <>
                                                 {swapDate <
-                                                twentyFourHoursAgo ? (
+                                                    twentyFourHoursAgo ? (
                                                     // car?.swaps && new Date(car?.swaps.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
                                                     <div className="flex flex-wrap justify-center items-center gap-3">
                                                         <svg
@@ -445,10 +445,9 @@ export default function CarDetail({
                                                                                                     ?.images[0]
                                                                                             }
                                                                                             className="w-full h-24 object-contain"
-                                                                                            alt={`Car ${
-                                                                                                index +
+                                                                                            alt={`Car ${index +
                                                                                                 1
-                                                                                            }`}
+                                                                                                }`}
                                                                                         />
                                                                                     </div>
                                                                                 )
@@ -495,9 +494,9 @@ export default function CarDetail({
                                                                 {formatNumberWithCommas(
                                                                     my_cars
                                                                         ? my_cars[
-                                                                              selectedCarIndex
-                                                                          ]
-                                                                              ?.price
+                                                                            selectedCarIndex
+                                                                        ]
+                                                                            ?.price
                                                                         : 0
                                                                 )}
                                                             </p>
@@ -539,7 +538,7 @@ export default function CarDetail({
                                         )
                                     ) : auth && auth.user ? (
                                         auth?.user &&
-                                        car.user_id == auth.user.id ? (
+                                            car.user_id == auth.user.id ? (
                                             <div className="flex  justify-center items-center gap-3 flex-row">
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -562,7 +561,7 @@ export default function CarDetail({
                                                 </p>
                                             </div>
                                         ) : bookingDate <
-                                          bookingTwentyFourHoursAgo ? (
+                                            bookingTwentyFourHoursAgo ? (
                                             // car?.bookings && new Date(car?.bookings?.created_at).getTime() < new Date().getTime() + 48 * 60 * 60 * 1000
                                             <div className="flex flex-wrap justify-center items-center gap-3">
                                                 <svg
@@ -628,7 +627,7 @@ export default function CarDetail({
                                 </div>
                                 {car.type || car.type == "swap" ? (
                                     auth?.user &&
-                                    car.user_id == auth.user.id ? (
+                                        car.user_id == auth.user.id ? (
                                         ""
                                     ) : car?.swaps ? (
                                         ""
@@ -701,10 +700,9 @@ export default function CarDetail({
                                                                                                 ?.images[0]
                                                                                         }
                                                                                         className="w-full h-4/5 object-contain"
-                                                                                        alt={`Car ${
-                                                                                            index +
+                                                                                        alt={`Car ${index +
                                                                                             1
-                                                                                        }`}
+                                                                                            }`}
                                                                                     />
                                                                                 </div>
                                                                             )
@@ -779,7 +777,7 @@ export default function CarDetail({
                                                 )}
                                             </div>
                                             <div className="bg-white rounded-lg shadow-md p-6 mt-2">
-                                <button
+                                                <button
                                                     onClick={handleBookNow}
                                                     className="bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-3"
                                                 >
@@ -798,19 +796,19 @@ export default function CarDetail({
                                                     />
                                                     +2348120222922
                                                 </a> */}
-                                            
-                                    {/* <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-6' >  Buy Cash  </button> */}
-                                    <p className='text-gray-950 mt-2 text-xl font-bold mb-2 text-left'>We deliver when you pay cash.</p>
-                                    <button onClick={() => window.location.href = 'mailto:cars@carswap.ng'} className='bg-gray-950 w-full text-white font-bold py-2 px-4 rounded mt-3'>
-                                        Make Inquiry
-                                    </button>
-                                </div>
+
+                                                {/* <button onClick={handleBookNow} className='bg-gray-950  w-full text-white font-bold py-2 px-4 rounded mt-6' >  Buy Cash  </button> */}
+                                                <p className='text-gray-950 mt-2 text-xl font-bold mb-2 text-left'>We deliver when you pay cash.</p>
+                                                <button onClick={() => window.location.href = 'mailto:cars@carswap.ng'} className='bg-gray-950 w-full text-white font-bold py-2 px-4 rounded mt-3'>
+                                                    Make Inquiry
+                                                </button>
+                                            </div>
                                         </>
                                     )
                                 ) : (
                                     ""
                                 )}
-                              
+
                             </div>
                         </div>
                     </div>
@@ -853,18 +851,18 @@ export default function CarDetail({
                                 </div>
                             </div>
                             <hr />
-                                <div className="flex justify-between bg-purple-50 p-4">
-                                    <div className="flex gap-2">
-                                        <img
-                                            src={location}
-                                            className="w-6 h-6"
-                                        />
-                                        <p>Location</p>
-                                    </div>
-                                    <div>
-                                        <p>{car.location} {car.state} {car.lga}</p>
-                                    </div>
+                            <div className="flex justify-between bg-purple-50 p-4">
+                                <div className="flex gap-2">
+                                    <img
+                                        src={location}
+                                        className="w-6 h-6"
+                                    />
+                                    <p>Location</p>
                                 </div>
+                                <div>
+                                    <p>{car.location} {car.state} {car.lga}</p>
+                                </div>
+                            </div>
                         </div>
                         <div className="col-span-12 md:col-span-6 lg:col-span-4">
                             <div className="flex justify-between bg-purple-50 p-4">
@@ -925,18 +923,18 @@ export default function CarDetail({
                                 </div>
                             </div>
                             <hr />
-                                <div className="flex justify-between bg-purple-50 p-4">
-                                    <div className="flex gap-2">
-                                        <img
-                                            src={cylinder}
-                                            className="w-6 h-6"
-                                        />
-                                        <p>Cylinder</p>
-                                    </div>
-                                    <div>
-                                        <p>{car.cylinder}</p>
-                                    </div>
+                            <div className="flex justify-between bg-purple-50 p-4">
+                                <div className="flex gap-2">
+                                    <img
+                                        src={cylinder}
+                                        className="w-6 h-6"
+                                    />
+                                    <p>Cylinder</p>
                                 </div>
+                                <div>
+                                    <p>{car.cylinder}</p>
+                                </div>
+                            </div>
                         </div>
                         <div className="col-span-12 md:col-span-6 lg:col-span-4">
                             <div className="flex justify-between bg-purple-50 p-4">
@@ -977,34 +975,37 @@ export default function CarDetail({
                                 <div>
                                     <p>{car.custom_paper}</p>
                                 </div>
-                            </div>                          
+                            </div>
                             <hr />
-                            
+
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="p-4">
                     <h3 className="font-bold text-gray-900 text-2xl">
                         Special Features:
                     </h3>
                     <div className="grid grid-cols-12 gap-4 mt-7">
-                        <div className="col-span-12 md:col-span-6 lg:col-span-4"> 
+                        <div className="col-span-8 md:col-span-8 lg:col-span-8">
                             <hr />
-                                <div className="flex justify-between bg-purple-50 p-4">
-                                    <div className="flex gap-2">
-                                        <img
-                                            src={feature}
-                                            className="w-6 h-6"
-                                        />
-                                        <p>Special Feature</p>
-                                    </div>
-                                    <div>
-                                        <p>{car?.feature}</p>
-                                    </div>
+                            <div className="flex justify-between bg-purple-50 p-4">
+                                <div className="flex flex-row items-start flex-wrap gap-2 ">
+                                    <img
+                                        src={feature}
+                                        className="w-6 h-6"
+                                    />
+                                    <p>Special Feature:</p>
                                 </div>
+                                <div className="flex flex-col items-start">
+                                    <p>{car?.feature}</p>
+                                    <p>{car?.feature}</p>
+                                    <p>{car?.feature}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
                 {car.title1 && (
@@ -1172,15 +1173,15 @@ export default function CarDetail({
                                     </div>
                                 </div>
                                 <hr />
-                            <div className="flex justify-between bg-purple-50 p-4">
-                                <div className="flex gap-2">
-                                    <img src={Custom} className="w-6 h-6" />
-                                    <p>Custom Paper</p>
+                                <div className="flex justify-between bg-purple-50 p-4">
+                                    <div className="flex gap-2">
+                                        <img src={Custom} className="w-6 h-6" />
+                                        <p>Custom Paper</p>
+                                    </div>
+                                    <div>
+                                        <p>{car.custom_paper1}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p>{car.custom_paper1}</p>
-                                </div>
-                            </div>
                             </div>
                             <div className="col-span-12 md:col-span-6 lg:col-span-4">
                                 <hr />
@@ -1340,15 +1341,15 @@ export default function CarDetail({
                                     </div>
                                 </div>
                                 <hr />
-                            <div className="flex justify-between bg-purple-50 p-4">
-                                <div className="flex gap-2">
-                                    <img src={Custom} className="w-6 h-6" />
-                                    <p>Custom Paper</p>
+                                <div className="flex justify-between bg-purple-50 p-4">
+                                    <div className="flex gap-2">
+                                        <img src={Custom} className="w-6 h-6" />
+                                        <p>Custom Paper</p>
+                                    </div>
+                                    <div>
+                                        <p>{car.custom_paper2}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p>{car.custom_paper2}</p>
-                                </div>
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -1383,16 +1384,16 @@ export default function CarDetail({
                                                     <div key={review.id}>
                                                         {auth?.user.id !==
                                                             review.user_id && (
-                                                            <ReviewListing
-                                                                auth={auth}
-                                                                car={car}
-                                                                review={
-                                                                    review
-                                                                        ? review
-                                                                        : null
-                                                                }
-                                                            />
-                                                        )}
+                                                                <ReviewListing
+                                                                    auth={auth}
+                                                                    car={car}
+                                                                    review={
+                                                                        review
+                                                                            ? review
+                                                                            : null
+                                                                    }
+                                                                />
+                                                            )}
                                                     </div>
                                                 ) : (
                                                     <div key={review.id}>
@@ -1448,14 +1449,32 @@ export default function CarDetail({
                             Similar Listings
                         </h3>
                         <div className="mx-auto max-w-screen-xl w-full h-full mt-3 ">
-                       
-                         <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mb-4  p-4">
+
+                            <div className="lg:container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  mb-4  p-4">
                                 {similarCars?.map((car: any, index: any) => (
                                     <div
                                         key={index}
                                         className="lg:w-[250px] xl:w-[275px] md:w-[220px] sm:w-[200px] bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105 md:me-[2px] sm:mt-2"
-                                        >
-                                        <div className="relative">
+                                    >
+                                        <div className="">
+
+                                            <Link href={route('CarDetail', car.slug)}>
+                                                <div className='pt-2 pb-2 bg-emerald-600 rounded-tl-md rounded-tr-md p-1 shadow-2xl cursor-pointer responsive responsive1 swap__car'>
+                                                    <p className='font-semibold text-black text-white flex gap-2 items-center justify-center align-center responsive responsive1'>
+                                                        <span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" />
+                                                            </svg>
+                                                        </span>
+                                                        <span>Swap Calculator</span>
+                                                        <span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                                            </svg>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </Link>
                                             <Link
                                                 href={route(
                                                     "CarDetail",
@@ -1463,7 +1482,7 @@ export default function CarDetail({
                                                 )}
                                             >
                                                 <img
-                                                     className="w-full h-[144px] rounded-t-lg object-cover image__responsive"
+                                                    className="w-full h-[144px] rounded-t-lg object-cover image__responsive"
                                                     src={
                                                         "/storage" +
                                                         car?.images[0]
@@ -1471,14 +1490,16 @@ export default function CarDetail({
                                                     alt="product image"
                                                 />
                                             </Link>
+
                                             {/* {car?.type === "For Swap" ? ( */}
-                                                <Link
-                                                    href={route(
-                                                        "CarDetail",
-                                                        car.slug
-                                                    )}
-                                                >
-                                                    <div className="absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl cursor-pointer">
+                                            <Link
+                                                href={route(
+                                                    "CarDetail",
+                                                    car.slug
+                                                )}
+                                            >
+
+                                                {/* <div className="absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl cursor-pointer">
                                                         <p className="font-semibold text-black text-white flex gap-2 items-center justify-center align-center">
                                                             <span>
                                                                 <svg
@@ -1516,8 +1537,8 @@ export default function CarDetail({
                                                                 </svg>
                                                             </span>
                                                         </p>
-                                                    </div>
-                                                </Link>
+                                                    </div> */}
+                                            </Link>
                                             {/* ) : null} */}
                                             <div className="absolute bottom-5 left-1">
                                                 {car.total_rating > 0 && (
@@ -1554,6 +1575,10 @@ export default function CarDetail({
                                                     car.price
                                                 )}
                                             </h5>
+                                            <div className="flex mb-2 flex-wrap justify-between">
+                                                <div className="flex"> Spec: {car?.feature && (car.feature.length > 25 ? car.feature.slice(0, 25) + '...' : car.feature)}</div>
+
+                                            </div>
                                             <Link
                                                 href={route(
                                                     "CarDetail",
@@ -1561,18 +1586,7 @@ export default function CarDetail({
                                                 )}
                                                 className=""
                                             >
-                                                <div className="flex"> <span className="mr-2">Spec: </span> 
-                                                {car.feature
-                                                    .split(" ")
-                                                    .slice(0, 2)
-                                                    .join(" ")}
-                                                {car.feature.split(" ")
-                                                    .length > 2 && (
-                                                    <p className="mx-1 text-dark responsive responsive1">
-                                                        ..
-                                                    </p>
-                                                )}
-                                                </div>
+
                                             </Link>
                                             <div className="flex mb-2 flex-wrap justify-between">
                                                 <div className="flex bg-emerald-500">
@@ -1584,8 +1598,8 @@ export default function CarDetail({
                                                     </p>
                                                 </div>
                                                 <div className=' mr-2'>
-                                                <p >Year : {car?.year}</p>
-                                            </div>
+                                                    <p >Year : {car?.year}</p>
+                                                </div>
                                             </div>
                                             <div className="mt-4">
                                                 <div className="flex flex-wrap justify-between mt-3">
@@ -1596,9 +1610,9 @@ export default function CarDetail({
                                                                     car?.brand
                                                                         ?.image
                                                                         ? "/storage/" +
-                                                                          car
-                                                                              ?.brand
-                                                                              ?.image
+                                                                        car
+                                                                            ?.brand
+                                                                            ?.image
                                                                         : ""
                                                                 }
                                                                 className="w-5 h-5"
@@ -1612,61 +1626,61 @@ export default function CarDetail({
                                                         </div>
                                                     </div>
                                                     <div className="flex flex-wrap justify-between">
-                                                    <div className="flex mb-1">
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            strokeWidth="1.5"
-                                                            stroke="currentColor"
-                                                            className="w-5 h-5"
-                                                        >
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                                                            />
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                                                            />
-                                                        </svg>
-                                                        <p className="mx-1 text-sm ">
-                                                            {car?.location}
-                                                        </p>
+                                                        <div className="flex mb-1">
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="none"
+                                                                viewBox="0 0 24 24"
+                                                                strokeWidth="1.5"
+                                                                stroke="currentColor"
+                                                                className="w-5 h-5"
+                                                            >
+                                                                <path
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                                                                />
+                                                                <path
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                                                                />
+                                                            </svg>
+                                                            <p className="mx-1 text-sm ">
+                                                                {car?.location}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                </div>
 
-                                               
+
                                                 <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
-                                        <div className='flex mb-1  rounded-[3px]'>
-                                            <p className='mx-1 text-12px  text-xs text-gray-600 responsive'>Conditon : {car?.condition}</p>
-                                        </div>
-                                        <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
-                                            <p className='mx-1  text-12px text-xs text-gray-600 responsive'>{car?.mileage} miles</p>
-                                        </div>
-                                        </div>
-                                        <div className="flex flex-wrap justify-between mt-1 condition__wrap">
-                                        <div className="flex  rounded-[4px]">
-                                            <Link
-                                                href={route(
-                                                    "CarDetail",
-                                                    car.slug
-                                                )}
-                                            >
-                                                <p className="mx-4  text-gray-900 font-bold cursor-pointer condition__wrap1">
-                                                    Swap
-                                                </p>
-                                            </Link>
-                                        </div>
-                                        <div className='flex   rounded-[4px]'>
-                                            <Link href={route('CarDetail', car.slug)}>
-                                                <p className='mx-4  text-emerald-600 font-bold cursor-pointer condition__wrap1'>Buy Cash </p>
-                                            </Link>
-                                        </div>
-                                    </div>
+                                                    <div className='flex mb-1  rounded-[3px]'>
+                                                        <p className='mx-1 text-12px  text-xs text-gray-600 responsive'>Conditon : {car?.condition}</p>
+                                                    </div>
+                                                    <div className='flex mb-1 bg-gray-100 rounded-[4px]'>
+                                                        <p className='mx-1  text-12px text-xs text-gray-600 responsive'>{car?.mileage} miles</p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex flex-wrap justify-between mt-1 condition__wrap">
+                                                    <div className="flex  rounded-[4px]">
+                                                        <Link
+                                                            href={route(
+                                                                "CarDetail",
+                                                                car.slug
+                                                            )}
+                                                        >
+                                                            <p className="mx-4  text-gray-900 font-bold cursor-pointer condition__wrap1">
+                                                                Swap
+                                                            </p>
+                                                        </Link>
+                                                    </div>
+                                                    <div className='flex   rounded-[4px]'>
+                                                        <Link href={route('CarDetail', car.slug)}>
+                                                            <p className='mx-4  text-emerald-600 font-bold cursor-pointer condition__wrap1'>Buy Cash </p>
+                                                        </Link>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1797,7 +1811,7 @@ export default function CarDetail({
                                                                     2000
                                                                 );
                                                             },
-                                                            onClose: () => {},
+                                                            onClose: () => { },
                                                         });
                                                     }}
                                                     className="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2 "
@@ -1879,7 +1893,7 @@ export default function CarDetail({
                                                                     2000
                                                                 );
                                                             },
-                                                            onClose: () => {},
+                                                            onClose: () => { },
                                                         });
                                                     }}
                                                     className="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded mr-2 "
@@ -1900,7 +1914,7 @@ export default function CarDetail({
                                 )}
                             </div>
                         </div>
-                       
+
                     </div>
                 ) : (
                     ""

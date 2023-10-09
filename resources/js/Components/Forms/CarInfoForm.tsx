@@ -43,7 +43,7 @@ const CarInfohtmlForm = ({ auth, brands, users, categories }: any) => {
         //new feilds
         no_owner: '',
         categories_id: '',
-        feature: [] as string[],
+        feature: '',
         distress: '',
         title1: '',
         model1: '',
@@ -58,7 +58,7 @@ const CarInfohtmlForm = ({ auth, brands, users, categories }: any) => {
         price1: '',
         cylinder1: '',
         custom_paper1: '',
-        feature1: [] as string[],
+        feature1: '',
         title2: '',
         model2: '',
         year2: '',
@@ -72,7 +72,7 @@ const CarInfohtmlForm = ({ auth, brands, users, categories }: any) => {
         price2: '',
         cylinder2: '',
         custom_paper2: '',
-        feature2: [] as string[],
+        feature2: '',
         images: []
     });
 
@@ -109,43 +109,43 @@ const CarInfohtmlForm = ({ auth, brands, users, categories }: any) => {
         setData('custom_paper', event.target.value)
     };
 
-    const handleCheckboxChange = (value: string) => {
-        const updatedFeature = [...data.feature];
-    
-        const index = updatedFeature.indexOf(value);
-        if (index !== -1) {
-          updatedFeature.splice(index, 1);
-        } else {
-          updatedFeature.push(value);
-        }
-    
-        setData({ ...data, feature: updatedFeature });
-      };
-      const handleCheckboxFeature1 = (value: string) => {
-        const updatedFeature1 = [...data.feature1];
-    
-        const index = updatedFeature1.indexOf(value);
-        if (index !== -1) {
-          updatedFeature1.splice(index, 1);
-        } else {
-          updatedFeature1.push(value);
-        }
-    
-        setData({ ...data, feature1: updatedFeature1 });
-      };
-      const handleCheckboxFeature2 = (value: string) => {
-        const updatedFeature2 = [...data.feature2];
-      
-        const index = updatedFeature2.indexOf(value);
-        if (index !== -1) {
-          updatedFeature2.splice(index, 1);
-        } else {
-          updatedFeature2.push(value);
-        }
-      
-        setData({ ...data, feature2: updatedFeature2 });
-      };
-      
+    // const handleCheckboxChange = (value: string) => {
+    //     const updatedFeature = [...data.feature];
+
+    //     const index = updatedFeature.indexOf(value);
+    //     if (index !== -1) {
+    //       updatedFeature.splice(index, 1);
+    //     } else {
+    //       updatedFeature.push(value);
+    //     }
+
+    //     setData({ ...data, feature: updatedFeature });
+    //   };
+    //   const handleCheckboxFeature1 = (value: string) => {
+    //     const updatedFeature1 = [...data.feature1];
+
+    //     const index = updatedFeature1.indexOf(value);
+    //     if (index !== -1) {
+    //       updatedFeature1.splice(index, 1);
+    //     } else {
+    //       updatedFeature1.push(value);
+    //     }
+
+    //     setData({ ...data, feature1: updatedFeature1 });
+    //   };
+    //   const handleCheckboxFeature2 = (value: string) => {
+    //     const updatedFeature2 = [...data.feature2];
+
+    //     const index = updatedFeature2.indexOf(value);
+    //     if (index !== -1) {
+    //       updatedFeature2.splice(index, 1);
+    //     } else {
+    //       updatedFeature2.push(value);
+    //     }
+
+    //     setData({ ...data, feature2: updatedFeature2 });
+    //   };
+
 
     return (
         <>
@@ -273,7 +273,10 @@ const CarInfohtmlForm = ({ auth, brands, users, categories }: any) => {
 
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
-                                <div className="flex flex-col">
+                                    <input type="text" name="Specs" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.feature} onChange={(e) => setData('feature', e.target.value)} />
+                                    <label htmlFor="first_name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Specification *</label>
+
+                                    {/* <div className="flex flex-col">
                                 <label htmlFor="feature" className="mb-1 text-sm text-gray-700 dark:text-white">Special features*</label>
                                 <div className="flex space-x-4">
                                  <label className="mb-1 text-sm text-gray-700 dark:text-white">
@@ -290,9 +293,9 @@ const CarInfohtmlForm = ({ auth, brands, users, categories }: any) => {
                             </label>
                             </div>
 
-                            </div>
-                              {errors.feature && <div className='text-red-500'>{errors.feature}</div>}
-                             </div>
+                            </div> */}
+                                    {errors.feature && <div className='text-red-500'>{errors.feature}</div>}
+                                </div>
 
 
                                 <div className="relative z-0 w-full mb-6 group">
@@ -320,9 +323,9 @@ const CarInfohtmlForm = ({ auth, brands, users, categories }: any) => {
                                 <div className="relative z-0 w-full mb-6 group">
                                     <select name="condition" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value={data.condition} onChange={(e) => setData('condition', e.target.value)}>
                                         <option value="">Select Condition</option>
-                                        <option value="Nigerian Used">Nigerian Used</option>
-                                        <option value="Foreign Used">Foreign Used</option>
                                         <option value="Brand New">Brand New</option>
+                                        <option value="Foreign Used">Foreign Used</option>
+                                        <option value="Nigerian Used">Nigerian Used</option>
                                     </select>
                                     {errors.condition && <div className='text-red-500'>{errors.condition}</div>}
                                     <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
@@ -587,7 +590,10 @@ const CarInfohtmlForm = ({ auth, brands, users, categories }: any) => {
                                                     <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
                                                 </div>
                                                 <div className="relative z-0 w-full mb-6 group">
-                                <div className="flex flex-col">
+                                                    <input type="text" name="Specs" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.feature1} onChange={(e) => setData('feature1', e.target.value)} />
+                                                    <label htmlFor="first_name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Specification *</label>
+
+                                                    {/* <div className="flex flex-col">
                                 <label htmlFor="feature1" className="mb-1 text-sm text-gray-700 dark:text-white">Special features*</label>
                                 <div className="flex space-x-4">
                                  <label className="mb-1 text-sm text-gray-700 dark:text-white">
@@ -604,9 +610,9 @@ const CarInfohtmlForm = ({ auth, brands, users, categories }: any) => {
                             </label>
                             </div>
 
-                            </div>
-                              {errors.feature1 && <div className='text-red-500'>{errors.feature1}</div>}
-                             </div>
+                            </div> */}
+                                                    {errors.feature1 && <div className='text-red-500'>{errors.feature1}</div>}
+                                                </div>
                                             </div>
                                             <div className='mt-2 '>
                                                 <h2 className='font-semibold font-lg'>2nd Option*</h2>
@@ -715,25 +721,28 @@ const CarInfohtmlForm = ({ auth, brands, users, categories }: any) => {
                                                     <label htmlFor="Price" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"></label>
                                                 </div>
                                                 <div className="relative z-0 w-full mb-6 group">
-  <div className="flex flex-col">
-    <label htmlFor="feature2" className="mb-1 text-sm text-gray-700 dark:text-white">Special features*</label>
-    <div className="flex space-x-4">
-      <label className="mb-1 text-sm text-gray-700 dark:text-white">
-        <input type="checkbox" name="feature2" checked={data.feature2.includes('Thumb start')} onChange={() => handleCheckboxFeature2('Thumb start')} className="mr-2" />
-        Thumb start
-      </label>
-      <label className="mb-1 text-sm text-gray-700 dark:text-white">
-        <input type="checkbox" name="feature2" checked={data.feature2.includes('Keyless entry')} onChange={() => handleCheckboxFeature2('Keyless entry')} className="mr-2" />
-        Keyless entry
-      </label>
-      <label className="mb-1 text-sm text-gray-700 dark:text-white">
-        <input type="checkbox" name="feature2" checked={data.feature2.includes('GPS')} onChange={() => handleCheckboxFeature2('GPS')} className="mr-2" />
-        GPS
-      </label>
-    </div>
-  </div>
-  {errors.feature2 && <div className='text-red-500'>{errors.feature2}</div>}
-</div>
+                                                    <input type="text" name="Specs" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={data.feature2} onChange={(e) => setData('feature2', e.target.value)} />
+                                                    <label htmlFor="first_name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transhtmlForm -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Specification *</label>
+
+                                                    {/* <div className="flex flex-col">
+                                                        <label htmlFor="feature2" className="mb-1 text-sm text-gray-700 dark:text-white">Special features*</label>
+                                                        <div className="flex space-x-4">
+                                                            <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                                                                <input type="checkbox" name="feature2" checked={data.feature2.includes('Thumb start')} onChange={() => handleCheckboxFeature2('Thumb start')} className="mr-2" />
+                                                                Thumb start
+                                                            </label>
+                                                            <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                                                                <input type="checkbox" name="feature2" checked={data.feature2.includes('Keyless entry')} onChange={() => handleCheckboxFeature2('Keyless entry')} className="mr-2" />
+                                                                Keyless entry
+                                                            </label>
+                                                            <label className="mb-1 text-sm text-gray-700 dark:text-white">
+                                                                <input type="checkbox" name="feature2" checked={data.feature2.includes('GPS')} onChange={() => handleCheckboxFeature2('GPS')} className="mr-2" />
+                                                                GPS
+                                                            </label>
+                                                        </div>
+                                                    </div> */}
+                                                    {errors.feature2 && <div className='text-red-500'>{errors.feature2}</div>}
+                                                </div>
 
                                             </div>
 

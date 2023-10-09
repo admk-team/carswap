@@ -53,18 +53,11 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                             key={index}
                             className="lg:w-[250px] xl:w-[275px] md:w-[220px] sm:w-[200px] bg-white border border-gray-200 shadow-xl rounded-lg dark:bg-gray-800 dark:border-gray-700 transition-transform transform hover:scale-105 md:me-[2px] sm:mt-2"
                         >
-                            <div className="relative">
-                                <Link href={route("CarDetail", car.slug)}>
-                                    <img
-                                        className="w-full h-[144px] rounded-t-lg object-cover image__responsive"
-                                        src={"/storage" + car?.images[0]}
-                                        alt="product image"
-                                    />
-                                </Link>
+                            <div className="">
                                 <>
 
                                     <Link href={route('CarDetail', car.slug)}>
-                                        <div className='absolute top-2 right-2 bg-emerald-600 rounded p-1 shadow-2xl cursor-pointer responsive responsive1 swap__car'>
+                                        <div className='pt-2 pb-2 bg-emerald-600 rounded-tl-md rounded-tr-md p-1 shadow-2xl cursor-pointer responsive responsive1 swap__car'>
                                             <p className='font-semibold text-black text-white flex gap-2 items-center justify-center align-center responsive responsive1'>
                                                 <span>
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
@@ -82,6 +75,14 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     </Link>
 
                                 </>
+
+                                <Link href={route("CarDetail", car.slug)}>
+                                    <img
+                                        className="w-full h-[144px]  object-cover image__responsive"
+                                        src={"/storage" + car?.images[0]}
+                                        alt="product image"
+                                    />
+                                </Link>
 
                                 <div className="absolute bottom-5 left-1">
                                     {car.total_rating > 0 && (
@@ -127,8 +128,10 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                     </h5> */}
                                 </Link>
                                 <div className="mt-2">
-                                    <div className="flex flex-wrap justify-between">
-                                        <div className="flex mb-2 flex-wrap justify-between">
+                                    <div className="flex mb-2 flex-wrap justify-between">
+                                        <div className="flex"> Spec: {car?.feature && (car.feature.length > 25 ? car.feature.slice(0, 25) + '...' : car.feature)}</div>
+
+                                        {/* <div className="flex mb-2 flex-wrap justify-between">
                                             <div className="flex"> <span className="mr-2">Spec: </span> 
                                                 {car?.feature
                                                     .split(" ")
@@ -141,7 +144,7 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                                     </p>
                                                 )}
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="flex flex-wrap justify-between">
                                         <div className="flex mb-2 flex-wrap justify-between">
@@ -153,11 +156,11 @@ const PricingCard = ({ brands, cars, auth }: any) => {
                                                     </span>
                                                 </p>
                                             </div>
-                                           
+
                                         </div>
                                         <div className=' mr-2'>
-                                                <p >Year : {car?.year}</p>
-                                            </div>
+                                            <p >Year : {car?.year}</p>
+                                        </div>
                                     </div>
                                     <div className='flex flex-wrap justify-between mt-1 condition__wrap'>
                                         <div className='flex mb-1 flex-wrap justify-between'>
