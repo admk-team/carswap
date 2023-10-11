@@ -38,7 +38,7 @@ const AboutUsPage = ({ auth }: any) => {
                                 Welcome To Carswap.ng
                             </h1>
                             <p className="text-gray-900 text-lg border-b border-gray-950 pb-4 mb-2 leading-8">
-                                Carawap.ng is Nigeria's first car swap
+                               CARSWAP.NG is Nigeria's first car swap
                                 marketplace launched in 2018 and Incorporated in
                                 Nigeria at Corporate Affairs Commission Nigeria
                                 as Carswap Limited. Our Objective is to end the
