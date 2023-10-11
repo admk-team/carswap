@@ -263,7 +263,7 @@ class FrontController extends Controller
             $query->where('brand_id', $request->brand);
         }
         if ($request->category) {
-            $query->where('body_type', $request->category);
+            $query->where('categories_id', $request->category);
         }
         if ($request->model) {
             $query->where('model', $request->model);
