@@ -237,7 +237,7 @@ export default function CarDetail({
         my_car_id: selectedCarIds,
         price_diff: 0,
     });
-    console.log("car", car);
+    
     useEffect(() => {
         setData({ ...data, ...{ my_car_id: selectedCarIds } });
     }, [selectedCarIds]);

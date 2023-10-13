@@ -5989,7 +5989,7 @@ BAQEBAQEBAQEBAQEBAQEBAQEH//Z" transform="matrix(1 0 0 1 48 -117.7202)">
 					c0.558,1.124,10.423,2.409,13.03,2.472c2.606,0.064,6.143-7.934,5.398-9.816C81.53,93.244,80.217,92.796,80.217,92.796z"/>
 			</g>
 			
-				<line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="156.534" y1="42.921" x2="156.534" y2="240.296"/>
+				<line fill="none" stroke="#000000" strokeWidth="2" stroke-miterlimit="10" x1="156.534" y1="42.921" x2="156.534" y2="240.296"/>
 		</g>
 	</g>
 </switch>

@@ -6,7 +6,6 @@ import ElectricCar from "@/Assets/BrandLogos/electric-car.png"
 import NoOfUsers from "@/Assets/BrandLogos/group.png"
 
 function Dashboard({auth,brand,car,user,pending_car}:any) {
-    console.log(user)
     return (
         <div className="container-fluid">
             <div className="d-sm-flex align-items-center justify-content-between mb-4">

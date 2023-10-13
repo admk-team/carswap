@@ -10,7 +10,6 @@ import CondtionalAssForm from '@/Components/Forms/CondtionalAssForm'
 import CheckBoxForm from '@/Components/Forms/CheckBoxForm'
 
 const CarInfohtmlForm = ({ auth, brands, users, categories }: any) => {
-    // console.log("auth",auth);
     const { errors } = usePage().props
     const [images, setImages] = useState([]);
     const [carSwapCheck, setCarSwapCheck] = useState(false);
@@ -216,7 +215,7 @@ const CarInfohtmlForm = ({ auth, brands, users, categories }: any) => {
                                         <option value="">Choose Make</option>
                                         {
                                             brands.map((brand: any) => (
-                                                <option value={brand.id}>{brand.title}</option>
+                                                <option key={brand.id} value={brand.id}>{brand.title}</option>
                                             ))
                                         }
 
@@ -263,7 +262,7 @@ const CarInfohtmlForm = ({ auth, brands, users, categories }: any) => {
                                         <option value="">Category</option>
                                         {
                                             categories.map((categories: any) => (
-                                                <option value={categories.id}>{categories.title}</option>
+                                                <option key={categories.id} value={categories.id}>{categories.title}</option>
                                             ))
                                         }
 

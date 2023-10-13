@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 
 
 const PendingAprroval = ({pendings }: any) => {
- console.log(pendings)
+ 
     const [currentPage, setCurrentPage] = useState(1);
     const [carsData, setCarsData] = useState([]);
     const itemsPerPage = 3;

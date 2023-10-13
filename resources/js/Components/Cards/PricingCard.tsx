@@ -6,7 +6,7 @@ import Conditon from "@/Assets/car-settings.png";
 import Engine from "@/Assets/car-engine.png";
 
 const PricingCard = ({ brands, cars, auth }: any) => {
-    console.log("carsswap", cars);
+   
     const [showModal, setShowModal] = useState(false);
     const [inspectionModal, setInspectionModal] = useState(false);
     const [compare, setCompare]: any = useState([]);

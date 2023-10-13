@@ -268,7 +268,7 @@ const Edit = ({ auth,brands,car,users ,categories}: any) => {
                 {
                   
                                             categories.map((categories: any) => (
-                                                <option value={categories.id}>{categories.title}</option>
+                                                <option key={categories.id}value={categories.id}>{categories.title}</option>
                                             ))
                                         }
 
