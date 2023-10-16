@@ -260,7 +260,7 @@ const handleCheckboxFeature2 = (value: string) => {
                 {
                   
                                             categories.map((categories: any) => (
-                                                <option value={categories.id}>{categories.title}</option>
+                                                <option key={categories.id} value={categories.id}>{categories.title}</option>
                                             ))
                                         }
 
@@ -525,7 +525,7 @@ const handleCheckboxFeature2 = (value: string) => {
                   <option value="">Select Brand</option>
                   {
                     brands.map((brand:any)=>(
-                      <option value={brand?.id} key={brand.id}>{brand?.title}</option>
+                      <option  value={brand?.id} key={brand.id}>{brand?.title}</option>
                     ))
                   }
                 </select>

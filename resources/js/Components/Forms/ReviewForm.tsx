@@ -81,8 +81,8 @@ function ReviewForm({ auth,car,review }: any) {
                         <div className="mt-2">
                           <div className="flex space-x-1">
                           {
-                            Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
-                              <label >
+                            Array.from({ length: 5 }, (_, index) => index + 1).map((star,index) => (
+                              <label key={index}>
                                   <input
                                       key={star}
                                       type="radio"
@@ -111,8 +111,8 @@ function ReviewForm({ auth,car,review }: any) {
                       <>
                       <div className="flex mt-3">
                           <div className="flex space-x-1">
-                              {Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
-                                  <label >
+                              {Array.from({ length: 5 }, (_, index) => index + 1).map((star,index) => (
+                                  <label key={index}>
                                       <input
                                           key={star}
                                           type="radio"
@@ -151,8 +151,8 @@ function ReviewForm({ auth,car,review }: any) {
                 <>
                   <div className="flex mt-3">
                     <div className="flex space-x-1">
-                        {Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
-                            <label >
+                        {Array.from({ length: 5 }, (_, index) => index + 1).map((star,index) => (
+                            <label key={index} >
                                 <input
                                     key={star}
                                     type="radio"

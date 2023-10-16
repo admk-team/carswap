@@ -94,7 +94,7 @@ function Sidebar({ onCollapseChange, style }) {
             <hr className="sidebar-divider d-none d-md-block" />
             <li className={`nav-item ${ route().current("admin.paymentGateway.index") ? "active" : "collapsed" }`} >
                 <Link href={route("admin.paymentGateway.index")} className="nav-link collapsed">
-                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                    <i className="fa fa-credit-card" aria-hidden="true"></i>
                     <span>Ravepay Gateway</span>
                 </Link>
             </li>
